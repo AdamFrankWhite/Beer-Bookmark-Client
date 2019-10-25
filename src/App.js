@@ -42,6 +42,7 @@ class App extends React.Component {
 
     addBeer(beerData) {
         const postData = {
+            username: this.state.username,
             beerName: beerData.name,
             beerType: beerData.abv.toString(),
             beerDescription: beerData.tagline,
@@ -52,7 +53,7 @@ class App extends React.Component {
         }
         
         console.log(postData)
-        axios.post("http://localhost:5000/my-beers/add", postData).then(res => {
+        axios.post("http://localhost:5000/users/my-beers/add", postData).then(res => {
             // console.log("hello")
             console.log(res.data)
             const newFavouriteBeers = [...this.state.favouriteBeers]
@@ -113,7 +114,7 @@ class App extends React.Component {
                 
                 
             })
-            this.setState({redirect: "profile", loggedIn: true})
+            this.setState({redirect: "profile", loggedIn: true}) // change to if successful
         }
         
     }
@@ -174,11 +175,67 @@ class App extends React.Component {
                 <br />
                 {/* <Login  login={this.clickLogin} handleChange={this.handleChange} username={this.state.username} password={this.state.password} /> */}
                 {this.renderRedirect()}
-                <Route path="/register" render={ routeProps => ( <Register {...routeProps} email={this.state.email} register={this.register} handleChange={this.handleChange} username={this.state.username} password={this.state.password} repeatPassword={this.state.repeatPassword} errorMessage={this.state.errorMessage}  />)}        />
-                <Route path="/login" render={ routeProps => ( <Login {...routeProps} login={this.login} handleChange={this.handleChange} username={this.state.username} password={this.state.password} loggedIn={this.state.loggedIn}   />)}        />
-                <Route path="/my-beers" render={ routeProps => ( <MyBeers {...routeProps} addBeer={this.addBeer} deleteBeer={this.deleteBeer} updateBeer={this.updateBeer} favouriteBeers={this.state.favouriteBeers} searchTerm={this.state.searchTerm} handleChange={this.handleChange}/> ) } />
-                <Route path="/search" render={ routeProps => ( <Search {...routeProps} beerData={this.state.beerData} favouriteBeers={this.state.favouriteBeers} addBeer={this.addBeer} searchTerm={this.state.searchTerm} handleChange={this.handleChange}/> ) } />
-                <Route path="/random-beer" render={ routeProps => ( <RandomBeer {...routeProps} searchTerm={this.state.searchTerm} handleChange={this.handleChange}/> ) } />
+                <Route 
+                    path="/register" 
+                    render={ routeProps => ( 
+                        <Register {...routeProps} 
+                            email={this.state.email} 
+                            register={this.register} 
+                            handleChange={this.handleChange} 
+                            username={this.state.username} 
+                            password={this.state.password} 
+                            repeatPassword={this.state.repeatPassword} 
+                            errorMessage={this.state.errorMessage} 
+                        />
+                    )}        
+                />
+                <Route 
+                    path="/login" 
+                    render={ routeProps => ( 
+                        <Login {...routeProps} 
+                            login={this.login} 
+                            handleChange={this.handleChange} 
+                            username={this.state.username} 
+                            password={this.state.password} 
+                            loggedIn={this.state.loggedIn}   
+                        />
+                    )}        
+                />
+                {this.state.loggedIn && 
+                <Route 
+                    path="/my-beers" 
+                    render={ routeProps => ( 
+                        <MyBeers {...routeProps} 
+                            addBeer={this.addBeer} 
+                            deleteBeer={this.deleteBeer} 
+                            updateBeer={this.updateBeer} 
+                            favouriteBeers={this.state.favouriteBeers} 
+                            searchTerm={this.state.searchTerm} 
+                            handleChange={this.handleChange}
+                        />
+                    )} 
+                />}
+                <Route 
+                    path="/search" 
+                    render={ routeProps => ( 
+                        <Search {...routeProps} 
+                            beerData={this.state.beerData} 
+                            favouriteBeers={this.state.favouriteBeers} 
+                            addBeer={this.addBeer} 
+                            searchTerm={this.state.searchTerm} 
+                            handleChange={this.handleChange}
+                        /> 
+                    )} 
+                />
+                <Route 
+                    path="/random-beer" 
+                    render={ routeProps => ( 
+                        <RandomBeer {...routeProps} 
+                            searchTerm={this.state.searchTerm} 
+                            handleChange={this.handleChange}
+                        /> 
+                    )} 
+                />
                 {this.state.loggedIn ? <Dashboard /> : null}
             </Router>
             

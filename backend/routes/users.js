@@ -58,28 +58,31 @@ router.route('/my-beers/').get((req, res) => {
 })
 
 router.route('/my-beers/add').post((req, res) => {
-    const beerName = req.body.beerName
-    const beerType = req.body.beerType
-    const beerDescription = req.body.beerDescription
-    const brewery = req.body.brewery
-    const date = Date.parse(req.body.date)
-    const stars = req.body.stars
-    const img = req.body.img
-
-    const newBeer = new Beer({
-        beerName,
-        beerType,
-        beerDescription,
-        brewery,
-        date,
-        stars,
-        img
-        
+    const addBeerDetails = {
+        username: req.body.username,
+        beerName: req.body.beerName,
+        beerType: req.body.beerType,
+        beerDescription: req.body.beerDescription,
+        brewery: req.body.brewery,
+        date: Date.parse(req.body.date),
+        stars: req.body.stars,
+        img: req.body.img
+    }
+    
+    console.log(addBeerDetails)
+    User.findOne({username: req.body.username})
+        .then(user => {
+            console.log("User found")
+            console.log(user.beers)
+            let newBeerList = [...user.beers].push(addBeerDetails)
+            user.beers = newBeerList
+            user.save()
+                .then(() => { 
+                    res.json("Beer added")
+                }).catch( err => res.json('Error: ' + err))
+        })   
     })
-    newBeer.save()
-        .then(() => res.json('Beer added!'))
-        .catch(err => res.status(400).json('Error: ' + err))
-})
+   
 
 router.route('my-beers/:id').delete((req, res) => {
     Beer.findByIdAndDelete(req.params.id)
