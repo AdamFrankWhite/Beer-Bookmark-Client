@@ -1,0 +1,5 @@
+handling state through multiple components is tedious - need to learn Redux. 
+also plan out routes thoroughly at beginning, so you don't have to redo everything painfully later
+can use params with query prop when using axios to get to pass through data e.g. username
+
+using routeprops and render prop helps to render props through route components 

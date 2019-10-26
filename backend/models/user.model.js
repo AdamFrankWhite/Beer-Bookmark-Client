@@ -27,8 +27,7 @@ const userSchema = new Schema({
     // NEW
     beers: {
         type: Array,
-        required: false,
-        trim: true
+        required: false
     }
 }, {
     timestamps: true

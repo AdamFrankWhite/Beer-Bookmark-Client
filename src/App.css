@@ -118,6 +118,9 @@
   color: white;
 }
 
+.buttons:hover {
+  cursor: pointer;
+}
 .beer:hover .buttons {
   visibility: visible;
 }

@@ -52,14 +52,15 @@ router.route('/register').post((req, res) => {
 // Beer routes
 
 router.route('/my-beers/').get((req, res) => {
-    Beer.find()
-        .then(beers => res.json(beers))
+    console.log(req.query.username)
+    User.findOne({username: req.query.username})
+        .then(user => res.json(user))
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.route('/my-beers/add').post((req, res) => {
     const addBeerDetails = {
-        username: req.body.username,
+        id: req.body.id,
         beerName: req.body.beerName,
         beerType: req.body.beerType,
         beerDescription: req.body.beerDescription,
@@ -74,8 +75,10 @@ router.route('/my-beers/add').post((req, res) => {
         .then(user => {
             console.log("User found")
             console.log(user.beers)
-            let newBeerList = [...user.beers].push(addBeerDetails)
-            user.beers = newBeerList
+            let beers = [...user.beers]
+            beers.push(addBeerDetails)
+            console.log(beers)
+            user.beers = beers
             user.save()
                 .then(() => { 
                     res.json("Beer added")

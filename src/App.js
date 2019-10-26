@@ -56,20 +56,21 @@ class App extends React.Component {
         axios.post("http://localhost:5000/users/my-beers/add", postData).then(res => {
             // console.log("hello")
             console.log(res.data)
-            const newFavouriteBeers = [...this.state.favouriteBeers]
-            newFavouriteBeers.push(postData)
-            this.setState({favouriteBeers: newFavouriteBeers})
-            console.log(this.state.favouriteBeers)
+            this.setState({favouriteBeers: res.data})
+            
+            // const newFavouriteBeers = [...this.state.favouriteBeers]
+            // newFavouriteBeers.push(postData)
+            // this.setState({favouriteBeers: newFavouriteBeers})
         })
     }
 
     deleteBeer(id) {
-        axios.get('http://localhost:5000/my-beers/').then(res => {
+        axios.get('http://localhost:5000/users/my-beers/').then(res => {
             this.setState({
                 favouriteBeers: res.data
             })
         })
-        axios.delete(`http://localhost:5000/my-beers/${id}`).then(res => {
+        axios.delete(`http://localhost:5000/users/my-beers/${id}`).then(res => {
             // console.log("hello")
             console.log("Beer deleted", res.status)
             //TO DO - delete error handling
@@ -78,7 +79,7 @@ class App extends React.Component {
             // }
         })
 
-        axios.get('http://localhost:5000/my-beers/').then(res => {
+        axios.get('http://localhost:5000/users/my-beers/').then(res => {
             this.setState({
                 favouriteBeers: res.data
             })
@@ -89,18 +90,17 @@ class App extends React.Component {
 
     updateBeer(id, rating) {
         const newRating = {stars: rating}
-        axios.post(`http://localhost:5000/my-beers/update/${id}`, newRating).then(res => {
+        axios.post(`http://localhost:5000/users/my-beers/update/${id}`, newRating).then(res => {
             console.log(res)
-            axios.get('http://localhost:5000/my-beers/').then(res => {
-                this.setState({favouriteBeers: res.data})
+            axios.get('http://localhost:5000/users/my-beers/').then(res => {
+                this.setState({favouriteBeers: res.data.beers})
             })
         })
     }
     componentDidMount() {
-        // !this.state.beerData && 
-        axios.get('http://localhost:5000/my-beers/').then(res => {
-            console.log(res.data)
-            this.setState({favouriteBeers: res.data})})
+        axios.get("http://localhost:5000/users/my-beers/", {params: {username: this.props.username}}).then(res => {
+            this.setState({favouriteBeers: res.data})
+            console.log(res.data)})
     }
     login() {
         const userCredentials = {
@@ -111,7 +111,8 @@ class App extends React.Component {
         if (this.state.username && this.state.password) {
             axios.post('http://localhost:5000/users/login', userCredentials).then(res =>
             {
-                
+                axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
+                    this.setState({favouriteBeers: res.data.beers})})
                 
             })
             this.setState({redirect: "profile", loggedIn: true}) // change to if successful
@@ -212,6 +213,7 @@ class App extends React.Component {
                             favouriteBeers={this.state.favouriteBeers} 
                             searchTerm={this.state.searchTerm} 
                             handleChange={this.handleChange}
+                            username={this.state.username}
                         />
                     )} 
                 />}

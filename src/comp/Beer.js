@@ -15,9 +15,11 @@ class Beer extends React.Component {
 
     render() {
         // checks to see if favourite beers includes this beer, if so render saved
+        
+        console.log(this.props.favouriteBeers)
         const checkBeerIncluded = this.props.search && JSON.stringify(this.props.favouriteBeers).includes(this.props.beerData.name)
         const clickText = checkBeerIncluded ? "Saved" : "Add to Favourites"
-        this.props.search && console.log(this.props.beerData, this.props.favouriteBeers) 
+        // this.props.search && console.log(this.props.beerData, this.props.favouriteBeers) 
         const stars = []
         for (let i=0; i<this.props.beerData.stars; i++) {
             stars.push(<span>&#11088;</span>)

@@ -11,24 +11,7 @@ class Search extends React.Component {
         // this.addBeer = this.addBeer.bind(this)
     }
 
-    // addBeer(beerData) {
-    //     const postData = {
-    //         beerName: beerData.name,
-    //         beerType: beerData.abv.toString(),
-    //         beerDescription: beerData.description,
-    //         brewery: "Punk IPA",
-    //         stars: "1",
-    //         date: new Date()
-    //     }
-        
-    //     console.log(postData)
-    //     axios.post("http://localhost:5000/my-beers/add", postData).then(res => {
-    //         console.log(res.data)
-    //         const newFavouriteBeers = [...this.state.favouriteBeers]
-    //         newFavouriteBeers.push(postData)
-    //         this.setState({favouriteBeers: newFavouriteBeers})
-    //     })
-    // }
+    
     componentDidMount() {
         fetch("https://api.punkapi.com/v2/beers?per_page=80").then(response => response.json()).then(data => {
             this.setState({beerData: data})
