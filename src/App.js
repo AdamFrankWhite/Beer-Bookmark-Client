@@ -42,6 +42,7 @@ class App extends React.Component {
 
     addBeer(beerData) {
         const postData = {
+            id: beerData.id,
             username: this.state.username,
             beerName: beerData.name,
             beerType: beerData.abv.toString(),
@@ -52,38 +53,42 @@ class App extends React.Component {
             img: beerData.image_url
         }
         
-        console.log(postData)
-        axios.post("http://localhost:5000/users/my-beers/add", postData).then(res => {
-            // console.log("hello")
+        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
             console.log(res.data)
-            this.setState({favouriteBeers: res.data})
-            
-            // const newFavouriteBeers = [...this.state.favouriteBeers]
-            // newFavouriteBeers.push(postData)
-            // this.setState({favouriteBeers: newFavouriteBeers})
+            this.setState({favouriteBeers: res.data.beers})})
+        console.log(postData)
+        axios.post("http://localhost:5000/users/my-beers/add", postData).then(res => {        
+        
         })
+        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
+            console.log(res.data)
+            this.setState({favouriteBeers: res.data.beers})})
+                    
+                
     }
 
-    deleteBeer(id) {
-        axios.get('http://localhost:5000/users/my-beers/').then(res => {
+    deleteBeer(beer) {
+        let deleteData = {
+            beerData: beer,
+            username: this.state.username
+        }
+        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
             this.setState({
-                favouriteBeers: res.data
+                favouriteBeers: res.data.beers
             })
         })
-        axios.delete(`http://localhost:5000/users/my-beers/${id}`).then(res => {
+        axios.post('http://localhost:5000/users/my-beers/delete-beer', deleteData).then(res => {
             // console.log("hello")
             console.log("Beer deleted", res.status)
-            //TO DO - delete error handling
-            // if (res.status != 400) {
-            //     this.deleteBeer()
-            // }
+            
         })
-
-        axios.get('http://localhost:5000/users/my-beers/').then(res => {
+        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
             this.setState({
-                favouriteBeers: res.data
+                favouriteBeers: res.data.beers
             })
         })
+
+        
 
         //need to update state before and after delete to ensure real-time update
     }
@@ -97,11 +102,12 @@ class App extends React.Component {
             })
         })
     }
-    componentDidMount() {
-        axios.get("http://localhost:5000/users/my-beers/", {params: {username: this.props.username}}).then(res => {
-            this.setState({favouriteBeers: res.data})
-            console.log(res.data)})
-    }
+    // componentDidMount() {
+    //     axios.get("http://localhost:5000/users/my-beers/", {params: {username: this.state.username}}).then(res => {
+    //         this.setState({favouriteBeers: res.data.beers})
+    //         // console.log(res.data)
+    //     })
+    // }
     login() {
         const userCredentials = {
             username: this.state.username,
@@ -109,13 +115,15 @@ class App extends React.Component {
         }
 
         if (this.state.username && this.state.password) {
-            axios.post('http://localhost:5000/users/login', userCredentials).then(res =>
-            {
-                axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
-                    this.setState({favouriteBeers: res.data.beers})})
+            axios.post('http://localhost:5000/users/login', userCredentials).then(res => {
+                console.log("BOO")
+        })
+        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
+            console.log(res.data)
+            this.setState({favouriteBeers: res.data.beers})})
+                    
                 
-            })
-            this.setState({redirect: "profile", loggedIn: true}) // change to if successful
+        this.setState({redirect: "profile", loggedIn: true}) // change to if successful
         }
         
     }

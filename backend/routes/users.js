@@ -20,8 +20,8 @@ router.route('/login').post((req, res, next) => {
             err.status = 401
             return next(err)
         } else {
-            console.log("Success")
             return res
+            console.log("Logged In")
         }
     })
 
@@ -87,6 +87,28 @@ router.route('/my-beers/add').post((req, res) => {
     })
    
 
+
+// Remove beer
+
+router.route('/my-beers/delete-beer').post((req, res) => {
+    const removeBeerDetails = req.body.beerData
+   
+    User.findOne({username: req.body.username})
+        .then(user => {
+            let beers = [...user.beers]
+            let newArray = beers.filter(beer => beer.id != removeBeerDetails.id)
+            console.log(newArray)
+            user.beers = newArray
+            user.save()
+                .then(() => { 
+                    res.json("Beer removed")
+                }).catch( err => res.json('Error: ' + err))
+        })   
+    })
+   
+
+
+    
 router.route('my-beers/:id').delete((req, res) => {
     Beer.findByIdAndDelete(req.params.id)
         .then(() => res.json('Beer deleted'))

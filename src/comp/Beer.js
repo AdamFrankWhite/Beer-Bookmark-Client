@@ -32,8 +32,10 @@ class Beer extends React.Component {
                 <p className="description">{this.props.beerData.beerDescription || this.props.beerData.tagline}</p>
                 {this.props.search && <span onClick={() => {
                     //only add to favourites if not already included
+                    this.clickedText()
                     !checkBeerIncluded && this.props.addBeer(this.props.beerData)
-                    this.clickedText()}} 
+                    
+                    }} 
                     className="buttons">
                     {/* {this.state.clickText} */}
                     {clickText}
@@ -53,7 +55,7 @@ class Beer extends React.Component {
                 }
                 
                 {this.props.myBeers && 
-                    <span onClick={() => this.props.deleteBeer(this.props.id)} className="delete-beer"> Delete </span>
+                    <span onClick={() => this.props.deleteBeer(this.props.beerData)} className="delete-beer"> Delete </span>
                 }
             </div>
         )
