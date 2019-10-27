@@ -33,6 +33,7 @@ class App extends React.Component {
         this.deleteBeer = this.deleteBeer.bind(this)
         this.updateBeer = this.updateBeer.bind(this)
         this.login = this.login.bind(this)
+        this.logout = this.logout.bind(this)
         this.register = this.register.bind(this)
         this.renderRedirect = this.renderRedirect.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -143,6 +144,9 @@ class App extends React.Component {
         
     }
 
+    logout() {
+        this.setState({loggedIn: false, redirect: "login"}) // how to redirect on logout??
+    }
     register() {
         let errorMessage = {}
         let newUser = {
@@ -195,7 +199,7 @@ class App extends React.Component {
     render() {
         return (
             <Router>
-                <Header loggedIn={this.state.loggedIn} />
+                <Header loggedIn={this.state.loggedIn} logout={this.logout} />
                 <br />
                 {/* <Login  login={this.clickLogin} handleChange={this.handleChange} username={this.state.username} password={this.state.password} /> */}
                 {this.renderRedirect()}

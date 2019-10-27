@@ -25,9 +25,23 @@
   color: #09d3ac;
 }
 
-
+.nav-title {
+  color: white;
+  font-size: 1.6em;
+}
 .link {
   color: white!important;
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+}
+
+.link:hover {
+  background: white;
+  color:#007bff!important;
+  text-decoration: none!important;
+  transition: 0.25em;
+  border-radius: 10px;
+
 }
 
 .registration {
@@ -138,3 +152,4 @@
   background-color: white;
   transition: 0.3s;
 }
+
