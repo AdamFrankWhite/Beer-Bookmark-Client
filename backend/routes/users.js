@@ -97,7 +97,6 @@ router.route('/my-beers/delete-beer').post((req, res) => {
         .then(user => {
             let beers = [...user.beers]
             let newArray = beers.filter(beer => beer.id != removeBeerDetails.id)
-            console.log(newArray)
             user.beers = newArray
             user.save()
                 .then(() => { 
@@ -107,13 +106,28 @@ router.route('/my-beers/delete-beer').post((req, res) => {
     })
    
 
-
-    
-router.route('my-beers/:id').delete((req, res) => {
-    Beer.findByIdAndDelete(req.params.id)
-        .then(() => res.json('Beer deleted'))
-        .catch(err => res.status(400).json('Error: ' + err))
-})
+    router.route('/my-beers/update').post((req, res) => {
+        const updateBeerDetails = req.body.beerData
+        
+        updateBeerDetails.stars = req.body.newRating
+       
+        User.findOne({username: req.body.username})
+            .then(user => {
+                let beers = [...user.beers]
+                let index = beers.findIndex(beer => beer.id === updateBeerDetails.id)
+                console.log(index)
+                //Remove beer to be edited
+                let newBeerList = beers.filter(beer => beer.id != updateBeerDetails.id)
+                //Insert updated beer
+                newBeerList.splice(index, 0, updateBeerDetails)
+                user.beers = newBeerList
+                user.save()
+                    .then(() => { 
+                        res.json("Beer updated")
+                    }).catch( err => res.json('Error: ' + err))
+            })   
+        })
+       
 
 router.route('my-beers/update/:id').post((req, res) => {
     Beer.findById(req.params.id)

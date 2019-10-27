@@ -3,3 +3,7 @@ also plan out routes thoroughly at beginning, so you don't have to redo everythi
 can use params with query prop when using axios to get to pass through data e.g. username
 
 using routeprops and render prop helps to render props through route components 
+
+nesting axios get, post, get using .then solves async update issues
+
+newArray.push() - bug, returning number, because assigning Array.push() TO A VARIABLE does that, but just using push on the array actually pushes the item, modifying the original array

@@ -46,11 +46,11 @@ class Beer extends React.Component {
                     {stars}
                 </span> 
                 {this.props.myBeers && <span className="ratings">Rate: 
-                    <span onClick={() => this.props.updateBeer(this.props.id, 1)}>1</span>
-                    <span onClick={() => this.props.updateBeer(this.props.id, 2)}>2</span>
-                    <span onClick={() => this.props.updateBeer(this.props.id, 3)}>3</span>
-                    <span onClick={() => this.props.updateBeer(this.props.id, 4)}>4</span>
-                    <span onClick={() => this.props.updateBeer(this.props.id, 5)}>5</span>
+                    <span onClick={() => this.props.updateBeer(this.props.beerData, 1)}>1</span>
+                    <span onClick={() => this.props.updateBeer(this.props.beerData, 2)}>2</span>
+                    <span onClick={() => this.props.updateBeer(this.props.beerData, 3)}>3</span>
+                    <span onClick={() => this.props.updateBeer(this.props.beerData, 4)}>4</span>
+                    <span onClick={() => this.props.updateBeer(this.props.beerData, 5)}>5</span>
                 </span>
                 }
                 

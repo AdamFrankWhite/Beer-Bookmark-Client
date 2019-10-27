@@ -56,13 +56,14 @@ class App extends React.Component {
         axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
             console.log(res.data)
             this.setState({favouriteBeers: res.data.beers})})
-        console.log(postData)
-        axios.post("http://localhost:5000/users/my-beers/add", postData).then(res => {        
-        
-        })
-        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
+            axios.post("http://localhost:5000/users/my-beers/add", postData).then(res => {        
+                axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
             console.log(res.data)
             this.setState({favouriteBeers: res.data.beers})})
+        })
+        console.log(postData)
+        
+        
                     
                 
     }
@@ -76,31 +77,45 @@ class App extends React.Component {
             this.setState({
                 favouriteBeers: res.data.beers
             })
-        })
-        axios.post('http://localhost:5000/users/my-beers/delete-beer', deleteData).then(res => {
+            axios.post('http://localhost:5000/users/my-beers/delete-beer', deleteData).then(res => {
             // console.log("hello")
             console.log("Beer deleted", res.status)
-            
-        })
-        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
+            axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
             this.setState({
                 favouriteBeers: res.data.beers
             })
         })
+        })
+        })
+        
+        
 
         
 
         //need to update state before and after delete to ensure real-time update
     }
 
-    updateBeer(id, rating) {
-        const newRating = {stars: rating}
-        axios.post(`http://localhost:5000/users/my-beers/update/${id}`, newRating).then(res => {
+    updateBeer(beer, rating) {
+        let updateData = {
+            beerData: beer,
+            username: this.state.username,
+            newRating: rating
+        }
+        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
+            this.setState({
+                favouriteBeers: res.data.beers
+            })
+            axios.post('http://localhost:5000/users/my-beers/update', updateData).then(res => {
             console.log(res)
-            axios.get('http://localhost:5000/users/my-beers/').then(res => {
-                this.setState({favouriteBeers: res.data.beers})
+            axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
+            this.setState({
+                favouriteBeers: res.data.beers
             })
         })
+        })
+        })
+        
+        
     }
     // componentDidMount() {
     //     axios.get("http://localhost:5000/users/my-beers/", {params: {username: this.state.username}}).then(res => {
