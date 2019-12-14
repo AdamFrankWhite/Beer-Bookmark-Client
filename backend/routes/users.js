@@ -74,13 +74,13 @@ router.route('/my-beers/add').post((req, res) => {
     User.findOne({username: req.body.username})
         .then(user => {
             console.log("User found")
-            console.log(user.beers)
+
             let beers = [...user.beers]
             beers.push(addBeerDetails)
-            console.log(beers)
             user.beers = beers
             user.save()
                 .then(() => { 
+                    res.json(user.beers)
                     res.json("Beer added")
                 }).catch( err => res.json('Error: ' + err))
         })   
@@ -100,6 +100,7 @@ router.route('/my-beers/delete-beer').post((req, res) => {
             user.beers = newArray
             user.save()
                 .then(() => { 
+                    res.json(user.beers)
                     res.json("Beer removed")
                 }).catch( err => res.json('Error: ' + err))
         })   
@@ -115,7 +116,6 @@ router.route('/my-beers/delete-beer').post((req, res) => {
             .then(user => {
                 let beers = [...user.beers]
                 let index = beers.findIndex(beer => beer.id === updateBeerDetails.id)
-                console.log(index)
                 //Remove beer to be edited
                 let newBeerList = beers.filter(beer => beer.id != updateBeerDetails.id)
                 //Insert updated beer
@@ -123,6 +123,7 @@ router.route('/my-beers/delete-beer').post((req, res) => {
                 user.beers = newBeerList
                 user.save()
                     .then(() => { 
+                        res.json(user.beers)
                         res.json("Beer updated")
                     }).catch( err => res.json('Error: ' + err))
             })   

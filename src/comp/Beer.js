@@ -16,8 +16,7 @@ class Beer extends React.Component {
     render() {
         // checks to see if favourite beers includes this beer, if so render saved
         
-        console.log(this.props.favouriteBeers)
-        const checkBeerIncluded = this.props.search && JSON.stringify(this.props.favouriteBeers).includes(this.props.beerData.name)
+        const checkBeerIncluded = this.props.search && JSON.stringify(this.props.favouriteBeers).includes(this.props.name)
         const clickText = checkBeerIncluded ? "Saved" : "Add to Favourites"
         // this.props.search && console.log(this.props.beerData, this.props.favouriteBeers) 
         const stars = []
@@ -27,13 +26,13 @@ class Beer extends React.Component {
         return (
             <div className="beer">
                 <img className="thumb" src={this.props.src}></img>
-                <h3>{this.props.beerData.beerName || this.props.beerData.name}</h3>
-                <h4>ABV: {this.props.beerData.beerType || this.props.beerData.abv}%</h4>
-                <p className="description">{this.props.beerData.beerDescription || this.props.beerData.tagline}</p>
+                <h3>{this.props.name || this.props.beerData.beerName}</h3>
+                <h4>ABV: {this.props.abv || this.props.beerData.beerABV}%</h4>
+                <p className="description">{this.props.style || this.props.beerData.beerDescription}</p>
                 {this.props.search && <span onClick={() => {
                     //only add to favourites if not already included
                     this.clickedText()
-                    !checkBeerIncluded && this.props.addBeer(this.props.beerData)
+                    !checkBeerIncluded && this.props.loggedIn && this.props.addBeer(this.props.beerData)
                     
                     }} 
                     className="buttons">
@@ -57,6 +56,8 @@ class Beer extends React.Component {
                 {this.props.myBeers && 
                     <span onClick={() => this.props.deleteBeer(this.props.beerData)} className="delete-beer"> Delete </span>
                 }
+
+                {!this.props.myBeers && <p>Details</p>}
             </div>
         )
         }

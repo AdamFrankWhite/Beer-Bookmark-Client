@@ -99,6 +99,7 @@
   z-index: 10000;
   background-color: slategray;
   color: white;
+  transform: scale(1.05)
 }
 
 
@@ -117,9 +118,7 @@
   right: 5px;
 }
 
-.beer:hover {
-  transform: scale(1.05)
-}
+
 
 .ratings span {
   padding: 0.25em;

@@ -38,35 +38,26 @@ class App extends React.Component {
         this.renderRedirect = this.renderRedirect.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.updateBeers = this.updateBeers.bind(this)
+        this.searchBeer = this.searchBeer.bind(this)
     }
 
 
     addBeer(beerData) {
         const postData = {
-            id: beerData.id,
+            id: beerData.bid,
             username: this.state.username,
-            beerName: beerData.name,
-            beerType: beerData.abv.toString(),
-            beerDescription: beerData.tagline,
+            beerName: beerData.beer_name,
+            beerABV: beerData.beer_abv.toString(),
+            beerDescription: beerData.beer_style,
             brewery: "Punk IPA",
             stars: "1",
             date: new Date(),
-            img: beerData.image_url
+            img: beerData.beer_label
         }
         
-        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
-            console.log(res.data)
-            this.setState({favouriteBeers: res.data.beers})})
-            axios.post("http://localhost:5000/users/my-beers/add", postData).then(res => {        
-                axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
-            console.log(res.data)
-            this.setState({favouriteBeers: res.data.beers})})
-        })
-        console.log(postData)
-        
-        
-                    
-                
+        axios.post("http://localhost:5000/users/my-beers/add", postData).then(res => {
+            this.setState({favouriteBeers: res.data})
+    })  
     }
 
     deleteBeer(beer) {
@@ -74,21 +65,9 @@ class App extends React.Component {
             beerData: beer,
             username: this.state.username
         }
-        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
-            this.setState({
-                favouriteBeers: res.data.beers
-            })
-            axios.post('http://localhost:5000/users/my-beers/delete-beer', deleteData).then(res => {
-            // console.log("hello")
-            console.log("Beer deleted", res.status)
-            axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
-            this.setState({
-                favouriteBeers: res.data.beers
-            })
-        })
-        })
-        })
-        
+        axios.post('http://localhost:5000/users/my-beers/delete-beer', deleteData).then(res => {
+            this.setState({favouriteBeers: res.data})
+    }) 
         
 
         
@@ -102,28 +81,11 @@ class App extends React.Component {
             username: this.state.username,
             newRating: rating
         }
-        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
-            this.setState({
-                favouriteBeers: res.data.beers
-            })
-            axios.post('http://localhost:5000/users/my-beers/update', updateData).then(res => {
-            console.log(res)
-            axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
-            this.setState({
-                favouriteBeers: res.data.beers
-            })
-        })
-        })
-        })
         
-        
+        axios.post('http://localhost:5000/users/my-beers/update', updateData).then(res => {
+            this.setState({favouriteBeers: res.data})
+        })          
     }
-    // componentDidMount() {
-    //     axios.get("http://localhost:5000/users/my-beers/", {params: {username: this.state.username}}).then(res => {
-    //         this.setState({favouriteBeers: res.data.beers})
-    //         // console.log(res.data)
-    //     })
-    // }
     login() {
         const userCredentials = {
             username: this.state.username,
@@ -174,8 +136,6 @@ class App extends React.Component {
         if (this.state.password.length < 6) {
             errorMessage.passwordLengthError = "Password must be at least 6 characters"
         }
-
-        
     }
 
     renderRedirect() {
@@ -195,6 +155,12 @@ class App extends React.Component {
     handleChange(e) {
         this.setState({[e.target.name]: e.target.value})
         this.updateBeers() // with search term rgument
+    }
+
+    searchBeer(searchTerm) {
+        axios.get(`https://api.untappd.com/v4/search/beer?q=${searchTerm}`, {params: {client_id:"F94775549BAC795E436858A50A3616690D3CD446", client_secret:"844CF3E397DB0294FC89ACE34560918CAFD035FB"}}).then(response => {
+            this.setState({beerData: response.data.response.beers.items, isLoading: false})
+            console.log(response.data.response.beers.items)})
     }
     render() {
         return (
@@ -253,6 +219,8 @@ class App extends React.Component {
                             addBeer={this.addBeer} 
                             searchTerm={this.state.searchTerm} 
                             handleChange={this.handleChange}
+                            searchBeer={this.searchBeer}
+                            loggedIn={this.state.loggedIn}
                         /> 
                     )} 
                 />
