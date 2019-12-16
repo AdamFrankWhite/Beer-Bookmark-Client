@@ -1,5 +1,6 @@
 import React from 'react'
 import Beer from './Beer'
+import Brewery from './Brewery'
 import ReactLoading from 'react-loading'
 import axios from 'axios'
 
@@ -37,6 +38,14 @@ class Search extends React.Component {
                 addBeer={this.props.addBeer} 
                 loggedIn={this.props.loggedIn} 
             />)
+        const breweries = this.props.breweryData.map(item => 
+            <Brewery 
+                img={item.brewery.brewery_label}
+                name={item.brewery.brewery_name}
+                location={item.brewery.location.brewery_city}
+                beerNum={item.brewery.beer_count}
+            />
+            )
             console.log(this.state.beerData)
         return (
             <div className="App">
@@ -47,9 +56,18 @@ class Search extends React.Component {
                     <label htmlFor="searchTerm">Search: 
                     <input type="text" value={this.props.searchTerm} onChange={this.props.handleChange} name="searchTerm"></input>
                     </label>
-                    <button onClick={() => this.props.searchBeer(this.props.searchTerm)}>Go</button>
+                    <button onClick={() => this.props.searchBeer(this.props.searchTerm, this.props.searchType)} >Go</button>
+                    <br></br>
+                    <label htmlFor="searchType">Beer: 
+                        <input name="searchType" type="radio" value="beer" onChange={this.props.handleChange}></input>
+                    </label>
+                    <label htmlFor="searchType">Brewery: 
+                        <input name="searchType" type="radio" value="brewery" onChange={this.props.handleChange}></input>
+                    </label>
+                    
                     <div className="beer-container">
                         {beers}
+                        {breweries}
                     </div>
                 </div>}
                 

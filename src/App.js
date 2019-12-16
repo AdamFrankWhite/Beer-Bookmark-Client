@@ -23,8 +23,10 @@ class App extends React.Component {
             password: "",
             repeatPassword: "",
             searchTerm: "",
+            searchType: "",
             errorMessage: "",
             beerData: [],
+            breweryData: [],
             searchBeerData: [],
             favouriteBeers: [],
             redirect: ""
@@ -157,10 +159,13 @@ class App extends React.Component {
         this.updateBeers() // with search term rgument
     }
 
-    searchBeer(searchTerm) {
-        axios.get(`https://api.untappd.com/v4/search/beer?q=${searchTerm}`, {params: {client_id:"F94775549BAC795E436858A50A3616690D3CD446", client_secret:"844CF3E397DB0294FC89ACE34560918CAFD035FB"}}).then(response => {
-            this.setState({beerData: response.data.response.beers.items, isLoading: false})
-            console.log(response.data.response.beers.items)})
+    searchBeer(searchTerm, searchType) {
+        this.setState({beerData: [], breweryData: []})
+        axios.get(`https://api.untappd.com/v4/search/${searchType}?q=${searchTerm}`, {params: {client_id:"F94775549BAC795E436858A50A3616690D3CD446", client_secret:"844CF3E397DB0294FC89ACE34560918CAFD035FB"}}).then(response => {
+            searchType === "beer" && this.setState({beerData: response.data.response.beers.items, isLoading: false})
+            searchType === "brewery" && this.setState({breweryData: response.data.response.brewery.items})
+            // console.log(this.state.breweryData, response.data.response.brewery.items)
+        })
     }
     render() {
         return (
@@ -214,10 +219,12 @@ class App extends React.Component {
                     path="/search" 
                     render={ routeProps => ( 
                         <Search {...routeProps} 
-                            beerData={this.state.beerData} 
+                            beerData={this.state.beerData}
+                            breweryData={this.state.breweryData} 
                             favouriteBeers={this.state.favouriteBeers} 
                             addBeer={this.addBeer} 
-                            searchTerm={this.state.searchTerm} 
+                            searchTerm={this.state.searchTerm}
+                            searchType={this.state.searchType} 
                             handleChange={this.handleChange}
                             searchBeer={this.searchBeer}
                             loggedIn={this.state.loggedIn}
