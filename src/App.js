@@ -96,14 +96,14 @@ class App extends React.Component {
 
         if (this.state.username && this.state.password) {
             axios.post('http://localhost:5000/users/login', userCredentials).then(res => {
-                console.log("BOO")
+                res.data === "success" &&  axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
+                    console.log(res.data)
+                    this.setState({favouriteBeers: res.data.beers})})
+                            
+                        
+                this.setState({redirect: "profile", loggedIn: true}) // change to if successful
         })
-        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
-            console.log(res.data)
-            this.setState({favouriteBeers: res.data.beers})})
-                    
-                
-        this.setState({redirect: "profile", loggedIn: true}) // change to if successful
+       
         }
         
     }

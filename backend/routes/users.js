@@ -20,8 +20,9 @@ router.route('/login').post((req, res, next) => {
             err.status = 401
             return next(err)
         } else {
-            return res
             console.log("Logged In")
+            return res.json("success")
+            
         }
     })
 
