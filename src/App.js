@@ -23,7 +23,7 @@ class App extends React.Component {
             password: "",
             repeatPassword: "",
             searchTerm: "",
-            searchType: "",
+            searchType: "beer",
             errorMessage: "",
             beerData: [],
             breweryData: [],
@@ -41,6 +41,7 @@ class App extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.updateBeers = this.updateBeers.bind(this)
         this.searchBeer = this.searchBeer.bind(this)
+        this.changeTab = this.changeTab.bind(this)
     }
 
 
@@ -57,7 +58,7 @@ class App extends React.Component {
             img: beerData.beer_label
         }
         
-        axios.post("http://localhost:5000/users/my-beers/add", postData).then(res => {
+        axios.post("users/my-beers/add", postData).then(res => {
             this.setState({favouriteBeers: res.data})
     })  
     }
@@ -67,7 +68,7 @@ class App extends React.Component {
             beerData: beer,
             username: this.state.username
         }
-        axios.post('http://localhost:5000/users/my-beers/delete-beer', deleteData).then(res => {
+        axios.post('users/my-beers/delete-beer', deleteData).then(res => {
             this.setState({favouriteBeers: res.data})
     }) 
         
@@ -84,7 +85,7 @@ class App extends React.Component {
             newRating: rating
         }
         
-        axios.post('http://localhost:5000/users/my-beers/update', updateData).then(res => {
+        axios.post('users/my-beers/update', updateData).then(res => {
             this.setState({favouriteBeers: res.data})
         })          
     }
@@ -95,15 +96,16 @@ class App extends React.Component {
         }
 
         if (this.state.username && this.state.password) {
-            axios.post('http://localhost:5000/users/login', userCredentials).then(res => {
-                res.data === "success" &&  axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
-                    console.log(res.data)
-                    this.setState({favouriteBeers: res.data.beers})})
-                            
-                        
+            axios.post('users/login', userCredentials).then(res => {
                 this.setState({redirect: "profile", loggedIn: true}) // change to if successful
+                console.log("BOO")
         })
-       
+        axios.get('users/my-beers/', {params: {username: this.state.username}}).then(res => {
+            console.log(res.data)
+            this.setState({favouriteBeers: res.data.beers})})
+                    
+                
+        
         }
         
     }
@@ -119,7 +121,7 @@ class App extends React.Component {
             password: this.state.password
         }
         if (this.state.password === this.state.repeatPassword && this.state.username.length > 5 && this.state.password.length > 5) {
-            axios.post('http://localhost:5000/users/register', newUser).then(res =>
+            axios.post('users/register', newUser).then(res =>
             {
                 console.log(res)
                 //TODO - Validate email
@@ -155,6 +157,7 @@ class App extends React.Component {
             // })
     }
     handleChange(e) {
+        console.log(e)
         this.setState({[e.target.name]: e.target.value})
         this.updateBeers() // with search term rgument
     }
@@ -167,9 +170,13 @@ class App extends React.Component {
             // console.log(this.state.breweryData, response.data.response.brewery.items)
         })
     }
+
+    changeTab(selectedTab) {
+        this.setState({searchType: selectedTab})
+    }
     render() {
         return (
-            <Router>
+            <Router basename={'/projects/favourite-beer-app'}>
                 <Header loggedIn={this.state.loggedIn} logout={this.logout} />
                 <br />
                 {/* <Login  login={this.clickLogin} handleChange={this.handleChange} username={this.state.username} password={this.state.password} /> */}
@@ -228,6 +235,7 @@ class App extends React.Component {
                             handleChange={this.handleChange}
                             searchBeer={this.searchBeer}
                             loggedIn={this.state.loggedIn}
+                            changeTab={this.changeTab}
                         /> 
                     )} 
                 />
