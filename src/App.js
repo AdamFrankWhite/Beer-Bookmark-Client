@@ -176,7 +176,7 @@ class App extends React.Component {
     }
     render() {
         return (
-            <Router basename={'/projects/favourite-beer-app'}>
+            <Router>
                 <Header loggedIn={this.state.loggedIn} logout={this.logout} />
                 <br />
                 {/* <Login  login={this.clickLogin} handleChange={this.handleChange} username={this.state.username} password={this.state.password} /> */}
