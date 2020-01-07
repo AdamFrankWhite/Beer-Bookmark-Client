@@ -20,7 +20,7 @@ connection.once('open',  () => {
 
 const usersRouter = require('./routes/users.js')
 const beersRouter = require('./routes/beers.js')
-app.use('./users', usersRouter)
+app.use('/users', usersRouter)
 // app.use('/my-beers', beersRouter)
 
 
