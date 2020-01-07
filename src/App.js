@@ -58,7 +58,7 @@ class App extends React.Component {
             img: beerData.beer_label
         }
         
-        axios.post("/users/my-beers/add", postData).then(res => {
+        axios.post("users/my-beers/add", postData).then(res => {
             this.setState({favouriteBeers: res.data})
     })  
     }
@@ -68,7 +68,7 @@ class App extends React.Component {
             beerData: beer,
             username: this.state.username
         }
-        axios.post('/users/my-beers/delete-beer', deleteData).then(res => {
+        axios.post('users/my-beers/delete-beer', deleteData).then(res => {
             this.setState({favouriteBeers: res.data})
     }) 
         
@@ -85,7 +85,7 @@ class App extends React.Component {
             newRating: rating
         }
         
-        axios.post('/users/my-beers/update', updateData).then(res => {
+        axios.post('users/my-beers/update', updateData).then(res => {
             this.setState({favouriteBeers: res.data})
         })          
     }
@@ -96,11 +96,11 @@ class App extends React.Component {
         }
 
         if (this.state.username && this.state.password) {
-            axios.post('/users/login', userCredentials).then(res => {
+            axios.post('users/login', userCredentials).then(res => {
                 this.setState({redirect: "profile", loggedIn: true}) // change to if successful
                 console.log("BOO")
         })
-        axios.get('/users/my-beers/', {params: {username: this.state.username}}).then(res => {
+        axios.get('users/my-beers/', {params: {username: this.state.username}}).then(res => {
             console.log(res.data)
             this.setState({favouriteBeers: res.data.beers})})
                     
