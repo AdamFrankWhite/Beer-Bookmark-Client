@@ -64,6 +64,7 @@ router.route('/my-beers/add').post((req, res) => {
         id: req.body.id,
         beerName: req.body.beerName,
         beerType: req.body.beerType,
+        abv: req.body.abv,
         beerDescription: req.body.beerDescription,
         brewery: req.body.brewery,
         date: Date.parse(req.body.date),

@@ -50,16 +50,17 @@ class App extends React.Component {
             id: beerData.bid,
             username: this.state.username,
             beerName: beerData.beer_name,
-            beerABV: beerData.beer_abv.toString(),
+            abv: beerData.beer_abv.toString(),
             beerDescription: beerData.beer_style,
-            brewery: "Punk IPA",
+            brewery: beerData.brewery,
             stars: "1",
             date: new Date(),
             img: beerData.beer_label
         }
         
-        axios.post("users/my-beers/add", postData).then(res => {
+        axios.post("http://localhost:5000/users/my-beers/add", postData).then(res => {
             this.setState({favouriteBeers: res.data})
+            console.log(res.data)
     })  
     }
 
@@ -68,7 +69,7 @@ class App extends React.Component {
             beerData: beer,
             username: this.state.username
         }
-        axios.post('users/my-beers/delete-beer', deleteData).then(res => {
+        axios.post('http://localhost:5000/users/my-beers/delete-beer', deleteData).then(res => {
             this.setState({favouriteBeers: res.data})
     }) 
         
@@ -85,7 +86,7 @@ class App extends React.Component {
             newRating: rating
         }
         
-        axios.post('users/my-beers/update', updateData).then(res => {
+        axios.post('http://localhost:5000/users/my-beers/update', updateData).then(res => {
             this.setState({favouriteBeers: res.data})
         })          
     }
@@ -96,11 +97,11 @@ class App extends React.Component {
         }
 
         if (this.state.username && this.state.password) {
-            axios.post('users/login', userCredentials).then(res => {
+            axios.post('http://localhost:5000/users/login', userCredentials).then(res => {
                 this.setState({redirect: "profile", loggedIn: true}) // change to if successful
                 console.log("BOO")
         })
-        axios.get('users/my-beers/', {params: {username: this.state.username}}).then(res => {
+        axios.get('http://localhost:5000/users/my-beers/', {params: {username: this.state.username}}).then(res => {
             console.log(res.data)
             this.setState({favouriteBeers: res.data.beers})})
                     
@@ -121,7 +122,7 @@ class App extends React.Component {
             password: this.state.password
         }
         if (this.state.password === this.state.repeatPassword && this.state.username.length > 5 && this.state.password.length > 5) {
-            axios.post('users/register', newUser).then(res =>
+            axios.post('http://localhost:5000/users/register', newUser).then(res =>
             {
                 console.log(res)
                 //TODO - Validate email
@@ -168,6 +169,7 @@ class App extends React.Component {
             searchType === "beer" && this.setState({beerData: response.data.response.beers.items, isLoading: false})
             searchType === "brewery" && this.setState({breweryData: response.data.response.brewery.items})
             // console.log(this.state.breweryData, response.data.response.brewery.items)
+            console.log(response.data.response.beers.items)
         })
     }
 
