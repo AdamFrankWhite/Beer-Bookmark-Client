@@ -20,7 +20,6 @@ connection.once('open',  () => {
 
 const usersRouter = require('./routes/users.js')
 app.use('/users', usersRouter)
-// app.use('/my-beers', beersRouter)
 
 
 
