@@ -30,7 +30,7 @@ class App extends React.Component {
             searchBeerData: [],
             favouriteBeers: [],
             redirect: "",
-            deployment: "dev"
+            deployment: "production"
         }
         this.baseUrl = this.state.deployment === "production" ? "" : "http://localhost:5000"
         this.addBeer = this.addBeer.bind(this)
