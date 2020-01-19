@@ -32,7 +32,7 @@ class App extends React.Component {
             redirect: "",
             deployment: "production"
         }
-        this.baseUrl = this.state.deployment === "production" ? "" : "http://localhost:5000"
+        this.baseUrl = this.state.deployment === "production" ? ":80" : "http://localhost:5000"
         this.addBeer = this.addBeer.bind(this)
         this.deleteBeer = this.deleteBeer.bind(this)
         this.updateBeer = this.updateBeer.bind(this)
