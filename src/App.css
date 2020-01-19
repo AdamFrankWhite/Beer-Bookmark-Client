@@ -44,6 +44,9 @@
 
 }
 
+.heading {
+  font-size: 1.5em;
+}
 .registration {
   width: fit-content;
   margin: auto;
@@ -69,9 +72,9 @@
 }
 
 .thumb {
-  height: 150px;
+  height: 30%;
   width: auto;
-  margin: 20px;
+  margin: 10%;
 }
 
 .randomBeer {
@@ -86,14 +89,22 @@
 .beer {
   border: 2px black solid;
   border-radius: 10px;
-  min-width: 300px;
-  flex-basis: 32%;
-  height: 400px;
+  min-width: 280px;
+  flex-basis: 18%;
+  height: 250px;
   margin: 5px;
   overflow: hidden;
   position: relative;
 }
 
+.beer h3,
+.beer h4 {
+  font-size: 1em;
+}
+
+.beer .description {
+  font-size: 0.9em;
+}
 .beer:hover {
   overflow: visible;
   z-index: 10000;
@@ -114,6 +125,7 @@
 
 .ratings {
   position: absolute;
+  font-size: 0.8em;
   top: 2em;
   right: 5px;
 }
@@ -129,6 +141,7 @@
   cursor: pointer;
   background: black;
   color: white;
+  border-radius: 10px;
 }
 
 .buttons:hover {
@@ -140,10 +153,11 @@
 
 .delete-beer {
   position: absolute;
+  font-size: 0.75em;
   padding: 0.5em;
   border-radius: 10px;
   bottom: 5px;
-  left: 45%;
+  left: 43%;
 }
 
 .delete-beer:hover {

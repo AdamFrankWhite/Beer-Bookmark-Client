@@ -30,7 +30,7 @@ class App extends React.Component {
             searchBeerData: [],
             favouriteBeers: [],
             redirect: "",
-            deployment: "production"
+            deployment: "dev"
         }
         this.baseUrl = this.state.deployment === "production" ? "" : "http://localhost:5000"
         this.addBeer = this.addBeer.bind(this)
@@ -252,7 +252,6 @@ class App extends React.Component {
                         /> 
                     )} 
                 />
-                {this.state.loggedIn ? <Dashboard /> : null}
             </Router>
             
         );

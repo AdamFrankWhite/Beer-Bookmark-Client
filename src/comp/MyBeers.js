@@ -29,12 +29,12 @@ class MyBeers extends React.Component {
         const beers = this.props.favouriteBeers.map(beer => <Beer myBeers={true} favouriteBeers={this.props.favouriteBeers} beerData={beer} src={beer.img} id={beer._id} name={beer.name} abv={beer.abv} description={beer.description} addBeer={this.props.addBeer} deleteBeer={this.props.deleteBeer} updateBeer={this.props.updateBeer}/>)
         return (
             <div className="App">
-                <h1>My Favourite Beers</h1>
+                <h1 className="heading">My Favourite Beers</h1>
                 {this.state.isLoading && <ReactLoading style={center} type="bubbles" color="black" height={400} width={350} />}
-                <div className="beer-container">
-                    
+                <div className="beer-container">  
                     {beers}
                 </div>
+                <h1 className="heading">My Favourite Breweries</h1>
                 
             </div>
         )

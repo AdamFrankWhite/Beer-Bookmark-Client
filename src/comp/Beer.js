@@ -37,7 +37,7 @@ class Beer extends React.Component {
                     }} 
                     className="buttons">
                     {/* {this.state.clickText} */}
-                    {clickText}
+                    {this.props.loggedIn && clickText}
                     </span>
                 }
                 <span className="buttons">
