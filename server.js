@@ -21,7 +21,7 @@ connection.once('open',  () => {
     console.log("Connected to MongoDB")
 })
 
-const usersRouter = require('./routes/users.js')
+const usersRouter = require('./backend/routes/users.js')
 app.use('/users', usersRouter)
 
 
