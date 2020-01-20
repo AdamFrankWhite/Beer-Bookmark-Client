@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 class RandomBeer extends React.Component {
     constructor() {
@@ -9,22 +10,19 @@ class RandomBeer extends React.Component {
     }
 
     componentDidMount() {
-        const beerData = fetch("https://api.punkapi.com/v2/beers/random").then(response => response.json()).then(data => this.setState({beerData: data[0]}))
-        // this.setState({
-        //     beerData: beerData
-        // })
+        const randomNum = Math.floor(Math.random() * 15000)
+        const randomSearchTerm = "red"
+        // search by ID
+        axios.get(`https://api.untappd.com/v4/search/beer?q=${randomSearchTerm}`, {params: {client_id:"F94775549BAC795E436858A50A3616690D3CD446", client_secret:"844CF3E397DB0294FC89ACE34560918CAFD035FB"}}).then(response => {
+            let results = response.data.response.beers.items
+            let randomNum = Math.floor(Math.random * results.length)
+            this.setState({beerData: results[randomNum]})
+            console.log(results)
+        })
     }
     render() {
-        let imgUrl = this.state.beerData.image_url
-        let beerName = this.state.beerData.name
-        let beerDescription = this.state.beerData.description
-        console.log(this.state.beerData)
         return (
-            <div className="randomBeer">
-                <h2>{beerName}</h2>
-                <p>{beerDescription}</p>
-                <img className="thumb" src={imgUrl}></img>
-            </div>
+            <h1>Something</h1>
         )
     }
     
