@@ -3,8 +3,8 @@ import React from 'react'
 function Dashboard() {
     return (
         <div className="App">
-            <p>My Favourite Beers</p>
-            <p>My Favourite Pubs</p>
+            <p className="heading">My Favourite Beers</p>
+            <p className="heading">My Favourite Pubs</p>
         </div>
     )
 }

@@ -246,12 +246,12 @@ class App extends React.Component {
                     path="/random-beer" 
                     render={ routeProps => ( 
                         <RandomBeer {...routeProps} 
-                            searchTerm={this.state.searchTerm} 
                             handleChange={this.handleChange}
+                            addBeer={this.addBeer}
+                            loggedIn={this.state.loggedIn}
                         /> 
                     )} 
                 />
-                {this.state.loggedIn ? <Dashboard /> : null}
             </Router>
             
         );
