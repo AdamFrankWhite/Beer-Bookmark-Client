@@ -249,6 +249,7 @@ class App extends React.Component {
                         <RandomBeer {...routeProps} 
                             handleChange={this.handleChange}
                             addBeer={this.addBeer}
+                            loggedIn={this.state.loggedIn}
                         /> 
                     )} 
                 />
