@@ -52,7 +52,7 @@ class Search extends React.Component {
                 {this.state.isLoading && <ReactLoading style={center} type="bubbles" color="black" />}
                 {!this.state.isLoading &&
                 <div> 
-                    <p>Can't quite remember that awesome beer you had last night? Save it to MyFavouriteBeers</p>
+                    <p>Can't quite remember that awesome beer you had last night? Save it to BeerMe</p>
                     <label htmlFor="searchTerm">Search: 
                     <input type="text" value={this.props.searchTerm} onChange={this.props.handleChange} name="searchTerm"></input>
                     </label>
