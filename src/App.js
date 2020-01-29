@@ -24,7 +24,9 @@ class App extends React.Component {
             repeatPassword: "",
             searchTerm: "",
             searchType: "beer",
+            showError: false,
             errorMessage: "",
+            regErrors: {},
             beerData: [],
             breweryData: [],
             searchBeerData: [],
@@ -35,13 +37,12 @@ class App extends React.Component {
         this.baseUrl = this.state.deployment === "production" ? "https://fierce-plateau-38188.herokuapp.com" : "http://localhost:5000"
         this.addBeer = this.addBeer.bind(this)
         this.deleteBeer = this.deleteBeer.bind(this)
-        this.updateBeer = this.updateBeer.bind(this)
         this.login = this.login.bind(this)
         this.logout = this.logout.bind(this)
         this.register = this.register.bind(this)
+        this.validation = this.validation.bind(this)
         this.renderRedirect = this.renderRedirect.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.updateBeers = this.updateBeers.bind(this)
         this.searchBeer = this.searchBeer.bind(this)
         this.changeTab = this.changeTab.bind(this)
     }
@@ -100,10 +101,10 @@ class App extends React.Component {
 
         if (this.state.username && this.state.password) {
             axios.post(`${this.baseUrl}/users/login`, userCredentials).then(res => {
-                this.setState({redirect: "profile", loggedIn: true}) // change to if successful
-                console.log("BOO")
-        })
-        axios.get(`${this.baseUrl}/users/my-beers/`, {params: {username: this.state.username}}).then(res => {
+                this.setState({redirect: "profile", loggedIn: true, showError: false})
+            }).catch(() => this.setState({showError: true, errorMessage: "Incorrect password. Please try again"}))
+        
+            axios.get(`${this.baseUrl}/users/my-beers/`, {params: {username: this.state.username}}).then(res => {
             console.log(res.data)
             this.setState({favouriteBeers: res.data.beers})})
                     
@@ -123,12 +124,16 @@ class App extends React.Component {
             email: this.state.email,
             password: this.state.password
         }
+
+        
+        
+        
         if (this.state.password === this.state.repeatPassword && this.state.username.length > 5 && this.state.password.length > 5) {
             axios.post(`${this.baseUrl}/users/register`, newUser).then(res =>
             {
                 console.log(res)
                 //TODO - Validate email
-                this.setState({redirect: "login", errorMessage: errorMessage})
+                this.setState({redirect: "login", regErrors: {}})
             })
             
             
@@ -145,6 +150,35 @@ class App extends React.Component {
         }
     }
 
+    validation() {
+        let validation = {
+            usernameLengthError: false, 
+            emailError: false, 
+            passwordLengthError: false, 
+            passwordMatchError: false
+        }
+
+        //Form validation
+        if(this.state.username.length < 6) {
+            validation.usernameLengthError = true 
+        }
+
+        if(this.state.email.length < 6 || !this.state.email.includes("@")) {
+            validation.emailError = true
+        }
+
+        if(this.state.password.length < 6) {
+            validation.passwordLengthError = true
+        }
+
+        if(this.state.password !== this.state.repeatPassword) {
+            validation.passwordMatchError = true
+        }
+
+        this.setState({regErrors: validation})    
+    }
+    
+
     renderRedirect() {
         if (this.state.redirect === "login") {
             return <Redirect to="/login" />
@@ -153,15 +187,8 @@ class App extends React.Component {
         }
     }
 
-    updateBeers() {
-        // TO DO
-            // this.setState({
-            //     searchBeerData: ??
-            // })
-    }
     handleChange(e) {
         this.setState({[e.target.name]: e.target.value})
-        this.updateBeers() // with search term rgument
     }
 
     searchBeer(searchTerm, searchType) {
@@ -195,6 +222,8 @@ class App extends React.Component {
                             password={this.state.password} 
                             repeatPassword={this.state.repeatPassword} 
                             errorMessage={this.state.errorMessage} 
+                            regErrors={this.state.regErrors}
+                            validation={this.validation}
                         />
                     )}        
                 />
@@ -206,7 +235,9 @@ class App extends React.Component {
                             handleChange={this.handleChange} 
                             username={this.state.username} 
                             password={this.state.password} 
-                            loggedIn={this.state.loggedIn}   
+                            loggedIn={this.state.loggedIn}
+                            showError={this.state.showError}
+                            errorMessage={this.state.errorMessage}  
                         />
                     )}        
                 />

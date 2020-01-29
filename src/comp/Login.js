@@ -14,7 +14,7 @@ function Login(props) {
                 </label>
                 <br />
                 <button onClick={props.login}>Login</button>
-                {props.errorMessage}
+                {props.showError && <p>{props.errorMessage}</p>}
             </div>
         )
     }   else {
