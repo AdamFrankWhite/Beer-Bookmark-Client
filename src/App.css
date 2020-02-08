@@ -25,14 +25,27 @@
   color: #09d3ac;
 }
 
+nav {
+  text-align: center;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+}
 .nav-title {
   color: white;
   font-size: 1.6em;
+  display: block;
+  font-family: 'Luckiest Guy', cursive;
+  text-shadow: 3px 3px 3px navy;
+  letter-spacing: 0.03em;
 }
 .link {
   color: white!important;
-  font-size: 1.2em;
-  padding: 0.5em 1em;
+  font-size: 1em;
+  padding: 0 0.25em;
+  display: block;
 }
 
 .link:hover {
@@ -113,7 +126,7 @@
 .beer {
   border: 2px black solid;
   border-radius: 10px;
-  min-width: 280px;
+  min-width: 250px;
   flex-basis: 18%;
   height: 250px;
   margin: 5px;
@@ -190,4 +203,25 @@
   transition: 0.3s;
 }
 
+
+/* Desktop */
+
+
+@media (min-width:1200px) {
+  .link {
+    font-size: 1.2em;
+    padding: 0.5em 1em;
+    display: inline;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .nav-title {
+    display: inline;
+  }
+
+}
 

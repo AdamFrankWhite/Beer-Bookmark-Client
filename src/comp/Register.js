@@ -9,7 +9,7 @@ function Register(props) {
                 <input 
                     name="username" 
                     type="text" 
-                    value={props.username} onChange={(e) => {props.handleChange(e); props.validation()}}>
+                    value={props.username} onChange={props.handleChange}>
                 </input>
                 <p className="errorMessage">{props.regErrors.usernameLengthError && "Username must be at least 6 characters"}</p>
             </label>
@@ -21,7 +21,7 @@ function Register(props) {
                     name="email" 
                     type="email" 
                     value={props.email} 
-                    onChange={(e) => {props.handleChange(e); props.validation()}}>
+                    onChange={props.handleChange}>
                 </input>
                 <p className="errorMessage" >{props.regErrors.emailError && "Invalid email. Please try again"}</p>
             </label>
@@ -34,7 +34,7 @@ function Register(props) {
                     name="password" 
                     type="password" 
                     value={props.password} 
-                    onChange={(e) => {props.handleChange(e); props.validation()}}>
+                    onChange={props.handleChange}>
                 </input>
                 <p className="errorMessage">{props.regErrors.passwordLengthError && "Password must be at least 6 characters"}</p>
             </label>
@@ -47,7 +47,7 @@ function Register(props) {
                     name="repeatPassword" 
                     type="password" 
                     value={props.repeatPassword} 
-                    onChange={(e) => {props.handleChange(e); props.validation()}}>
+                    onChange={props.handleChange}>
                 </input>
                 <p className="errorMessage">{props.regErrors.passwordMatchError && "Passwords do not match"}</p>
             </label>
