@@ -183,6 +183,10 @@ nav {
 
 }
 
+.sort-btn:hover {
+  cursor: pointer;
+}
+
 .ratings {
   position: absolute;
   font-size: 0.8em;
