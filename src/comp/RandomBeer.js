@@ -6,11 +6,16 @@ class RandomBeer extends React.Component {
         super()
         this.state = {
             randomBeerData: [],
-            randomBeerBrewery: {name: "", url: ""} // needed to avoid nested rendering bug
+            randomBeerBrewery: {name: "", url: ""}, // needed to avoid nested rendering bug
+            clickText: "Add to favourites"
         }
         this.randomBeer = this.randomBeer.bind(this)
+        this.clickedText = this.clickedText.bind(this)
     }
 
+    clickedText() {
+        this.setState({clickText: "Saved"})
+    }
     componentDidMount() {
         const randomBeer = Math.floor(Math.random() * 15000)
         
@@ -41,13 +46,26 @@ class RandomBeer extends React.Component {
     }
     render() {
         const beerTypes = ["pale", "white", "wheat", "stout", "porter", "session", "fruit"]
-        console.log(this.state.randomBeerData)
-        return (
-            <div className="randomBeer">
-                {beerTypes.map(beerType => <button onClick={() => this.randomBeer(beerType)}>{beerType}</button>)}
 
+        const checkBeerIncluded = JSON.stringify(this.props.favouriteBeers).includes(this.state.randomBeerData.beer_name)
+        const clickText = checkBeerIncluded ? "Saved" : "Add to Favourites"
+        return (
+            <div>
+                <div className="random-beer-buttons">
+                    {beerTypes.map(beerType => <span className="beer-types" onClick={() => this.randomBeer(beerType)}>{beerType}</span>)}
+                </div>
+                <div className="randomBeer">
+                
+                {this.props.loggedIn && <span className="buttons" onClick={() => {
+                    this.clickedText()
+                    console.log(this.state.randomBeerData)
+                    !checkBeerIncluded && this.props.loggedIn && this.props.addBeer(this.state.randomBeerData)}
+                    }
+                    >{clickText}</span> }
                 <br></br>
-        {this.props.loggedIn && <button className="buttons" onClick={() => this.props.addBeer(this.state.randomBeerData)}>Add To Favourites</button> }
+                
+                <br></br>
+        
                 <h4>{this.state.randomBeerData.beer_name}</h4>
                 <a href={this.state.randomBeerBrewery.url} target="_blank"><h5>{this.state.randomBeerBrewery.name}</h5></a>
                 <img src={this.state.randomBeerData.beer_label}></img>
@@ -56,6 +74,8 @@ class RandomBeer extends React.Component {
                 <p className="description">{this.state.randomBeerData.beer_description}</p>
                 
             </div>
+            </div>
+            
         
 
         )

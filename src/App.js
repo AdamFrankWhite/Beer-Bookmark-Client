@@ -284,6 +284,7 @@ class App extends React.Component {
                             handleChange={this.handleChange}
                             addBeer={this.addBeer}
                             loggedIn={this.state.loggedIn}
+                            favouriteBeers={this.state.favouriteBeers}
                         /> 
                     )} 
                 />

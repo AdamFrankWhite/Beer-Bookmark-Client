@@ -48,6 +48,10 @@ nav {
   display: block;
 }
 
+.heading {
+  font-family: "Bangers", cursive;
+}
+
 .link:hover {
   background: white;
   color:#007bff!important;
@@ -103,15 +107,15 @@ nav {
 .thumb {
   height: 30%;
   width: auto;
-  margin: 10%;
+  margin: 20% 10% 5% 10%;
 }
 
 .randomBeer {
   border: 2px black solid;
   position: relative;
   border-radius: 10px;
-  width: 600px;
-  height: 400px;
+  width: 95%;
+  /* height: 400px; */
   margin: auto;
   text-align: center;
   font-size: 1em;
@@ -134,9 +138,12 @@ nav {
   position: relative;
 }
 
-.beer h3,
-.beer h4 {
+.beer h3 {
   font-size: 1em;
+}
+
+.beer h4 {
+  font-size: 0.9em;
 }
 
 .beer .description {
@@ -158,6 +165,22 @@ nav {
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+.random-beer-buttons {
+  margin-bottom: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.beer-types {
+  padding: 0.25em 0.5em; 
+  border-radius: 10px;
+  background:rgb(27, 121, 243); 
+  border: 2px  navy solid;
+  color: white;
+  margin: 0.3em;
+
 }
 
 .ratings {
@@ -194,7 +217,7 @@ nav {
   padding: 0.5em;
   border-radius: 10px;
   bottom: 5px;
-  left: 43%;
+  left: 41%;
 }
 
 .delete-beer:hover {
@@ -221,6 +244,11 @@ nav {
 
   .nav-title {
     display: inline;
+  }
+
+  .randomBeer {
+    width: 600px;
+    height: 400px;
   }
 
 }

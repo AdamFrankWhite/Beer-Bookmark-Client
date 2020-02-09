@@ -12,16 +12,13 @@ class Search extends React.Component {
             favouriteBeers: [],
             isLoading: false
         }
-        // this.addBeer = this.addBeer.bind(this)
     }
 
     
     componentDidMount() {
-        // axios.get("https://api.untappd.com/v4/search/beer?q=Pilsner", {params: {client_id:"F94775549BAC795E436858A50A3616690D3CD446", client_secret:"844CF3E397DB0294FC89ACE34560918CAFD035FB"}}).then(response => {
-        //     this.setState({beerData: response.data.response.beers.items, isLoading: false})
-        //     console.log(response.data.response.beers.items)})
-       
+        
     }
+    
     render() {
         const center = {margin: "auto", height: 150, width: 200}
         const beers = this.props.beerData.map(item => 
