@@ -200,8 +200,7 @@ class App extends React.Component {
         axios.get(`https://api.untappd.com/v4/search/${searchType}?q=${searchTerm}`, {params: {client_id:"F94775549BAC795E436858A50A3616690D3CD446", client_secret:"844CF3E397DB0294FC89ACE34560918CAFD035FB"}}).then(response => {
             searchType === "beer" && this.setState({beerData: response.data.response.beers.items, isLoading: false})
             searchType === "brewery" && this.setState({breweryData: response.data.response.brewery.items})
-            // console.log(this.state.breweryData, response.data.response.brewery.items)
-            console.log(response.data.response.beers.items)
+         
         })
     }
 

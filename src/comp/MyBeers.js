@@ -1,6 +1,7 @@
 import React from 'react'
 import Beer from './Beer'
 import ReactLoading from 'react-loading'
+import FlipMove from 'react-flip-move';
 
 class MyBeers extends React.Component {
     constructor() {
@@ -19,7 +20,13 @@ class MyBeers extends React.Component {
     }
    
     sortBeers(searchType) {
-        let sortedBeers = this.state.beerData.sort((a, b) => (a[searchType] > b[searchType]) ? 1 : ((b[searchType] > a[searchType]) ? -1 : 0))
+        let sortedBeers;
+        if (searchType=="beerName"){
+            sortedBeers = this.state.beerData.sort((a, b) => (a[searchType] > b[searchType]) ? 1 : ((b[searchType] > a[searchType]) ? -1 : 0))
+        } else if (searchType="stars") {
+            sortedBeers = this.state.beerData.sort((a, b) => (a[searchType] < b[searchType]) ? 1 : ((b[searchType] < a[searchType]) ? -1 : 0))
+        }
+        
         this.setState({beerData: sortedBeers})
         console.log(sortedBeers)
     }
@@ -42,15 +49,25 @@ class MyBeers extends React.Component {
             />)
         return (
             <div className="App">
-                <h1 className="heading">My Favourite Beers</h1>
-                <span>Sort by </span>
-                <span className="sort-btn" onClick={() => this.sortBeers("beerName")}>Name</span>
-                <span className="sort-btn" onClick={() => this.sortBeers("stars")}>Top Rated</span>
-                {this.state.isLoading && <ReactLoading style={center} type="bubbles" color="black" height={400} width={350} />}
-                <div className="beer-container">  
-                    {beers}
+                <div className="my-beers-cont">
+                    <h1 className="heading">My Favourite Beers</h1>
+                    <div className="sort-btn-group">
+                        <span>Sort by: </span>
+                        <span className="sort-btn" onClick={() => this.sortBeers("beerName")}>Name</span>
+                        <span className="sort-btn" onClick={() => this.sortBeers("stars")}>Top Rated</span>
+                    </div>
+                    
+                    {this.state.isLoading && <ReactLoading style={center} type="bubbles" color="black" height={400} width={350} />}
+                    <div className="beer-container">  
+                        {/* <FlipMove> */}
+                            {beers}
+                        {/* </FlipMove> */}
+                    </div>
                 </div>
-                <h1 className="heading">My Favourite Breweries</h1>
+                
+                {/* <div className="my-breweries-cont">
+                    <h1 className="heading">My Favourite Breweries</h1>
+                </div> */}
                 
             </div>
         )

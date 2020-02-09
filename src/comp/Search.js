@@ -2,7 +2,6 @@ import React from 'react'
 import Beer from './Beer'
 import Brewery from './Brewery'
 import ReactLoading from 'react-loading'
-import axios from 'axios'
 
 class Search extends React.Component {
     constructor() {
@@ -55,12 +54,12 @@ class Search extends React.Component {
                     </label>
                     <button onClick={() => this.props.searchBeer(this.props.searchTerm, this.props.searchType)} >Go</button>
                     <br></br>
-                    <label htmlFor="searchType">Beer: 
+                    {/* <label htmlFor="searchType">Beer: 
                         <input name="searchType" type="radio" value="beer" onChange={this.props.handleChange}></input>
                     </label>
                     <label htmlFor="searchType">Brewery: 
                         <input name="searchType" type="radio" value="brewery" onChange={this.props.handleChange}></input>
-                    </label>
+                    </label> */}
                     
                     <div className="beer-container">
                         {beers}

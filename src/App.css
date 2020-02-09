@@ -25,6 +25,14 @@
   color: #09d3ac;
 }
 
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Questrial", cursive;
+}
+
 nav {
   text-align: center;
 }
@@ -50,7 +58,10 @@ nav {
 
 .heading {
   font-family: "Bangers", cursive;
+  margin-top: 0.5em;
 }
+
+
 
 .link:hover {
   background: white;
@@ -102,6 +113,7 @@ nav {
   width: 80%;
   flex-wrap: wrap;
   margin: auto;
+  justify-content: space-evenly;
 }
 
 .thumb {
@@ -131,9 +143,9 @@ nav {
   border: 2px black solid;
   border-radius: 10px;
   min-width: 250px;
-  flex-basis: 18%;
+  flex-basis: 20%;
   height: 250px;
-  margin: 5px;
+  margin: 10px;
   overflow: hidden;
   position: relative;
 }
@@ -158,7 +170,9 @@ nav {
 }
 
 
-
+.click-text-saved {
+  color: blue;
+}
 
 .buttons {
   /* visibility: hidden; */
@@ -183,10 +197,29 @@ nav {
 
 }
 
-.sort-btn:hover {
+.beer-types:hover {
   cursor: pointer;
 }
 
+.sort-btn-group {
+  text-align: right;
+  margin-right: 1em;
+}
+
+.sort-btn {
+  padding: 0.5em;
+}
+.sort-btn:hover {
+  cursor: pointer;
+  text-shadow: 0 0 0.02px black;
+}
+
+.my-beers-cont {
+  width: 90%;
+  margin: auto;
+  border: rgb(175, 2, 2) solid 2px;
+  border-radius: 5px;
+}
 .ratings {
   position: absolute;
   font-size: 0.8em;
@@ -252,7 +285,6 @@ nav {
 
   .randomBeer {
     width: 600px;
-    height: 400px;
   }
 
 }
