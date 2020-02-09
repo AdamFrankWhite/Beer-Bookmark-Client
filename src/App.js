@@ -45,6 +45,7 @@ class App extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.searchBeer = this.searchBeer.bind(this)
         this.changeTab = this.changeTab.bind(this)
+        this.updateBeer = this.updateBeer.bind(this)
     }
 
 
@@ -88,7 +89,7 @@ class App extends React.Component {
             username: this.state.username,
             newRating: rating
         }
-        
+        console.log(updateData)
         axios.post(`${this.baseUrl}/users/my-beers/update`, updateData).then(res => {
             this.setState({favouriteBeers: res.data})
         })          
@@ -105,7 +106,7 @@ class App extends React.Component {
             }).catch(() => this.setState({showError: true, errorMessage: "Incorrect password. Please try again"}))
         
             axios.get(`${this.baseUrl}/users/my-beers/`, {params: {username: this.state.username}}).then(res => {
-            console.log(res.data)
+            console.log(this.state.username)
             this.setState({favouriteBeers: res.data.beers})})
                     
                 
