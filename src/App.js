@@ -43,7 +43,8 @@ class App extends React.Component {
         this.validation = this.validation.bind(this)
         this.renderRedirect = this.renderRedirect.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.searchBeer = this.searchBeer.bind(this)
+        this.searchBeer = this.searchBeer.bind(this)        
+        this.sortBeers = this.sortBeers.bind(this)
         this.changeTab = this.changeTab.bind(this)
         this.updateBeer = this.updateBeer.bind(this)
     }
@@ -204,6 +205,18 @@ class App extends React.Component {
         })
     }
 
+    sortBeers(searchType) {
+        let sortedBeers;
+        if (searchType=="beerName"){
+            sortedBeers = this.state.beerData.sort((a, b) => (a[searchType] > b[searchType]) ? 1 : ((b[searchType] > a[searchType]) ? -1 : 0))
+        } else if (searchType="stars") {
+            sortedBeers = this.state.beerData.sort((a, b) => (a[searchType] < b[searchType]) ? 1 : ((b[searchType] < a[searchType]) ? -1 : 0))
+        }
+        
+        this.setState({favouriteBeers: sortedBeers})
+        console.log(sortedBeers)
+    }
+
     changeTab(selectedTab) {
         this.setState({searchType: selectedTab})
     }
@@ -256,6 +269,7 @@ class App extends React.Component {
                             searchTerm={this.state.searchTerm} 
                             handleChange={this.handleChange}
                             username={this.state.username}
+                            sortBeers={this.sortBeers}
                         />
                     )} 
                 />}
