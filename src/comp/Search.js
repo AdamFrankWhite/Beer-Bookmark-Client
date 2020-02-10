@@ -32,7 +32,8 @@ class Search extends React.Component {
                 beerData={item.beer} 
                 favouriteBeers={this.props.favouriteBeers} 
                 addBeer={this.props.addBeer} 
-                loggedIn={this.props.loggedIn} 
+                loggedIn={this.props.loggedIn}
+                brewery={item.brewery.brewery_name} 
             />)
         const breweries = this.props.breweryData.map(item => 
             <Brewery 
@@ -42,13 +43,12 @@ class Search extends React.Component {
                 beerNum={item.brewery.beer_count}
             />
             )
-            console.log(this.state.beerData)
         return (
             <div className="App">
                 {this.state.isLoading && <ReactLoading style={center} type="bubbles" color="black" />}
                 {!this.state.isLoading &&
                 <div> 
-                    <p>Can't quite remember that awesome beer you had last night? Save it to BeerMe</p>
+                    <p>Can't quite remember that awesome beer you had last night? Bookmark it with BeerMe</p>
                     <label htmlFor="searchTerm">Search: 
                     <input type="text" value={this.props.searchTerm} onChange={this.props.handleChange} name="searchTerm"></input>
                     </label>

@@ -55,14 +55,14 @@ class App extends React.Component {
     }
 
 
-    addBeer(beerData) {
+    addBeer(beerData, brewery) {
         const postData = {
             id: beerData.bid,
             username: this.state.username,
             beerName: beerData.beer_name,
             abv: beerData.beer_abv.toString(),
             beerDescription: beerData.beer_style,
-            brewery: beerData.brewery,
+            brewery: brewery,
             stars: "1",
             date: new Date(),
             img: beerData.beer_label
@@ -112,8 +112,10 @@ class App extends React.Component {
             }).catch(() => this.setState({showError: true, errorMessage: "Incorrect password. Please try again"}))
         
             axios.get(`${this.baseUrl}/users/my-beers/`, {params: {username: this.state.username}}).then(res => {
-            console.log(this.state.username)
-            this.setState({favouriteBeers: res.data.beers})})
+           
+            this.setState({favouriteBeers: res.data.beers})
+            console.log(this.state.favouriteBeers)
+        })
                     
                 
         
@@ -143,18 +145,8 @@ class App extends React.Component {
                 this.setState({redirect: "login", regErrors: {}})
             })
             
-            
             console.log("User added", newUser)
         }
-        // if (this.state.username.length <= 6) {
-        //     errorMessage.usernameError = "Username must be at last 6 characters" 
-        // }
-        // if (this.state.password !== this.state.repeatPassword) {
-        //     errorMessage.passwordMatchError = "Passwords must match"
-        // }
-        // if (this.state.password.length < 6) {
-        //     errorMessage.passwordLengthError = "Password must be at least 6 characters"
-        // }
     }
 
     validation(type) {
@@ -198,10 +190,12 @@ class App extends React.Component {
     }
 
     searchBeer(searchTerm, searchType) {
+        //clear search data
         this.setState({beerData: [], breweryData: []})
         axios.get(`https://api.untappd.com/v4/search/${searchType}?q=${searchTerm}`, {params: {client_id:"F94775549BAC795E436858A50A3616690D3CD446", client_secret:"844CF3E397DB0294FC89ACE34560918CAFD035FB"}}).then(response => {
             searchType === "beer" && this.setState({beerData: response.data.response.beers.items, isLoading: false})
             searchType === "brewery" && this.setState({breweryData: response.data.response.brewery.items})
+            console.log(this.state.beerData)
          
         })
     }
@@ -209,9 +203,9 @@ class App extends React.Component {
     sortBeers(searchType) {
         let sortedBeers;
         if (searchType=="beerName"){
-            sortedBeers = this.state.beerData.sort((a, b) => (a[searchType] > b[searchType]) ? 1 : ((b[searchType] > a[searchType]) ? -1 : 0))
+            sortedBeers = this.state.favouriteBeers.sort((a, b) => (a[searchType] > b[searchType]) ? 1 : ((b[searchType] > a[searchType]) ? -1 : 0))
         } else if (searchType="stars") {
-            sortedBeers = this.state.beerData.sort((a, b) => (a[searchType] < b[searchType]) ? 1 : ((b[searchType] < a[searchType]) ? -1 : 0))
+            sortedBeers = this.state.favouriteBeers.sort((a, b) => (a[searchType] < b[searchType]) ? 1 : ((b[searchType] < a[searchType]) ? -1 : 0))
         }
         
         this.setState({favouriteBeers: sortedBeers})

@@ -23,16 +23,18 @@ class Beer extends React.Component {
         for (let i=0; i<this.props.beerData.stars; i++) {
             stars.push(<span>&#11088;</span>)
         }
+        // console.log(this.props.beerData)
         return (
             <div className="beer">
                 <img className="thumb" src={this.props.src}></img>
                 <h3>{this.props.name || this.props.beerData.beerName}</h3>
+                <h4>{this.props.brewery}</h4>
                 <h4>ABV: {this.props.abv || this.props.beerData.abv}%</h4>
                 <p className="description">{this.props.style || this.props.beerData.beerDescription}</p>
                 {this.props.search && <span onClick={() => {
                     //only add to favourites if not already included
                     this.clickedText()
-                    !checkBeerIncluded && this.props.loggedIn && this.props.addBeer(this.props.beerData)
+                    !checkBeerIncluded && this.props.loggedIn && this.props.addBeer(this.props.beerData, this.props.brewery)
                     }} 
 
                     className={clickTextStyle + " buttons"}>

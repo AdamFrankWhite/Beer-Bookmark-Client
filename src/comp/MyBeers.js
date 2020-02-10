@@ -32,6 +32,7 @@ class MyBeers extends React.Component {
                 addBeer={this.props.addBeer} 
                 deleteBeer={this.props.deleteBeer} 
                 updateBeer={this.props.updateBeer}
+                brewery={beer.brewery}
             />)
         return (
             <div className="App">

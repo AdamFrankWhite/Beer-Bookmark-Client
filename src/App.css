@@ -33,6 +33,9 @@ h6 {
   font-family: "Questrial", cursive;
 }
 
+p {
+  margin: 5px 5px;
+}
 nav {
   text-align: center;
 }
@@ -41,6 +44,7 @@ nav {
   display: flex;
   flex-direction: column;
 }
+
 .nav-title {
   color: white;
   font-size: 1.6em;
@@ -83,6 +87,7 @@ nav {
   margin: auto;
   text-align: center;
   line-height: 1em;
+  font-size: 0.8em;
 }
 
 .registration input {
@@ -274,9 +279,14 @@ nav {
 
 
 /* Desktop */
+@media (max-width: 767px) {
+  /* Fix bootstrap issue */
+  .navbar-brand {
+    margin: auto!important;
+  }
+}
 
-
-@media (min-width:1200px) {
+@media (min-width:768px) {
   .link {
     font-size: 1.2em;
     padding: 0.5em 1em;
@@ -290,6 +300,10 @@ nav {
 
   .nav-title {
     display: inline;
+  }
+
+  .registration {
+    font-size: 1em;
   }
 
   .randomBeer {
