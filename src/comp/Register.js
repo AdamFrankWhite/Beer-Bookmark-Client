@@ -11,7 +11,8 @@ function Register(props) {
                     type="text" 
                     value={props.username} onChange={props.handleChange}>
                 </input>
-                <p className="errorMessage">{props.regErrors.usernameLengthError && "Username must be at least 6 characters"}</p>
+                {/* Conditional style based on error boolean and success */}
+                <p className={!props.regErrors.usernameLengthError && props.username.length > 1 ? "validationPass" : "errorMessage"}>{props.regErrors.usernameLengthError && "Username must be at least 6 characters"}</p>
             </label>
             
             
@@ -23,7 +24,7 @@ function Register(props) {
                     value={props.email} 
                     onChange={props.handleChange}>
                 </input>
-                <p className="errorMessage" >{props.regErrors.emailError && "Invalid email. Please try again"}</p>
+                <p className={!props.regErrors.emailError && props.email.length > 1 ? "validationPass" : "errorMessage"}>{props.regErrors.emailError && "Invalid email. Please try again"}</p>
             </label>
             
             <br/>
@@ -36,7 +37,7 @@ function Register(props) {
                     value={props.password} 
                     onChange={props.handleChange}>
                 </input>
-                <p className="errorMessage">{props.regErrors.passwordLengthError && "Password must be at least 6 characters"}</p>
+                <p className={!props.regErrors.passwordLengthError && props.password.length > 1 ? "validationPass" : "errorMessage"}>{props.regErrors.passwordLengthError && "Password must be at least 6 characters"}</p>
             </label>
             
             <br />
@@ -49,7 +50,7 @@ function Register(props) {
                     value={props.repeatPassword} 
                     onChange={props.handleChange}>
                 </input>
-                <p className="errorMessage">{props.regErrors.passwordMatchError && "Passwords do not match"}</p>
+                <p className={!props.regErrors.passwordMatchError && props.repeatPassword.length > 1 ? "validationPass" : "errorMessage"}>{props.regErrors.passwordMatchError && "Passwords do not match"}</p>
             </label>
             <br />
             <button onClick={props.register}>Register</button>

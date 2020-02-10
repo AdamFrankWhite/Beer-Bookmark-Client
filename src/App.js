@@ -26,7 +26,12 @@ class App extends React.Component {
             searchType: "beer",
             showError: false,
             errorMessage: "",
-            regErrors: {},
+            regErrors: {
+                usernameLengthError: false, 
+                emailError: false, 
+                passwordLengthError: false, 
+                passwordMatchError: false
+            },
             beerData: [],
             breweryData: [],
             searchBeerData: [],
@@ -141,40 +146,35 @@ class App extends React.Component {
             
             console.log("User added", newUser)
         }
-        if (this.state.username.length <= 6) {
-            errorMessage.usernameError = "Username must be at last 6 characters" 
-        }
-        if (this.state.password !== this.state.repeatPassword) {
-            errorMessage.passwordMatchError = "Passwords must match"
-        }
-        if (this.state.password.length < 6) {
-            errorMessage.passwordLengthError = "Password must be at least 6 characters"
-        }
+        // if (this.state.username.length <= 6) {
+        //     errorMessage.usernameError = "Username must be at last 6 characters" 
+        // }
+        // if (this.state.password !== this.state.repeatPassword) {
+        //     errorMessage.passwordMatchError = "Passwords must match"
+        // }
+        // if (this.state.password.length < 6) {
+        //     errorMessage.passwordLengthError = "Password must be at least 6 characters"
+        // }
     }
 
-    validation() {
-        let validation = {
-            usernameLengthError: false, 
-            emailError: false, 
-            passwordLengthError: false, 
-            passwordMatchError: false
-        }
+    validation(type) {
+        let validation = this.state.regErrors
 
         //Form validation
-        if(this.state.username.length < 6) {
-            validation.usernameLengthError = true 
+        if (type === "username") {
+            this.state.username.length < 6 ? validation.usernameLengthError = true : validation.usernameLengthError = false
         }
 
-        if(this.state.email.length < 6 || !this.state.email.includes("@")) {
-            validation.emailError = true
+        if (type === "email") {
+            this.state.email.length < 6 || !this.state.email.includes("@") ? validation.emailError = true : validation.emailError = false
         }
 
-        if(this.state.password.length < 6) {
-            validation.passwordLengthError = true
+        if (type === "password") {
+            this.state.password.length < 6 ? validation.passwordLengthError = true : validation.passwordLengthError = false
         }
 
-        if(this.state.password !== this.state.repeatPassword) {
-            validation.passwordMatchError = true
+        if (type === "repeatPassword") {
+            this.state.password !== this.state.repeatPassword ? validation.passwordMatchError = true : validation.passwordMatchError = false
         }
 
         this.setState({regErrors: validation})    
@@ -191,8 +191,9 @@ class App extends React.Component {
 
     handleChange(e) {
         // Update form fields and validation
-        this.setState({[e.target.name]: e.target.value},() => {
-            this.validation();
+        let changeType = e.target.name
+        this.setState({[changeType]: e.target.value},() => {
+            this.validation(changeType);
         })
     }
 
