@@ -16,14 +16,13 @@ class Beer extends React.Component {
     render() {
         // checks to see if favourite beers includes this beer, if so render saved
         
-        const checkBeerIncluded = this.props.search && JSON.stringify(this.props.favouriteBeers).includes(this.props.name)
+        const checkBeerIncluded = this.props.search && JSON.stringify(this.props.favouriteBeers).includes(this.props.id)
         const clickText = checkBeerIncluded ? "Saved" : "Add to Favourites"
         const clickTextStyle = checkBeerIncluded && "click-text-saved"
         const stars = []
         for (let i=0; i<this.props.beerData.stars; i++) {
             stars.push(<span>&#11088;</span>)
         }
-        // console.log(this.props.beerData)
         return (
             <div className="beer">
                 <img className="thumb" src={this.props.src}></img>
