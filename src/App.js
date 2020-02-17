@@ -120,8 +120,6 @@ class App extends React.Component {
                 
         
         }
-        //wait until after redirect
-        this.setState({loading: false})
     }
 
     logout() {
@@ -178,6 +176,7 @@ class App extends React.Component {
         if (this.state.redirect === "login") {
             return <Redirect to="/login" />
         } else if (this.state.redirect === "profile") {
+            this.setState({loading: false})
             return <Redirect to="/my-beers" />
         }
     }
