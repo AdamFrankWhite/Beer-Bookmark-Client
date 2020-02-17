@@ -114,7 +114,7 @@ class App extends React.Component {
         
             axios.get(`${this.baseUrl}/users/my-beers/`, {params: {username: this.state.username}}).then(res => {
            
-            this.setState({favouriteBeers: res.data.beers, loading: false})
+            this.setState({favouriteBeers: res.data.beers})
         })
                     
                 
