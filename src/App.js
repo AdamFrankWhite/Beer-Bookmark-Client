@@ -108,9 +108,9 @@ class App extends React.Component {
         if (this.state.username && this.state.password) {
             axios.post(`${this.baseUrl}/users/login`, userCredentials).then(res => {
                 this.setState({redirect: "profile", loggedIn: true, showError: false})
-            }).catch(() => this.setState({showError: true, errorMessage: "Incorrect password. Please try again"}))
+            }).catch(() => this.setState({showError: true, errorMessage: "Incorrect password. Please try again", loading: false}))
         
-            axios.get(`${this.baseUrl}/users/my-beers/`, {params: {username: this.state.username}}).then(res => {
+            this.state.loggedIn && axios.get(`${this.baseUrl}/users/my-beers/`, {params: {username: this.state.username}}).then(res => {
         // Set MyBeers data
             this.setState({favouriteBeers: res.data.beers})
         })
@@ -133,7 +133,7 @@ class App extends React.Component {
             password: this.state.password
         }
         let {usernameLengthError, emailError, passwordLengthError, passwordMatchError} = this.state.regErrors
-        
+        console.log(this.state.regErrors)
         if (!usernameLengthError && !emailError && !passwordLengthError && !passwordMatchError) {
             axios.post(`${this.baseUrl}/users/register`, newUser).then(res =>
             {
