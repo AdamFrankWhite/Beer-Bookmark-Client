@@ -164,6 +164,10 @@ nav {
   position: relative;
 }
 
+.spinner {
+  margin: auto;
+}
+
 .beer h3 {
   font-size: 1em;
 }

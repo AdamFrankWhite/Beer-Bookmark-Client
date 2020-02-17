@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactLoading from 'react-loading'
 
 function Login(props) {
     if (!props.loggedIn) {
@@ -13,7 +14,10 @@ function Login(props) {
                     <input name="password" type="password" value={props.password} onChange={props.handleChange}></input>
                 </label>
                 <br />
-                <button onClick={props.login}>Login</button>
+                {!props.loading ? 
+                    <button onClick={props.login}>Login</button> :
+                    <ReactLoading type={"spin"} color={"#000"} height={25} width={25} className="spinner" />
+                }
                 {props.showError && <p>{props.errorMessage}</p>}
             </div>
         )

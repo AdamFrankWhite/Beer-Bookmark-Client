@@ -17,6 +17,7 @@ class App extends React.Component {
     constructor() {
         super()
         this.state = {
+            loading: false,
             loggedIn: false,
             username: "",
             email: "",
@@ -105,7 +106,7 @@ class App extends React.Component {
             username: this.state.username,
             password: this.state.password
         }
-
+        this.setState({loading: true})
         if (this.state.username && this.state.password) {
             axios.post(`${this.baseUrl}/users/login`, userCredentials).then(res => {
                 this.setState({redirect: "profile", loggedIn: true, showError: false})
@@ -113,8 +114,7 @@ class App extends React.Component {
         
             axios.get(`${this.baseUrl}/users/my-beers/`, {params: {username: this.state.username}}).then(res => {
            
-            this.setState({favouriteBeers: res.data.beers})
-            console.log(this.state.favouriteBeers)
+            this.setState({favouriteBeers: res.data.beers, loading: false})
         })
                     
                 
@@ -246,6 +246,7 @@ class App extends React.Component {
                             handleChange={this.handleChange} 
                             username={this.state.username} 
                             password={this.state.password} 
+                            loading={this.state.loading}
                             loggedIn={this.state.loggedIn}
                             showError={this.state.showError}
                             errorMessage={this.state.errorMessage}  
