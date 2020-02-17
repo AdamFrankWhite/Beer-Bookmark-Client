@@ -55,29 +55,29 @@ class RandomBeer extends React.Component {
                     {beerTypes.map(beerType => <span className="beer-types" onClick={() => this.randomBeer(beerType)}>{beerType}</span>)}
                 </div>
                 <div className="randomBeer">
-                
-                {this.props.loggedIn && <span className="buttons" onClick={() => {
-                    this.clickedText()
-                    console.log(this.state.randomBeerData)
-                    !checkBeerIncluded && this.props.loggedIn && this.props.addBeer(this.state.randomBeerData)}
-                    }
-                    >{clickText}</span> }
-                <br></br>
-                
-                <br></br>
-        
-                <h4>{this.state.randomBeerData.beer_name}</h4>
-                <a href={this.state.randomBeerBrewery.url} target="_blank"><h5>{this.state.randomBeerBrewery.name}</h5></a>
-                <img src={this.state.randomBeerData.beer_label}></img>
-                <h5>ABV: {this.state.randomBeerData.beer_abv}%</h5>
-                <h6>{this.state.randomBeerData.beer_style}</h6>
-                <p className="description">{this.state.randomBeerData.beer_description}</p>
-                
+                    {this.props.loggedIn && <span className="buttons" onClick={() => {
+                        this.clickedText()
+                        console.log(this.state.randomBeerData)
+                        !checkBeerIncluded && this.props.loggedIn && this.props.addBeer(this.state.randomBeerData)}
+                        }
+                        >{clickText}</span> }
+                    <br></br>
+                    
+                    <br></br>
+                    {/* Beer Name */}
+                    <h4>{this.state.randomBeerData.beer_name}</h4>
+                    {/* Brewery Name/Link */}
+                    <a href={this.state.randomBeerBrewery.url} target="_blank" rel="noopener noreferrer"><h5>{this.state.randomBeerBrewery.name}</h5></a>
+                    {/* Beer picture */}
+                    <img src={this.state.randomBeerData.beer_label} alt="beer logo"></img>
+                    {/* Beer ABV */}
+                    <h5>ABV: {this.state.randomBeerData.beer_abv}%</h5>
+                    {/* Beer type */}
+                    <h6>{this.state.randomBeerData.beer_style}</h6>
+                    {/* Beer Description */}
+                    <p className="description">{this.state.randomBeerData.beer_description}</p>
+                </div>
             </div>
-            </div>
-            
-        
-
         )
     }
     

@@ -13,13 +13,10 @@ class Search extends React.Component {
         }
     }
 
-    
-    componentDidMount() {
-        
-    }
-    
     render() {
         const center = {margin: "auto", height: 150, width: 200}
+
+        // Beer Components
         const beers = this.props.beerData.map(item => 
             <Beer 
                 search={true} 
@@ -35,6 +32,8 @@ class Search extends React.Component {
                 loggedIn={this.props.loggedIn}
                 brewery={item.brewery.brewery_name} 
             />)
+
+        // Brewery Components
         const breweries = this.props.breweryData.map(item => 
             <Brewery 
                 img={item.brewery.brewery_label}
@@ -45,10 +44,16 @@ class Search extends React.Component {
             )
         return (
             <div className="App">
+
+                {/* Loading animation */}
                 {this.state.isLoading && <ReactLoading style={center} type="bubbles" color="black" />}
+                
+                {/* Loaded  */}
                 {!this.state.isLoading &&
                 <div> 
                     <p>Can't quite remember that awesome beer you had last night? Bookmark it with BeerMe</p>
+
+                    {/* Search Box */}
                     <label htmlFor="searchTerm">Search: 
                     <input type="text" value={this.props.searchTerm} onChange={this.props.handleChange} name="searchTerm"></input>
                     </label>
@@ -61,6 +66,7 @@ class Search extends React.Component {
                         <input name="searchType" type="radio" value="brewery" onChange={this.props.handleChange}></input>
                     </label> */}
                     
+                    {/* Beer Container */}
                     <div className="beer-container">
                         {beers}
                         {breweries}

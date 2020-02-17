@@ -1,13 +1,11 @@
+/* == Root Styles == */
+
 .App {
   text-align: center;
 }
 
 * {
   box-sizing: border-box;
-}
-
-.App-logo {
-  height: 40vmin;
 }
 
 .App-header {
@@ -36,6 +34,8 @@ h6 {
 p {
   margin: 5px 5px;
 }
+
+/* == Header/Nav == */
 nav {
   text-align: center;
 }
@@ -53,6 +53,7 @@ nav {
   text-shadow: 3px 3px 3px navy;
   letter-spacing: 0.03em;
 }
+
 .link {
   color: white!important;
   font-size: 1em;
@@ -60,19 +61,11 @@ nav {
   display: block;
 }
 
-.heading {
-  font-family: "Bangers", cursive;
-  margin-top: 0.5em;
-}
-
-
-
 .link:hover {
   background: white;
   color:#007bff!important;
   text-decoration: none!important;
-  transition: 0.25em;
-  border-radius: 10px;
+  transition: 0.25s;
 
 }
 
@@ -80,7 +73,12 @@ nav {
   font-size: 1.5em;
 }
 
-/* Registration */
+.heading {
+  font-family: "Bangers", cursive;
+  margin-top: 0.5em;
+}
+
+/* == Registration / Login Forms == */
 
 .registration {
   width: fit-content;
@@ -120,7 +118,11 @@ nav {
   border-radius: 5px;
 }
 
+.spinner {
+  margin: auto;
+}
 
+/* == Beer Styles == */
 
 .beer-container {
   display: flex;
@@ -141,7 +143,6 @@ nav {
   position: relative;
   border-radius: 10px;
   width: 95%;
-  /* height: 400px; */
   margin: auto;
   text-align: center;
   font-size: 1em;
@@ -162,10 +163,6 @@ nav {
   margin: 10px;
   overflow: hidden;
   position: relative;
-}
-
-.spinner {
-  margin: auto;
 }
 
 .beer h3 {
@@ -193,8 +190,9 @@ nav {
   color: blue;
 }
 
+/* == Random Beer == */
+
 .buttons {
-  /* visibility: hidden; */
   position: absolute;
   top: 5px;
   right: 5px;
@@ -233,6 +231,8 @@ nav {
   text-shadow: 0 0 0.02px black;
 }
 
+/* == My Beers == */
+
 .my-beers-cont {
   width: 90%;
   margin: auto;
@@ -245,8 +245,6 @@ nav {
   top: 2em;
   right: 5px;
 }
-
-
 
 .ratings span {
   padding: 0.25em;
@@ -283,19 +281,20 @@ nav {
 }
 
 
-/* Desktop */
+/* == Mobile/Tab == */
 @media (max-width: 767px) {
   /* Fix bootstrap issue */
   .navbar-brand {
     margin: auto!important;
   }
 }
-
+/* == Mobile == */
 @media (min-width:768px) {
   .link {
     font-size: 1.2em;
-    padding: 0.5em 1em;
+    padding: 0.3em 0.7em;
     display: inline;
+    border-radius: 10px ;
   }
 
   .navbar {
@@ -305,6 +304,7 @@ nav {
 
   .nav-title {
     display: inline;
+    font-size: 2em;
   }
 
   .registration {

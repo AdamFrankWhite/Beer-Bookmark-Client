@@ -5,51 +5,50 @@ function Register(props) {
     return (
         <div className="registration">
             <h2>Register</h2>
-            <label for="username">Username: 
+            {/* Username field */}
+            <label htmlFor="username">Username: 
                 <input 
                     name="username" 
                     type="text" 
                     value={props.username} onChange={props.handleChange}>
                 </input>
                 {/* Conditional style based on error boolean and success */}
-                <p className={!props.regErrors.usernameLengthError && props.username.length > 1 ? "validationPass" : "errorMessage"}>{props.regErrors.usernameLengthError && window.innerWidth > 600 && "Username must be at least 6 characters"}</p>
+                <p className={!errors.usernameLengthError && props.username.length > 1 ? "validationPass" : "errorMessage"}>{errors.usernameLengthError && window.innerWidth > 600 && "Username must be at least 6 characters"}</p>
             </label>
             
-            
-            
-            <label for="email">Email: 
+            {/* Email field */}
+            <label htmlFor="email">Email: 
                 <input 
                     name="email" 
                     type="email" 
                     value={props.email} 
                     onChange={props.handleChange}>
                 </input>
-                <p className={!props.regErrors.emailError && props.email.length > 1 ? "validationPass" : "errorMessage"}>{props.regErrors.emailError && window.innerWidth > 1200 && "Invalid email. Please try again"}</p>
+                <p className={!errors.emailError && props.email.length > 1 ? "validationPass" : "errorMessage"}>{errors.emailError && window.innerWidth > 1200 && "Invalid email. Please try again"}</p>
             </label>
             
-
-
-            <label for="password">Password: 
+            {/* Password field */}
+            <label htmlFor="password">Password: 
                 <input 
                     name="password" 
                     type="password" 
                     value={props.password} 
                     onChange={props.handleChange}>
                 </input>
-                <p className={!props.regErrors.passwordLengthError && props.password.length > 1 ? "validationPass" : "errorMessage"}>{props.regErrors.passwordLengthError && window.innerWidth > 1200 && "Password must be at least 6 characters"}</p>
+                <p className={!errors.passwordLengthError && props.password.length > 1 ? "validationPass" : "errorMessage"}>{errors.passwordLengthError && window.innerWidth > 1200 && "Password must be at least 6 characters"}</p>
             </label>
             
             <br />
 
-
-            <label for="repeatPassword">Repeat Password: 
+            {/* Repeat Password field */}
+            <label htmlFor="repeatPassword">Repeat Password: 
                 <input 
                     name="repeatPassword" 
                     type="password" 
                     value={props.repeatPassword} 
                     onChange={props.handleChange}>
                 </input>
-                <p className={!props.regErrors.passwordMatchError && props.repeatPassword.length > 1 ? "validationPass" : "errorMessage"}>{props.regErrors.passwordMatchError && window.innerWidth > 1200  && "Passwords do not match"}</p>
+                <p className={!errors.passwordMatchError && props.repeatPassword.length > 1 ? "validationPass" : "errorMessage"}>{errors.passwordMatchError && window.innerWidth > 1200  && "Passwords do not match"}</p>
             </label>
             <br />
             <button onClick={props.register}>Register</button>

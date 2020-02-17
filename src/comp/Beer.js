@@ -20,12 +20,14 @@ class Beer extends React.Component {
         const clickText = checkBeerIncluded ? "Saved" : "Add to Favourites"
         const clickTextStyle = checkBeerIncluded && "click-text-saved"
         const stars = []
+
+        // stars
         for (let i=0; i<this.props.beerData.stars; i++) {
-            stars.push(<span>&#11088;</span>)
+            stars.push(<span role="img" aria-label="star">&#11088;</span>)
         }
         return (
             <div className="beer">
-                <img className="thumb" src={this.props.src}></img>
+                <img className="thumb" alt="beer" src={this.props.src}></img>
                 <h3>{this.props.name || this.props.beerData.beerName}</h3>
                 <h4>{this.props.brewery}</h4>
                 <h4>ABV: {this.props.abv || this.props.beerData.abv}%</h4>
@@ -37,12 +39,10 @@ class Beer extends React.Component {
                     }} 
 
                     className={clickTextStyle + " buttons"}>
-                    {/* {this.state.clickText} */}
                     {this.props.loggedIn && clickText}
                     </span>
                 }
-                <span className="buttons">
-                    
+                <span className="buttons">                  
                     {stars}
                 </span> 
                 

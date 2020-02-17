@@ -11,12 +11,10 @@ class MyBeers extends React.Component {
         }
     }
 
-   
     componentDidMount() {
         this.setState({isLoading: false})
     }
    
-
     render() {
         const center = {margin: "auto"}
         const beers = this.props.favouriteBeers.map(beer => 

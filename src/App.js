@@ -5,7 +5,6 @@ import Header from './comp/Header'
 import Login from './comp/Login'
 import Register from './comp/Register'
 import Search from './comp/Search'
-import Dashboard from './comp/Dashboard'
 import RandomBeer from './comp/RandomBeer'
 import MyBeers from './comp/MyBeers'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -55,7 +54,7 @@ class App extends React.Component {
         this.updateBeer = this.updateBeer.bind(this)
     }
 
-
+    // Add Beer 
     addBeer(beerData, brewery) {
         const postData = {
             id: beerData.bid,
@@ -75,6 +74,7 @@ class App extends React.Component {
     })  
     }
 
+    // Delete Beer
     deleteBeer(beer) {
         let deleteData = {
             beerData: beer,
@@ -82,30 +82,28 @@ class App extends React.Component {
         }
         axios.post(`${this.baseUrl}/users/my-beers/delete-beer`, deleteData).then(res => {
             this.setState({favouriteBeers: res.data})
-    }) 
-        
-
-        
-
-        //need to update state before and after delete to ensure real-time update
+        }) 
     }
 
+    // Update Beer Rating    
     updateBeer(beer, rating) {
         let updateData = {
             beerData: beer,
             username: this.state.username,
             newRating: rating
         }
-        console.log(updateData)
         axios.post(`${this.baseUrl}/users/my-beers/update`, updateData).then(res => {
             this.setState({favouriteBeers: res.data})
         })          
     }
+
+    // Login
     login() {
         const userCredentials = {
             username: this.state.username,
             password: this.state.password
         }
+        // Set loading animation
         this.setState({loading: true})
         if (this.state.username && this.state.password) {
             axios.post(`${this.baseUrl}/users/login`, userCredentials).then(res => {
@@ -113,7 +111,7 @@ class App extends React.Component {
             }).catch(() => this.setState({showError: true, errorMessage: "Incorrect password. Please try again"}))
         
             axios.get(`${this.baseUrl}/users/my-beers/`, {params: {username: this.state.username}}).then(res => {
-           
+        // Set MyBeers data
             this.setState({favouriteBeers: res.data.beers})
         })
                     
@@ -122,24 +120,23 @@ class App extends React.Component {
         }
     }
 
+    // Logout
     logout() {
         this.setState({loggedIn: false, redirect: "login", loading: false}) // redirect on logout
     }
+
+    //Register
     register() {
-        let errorMessage = {}
         let newUser = {
             username: this.state.username,
             email: this.state.email,
             password: this.state.password
         }
-
+        let {usernameLengthError, emailError, passwordLengthError, passwordMatchError} = this.state.regErrors
         
-        
-        
-        if (this.state.password === this.state.repeatPassword && this.state.username.length > 5 && this.state.password.length > 5) {
+        if (!usernameLengthError && !emailError && !passwordLengthError && !passwordMatchError) {
             axios.post(`${this.baseUrl}/users/register`, newUser).then(res =>
             {
-                console.log(res)
                 //TODO - Validate email
                 this.setState({redirect: "login", regErrors: {}})
             })
@@ -150,6 +147,7 @@ class App extends React.Component {
 
     validation(type) {
         let validation = this.state.regErrors
+        
 
         //Form validation
         if (type === "username") {
@@ -201,9 +199,9 @@ class App extends React.Component {
 
     sortBeers(searchType) {
         let sortedBeers;
-        if (searchType=="beerName"){
+        if (searchType === "beerName"){
             sortedBeers = this.state.favouriteBeers.sort((a, b) => (a[searchType] > b[searchType]) ? 1 : ((b[searchType] > a[searchType]) ? -1 : 0))
-        } else if (searchType="stars") {
+        } else if (searchType === "stars") {
             sortedBeers = this.state.favouriteBeers.sort((a, b) => (a[searchType] < b[searchType]) ? 1 : ((b[searchType] < a[searchType]) ? -1 : 0))
         }
         
@@ -218,9 +216,9 @@ class App extends React.Component {
         return (
             <Router>
                 <Header loggedIn={this.state.loggedIn} logout={this.logout} />
-                <br />
-                {/* <Login  login={this.clickLogin} handleChange={this.handleChange} username={this.state.username} password={this.state.password} /> */}
-                {this.renderRedirect()}
+                <br /> {this.renderRedirect()}
+                
+                {/* Register Router */}
                 <Route 
                     path="/register" 
                     render={ routeProps => ( 
@@ -237,6 +235,8 @@ class App extends React.Component {
                         />
                     )}        
                 />
+
+                {/* Login Router */}
                 <Route 
                     path="/login" 
                     render={ routeProps => ( 
@@ -252,6 +252,8 @@ class App extends React.Component {
                         />
                     )}        
                 />
+
+                {/* My Beers Router */}
                 {this.state.loggedIn && 
                 <Route 
                     path="/my-beers" 
@@ -268,6 +270,8 @@ class App extends React.Component {
                         />
                     )} 
                 />}
+
+                {/* Search Router */}
                 <Route 
                     path="/search" 
                     render={ routeProps => ( 
@@ -285,6 +289,8 @@ class App extends React.Component {
                         /> 
                     )} 
                 />
+
+                {/* Random Beer Router */}
                 <Route 
                     path="/random-beer" 
                     render={ routeProps => ( 
