@@ -120,7 +120,8 @@ class App extends React.Component {
                 
         
         }
-        
+        //wait until after redirect
+        this.setState({loading: false})
     }
 
     logout() {
