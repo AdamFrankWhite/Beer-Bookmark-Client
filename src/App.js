@@ -123,7 +123,7 @@ class App extends React.Component {
     }
 
     logout() {
-        this.setState({loggedIn: false, redirect: "login"}) // how to redirect on logout??
+        this.setState({loggedIn: false, redirect: "login", loading: false}) // redirect on logout
     }
     register() {
         let errorMessage = {}
@@ -176,7 +176,6 @@ class App extends React.Component {
         if (this.state.redirect === "login") {
             return <Redirect to="/login" />
         } else if (this.state.redirect === "profile") {
-            this.setState({loading: false})
             return <Redirect to="/my-beers" />
         }
     }
