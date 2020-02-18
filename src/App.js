@@ -17,11 +17,13 @@ class App extends React.Component {
         super()
         this.state = {
             loading: false,
+            regUsername: "",
+            regPassword: "",
+            regEmail: "",
+            regRepeatPassword: "",
             loggedIn: false,
             username: "",
-            email: "",
             password: "",
-            repeatPassword: "",
             searchTerm: "",
             searchType: "beer",
             showError: false,
@@ -105,9 +107,11 @@ class App extends React.Component {
         }
         // Set loading animation
         this.setState({loading: true})
-        if (this.state.username && this.state.password) {
+        if (!this.state.username) {
+            this.setState({showError: true, errorMessage: "Please enter username", loading: false})
+        } else {
             axios.post(`${this.baseUrl}/users/login`, userCredentials).then(res => {
-                this.setState({redirect: "profile", loggedIn: true, showError: false})
+                this.setState({redirect: "profile", loggedIn: true, showError: false, loading: true})
             }).catch(() => this.setState({showError: true, errorMessage: "Incorrect password. Please try again", loading: false}))
         
             this.state.loggedIn && axios.get(`${this.baseUrl}/users/my-beers/`, {params: {username: this.state.username}}).then(res => {
@@ -122,15 +126,15 @@ class App extends React.Component {
 
     // Logout
     logout() {
-        this.setState({loggedIn: false, redirect: "login", loading: false}) // redirect on logout
+        this.setState({loggedIn: false, redirect: "login", loading: false, username: "", password: ""}) // redirect on logout
     }
 
     //Register
     register() {
         let newUser = {
-            username: this.state.username,
-            email: this.state.email,
-            password: this.state.password
+            username: this.state.regUsername,
+            email: this.state.regEmail,
+            password: this.state.regPassword
         }
         let {usernameLengthError, emailError, passwordLengthError, passwordMatchError} = this.state.regErrors
         console.log(this.state.regErrors)
@@ -138,7 +142,7 @@ class App extends React.Component {
             axios.post(`${this.baseUrl}/users/register`, newUser).then(res =>
             {
                 //TODO - Validate email
-                this.setState({redirect: "login", regErrors: {}})
+                this.setState({redirect: "login", showError: false, regErrors: {}, username: this.state.regUsername})
             })
             
             console.log("User added", newUser)
@@ -150,20 +154,20 @@ class App extends React.Component {
         
 
         //Form validation
-        if (type === "username") {
-            this.state.username.length < 6 ? validation.usernameLengthError = true : validation.usernameLengthError = false
+        if (type === "regUsername") {
+            this.state.regUsername.length < 6 ? validation.usernameLengthError = true : validation.usernameLengthError = false
         }
 
-        if (type === "email") {
-            this.state.email.length < 6 || !this.state.email.includes("@") ? validation.emailError = true : validation.emailError = false
+        if (type === "regEmail") {
+            this.state.regEmail.length < 6 || !this.state.regEmail.includes("@") ? validation.emailError = true : validation.emailError = false
         }
 
-        if (type === "password") {
-            this.state.password.length < 6 ? validation.passwordLengthError = true : validation.passwordLengthError = false
+        if (type === "regPassword") {
+            this.state.regPassword.length < 6 ? validation.passwordLengthError = true : validation.passwordLengthError = false
         }
 
-        if (type === "repeatPassword") {
-            this.state.password !== this.state.repeatPassword ? validation.passwordMatchError = true : validation.passwordMatchError = false
+        if (type === "regRepeatPassword") {
+            this.state.regPassword !== this.state.regRepeatPassword ? validation.passwordMatchError = true : validation.passwordMatchError = false
         }
 
         this.setState({regErrors: validation})    
@@ -223,12 +227,12 @@ class App extends React.Component {
                     path="/register" 
                     render={ routeProps => ( 
                         <Register {...routeProps} 
-                            email={this.state.email} 
-                            register={this.register} 
+                            register={this.register}
+                            email={this.state.regEmail} 
                             handleChange={this.handleChange} 
-                            username={this.state.username} 
-                            password={this.state.password} 
-                            repeatPassword={this.state.repeatPassword} 
+                            username={this.state.regUsername} 
+                            password={this.state.regPassword} 
+                            repeatPassword={this.state.regRepeatPassword} 
                             errorMessage={this.state.errorMessage} 
                             regErrors={this.state.regErrors}
                             validation={this.validation}

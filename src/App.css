@@ -109,6 +109,12 @@ nav {
   color: darkgoldenrod
 }
 
+.loginError {
+  background-color: rgb(248, 217, 113);
+  padding: 0.25em;
+  border-radius: 5px;
+  color: darkgoldenrod
+}
 .validationPass {
   background-color: palegreen;
   width: fit-content;

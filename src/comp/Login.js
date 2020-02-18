@@ -18,7 +18,7 @@ function Login(props) {
                     <button onClick={props.login}>Login</button> :
                     <ReactLoading type={"spin"} color={"#000"} height={25} width={25} className="spinner" />
                 }
-                {props.showError && <p>{props.errorMessage}</p>}
+                {props.showError && <p className="loginError">{props.errorMessage}</p>}
             </div>
         )
     }   else {

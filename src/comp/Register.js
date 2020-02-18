@@ -6,9 +6,9 @@ function Register(props) {
         <div className="registration">
             <h2>Register</h2>
             {/* Username field */}
-            <label htmlFor="username">Username: 
+            <label htmlFor="regUsername">Username: 
                 <input 
-                    name="username" 
+                    name="regUsername" 
                     type="text" 
                     value={props.username} onChange={props.handleChange}>
                 </input>
@@ -17,9 +17,9 @@ function Register(props) {
             </label>
             
             {/* Email field */}
-            <label htmlFor="email">Email: 
+            <label htmlFor="regEmail">Email: 
                 <input 
-                    name="email" 
+                    name="regEmail" 
                     type="email" 
                     value={props.email} 
                     onChange={props.handleChange}>
@@ -28,9 +28,9 @@ function Register(props) {
             </label>
             
             {/* Password field */}
-            <label htmlFor="password">Password: 
+            <label htmlFor="regPassword">Password: 
                 <input 
-                    name="password" 
+                    name="regPassword" 
                     type="password" 
                     value={props.password} 
                     onChange={props.handleChange}>
@@ -41,9 +41,9 @@ function Register(props) {
             <br />
 
             {/* Repeat Password field */}
-            <label htmlFor="repeatPassword">Repeat Password: 
+            <label htmlFor="regRepeatPassword">Repeat Password: 
                 <input 
-                    name="repeatPassword" 
+                    name="regRepeatPassword" 
                     type="password" 
                     value={props.repeatPassword} 
                     onChange={props.handleChange}>
