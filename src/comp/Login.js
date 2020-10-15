@@ -10,25 +10,27 @@ export default function Login(props) {
                     <h2>Login</h2>
                 </div>
 
-                <label for="username">
-                    Username:
+                <div className="row">
+                    <label htmlFor="username">Username</label>
                     <input
+                        id="username"
                         name="username"
                         type="text"
                         value={props.username}
                         onChange={props.handleChange}
                     ></input>
-                </label>
+                </div>
                 <br />
-                <label for="password">
-                    Password:
+                <div className="row">
+                    <label htmlFor="password">Password</label>
                     <input
+                        id="password"
                         name="password"
                         type="password"
                         value={props.password}
                         onChange={props.handleChange}
                     ></input>
-                </label>
+                </div>
                 <br />
                 {!props.loading ? (
                     <span className="button" onClick={props.login}>

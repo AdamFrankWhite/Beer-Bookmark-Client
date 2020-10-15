@@ -58,6 +58,8 @@ nav {
   font-size: 1em;
   padding: 0 0.25em;
   display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .link:hover {
@@ -80,14 +82,15 @@ nav {
   width: 100%;
   min-height: 80vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
   align-items: center;
 }
 
 .banner {
   height: 100%;
   width: 100%;
-  min-height: 80vh;
+  min-height: 70vh;
   background-image: url("/banner.jpg");
   background-size: cover;
   display: flex;
@@ -99,6 +102,45 @@ nav {
 .banner .banner-cont {
   background: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
+  padding: 1em;
+}
+.banner span:nth-of-type(2) {
+  background: #0a5694;
+}
+
+.home-description {
+  padding: 2em;
+  width: 60%;
+  margin: auto;
+  font-size: 1.5em;
+}
+.home-description p {
+  text-align: center;
+}
+
+.home hr {
+  width: 5em;
+  background-color: black;
+  margin: auto;
+}
+.home h2 {
+  text-align: center;
+}
+
+.features {
+  display: flex;
+  margin: 3em auto;
+  justify-content: center;
+}
+.features .feature-card {
+  width: 20%;
+  margin: 0 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.features .feature-card img {
   padding: 1em;
 }
 
@@ -113,22 +155,22 @@ nav {
 }
 
 .registration input {
-  margin-left: 10px;
+  width: 90%;
+  margin: auto;
+  padding: 0.75em;
 }
 
-.registration > label {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.registration label {
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+.registration label:hover {
+  cursor: pointer;
 }
 
 .errorMessage {
   background-color: #f8d971;
   width: fit-content;
-  position: absolute;
-  left: 105%;
-  padding: 0.25em;
   border-radius: 5px;
   color: darkgoldenrod;
 }
@@ -139,6 +181,9 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.login-head h2 {
+  padding-top: 0.5em;
 }
 
 .login-head > img {
@@ -181,10 +226,10 @@ nav {
 /* == Beer Styles == */
 .beer-container {
   display: flex;
-  width: 80%;
+  width: 90%;
   flex-wrap: wrap;
   margin: auto;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 }
 
 .thumb {
@@ -213,7 +258,7 @@ nav {
   border: 2px black solid;
   border-radius: 10px;
   min-width: 250px;
-  flex-basis: 20%;
+  width: 22%;
   height: 325px;
   margin: 10px;
   overflow: hidden;
@@ -221,11 +266,12 @@ nav {
 }
 
 .beer h3 {
-  font-size: 1em;
+  font-size: 1.25em;
+  font-weight: bold;
 }
 
 .beer h4 {
-  font-size: 0.9em;
+  font-size: 1em;
 }
 
 .beer .description {

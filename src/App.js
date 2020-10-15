@@ -275,24 +275,44 @@ class App extends React.Component {
             });
     }
 
-    sortBeers(searchType) {
+    sortBeers(searchType, order) {
         let sortedBeers;
         if (searchType === "beerName") {
-            sortedBeers = this.state.favouriteBeers.sort((a, b) =>
-                a[searchType] > b[searchType]
-                    ? 1
-                    : b[searchType] > a[searchType]
-                    ? -1
-                    : 0
-            );
+            if (order === "asc") {
+                sortedBeers = this.state.favouriteBeers.sort((a, b) =>
+                    a[searchType] > b[searchType]
+                        ? 1
+                        : b[searchType] > a[searchType]
+                        ? -1
+                        : 0
+                );
+            } else {
+                sortedBeers = this.state.favouriteBeers.sort((a, b) =>
+                    a[searchType] < b[searchType]
+                        ? 1
+                        : b[searchType] < a[searchType]
+                        ? -1
+                        : 0
+                );
+            }
         } else if (searchType === "stars") {
-            sortedBeers = this.state.favouriteBeers.sort((a, b) =>
-                a[searchType] < b[searchType]
-                    ? 1
-                    : b[searchType] < a[searchType]
-                    ? -1
-                    : 0
-            );
+            if (order === "asc") {
+                sortedBeers = this.state.favouriteBeers.sort((a, b) =>
+                    a[searchType] < b[searchType]
+                        ? 1
+                        : b[searchType] < a[searchType]
+                        ? -1
+                        : 0
+                );
+            } else {
+                sortedBeers = this.state.favouriteBeers.sort((a, b) =>
+                    a[searchType] > b[searchType]
+                        ? 1
+                        : b[searchType] > a[searchType]
+                        ? -1
+                        : 0
+                );
+            }
         }
 
         this.setState({ favouriteBeers: sortedBeers });
