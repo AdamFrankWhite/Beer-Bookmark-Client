@@ -39,7 +39,7 @@ class App extends React.Component {
             searchBeerData: [],
             favouriteBeers: [],
             redirect: "",
-            deployment: "production",
+            deployment: "dev",
         };
         this.baseUrl =
             this.state.deployment === "production"
@@ -126,8 +126,10 @@ class App extends React.Component {
             axios
                 .post(`${this.baseUrl}/users/login`, userCredentials)
                 .then((res) => {
+                    console.log(res);
                     this.setState({
                         redirect: "profile",
+                        favouriteBeers: res.data,
                         loggedIn: true,
                         showError: false,
                         loading: true,
@@ -141,15 +143,15 @@ class App extends React.Component {
                     })
                 );
 
-            this.state.loggedIn &&
-                axios
-                    .get(`${this.baseUrl}/users/my-beers/`, {
-                        params: { username: this.state.username },
-                    })
-                    .then((res) => {
-                        // Set MyBeers data
-                        this.setState({ favouriteBeers: res.data.beers });
-                    });
+            // this.state.loggedIn &&
+            //     axios
+            //         .get(`${this.baseUrl}/users/my-beers/`, {
+            //             params: { username: this.state.username },
+            //         })
+            //         .then((res) => {
+            //             // Set MyBeers data
+            //             this.setState({ favouriteBeers: res.data.beers });
+            //         });
         }
     }
 
@@ -326,7 +328,7 @@ class App extends React.Component {
         return (
             <Router>
                 <Header loggedIn={this.state.loggedIn} logout={this.logout} />
-                {/* <br /> {this.renderRedirect()} */}
+                {this.renderRedirect()}
                 <div className="tab-frame">
                     <Route path="/" exact component={Home} />
                     {/* Register Router */}
