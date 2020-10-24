@@ -21,7 +21,7 @@ class App extends React.Component {
             regPassword: "",
             regEmail: "",
             regRepeatPassword: "",
-            loggedIn: false,
+            loggedIn: window.localStorage.access_token ? true : false,
             username: "",
             password: "",
             searchTerm: "",
@@ -158,6 +158,7 @@ class App extends React.Component {
 
     // Logout
     logout() {
+        window.localStorage.clear();
         this.setState({
             loggedIn: false,
             redirect: "login",
@@ -326,6 +327,8 @@ class App extends React.Component {
         this.setState({ searchType: selectedTab });
     }
     render() {
+        console.log(window.localStorage.access_token);
+
         return (
             <Router>
                 <Header loggedIn={this.state.loggedIn} logout={this.logout} />
