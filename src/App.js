@@ -72,7 +72,7 @@ class App extends React.Component {
             date: new Date(),
             img: beerData.beer_label,
         };
-
+        console.log(brewery);
         axios
             .post(`${this.baseUrl}/users/my-beers/add`, postData)
             .then((res) => {
@@ -88,7 +88,7 @@ class App extends React.Component {
             username: this.state.username,
         };
         axios
-            .post(`${this.baseUrl}/users/my-beers/delete-beer`, deleteData)
+            .put(`${this.baseUrl}/users/my-beers/delete-beer`, deleteData)
             .then((res) => {
                 this.setState({ favouriteBeers: res.data });
             });
@@ -101,8 +101,9 @@ class App extends React.Component {
             username: this.state.username,
             newRating: rating,
         };
+        console.log(beer.stars);
         axios
-            .post(`${this.baseUrl}/users/my-beers/update`, updateData)
+            .put(`${this.baseUrl}/users/my-beers/update`, updateData)
             .then((res) => {
                 this.setState({ favouriteBeers: res.data });
             });
@@ -126,10 +127,10 @@ class App extends React.Component {
             axios
                 .post(`${this.baseUrl}/users/login`, userCredentials)
                 .then((res) => {
-                    console.log(res);
+                    window.localStorage.setItem("access_token", res.data.token);
                     this.setState({
                         redirect: "profile",
-                        favouriteBeers: res.data,
+                        favouriteBeers: res.data.beers || [],
                         loggedIn: true,
                         showError: false,
                         loading: true,
