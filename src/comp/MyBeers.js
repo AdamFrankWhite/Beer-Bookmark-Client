@@ -18,26 +18,31 @@ class MyBeers extends React.Component {
 
     render() {
         const center = { margin: "auto" };
-        const beers = this.props.favouriteBeers.map((beer) => (
-            <Beer
-                myBeers={true}
-                favouriteBeers={this.props.favouriteBeers}
-                beerData={beer}
-                src={beer.img}
-                id={beer._id}
-                name={beer.name}
-                abv={beer.abv}
-                description={beer.description}
-                addBeer={this.props.addBeer}
-                deleteBeer={this.props.deleteBeer}
-                updateBeer={this.props.updateBeer}
-                brewery={beer.brewery}
-            />
-        ));
+        const beers =
+            this.props.favouriteBeers &&
+            this.props.favouriteBeers.map((beer) => (
+                <Beer
+                    myBeers={true}
+                    favouriteBeers={this.props.favouriteBeers}
+                    beerData={beer}
+                    src={beer.img}
+                    id={beer._id}
+                    name={beer.name}
+                    abv={beer.abv}
+                    description={beer.description}
+                    addBeer={this.props.addBeer}
+                    deleteBeer={this.props.deleteBeer}
+                    updateBeer={this.props.updateBeer}
+                    brewery={beer.brewery}
+                />
+            ));
         return (
             <div className="App">
                 <div className="my-beers-cont">
-                    <h1 className="heading">My Favourite Beers</h1>
+                    <div className="my-beers-banner">
+                        <h1>My Favourite Beers</h1>
+                    </div>
+
                     <div className="sort-btn-group">
                         <span>Sort by: </span>
                         <span
