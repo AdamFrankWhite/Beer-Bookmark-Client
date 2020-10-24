@@ -21,16 +21,16 @@ class Beer extends React.Component {
             JSON.stringify(this.props.favouriteBeers).includes(this.props.id);
         const clickText = checkBeerIncluded ? "Saved" : "Add to Favourites";
         const clickTextStyle = checkBeerIncluded && "click-text-saved";
-        const stars = [];
+        // const stars = [];
 
-        // stars
-        for (let i = 0; i < this.props.beerData.stars; i++) {
-            stars.push(
-                <span role="img" aria-label="star">
-                    &#11088;
-                </span>
-            );
-        }
+        // // stars
+        // for (let i = 0; i < this.props.beerData.stars; i++) {
+        //     stars.push(
+        //         <span role="img" aria-label="star">
+        //             &#11088;
+        //         </span>
+        //     );
+        // }
         // console.log(window.localStorage.getItem("access_token"));
         return (
             <div className="beer">
@@ -66,7 +66,9 @@ class Beer extends React.Component {
                         {this.props.loggedIn && clickText}
                     </span>
                 )}
-                <span className="buttons">{stars}</span>
+                <span className="buttons">
+                    &#127866;{this.props.beerData.stars}
+                </span>
 
                 {/* {this.props.myBeers && (
                     <span className="ratings">

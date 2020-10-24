@@ -234,9 +234,24 @@ nav {
   align-items: center;
 }
 
+.my-beers-cont {
+  width: 90%;
+  margin: auto;
+}
+
 .thumb {
-  width: 10%;
+  width: 5vw;
+  min-width: 75px;
   height: auto;
+}
+@media (min-width: 1400px) {
+  .thumb {
+    width: 4vw;
+  }
+}
+
+table {
+  width: 100%;
 }
 
 .randomBeer {
@@ -259,15 +274,17 @@ nav {
   border: 2px black solid;
   border-radius: 10px;
   min-width: 250px;
+  padding: 0.5em;
+  width: 100%;
   margin: 10px;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
 }
 .beer * {
   margin: auto;
+}
+.beer td {
+  text-align: left;
 }
 .beer h3 {
   font-size: 1.5em;
@@ -326,12 +343,12 @@ nav {
 }
 
 /* == My Beers == */
-.my-beers-cont {
+.my-beers-wrapper {
   width: 90%;
   margin: 2em auto;
   border-radius: 5px;
 }
-.my-beers-cont .my-beers-banner {
+.my-beers-wrapper .my-beers-banner {
   width: 100%;
   min-height: 500px;
   border-radius: 5px 5px 0 0;
@@ -342,7 +359,7 @@ nav {
   justify-content: center;
   align-items: center;
 }
-.my-beers-cont .my-beers-banner h1 {
+.my-beers-wrapper .my-beers-banner h1 {
   color: #e0e0e0;
 }
 
@@ -374,6 +391,19 @@ nav {
   font-size: 0.75em;
   padding: 0.5em;
   border-radius: 10px;
+}
+
+.delete-confirm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+tr > th:nth-of-type(7),
+tr > td:nth-of-type(7) {
+  width: 10%;
+  text-align: center;
 }
 
 .delete-beer:hover {

@@ -242,11 +242,22 @@ nav {
     align-items: center;
 }
 
+.my-beers-cont {
+    width: 90%;
+    margin: auto;
+}
 .thumb {
-    width: 10%;
+    width: 5vw;
+    min-width: 75px;
+    @media (min-width: 1400px) {
+        width: 4vw;
+    }
+
     height: auto;
 }
-
+table {
+    width: 100%;
+}
 .randomBeer {
     border: 2px black solid;
     position: relative;
@@ -267,18 +278,23 @@ nav {
     border: 2px black solid;
     border-radius: 10px;
     min-width: 250px;
-    // width: 100%;
-    @media (min-width: 1400px) {
-        // width: 45%;
-    }
+    padding: 0.5em;
+    width: 100%;
+    // @media (min-width: 1400px) {
+    //     width: 48%;
+    // }
     margin: 10px;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     position: relative;
     * {
         margin: auto;
+    }
+    td {
+        // margin-left: 0;
+        text-align: left;
     }
     h3 {
         font-size: 1.5em;
@@ -346,7 +362,7 @@ nav {
 
 /* == My Beers == */
 
-.my-beers-cont {
+.my-beers-wrapper {
     width: 90%;
     margin: 2em auto;
     // border: rgb(175, 2, 2) solid 2px;
@@ -401,7 +417,17 @@ nav {
     // bottom: 5px;
     // left: 41%;
 }
-
+.delete-confirm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+tr > th:nth-of-type(7),
+tr > td:nth-of-type(7) {
+    width: 10%;
+    text-align: center;
+}
 .delete-beer:hover {
     color: black;
     background-color: gray;

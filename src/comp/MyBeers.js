@@ -1,5 +1,5 @@
 import React from "react";
-import Beer from "./Beer";
+import BeerRow from "./BeerRow";
 import ReactLoading from "react-loading";
 import FlipMove from "react-flip-move";
 
@@ -21,7 +21,21 @@ class MyBeers extends React.Component {
         const beers =
             this.props.favouriteBeers &&
             this.props.favouriteBeers.map((beer) => (
-                <Beer
+                // <Beer
+                //     myBeers={true}
+                //     favouriteBeers={this.props.favouriteBeers}
+                //     beerData={beer}
+                //     src={beer.img}
+                //     id={beer._id}
+                //     name={beer.name}
+                //     abv={beer.abv}
+                //     description={beer.description}
+                //     addBeer={this.props.addBeer}
+                //     deleteBeer={this.props.deleteBeer}
+                //     updateBeer={this.props.updateBeer}
+                //     brewery={beer.brewery}
+                // />
+                <BeerRow
                     myBeers={true}
                     favouriteBeers={this.props.favouriteBeers}
                     beerData={beer}
@@ -38,7 +52,7 @@ class MyBeers extends React.Component {
             ));
         return (
             <div className="App">
-                <div className="my-beers-cont">
+                <div className="my-beers-wrapper">
                     <div className="my-beers-banner">
                         <h1>My Favourite Beers</h1>
                     </div>
@@ -90,9 +104,22 @@ class MyBeers extends React.Component {
                             width={350}
                         />
                     )}
-                    <div className="beer-container">
+                    <div className="my-beers-cont">
                         {/* <FlipMove> */}
-                        {beers}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>{beers}</tbody>
+                        </table>
                         {/* </FlipMove> */}
                     </div>
                 </div>

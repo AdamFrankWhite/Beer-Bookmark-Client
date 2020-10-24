@@ -1,5 +1,5 @@
 import React from "react";
-import Beer from "./Beer";
+import BeerRow from "./BeerRow";
 import Brewery from "./Brewery";
 import ReactLoading from "react-loading";
 
@@ -19,7 +19,7 @@ class Search extends React.Component {
         // Beer Components
         const beers = this.props.beerData.map((item) => {
             return (
-                <Beer
+                <BeerRow
                     search={true}
                     src={item.beer.beer_label}
                     id={item.beer.bid}
@@ -90,8 +90,20 @@ class Search extends React.Component {
 
                         {/* Beer Container */}
                         <div className="beer-container">
-                            {beers}
-                            {breweries}
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>{beers}</tbody>
+                            </table>
                         </div>
                     </div>
                 )}
