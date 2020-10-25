@@ -23,9 +23,13 @@ export const getBeers = (username) => (dispatch) => {
 
 export const login = (loginData) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
-    axios.post(`http://localhost:5000/users/login`, loginData).then((res) => {
-        dispatch({ type: SET_USER, payload: res.data });
-        dispatch({ type: SET_LOADING, payload: false });
-        console.log(res);
-    });
+    axios
+        .post(`http://localhost:5000/users/login`, loginData)
+        .then((res) => {
+            dispatch({ type: SET_USER, payload: res.data });
+            dispatch({ type: SET_LOADING, payload: false });
+        })
+        .catch((err) => {
+            //dispatch error
+        });
 };

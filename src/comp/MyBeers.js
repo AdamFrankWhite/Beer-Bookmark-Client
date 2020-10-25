@@ -2,7 +2,8 @@ import React from "react";
 import BeerRow from "./BeerRow";
 import ReactLoading from "react-loading";
 import FlipMove from "react-flip-move";
-
+import { connect } from "react-redux";
+import userReducer from "../redux/reducers/userReducer";
 class MyBeers extends React.Component {
     constructor() {
         super();
@@ -17,10 +18,11 @@ class MyBeers extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         const center = { margin: "auto" };
         const beers =
-            this.props.favouriteBeers &&
-            this.props.favouriteBeers.map((beer) => (
+            this.props.user.userData.beers &&
+            this.props.user.userData.beers.map((beer) => (
                 // <Beer
                 //     myBeers={true}
                 //     favouriteBeers={this.props.favouriteBeers}
@@ -37,7 +39,7 @@ class MyBeers extends React.Component {
                 // />
                 <BeerRow
                     myBeers={true}
-                    favouriteBeers={this.props.favouriteBeers}
+                    favouriteBeers={this.props.user.userData.beers}
                     beerData={beer}
                     src={beer.img}
                     id={beer._id}
@@ -131,5 +133,11 @@ class MyBeers extends React.Component {
         );
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    };
+};
 
-export default MyBeers;
+const mapActionsToProps = {};
+export default connect(mapStateToProps, mapActionsToProps)(MyBeers);

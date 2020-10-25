@@ -194,9 +194,9 @@ class App extends React.Component {
     }
 
     renderRedirect() {
-        if (this.state.redirect === "login") {
+        if (this.props.user.redirect === "login") {
             return <Redirect to="/login" />;
-        } else if (this.state.redirect === "profile") {
+        } else if (this.props.user.redirect === "my-beers") {
             return <Redirect to="/my-beers" />;
         }
     }
@@ -329,7 +329,7 @@ class App extends React.Component {
                     />
 
                     {/* My Beers Router */}
-                    {this.state.loggedIn && (
+                    {this.props.user.loggedIn && (
                         <Route
                             path="/my-beers"
                             render={(routeProps) => (
@@ -338,7 +338,7 @@ class App extends React.Component {
                                     addBeer={this.addBeer}
                                     deleteBeer={this.deleteBeer}
                                     updateBeer={this.updateBeer}
-                                    favouriteBeers={this.state.favouriteBeers}
+                                    // favouriteBeers={this.state.favouriteBeers}
                                     searchTerm={this.state.searchTerm}
                                     handleChange={this.handleChange}
                                     username={this.state.username}

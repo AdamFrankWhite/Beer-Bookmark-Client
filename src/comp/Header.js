@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 function Header(props) {
     return (
@@ -26,7 +27,7 @@ function Header(props) {
                         </Link>
                     )}
                     <Link to="/login" className="link">
-                        {props.loggedIn ? (
+                        {props.user.loggedIn ? (
                             <span onClick={() => props.logout()}>Logout</span>
                         ) : (
                             <span>Login</span>
@@ -38,4 +39,10 @@ function Header(props) {
     );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    };
+};
+
+export default connect(mapStateToProps)(Header);

@@ -14,6 +14,7 @@ import {
 const initialState = {
     beers: [],
     loading: false,
+    redirect: "",
     //
     authenticated: false,
     token: "",
@@ -27,6 +28,13 @@ const initialState = {
 //NOTE - if dispatch is called without case for it, it will use default and reset state between dispatches
 export default function (state = initialState, action) {
     switch (action.type) {
+        case SET_USER:
+            return {
+                ...state,
+                userData: action.payload,
+                redirect: "my-beers",
+                loggedIn: true,
+            };
         case GET_BEERS:
             return {
                 ...state,
@@ -46,11 +54,7 @@ export default function (state = initialState, action) {
             };
         case SET_UNAUTHENTICATED:
             return initialState;
-        case SET_USER:
-            return {
-                ...state,
-                userData: action.payload,
-            };
+
         case GET_ALL_USERS:
             return {
                 ...state,
