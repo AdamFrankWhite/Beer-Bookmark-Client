@@ -5,7 +5,7 @@ class RandomBeer extends React.Component {
     constructor() {
         super();
         this.state = {
-            randomBeerData: [],
+            randomBeerData: {},
             randomBeerBrewery: { name: "", url: "" }, // needed to avoid nested rendering bug
             clickText: "Add to favourites",
         };
@@ -74,6 +74,7 @@ class RandomBeer extends React.Component {
             this.props.favouriteBeers
         ).includes(this.state.randomBeerData.beer_name);
         const clickText = checkBeerIncluded ? "Saved" : "Add to Favourites";
+        console.log(this.state.randomBeerData);
         return (
             <div>
                 <div className="random-beer-buttons">
@@ -108,28 +109,34 @@ class RandomBeer extends React.Component {
 
                     <br></br>
                     {/* Beer Name */}
-                    <h4>{this.state.randomBeerData.beer_name}</h4>
-                    {/* Brewery Name/Link */}
-                    <a
-                        href={this.state.randomBeerBrewery.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <h5>{this.state.randomBeerBrewery.name}</h5>
-                    </a>
-                    {/* Beer picture */}
-                    <img
-                        src={this.state.randomBeerData.beer_label}
-                        alt="beer logo"
-                    ></img>
-                    {/* Beer ABV */}
-                    <h5>ABV: {this.state.randomBeerData.beer_abv}%</h5>
-                    {/* Beer type */}
-                    <h6>{this.state.randomBeerData.beer_style}</h6>
-                    {/* Beer Description */}
-                    <p className="description">
-                        {this.state.randomBeerData.beer_description}
-                    </p>
+                    {Object.keys(this.state.randomBeerData).length > 0 ? (
+                        <React.Fragment>
+                            <h4>{this.state.randomBeerData.beer_name}</h4>
+                            {/* Brewery Name/Link */}
+                            <a
+                                href={this.state.randomBeerBrewery.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <h5>{this.state.randomBeerBrewery.name}</h5>
+                            </a>
+                            {/* Beer picture */}
+                            <img
+                                src={this.state.randomBeerData.beer_label}
+                                alt="beer logo"
+                            ></img>
+                            {/* Beer ABV */}
+                            <h5>ABV: {this.state.randomBeerData.beer_abv}%</h5>
+                            {/* Beer type */}
+                            <h6>{this.state.randomBeerData.beer_style}</h6>
+                            {/* Beer Description */}
+                            <p className="description">
+                                {this.state.randomBeerData.beer_description}
+                            </p>
+                        </React.Fragment>
+                    ) : (
+                        <p>Loading...</p>
+                    )}
                 </div>
             </div>
         );
