@@ -31,8 +31,10 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case SET_USER:
+            console.log(action.payload);
             return {
                 ...state,
+                beers: action.payload.beers,
                 userData: action.payload,
                 redirect: "my-beers",
                 loggedIn: true,

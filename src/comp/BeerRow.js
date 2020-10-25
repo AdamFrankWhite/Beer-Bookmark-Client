@@ -1,7 +1,7 @@
 import { set } from "mongoose";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { deleteBeer } from "../redux/actions/userActions";
+import { addBeer, deleteBeer } from "../redux/actions/userActions";
 function BeerRow(props) {
     const checkBeerIncluded =
         props.search && JSON.stringify(props.user.beers).includes(props.id);
@@ -133,7 +133,7 @@ function BeerRow(props) {
                     </span>
                 )}
             </td>
-            {/* FIX CHECK INCLUDED */}
+            {/* Bookmark Cell */}
             {props.search && (
                 <td>
                     <span
@@ -143,9 +143,11 @@ function BeerRow(props) {
                             !checkBeerIncluded &&
                                 props.user.loggedIn &&
                                 console.log("add");
-                            // props.addBeer(
-
-                            // );
+                            props.addBeer({
+                                username: props.user.userData.username,
+                                brewery: props.brewery,
+                                beerData: props.beerData,
+                            });
                         }}
                         className={clickTextStyle + " buttons"}
                     >
@@ -167,5 +169,6 @@ const mapStateToProps = (state) => {
 
 const mapActionsToProps = {
     deleteBeer,
+    addBeer,
 };
 export default connect(mapStateToProps, mapActionsToProps)(BeerRow);

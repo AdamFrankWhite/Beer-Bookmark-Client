@@ -27,7 +27,9 @@ export const login = (loginData) => (dispatch) => {
     axios
         .post(`http://localhost:5000/users/login`, loginData)
         .then((res) => {
+            console.log(res.data);
             dispatch({ type: SET_USER, payload: res.data });
+            // dispatch({ type: GET_BEERS, payload: res.data });
             dispatch({ type: SET_LOADING, payload: false });
         })
         .catch((err) => {
@@ -35,6 +37,27 @@ export const login = (loginData) => (dispatch) => {
         });
 };
 
+export const addBeer = (data) => (dispatch) => {
+    const { username, beerData, brewery } = data;
+    const postData = {
+        id: beerData.bid,
+        username,
+        beerName: beerData.beer_name,
+        abv: beerData.beer_abv.toString(),
+        beerDescription: beerData.beer_style,
+        brewery: brewery,
+        stars: "1",
+        date: new Date(),
+        img: beerData.beer_label,
+    };
+    console.log(postData);
+    axios
+        .post("http://localhost:5000/users/my-beers/add", postData)
+        .then((res) => {
+            dispatch({ type: GET_BEERS, payload: res.data });
+            console.log(res.data);
+        });
+};
 export const deleteBeer = (data) => (dispatch) => {
     const { username, beerData } = data;
     let deleteData = {

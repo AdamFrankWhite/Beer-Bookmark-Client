@@ -45,7 +45,7 @@ class App extends React.Component {
             this.state.deployment === "production"
                 ? "https://fierce-plateau-38188.herokuapp.com"
                 : "http://localhost:5000";
-        this.addBeer = this.addBeer.bind(this);
+        // this.addBeer = this.addBeer.bind(this);
         // this.deleteBeer = this.deleteBeer.bind(this);
         // this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -60,26 +60,6 @@ class App extends React.Component {
     }
 
     // Add Beer
-    addBeer(beerData, brewery) {
-        const postData = {
-            id: beerData.bid,
-            username: this.state.username,
-            beerName: beerData.beer_name,
-            abv: beerData.beer_abv.toString(),
-            beerDescription: beerData.beer_style,
-            brewery: brewery,
-            stars: "1",
-            date: new Date(),
-            img: beerData.beer_label,
-        };
-        console.log(brewery);
-        axios
-            .post(`${this.baseUrl}/users/my-beers/add`, postData)
-            .then((res) => {
-                this.setState({ favouriteBeers: res.data });
-                console.log(res.data);
-            });
-    }
 
     // Delete Beer
 
