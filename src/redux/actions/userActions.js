@@ -42,6 +42,27 @@ export const logout = () => (dispatch) => {
     window.localStorage.clear();
     dispatch({ type: LOGOUT });
 };
+
+export const register = (data) => (dispatch) => {
+    const { username, email, password } = data;
+
+    axios
+        .post("http://localhost:5000/users/register", {
+            username,
+            email,
+            password,
+        })
+        .then((res) => {
+            //TODO - Validate email
+            console.log(res.data);
+            // dispatch({type:SET_USER, payload: res})
+            // redirect: "login",
+            // showError: false,
+            // regErrors: {},
+            // username: this.state.regUsername,
+        });
+};
+
 export const addBeer = (data) => (dispatch) => {
     const { username, beerData, brewery } = data;
     const postData = {

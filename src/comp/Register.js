@@ -1,9 +1,20 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { register } from "../redux/actions/userActions";
 function Register(props) {
     let errors = props.regErrors;
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    const handleSubmit = (e) => {
+        console.log("ba");
+        e.preventDefault();
+        props.register({ username, email, password });
+    };
     return (
-        <div className="registration">
+        <form className="registration" onSubmit={handleSubmit}>
             <h2>Register</h2>
             {/* Username field */}
             <div className="row">
@@ -12,11 +23,11 @@ function Register(props) {
                     id="regUsername"
                     name="regUsername"
                     type="text"
-                    value={props.username}
-                    onChange={props.handleChange}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 ></input>
                 {/* Conditional style based on error boolean and success */}
-                <p
+                {/* <p
                     className={
                         !errors.usernameLengthError && props.username.length > 1
                             ? "validationPass"
@@ -26,7 +37,7 @@ function Register(props) {
                     {errors.usernameLengthError &&
                         window.innerWidth > 600 &&
                         "Username must be at least 6 characters"}
-                </p>
+                </p> */}
             </div>
 
             {/* Email field */}
@@ -36,8 +47,8 @@ function Register(props) {
                     id="regEmail"
                     name="regEmail"
                     type="email"
-                    value={props.email}
-                    onChange={props.handleChange}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 ></input>
                 <p
                     className={
@@ -58,8 +69,8 @@ function Register(props) {
                     id="regPassword"
                     name="regPassword"
                     type="password"
-                    value={props.password}
-                    onChange={props.handleChange}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 ></input>
                 <p
                     className={
@@ -83,8 +94,8 @@ function Register(props) {
                     id="regRepeatPassword"
                     name="regRepeatPassword"
                     type="password"
-                    value={props.repeatPassword}
-                    onChange={props.handleChange}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                 ></input>
                 <p
                     className={
@@ -100,11 +111,16 @@ function Register(props) {
                 </p>
             </div>
             <br />
-            <span className="button" onClick={props.register}>
-                Register
-            </span>
-        </div>
+            <input type="submit" value="Register" />
+        </form>
     );
 }
-
-export default Register;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    };
+};
+const mapActionsToProps = {
+    register,
+};
+export default connect(mapStateToProps, mapActionsToProps)(Register);

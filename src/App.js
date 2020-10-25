@@ -48,7 +48,7 @@ class App extends React.Component {
         // this.deleteBeer = this.deleteBeer.bind(this);
         // this.login = this.login.bind(this);
         // this.logout = this.logout.bind(this);
-        this.register = this.register.bind(this);
+        // this.register = this.register.bind(this);
         this.validation = this.validation.bind(this);
         this.renderRedirect = this.renderRedirect.bind(this);
         // this.handleChange = this.handleChange.bind(this);
@@ -82,40 +82,6 @@ class App extends React.Component {
     // Logout
 
     //Register
-    register() {
-        let newUser = {
-            username: this.state.regUsername,
-            email: this.state.regEmail,
-            password: this.state.regPassword,
-        };
-        let {
-            usernameLengthError,
-            emailError,
-            passwordLengthError,
-            passwordMatchError,
-        } = this.state.regErrors;
-        console.log(this.state.regErrors);
-        if (
-            !usernameLengthError &&
-            !emailError &&
-            !passwordLengthError &&
-            !passwordMatchError
-        ) {
-            axios
-                .post(`${this.baseUrl}/users/register`, newUser)
-                .then((res) => {
-                    //TODO - Validate email
-                    this.setState({
-                        redirect: "login",
-                        showError: false,
-                        regErrors: {},
-                        username: this.state.regUsername,
-                    });
-                });
-
-            console.log("User added", newUser);
-        }
-    }
 
     validation(type) {
         let validation = this.state.regErrors;
