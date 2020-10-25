@@ -142,12 +142,11 @@ function BeerRow(props) {
                             setClickText("Saved");
                             !checkBeerIncluded &&
                                 props.user.loggedIn &&
-                                console.log("add");
-                            props.addBeer({
-                                username: props.user.userData.username,
-                                brewery: props.brewery,
-                                beerData: props.beerData,
-                            });
+                                props.addBeer({
+                                    username: props.user.userData.username,
+                                    brewery: props.brewery,
+                                    beerData: props.beerData,
+                                });
                         }}
                         className={clickTextStyle + " buttons"}
                     >

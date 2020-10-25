@@ -10,7 +10,7 @@ function Header(props) {
                     BeerMe
                 </a>
                 <div>
-                    {props.loggedIn ? (
+                    {props.user.loggedIn ? (
                         <Link to="/my-beers" className="link">
                             My Beers
                         </Link>
