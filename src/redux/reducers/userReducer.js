@@ -1,4 +1,5 @@
 import {
+    GET_BEERS,
     SET_USER,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
@@ -9,6 +10,8 @@ import {
 } from "../types";
 
 const initialState = {
+    beers: [],
+    //
     authenticated: false,
     token: "",
     userData: {},
@@ -21,6 +24,12 @@ const initialState = {
 //NOTE - if dispatch is called without case for it, it will use default and reset state between dispatches
 export default function (state = initialState, action) {
     switch (action.type) {
+        case GET_BEERS:
+            return {
+                ...state,
+                beers: action.payload,
+            };
+
         case SET_AUTHENTICATION:
             return {
                 ...state,

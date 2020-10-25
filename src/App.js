@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import Header from "./comp/Header";
@@ -11,6 +12,7 @@ import Home from "./comp/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import axios from "axios";
+import { getBeers, getUser, login } from "./redux/actions/userActions";
 
 class App extends React.Component {
     constructor() {
@@ -22,6 +24,7 @@ class App extends React.Component {
             regEmail: "",
             regRepeatPassword: "",
             loggedIn: window.localStorage.access_token ? true : false,
+            currentUser: "",
             username: "",
             password: "",
             searchTerm: "",
@@ -134,7 +137,10 @@ class App extends React.Component {
                         loggedIn: true,
                         showError: false,
                         loading: true,
+                        currentUser: res.data.user.username,
                     });
+                    this.props.getUser(res.data.user.username);
+                    // this.props.getBeers(res.data.user.username);
                 })
                 .catch(() =>
                     this.setState({
@@ -327,8 +333,6 @@ class App extends React.Component {
         this.setState({ searchType: selectedTab });
     }
     render() {
-        console.log(window.localStorage.access_token);
-
         return (
             <Router>
                 <Header loggedIn={this.state.loggedIn} logout={this.logout} />
@@ -431,4 +435,15 @@ class App extends React.Component {
     }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    };
+};
+const mapActionsToProps = {
+    getBeers,
+    getUser,
+    login,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(App);
