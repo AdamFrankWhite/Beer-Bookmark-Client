@@ -2,6 +2,7 @@ import {
     GET_BEERS,
     SET_USER,
     SET_LOADING,
+    SET_SEARCH_RESULTS,
     //
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
@@ -15,6 +16,7 @@ const initialState = {
     beers: [],
     loading: false,
     redirect: "",
+    searchResults: [],
     //
     authenticated: false,
     token: "",
@@ -45,6 +47,12 @@ export default function (state = initialState, action) {
                 ...state,
                 loading: action.payload,
             };
+        case SET_SEARCH_RESULTS:
+            return {
+                ...state,
+                searchResults: action.payload,
+            };
+
         case SET_AUTHENTICATION:
             return {
                 ...state,

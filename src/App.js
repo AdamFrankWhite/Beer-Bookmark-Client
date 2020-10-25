@@ -27,8 +27,6 @@ class App extends React.Component {
             currentUser: "",
             username: "",
             password: "",
-            searchTerm: "",
-            searchType: "beer",
             showError: false,
             errorMessage: "",
             regErrors: {
@@ -39,7 +37,6 @@ class App extends React.Component {
             },
             beerData: [],
             breweryData: [],
-            searchBeerData: [],
             favouriteBeers: [],
             redirect: "",
             deployment: "dev",
@@ -49,16 +46,16 @@ class App extends React.Component {
                 ? "https://fierce-plateau-38188.herokuapp.com"
                 : "http://localhost:5000";
         this.addBeer = this.addBeer.bind(this);
-        this.deleteBeer = this.deleteBeer.bind(this);
+        // this.deleteBeer = this.deleteBeer.bind(this);
         // this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
         this.register = this.register.bind(this);
         this.validation = this.validation.bind(this);
         this.renderRedirect = this.renderRedirect.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.searchBeer = this.searchBeer.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
+        // this.searchBeer = this.searchBeer.bind(this);
         this.sortBeers = this.sortBeers.bind(this);
-        this.changeTab = this.changeTab.bind(this);
+        // this.changeTab = this.changeTab.bind(this);
         this.updateBeer = this.updateBeer.bind(this);
     }
 
@@ -85,17 +82,6 @@ class App extends React.Component {
     }
 
     // Delete Beer
-    deleteBeer(beer) {
-        let deleteData = {
-            beerData: beer,
-            username: this.state.username,
-        };
-        axios
-            .put(`${this.baseUrl}/users/my-beers/delete-beer`, deleteData)
-            .then((res) => {
-                this.setState({ favouriteBeers: res.data });
-            });
-    }
 
     // Update Beer Rating
     updateBeer(beer, rating) {
@@ -201,41 +187,13 @@ class App extends React.Component {
         }
     }
 
-    handleChange(e) {
-        // Update form fields and validation
-        let changeType = e.target.name;
-        this.setState({ [changeType]: e.target.value }, () => {
-            this.validation(changeType);
-        });
-    }
-
-    searchBeer(searchTerm, searchType) {
-        //clear search data
-        this.setState({ beerData: [], breweryData: [] });
-        axios
-            .get(
-                `https://api.untappd.com/v4/search/${searchType}?q=${searchTerm}`,
-                {
-                    params: {
-                        client_id: "F94775549BAC795E436858A50A3616690D3CD446",
-                        client_secret:
-                            "844CF3E397DB0294FC89ACE34560918CAFD035FB",
-                    },
-                }
-            )
-            .then((response) => {
-                searchType === "beer" &&
-                    this.setState({
-                        beerData: response.data.response.beers.items,
-                        isLoading: false,
-                    });
-                searchType === "brewery" &&
-                    this.setState({
-                        breweryData: response.data.response.brewery.items,
-                    });
-                console.log(this.state.beerData);
-            });
-    }
+    // handleChange(e) {
+    //     // Update form fields and validation
+    //     let changeType = e.target.name;
+    //     this.setState({ [changeType]: e.target.value }, () => {
+    //         this.validation(changeType);
+    //     });
+    // }
 
     sortBeers(searchType, order) {
         let sortedBeers;
@@ -281,9 +239,9 @@ class App extends React.Component {
         console.log(sortedBeers);
     }
 
-    changeTab(selectedTab) {
-        this.setState({ searchType: selectedTab });
-    }
+    // changeTab(selectedTab) {
+    //     this.setState({ searchType: selectedTab });
+    // }
     render() {
         return (
             <Router>
@@ -317,11 +275,11 @@ class App extends React.Component {
                             <Login
                                 {...routeProps}
                                 // login={this.login}
-                                handleChange={this.handleChange}
-                                username={this.state.username}
-                                password={this.state.password}
-                                loading={this.state.loading}
-                                loggedIn={this.state.loggedIn}
+                                // handleChange={this.handleChange}
+                                // username={this.state.username}
+                                // password={this.state.password}
+                                // loading={this.state.loading}
+                                // loggedIn={this.state.loggedIn}
                                 showError={this.state.showError}
                                 errorMessage={this.state.errorMessage}
                             />
@@ -336,12 +294,11 @@ class App extends React.Component {
                                 <MyBeers
                                     {...routeProps}
                                     addBeer={this.addBeer}
-                                    deleteBeer={this.deleteBeer}
+                                    // deleteBeer={this.deleteBeer}
                                     updateBeer={this.updateBeer}
-                                    // favouriteBeers={this.state.favouriteBeers}
                                     searchTerm={this.state.searchTerm}
                                     handleChange={this.handleChange}
-                                    username={this.state.username}
+                                    // username={this.state.username}
                                     sortBeers={this.sortBeers}
                                 />
                             )}

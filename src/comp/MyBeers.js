@@ -21,8 +21,8 @@ class MyBeers extends React.Component {
         console.log(this.props);
         const center = { margin: "auto" };
         const beers =
-            this.props.user.userData.beers &&
-            this.props.user.userData.beers.map((beer) => (
+            this.props.user.beers &&
+            this.props.user.beers.map((beer) => (
                 // <Beer
                 //     myBeers={true}
                 //     favouriteBeers={this.props.favouriteBeers}
@@ -39,7 +39,7 @@ class MyBeers extends React.Component {
                 // />
                 <BeerRow
                     myBeers={true}
-                    favouriteBeers={this.props.user.userData.beers}
+                    favouriteBeers={this.props.user.beers}
                     beerData={beer}
                     src={beer.img}
                     id={beer._id}

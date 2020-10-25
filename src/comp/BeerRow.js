@@ -1,5 +1,6 @@
 import React from "react";
-
+import { connect } from "react-redux";
+import { deleteBeer } from "../redux/actions/userActions";
 class BeerRow extends React.Component {
     constructor() {
         super();
@@ -16,23 +17,14 @@ class BeerRow extends React.Component {
 
     render() {
         // checks to see if favourite beers includes this beer, if so render saved
-        console.log(this.state.confirmDelete);
-        const checkBeerIncluded =
-            this.props.search &&
-            JSON.stringify(this.props.favouriteBeers).includes(this.props.id);
-        const clickText = checkBeerIncluded ? "Saved" : "Add to Favourites";
-        const clickTextStyle = checkBeerIncluded && "click-text-saved";
-        const stars = [];
 
-        // // stars
-        // for (let i = 0; i < this.props.beerData.stars; i++) {
-        //     stars.push(
-        //         <span role="img" aria-label="star">
-        //             &#11088;
-        //         </span>
-        //     );
-        // }
-        // console.log(window.localStorage.getItem("access_token"));
+        //FIX CHECK INCLUDED
+        // const checkBeerIncluded =
+        //     this.props.search &&
+        //     JSON.stringify(this.props.favouriteBeers).includes(this.props.id);
+        // const clickText = checkBeerIncluded ? "Saved" : "Add to Favourites";
+        // const clickTextStyle = checkBeerIncluded && "click-text-saved";
+
         return (
             <tr className="beer">
                 <td>
@@ -121,6 +113,7 @@ class BeerRow extends React.Component {
                         Delete
                     </span>
                 )} */}
+
                 {this.props.myBeers && this.state.confirmDelete ? (
                     <td>
                         <div className="delete-confirm">
@@ -128,9 +121,11 @@ class BeerRow extends React.Component {
                             <div>
                                 <span
                                     onClick={() => {
-                                        this.props.deleteBeer(
-                                            this.props.beerData
-                                        );
+                                        this.props.deleteBeer({
+                                            username: this.props.user.userData
+                                                .username,
+                                            beerData: this.props.beerData,
+                                        });
                                         this.setState({
                                             confirmDelete: false,
                                         });
@@ -156,7 +151,9 @@ class BeerRow extends React.Component {
                     <td>
                         <span
                             onClick={() =>
-                                this.setState({ confirmDelete: true })
+                                this.setState({
+                                    confirmDelete: true,
+                                })
                             }
                             className="delete-beer"
                         >
@@ -164,8 +161,8 @@ class BeerRow extends React.Component {
                         </span>
                     </td>
                 )}
-
-                {this.props.search && (
+                {/* FIX CHECK INCLUDED */}
+                {/* {this.props.search && (
                     <td>
                         <span
                             onClick={() => {
@@ -184,7 +181,7 @@ class BeerRow extends React.Component {
                             {this.props.loggedIn && clickText}
                         </span>
                     </td>
-                )}
+                )} */}
 
                 {/* {!this.props.myBeers && <p>Details</p>} // TODO - add modal window with beer details */}
             </tr>
@@ -192,4 +189,13 @@ class BeerRow extends React.Component {
     }
 }
 
-export default BeerRow;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    };
+};
+
+const mapActionsToProps = {
+    deleteBeer,
+};
+export default connect(mapStateToProps, mapActionsToProps)(BeerRow);
