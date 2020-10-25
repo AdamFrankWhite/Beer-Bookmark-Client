@@ -12,7 +12,7 @@ import Home from "./comp/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import axios from "axios";
-import { getBeers, getUser, login } from "./redux/actions/userActions";
+import { getBeers, login } from "./redux/actions/userActions";
 
 class App extends React.Component {
     constructor() {
@@ -50,7 +50,7 @@ class App extends React.Component {
                 : "http://localhost:5000";
         this.addBeer = this.addBeer.bind(this);
         this.deleteBeer = this.deleteBeer.bind(this);
-        this.login = this.login.bind(this);
+        // this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
         this.register = this.register.bind(this);
         this.validation = this.validation.bind(this);
@@ -113,54 +113,6 @@ class App extends React.Component {
     }
 
     // Login
-    login() {
-        const userCredentials = {
-            username: this.state.username,
-            password: this.state.password,
-        };
-        // Set loading animation
-        this.setState({ loading: true });
-        if (!this.state.username) {
-            this.setState({
-                showError: true,
-                errorMessage: "Please enter username",
-                loading: false,
-            });
-        } else {
-            axios
-                .post(`${this.baseUrl}/users/login`, userCredentials)
-                .then((res) => {
-                    window.localStorage.setItem("access_token", res.data.token);
-                    this.setState({
-                        redirect: "profile",
-                        favouriteBeers: res.data.beers || [],
-                        loggedIn: true,
-                        showError: false,
-                        loading: true,
-                        currentUser: res.data.user.username,
-                    });
-                    this.props.getUser(res.data.user.username);
-                    // this.props.getBeers(res.data.user.username);
-                })
-                .catch(() =>
-                    this.setState({
-                        showError: true,
-                        errorMessage: "Incorrect password. Please try again",
-                        loading: false,
-                    })
-                );
-
-            // this.state.loggedIn &&
-            //     axios
-            //         .get(`${this.baseUrl}/users/my-beers/`, {
-            //             params: { username: this.state.username },
-            //         })
-            //         .then((res) => {
-            //             // Set MyBeers data
-            //             this.setState({ favouriteBeers: res.data.beers });
-            //         });
-        }
-    }
 
     // Logout
     logout() {
@@ -364,7 +316,7 @@ class App extends React.Component {
                         render={(routeProps) => (
                             <Login
                                 {...routeProps}
-                                login={this.login}
+                                // login={this.login}
                                 handleChange={this.handleChange}
                                 username={this.state.username}
                                 password={this.state.password}
@@ -442,7 +394,6 @@ const mapStateToProps = (state) => {
 };
 const mapActionsToProps = {
     getBeers,
-    getUser,
     login,
 };
 

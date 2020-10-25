@@ -1,6 +1,7 @@
 import {
     SET_USER,
     GET_BEERS,
+    SET_LOADING,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -20,9 +21,11 @@ export const getBeers = (username) => (dispatch) => {
         });
 };
 
-export const login = (username) => (dispatch) => {
-    axios.get(`http://localhost:5000/users/${username}`).then((res) => {
+export const login = (loginData) => (dispatch) => {
+    dispatch({ type: SET_LOADING, payload: true });
+    axios.post(`http://localhost:5000/users/login`, loginData).then((res) => {
         dispatch({ type: SET_USER, payload: res.data });
+        dispatch({ type: SET_LOADING, payload: false });
         console.log(res);
     });
 };

@@ -1,6 +1,8 @@
 import {
     GET_BEERS,
     SET_USER,
+    SET_LOADING,
+    //
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     CLEAR_ERRORS,
@@ -11,12 +13,13 @@ import {
 
 const initialState = {
     beers: [],
+    loading: false,
     //
     authenticated: false,
     token: "",
     userData: {},
     loggedIn: false,
-    loading: false,
+
     messages: [],
     users: [],
 };
@@ -29,7 +32,11 @@ export default function (state = initialState, action) {
                 ...state,
                 beers: action.payload,
             };
-
+        case SET_LOADING:
+            return {
+                ...state,
+                loading: action.payload,
+            };
         case SET_AUTHENTICATION:
             return {
                 ...state,
