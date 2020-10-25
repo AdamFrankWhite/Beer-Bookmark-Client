@@ -1,102 +1,85 @@
-import React from "react";
+import { set } from "mongoose";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { deleteBeer } from "../redux/actions/userActions";
-class BeerRow extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            clickText: "Add to favourites",
-            confirmDelete: false,
-        };
-        this.clickedText = this.clickedText.bind(this);
-    }
+function BeerRow(props) {
+    const checkBeerIncluded =
+        props.search && JSON.stringify(props.user.beers).includes(props.id);
 
-    clickedText() {
-        this.setState({ clickText: "Saved" });
-    }
+    const clickTextStyle = checkBeerIncluded && "click-text-saved";
+    const [clickText, setClickText] = useState(
+        checkBeerIncluded ? "Saved" : "Add to favourites"
+    );
+    const [confirmDelete, toggleDelete] = useState(false);
 
-    render() {
-        // checks to see if favourite beers includes this beer, if so render saved
+    // checks to see if favourite beers includes this beer, if so render saved
 
-        //FIX CHECK INCLUDED
-        // const checkBeerIncluded =
-        //     this.props.search &&
-        //     JSON.stringify(this.props.favouriteBeers).includes(this.props.id);
-        // const clickText = checkBeerIncluded ? "Saved" : "Add to Favourites";
-        // const clickTextStyle = checkBeerIncluded && "click-text-saved";
+    //FIX CHECK INCLUDED
 
-        return (
-            <tr className="beer">
-                <td>
-                    <img
-                        className="thumb"
-                        alt="beer"
-                        src={this.props.src}
-                    ></img>
-                </td>
-                <td>
-                    <h3>{this.props.name || this.props.beerData.beerName}</h3>
-                </td>
-                <td>
-                    <a
-                        href={
-                            this.props.brewery.contact.url &&
-                            this.props.brewery.contact.url
-                        }
-                    >
-                        <h4>{this.props.brewery.brewery_name}</h4>
-                    </a>
-                </td>
-                <td>
-                    <h4>ABV: {this.props.abv || this.props.beerData.abv}%</h4>
-                </td>
-                <td>
-                    <p className="description">
-                        {this.props.style ||
-                            this.props.beerData.beerDescription}
-                    </p>
-                </td>
+    return (
+        <tr className="beer">
+            <td>
+                <img className="thumb" alt="beer" src={props.src}></img>
+            </td>
+            <td>
+                <h3>{props.name || props.beerData.beerName}</h3>
+            </td>
+            <td>
+                <a
+                    href={
+                        props.brewery.contact.url && props.brewery.contact.url
+                    }
+                >
+                    <h4>{props.brewery.brewery_name}</h4>
+                </a>
+            </td>
+            <td>
+                <h4>ABV: {props.abv || props.beerData.abv}%</h4>
+            </td>
+            <td>
+                <p className="description">
+                    {props.style || props.beerData.beerDescription}
+                </p>
+            </td>
 
-                <td>
-                    <span className="buttons">
-                        &#127866;{this.props.beerData.stars}
-                    </span>
-                </td>
+            <td>
+                <span className="buttons">&#127866;{props.beerData.stars}</span>
+            </td>
 
-                {/* {this.props.myBeers && (
+            {/* {props.myBeers && (
                     <span className="ratings">
                         Rate:
                         <span
                             onClick={() =>
-                                this.props.updateBeer(this.props.beerData, 1)
+                                props.updateBeer(props.beerData, 1)
                             }
                         >
                             1
                         </span>
                         <span
                             onClick={() =>
-                                this.props.updateBeer(this.props.beerData, 2)
+                                props.updateBeer(props.beerData, 2)
                             }
                         >
                             2
                         </span>
                         <span
                             onClick={() =>
-                                this.props.updateBeer(this.props.beerData, 3)
+                                props.updateBeer(props.beerData, 3)
                             }
                         >
                             3
                         </span>
                         <span
                             onClick={() =>
-                                this.props.updateBeer(this.props.beerData, 4)
+                                props.updateBeer(props.beerData, 4)
                             }
                         >
                             4
                         </span>
                         <span
                             onClick={() =>
-                                this.props.updateBeer(this.props.beerData, 5)
+                                props.updateBeer(props.beerData, 5)
                             }
                         >
                             5
@@ -104,87 +87,76 @@ class BeerRow extends React.Component {
                     </span>
                 )} */}
 
-                {/* //TODO - add buy button and affiliate <a target="_blank" href={`https://www.beerhawk.co.uk/search/?q=${this.props.beerData.beerName||this.props.name}+${this.props.brewery}`}><span>Buy</span></a> */}
-                {/* {this.props.myBeers && (
+            {/* //TODO - add buy button and affiliate <a target="_blank" href={`https://www.beerhawk.co.uk/search/?q=${props.beerData.beerName||props.name}+${props.brewery}`}><span>Buy</span></a> */}
+            {/* {props.myBeers && (
                     <span
-                        onClick={this.setState({ confirmDelete: true })}
+                        onClick={setState({ confirmDelete: true })}
                         className="delete-beer"
                     >
                         Delete
                     </span>
                 )} */}
-                <td>
-                    {this.props.myBeers && this.state.confirmDelete && (
-                        <div className="delete-confirm">
-                            <span>Are you sure?</span>
-                            <div>
-                                <span
-                                    onClick={() => {
-                                        this.props.deleteBeer({
-                                            username: this.props.user.userData
-                                                .username,
-                                            beerData: this.props.beerData,
-                                        });
-                                        this.setState({
-                                            confirmDelete: false,
-                                        });
-                                    }}
-                                    className="delete-beer"
-                                >
-                                    Yes
-                                </span>
-                                <span
-                                    onClick={() => {
-                                        this.setState({
-                                            confirmDelete: false,
-                                        });
-                                    }}
-                                    className="delete-beer"
-                                >
-                                    No
-                                </span>
-                            </div>
+            <td>
+                {props.myBeers && confirmDelete && (
+                    <div className="delete-confirm">
+                        <span>Are you sure?</span>
+                        <div>
+                            <span
+                                onClick={() => {
+                                    props.deleteBeer({
+                                        username: props.user.userData.username,
+                                        beerData: props.beerData,
+                                    });
+                                    toggleDelete(false);
+                                }}
+                                className="delete-beer"
+                            >
+                                Yes
+                            </span>
+                            <span
+                                onClick={() => {
+                                    toggleDelete(false);
+                                }}
+                                className="delete-beer"
+                            >
+                                No
+                            </span>
                         </div>
-                    )}
-                    {this.props.myBeers && !this.state.confirmDelete && (
-                        <span
-                            onClick={() =>
-                                this.setState({
-                                    confirmDelete: true,
-                                })
-                            }
-                            className="delete-beer"
-                        >
-                            Remove
-                        </span>
-                    )}
-                </td>
-                {/* FIX CHECK INCLUDED */}
-                {this.props.search && (
-                    <td>
-                        {/* <span
-                            onClick={() => {
-                                console.log(this.props.brewery);
-                                //only add to favourites if not already included
-                                this.clickedText();
-                                !checkBeerIncluded &&
-                                    this.props.loggedIn &&
-                                    this.props.addBeer(
-                                        this.props.beerData,
-                                        this.props.brewery
-                                    );
-                            }}
-                            className={clickTextStyle + " buttons"}
-                        >
-                            {this.props.loggedIn && clickText}
-                        </span> */}
-                    </td>
+                    </div>
                 )}
+                {props.myBeers && !confirmDelete && (
+                    <span
+                        onClick={() => toggleDelete(true)}
+                        className="delete-beer"
+                    >
+                        Remove
+                    </span>
+                )}
+            </td>
+            {/* FIX CHECK INCLUDED */}
+            {props.search && (
+                <td>
+                    <span
+                        onClick={() => {
+                            //only add to favourites if not already included
+                            setClickText("Saved");
+                            !checkBeerIncluded &&
+                                props.user.loggedIn &&
+                                console.log("add");
+                            // props.addBeer(
 
-                {/* {!this.props.myBeers && <p>Details</p>} // TODO - add modal window with beer details */}
-            </tr>
-        );
-    }
+                            // );
+                        }}
+                        className={clickTextStyle + " buttons"}
+                    >
+                        {props.user.loggedIn && clickText}
+                    </span>
+                </td>
+            )}
+
+            {/* {!props.myBeers && <p>Details</p>} // TODO - add modal window with beer details */}
+        </tr>
+    );
 }
 
 const mapStateToProps = (state) => {
