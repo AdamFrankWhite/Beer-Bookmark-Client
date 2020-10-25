@@ -3,6 +3,7 @@ import {
     SET_USER,
     SET_LOADING,
     SET_SEARCH_RESULTS,
+    LOGOUT,
     //
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
@@ -54,7 +55,11 @@ export default function (state = initialState, action) {
                 ...state,
                 searchResults: action.payload,
             };
-
+        case LOGOUT: {
+            return {
+                initialState,
+            };
+        }
         case SET_AUTHENTICATION:
             return {
                 ...state,

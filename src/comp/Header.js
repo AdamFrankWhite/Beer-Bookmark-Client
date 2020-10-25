@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
+import { logout } from "../redux/actions/userActions";
 function Header(props) {
     return (
         <header>
@@ -45,4 +45,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(Header);
+const mapActionsToProps = {
+    logout,
+};
+export default connect(mapStateToProps, mapActionsToProps)(Header);

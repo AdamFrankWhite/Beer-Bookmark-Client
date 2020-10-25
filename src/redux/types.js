@@ -6,6 +6,7 @@ export const SET_USER = "SET_USER";
 export const GET_BEERS = "GET_BEERS";
 export const SET_LOADING = "SET_LOADING";
 export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
+export const LOGOUT = "LOGOUT";
 export const LOADING_USER = "LOADING_USER";
 export const SET_USER_IMAGE = "SET_USER_IMAGE";
 export const GET_USER_MESSAGES = "GET_USER_MESSAGES";

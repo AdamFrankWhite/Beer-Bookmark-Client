@@ -12,7 +12,6 @@ import Home from "./comp/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import axios from "axios";
-import { getBeers, login } from "./redux/actions/userActions";
 
 class App extends React.Component {
     constructor() {
@@ -48,7 +47,7 @@ class App extends React.Component {
         // this.addBeer = this.addBeer.bind(this);
         // this.deleteBeer = this.deleteBeer.bind(this);
         // this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this);
+        // this.logout = this.logout.bind(this);
         this.register = this.register.bind(this);
         this.validation = this.validation.bind(this);
         this.renderRedirect = this.renderRedirect.bind(this);
@@ -81,16 +80,6 @@ class App extends React.Component {
     // Login
 
     // Logout
-    logout() {
-        window.localStorage.clear();
-        this.setState({
-            loggedIn: false,
-            redirect: "login",
-            loading: false,
-            username: "",
-            password: "",
-        }); // redirect on logout
-    }
 
     //Register
     register() {
@@ -329,9 +318,5 @@ const mapStateToProps = (state) => {
         user: state.user,
     };
 };
-const mapActionsToProps = {
-    getBeers,
-    login,
-};
 
-export default connect(mapStateToProps, mapActionsToProps)(App);
+export default connect(mapStateToProps)(App);

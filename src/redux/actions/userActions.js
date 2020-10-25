@@ -3,6 +3,7 @@ import {
     GET_BEERS,
     SET_LOADING,
     SET_SEARCH_RESULTS,
+    LOGOUT,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -37,6 +38,10 @@ export const login = (loginData) => (dispatch) => {
         });
 };
 
+export const logout = () => (dispatch) => {
+    window.localStorage.clear();
+    dispatch({ type: LOGOUT });
+};
 export const addBeer = (data) => (dispatch) => {
     const { username, beerData, brewery } = data;
     const postData = {
