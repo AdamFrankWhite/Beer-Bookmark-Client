@@ -113,9 +113,8 @@ class BeerRow extends React.Component {
                         Delete
                     </span>
                 )} */}
-
-                {this.props.myBeers && this.state.confirmDelete ? (
-                    <td>
+                <td>
+                    {this.props.myBeers && this.state.confirmDelete && (
                         <div className="delete-confirm">
                             <span>Are you sure?</span>
                             <div>
@@ -146,9 +145,8 @@ class BeerRow extends React.Component {
                                 </span>
                             </div>
                         </div>
-                    </td>
-                ) : (
-                    <td>
+                    )}
+                    {this.props.myBeers && !this.state.confirmDelete && (
                         <span
                             onClick={() =>
                                 this.setState({
@@ -159,12 +157,12 @@ class BeerRow extends React.Component {
                         >
                             Remove
                         </span>
-                    </td>
-                )}
+                    )}
+                </td>
                 {/* FIX CHECK INCLUDED */}
-                {/* {this.props.search && (
+                {this.props.search && (
                     <td>
-                        <span
+                        {/* <span
                             onClick={() => {
                                 console.log(this.props.brewery);
                                 //only add to favourites if not already included
@@ -179,9 +177,9 @@ class BeerRow extends React.Component {
                             className={clickTextStyle + " buttons"}
                         >
                             {this.props.loggedIn && clickText}
-                        </span>
+                        </span> */}
                     </td>
-                )} */}
+                )}
 
                 {/* {!this.props.myBeers && <p>Details</p>} // TODO - add modal window with beer details */}
             </tr>
