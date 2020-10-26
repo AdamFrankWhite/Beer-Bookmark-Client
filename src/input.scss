@@ -1,6 +1,7 @@
 /* == Root Styles == */
 
-#root {
+#root,
+.App {
     text-align: center;
     width: 100%;
     font-family: -apple-system,
@@ -48,11 +49,29 @@ h4,
 h5,
 h6,
 p,
-span {
+span,
+input {
 }
 
 p {
     margin: 5px 5px;
+}
+
+input {
+    font-family: -apple-system,
+        // Chrome < 56 for OS X (San Francisco)
+        BlinkMacSystemFont,
+        // Windows
+        "Segoe UI",
+        // Android
+        "Roboto",
+        // Basic web fallback
+        "Helvetica Neue",
+        Arial, sans-serif,
+        // Emoji fonts
+        "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1.25em;
 }
 
 /* == Header/Nav == */
@@ -317,6 +336,21 @@ nav {
 }
 table {
     width: 100%;
+
+    border-collapse: collapse;
+}
+
+tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+}
+tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+}
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
 }
 .randomBeer {
     border: 2px black solid;
@@ -335,7 +369,7 @@ table {
 }
 
 .beer {
-    border: 2px black solid;
+    border: black 2px solid;
     border-radius: 10px;
     min-width: 250px;
     padding: 0.5em;
@@ -357,7 +391,7 @@ table {
         text-align: left;
     }
     h3 {
-        font-size: 1.5em;
+        font-size: 1.25em;
         font-weight: bold;
     }
     a {
