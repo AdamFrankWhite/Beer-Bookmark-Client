@@ -18,9 +18,9 @@ function NavBar(props) {
                     <Link to="/search" className="link">
                         Search
                     </Link>
-                    <Link to="/random-beer" className="link">
+                    {/* <Link to="/random-beer" className="link">
                         Random Beer
-                    </Link>
+                    </Link> */}
                     {!props.user.loggedIn && (
                         <Link to="/register" className="link">
                             Register
