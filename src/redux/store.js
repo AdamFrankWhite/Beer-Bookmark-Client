@@ -1,8 +1,8 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-
+import { loadState } from "../localStorage";
 import userReducer from "./reducers/userReducer";
-
+const persistedState = loadState();
 const initialState = {};
 const reduxDevTools =
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
@@ -15,7 +15,8 @@ const reducers = combineReducers({
 
 const store = createStore(
     reducers,
-    initialState,
+    // initialState,
+    persistedState,
     compose(applyMiddleware(...middleware), reduxDevTools)
 );
 

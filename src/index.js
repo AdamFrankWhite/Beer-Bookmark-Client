@@ -3,7 +3,10 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import App from "./App";
-
+import { loadState, saveState } from "./localStorage";
+store.subscribe(() => {
+    saveState(store.getState());
+});
 render(
     <Provider store={store}>
         <App />

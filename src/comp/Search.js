@@ -12,23 +12,25 @@ function Search(props) {
     const [randomBeerData, setRandomBeerData] = useState([]);
     const [beerType, setBeerType] = useState(["ipa"]);
     // Beer Components
-    const beers = props.user.searchResults.map((item) => {
-        return (
-            <BeerRow
-                search={true}
-                src={item.beer.beer_label}
-                id={item.beer.bid}
-                name={item.beer.beer_name}
-                abv={item.beer.beer_abv}
-                style={item.beer.beer_style}
-                description={item.beer.beer_description}
-                beerData={item.beer}
-                // favouriteBeers={this.props.favouriteBeers}
-                // addBeer={this.props.addBeer}
-                brewery={item.brewery}
-            />
-        );
-    });
+    const beers = props.user.searchResults
+        ? props.user.searchResults.map((item) => {
+              return (
+                  <BeerRow
+                      search={true}
+                      src={item.beer.beer_label}
+                      id={item.beer.bid}
+                      name={item.beer.beer_name}
+                      abv={item.beer.beer_abv}
+                      style={item.beer.beer_style}
+                      description={item.beer.beer_description}
+                      beerData={item.beer}
+                      // favouriteBeers={this.props.favouriteBeers}
+                      // addBeer={this.props.addBeer}
+                      brewery={item.brewery}
+                  />
+              );
+          })
+        : [];
     useEffect(() => {
         // https://api.untappd.com/v4/search/beer/?q=${beerType}
 
@@ -95,9 +97,10 @@ function Search(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {props.user.randomBeers.map((beer) => (
-                                    <RandomBeer beerData={beer} />
-                                ))}
+                                {props.user.randombeers &&
+                                    props.user.randomBeers.map((beer) => (
+                                        <RandomBeer beerData={beer} />
+                                    ))}
                             </tbody>
                         </table>
                     </div>
