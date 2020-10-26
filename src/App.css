@@ -1,11 +1,20 @@
 /* == Root Styles == */
-.App {
+#root {
   text-align: center;
   width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 .App-header {
@@ -23,14 +32,6 @@
   color: #09d3ac;
 }
 
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Questrial", cursive;
-}
-
 p {
   margin: 5px 5px;
 }
@@ -42,7 +43,19 @@ nav {
 
 .navbar {
   display: flex;
+  padding: 1em;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #008cff;
+}
+@media (min-width: 800px) {
+  .navbar {
+    flex-direction: row;
+  }
+}
+.navbar a {
+  text-decoration: none;
 }
 
 .nav-title {
@@ -104,6 +117,21 @@ nav {
   background: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   padding: 1em;
+  text-align: left;
+}
+.banner .banner-cont h1 {
+  margin: 0;
+  font-size: 2em;
+}
+.banner .banner-cont h2 {
+  font-size: 1.75em;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+.banner .banner-cont .button {
+  display: inline;
+  padding: 0.5em 0.75em;
+  margin-right: 0.75em;
 }
 .banner span:nth-of-type(2) {
   background: #0a5694;
@@ -119,6 +147,9 @@ nav {
   text-align: center;
 }
 
+.home {
+  font-size: 1.05em;
+}
 .home hr {
   width: 5em;
   background-color: black;
@@ -165,6 +196,7 @@ nav {
 }
 .row label {
   display: block;
+  text-align: left;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }

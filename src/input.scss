@@ -1,14 +1,32 @@
 /* == Root Styles == */
 
-.App {
+#root {
     text-align: center;
     width: 100%;
+    font-family: -apple-system,
+        // Chrome < 56 for OS X (San Francisco)
+        BlinkMacSystemFont,
+        // Windows
+        "Segoe UI",
+        // Android
+        "Roboto",
+        // Basic web fallback
+        "Helvetica Neue",
+        Arial, sans-serif,
+        // Emoji fonts
+        "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 * {
     box-sizing: border-box;
 }
-
+body {
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
 .App-header {
     background-color: #282c34;
     min-height: 100vh;
@@ -23,13 +41,14 @@
 .App-link {
     color: #09d3ac;
 }
-
+h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-    font-family: "Questrial", cursive;
+h6,
+p,
+span {
 }
 
 p {
@@ -43,7 +62,17 @@ nav {
 
 .navbar {
     display: flex;
+    padding: 1em;
     flex-direction: column;
+    @media (min-width: 800px) {
+        flex-direction: row;
+    }
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(0, 140, 255);
+    a {
+        text-decoration: none;
+    }
 }
 
 .nav-title {
@@ -106,6 +135,21 @@ nav {
         background: rgba(255, 255, 255, 0.5);
         border-radius: 10px;
         padding: 1em;
+        text-align: left;
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        h2 {
+            font-size: 1.75em;
+            margin-top: 0;
+            margin-bottom: 1em;
+        }
+        .button {
+            display: inline;
+            padding: 0.5em 0.75em;
+            margin-right: 0.75em;
+        }
     }
     span:nth-of-type(2) {
         background: #0a5694;
@@ -123,6 +167,7 @@ nav {
 }
 
 .home {
+    font-size: 1.05em;
     hr {
         width: 5em;
         background-color: black;
@@ -168,7 +213,7 @@ nav {
     }
     label {
         display: block;
-        // margin-left: -1em;
+        text-align: left;
         margin-top: 0.5em;
         margin-bottom: 0.5em;
     }

@@ -9,7 +9,7 @@ import Search from "./comp/Search";
 import RandomBeer from "./comp/RandomBeer";
 import MyBeers from "./comp/MyBeers";
 import Home from "./comp/Home";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import axios from "axios";
 

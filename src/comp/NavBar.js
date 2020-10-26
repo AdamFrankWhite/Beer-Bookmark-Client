@@ -5,8 +5,8 @@ import { logout } from "../redux/actions/userActions";
 function NavBar(props) {
     return (
         <header>
-            <nav className="navbar navbar-dark bg-primary">
-                <a className="navbar-brand nav-title" href="/">
+            <nav className="navbar">
+                <a className="nav-title" href="/">
                     BeerMe
                 </a>
                 <div>
