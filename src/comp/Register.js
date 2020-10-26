@@ -55,18 +55,13 @@ function Register(props) {
                     onChange={(e) => setUsername(e.target.value)}
                 ></input>
                 {/* Conditional style based on error boolean and success */}
-                <p
-                    className="errorMessage"
-                    style={
-                        !formErrors.usernameLengthError
-                            ? { display: "none" }
-                            : {}
-                    }
-                >
-                    {formErrors.usernameLengthError &&
-                        window.innerWidth > 600 &&
-                        "Username must be at least 6 characters"}
-                </p>
+                {formErrors.usernameLengthError && (
+                    <p className="errorMessage">
+                        {formErrors.usernameLengthError &&
+                            window.innerWidth > 600 &&
+                            "Username must be at least 6 characters"}
+                    </p>
+                )}
             </div>
 
             {/* Email field */}
@@ -79,14 +74,20 @@ function Register(props) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 ></input>
-                <p
-                    className="errorMessage"
-                    style={!formErrors.emailError ? { display: "none" } : {}}
-                >
-                    {formErrors.emailError &&
-                        window.innerWidth > 1200 &&
-                        "Invalid email. Please try again"}
-                </p>
+                {formErrors.emailError && (
+                    <p className="errorMessage">
+                        {formErrors.emailError &&
+                            window.innerWidth > 1200 &&
+                            "Invalid email. Please try again"}
+                    </p>
+                )}
+                {formErrors.emailLengthError && (
+                    <p className="errorMessage">
+                        {formErrors.emailError &&
+                            window.innerWidth > 1200 &&
+                            "Email address too short"}
+                    </p>
+                )}
             </div>
             {/* Password field */}
             <div className="row">
@@ -98,18 +99,11 @@ function Register(props) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 ></input>
-                <p
-                    className="errorMessage"
-                    style={
-                        !formErrors.passwordLengthError
-                            ? { display: "none" }
-                            : {}
-                    }
-                >
-                    {formErrors.passwordLengthError &&
-                        window.innerWidth > 1200 &&
-                        "Password must be at least 8 characters"}
-                </p>
+                {formErrors.passwordLengthError && (
+                    <p className="errorMessage">
+                        "Password must be at least 8 characters"
+                    </p>
+                )}
             </div>
 
             {/* Repeat Password field */}
@@ -122,19 +116,9 @@ function Register(props) {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 ></input>
-
-                <p
-                    className="errorMessage"
-                    style={
-                        !formErrors.passwordMatchError
-                            ? { display: "none" }
-                            : {}
-                    }
-                >
-                    {formErrors.passwordMatchError &&
-                        window.innerWidth > 1200 &&
-                        "Passwords do not match"}
-                </p>
+                {formErrors.passwordMatchError && (
+                    <p className="errorMessage">"Passwords do not match"</p>
+                )}
             </div>
             <br />
             <input className="button" type="submit" value="Register" />
