@@ -71,14 +71,14 @@ function Login(props) {
                 </div>
                 <br />
                 {!props.user.loading ? (
-                    <span
+                    <input
+                        type="submit"
                         className="button"
+                        value="Login"
                         onClick={() => {
                             props.login({ username, password });
                         }}
-                    >
-                        Login
-                    </span>
+                    ></input>
                 ) : (
                     <ReactLoading
                         type={"spin"}

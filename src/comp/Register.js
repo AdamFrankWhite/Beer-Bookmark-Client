@@ -55,7 +55,11 @@ function Register(props) {
     };
     return (
         <form className="registration" onSubmit={handleSubmit}>
-            <h2>Register</h2>
+            <div className="login-head">
+                <img src="/login.png" alt="login" />
+                <h2>Register</h2>
+            </div>
+
             {/* Username field */}
             <div className="row">
                 <label htmlFor="regUsername">Username: </label>
@@ -154,7 +158,7 @@ function Register(props) {
                 </p> */}
             </div>
             <br />
-            <input type="submit" value="Register" />
+            <input className="button" type="submit" value="Register" />
         </form>
     );
 }
