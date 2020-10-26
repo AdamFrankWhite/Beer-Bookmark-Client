@@ -54,12 +54,22 @@ export const register = (data) => (dispatch) => {
         })
         .then((res) => {
             //TODO - Validate email
-            console.log(res.data);
             // dispatch({type:SET_USER, payload: res})
             // redirect: "login",
             // showError: false,
             // regErrors: {},
             // username: this.state.regUsername,
+        })
+        .then((res) => {
+            axios
+                .post("http://localhost:5000/users/login", {
+                    username,
+                    password,
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    dispatch({ type: SET_USER, payload: res.data });
+                });
         });
 };
 
