@@ -2,6 +2,7 @@ import {
     SET_USER,
     GET_BEERS,
     SET_LOADING,
+    SET_RANDOM_BEERS,
     SET_SEARCH_RESULTS,
     LOGOUT,
     SET_AUTHENTICATION,
@@ -136,5 +137,35 @@ export const searchBeer = (searchTerm, searchType = "beer") => (dispatch) => {
             //         breweryData: response.data.response.brewery.items,
             //     });
             // console.log(this.state.beerData);
+        });
+};
+
+export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
+    dispatch({ type: SET_LOADING, payload: true });
+    axios
+        .get(`https://api.untappd.com/v4/search/beer/?q=${beerType}`, {
+            params: {
+                client_id: "F94775549BAC795E436858A50A3616690D3CD446",
+                client_secret: "844CF3E397DB0294FC89ACE34560918CAFD035FB",
+            },
+        })
+        .then((res) => {
+            const randomNum = () =>
+                Math.floor(Math.random() * res.data.response.beers.count);
+
+            const randomBeers = [];
+            for (let i = 0; randomBeers.length < 5; i++) {
+                let randomBeer =
+                    res.data.response.beers.items[randomNum()].beer;
+                if (
+                    !JSON.stringify(randomBeers).includes(
+                        JSON.stringify(randomBeer)
+                    )
+                ) {
+                    randomBeers.push(randomBeer);
+                }
+            }
+            dispatch({ type: SET_LOADING, payload: false });
+            dispatch({ type: SET_RANDOM_BEERS, payload: randomBeers });
         });
 };
