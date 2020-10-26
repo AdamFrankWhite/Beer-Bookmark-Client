@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { register } from "../redux/actions/userActions";
 function Register(props) {
@@ -6,55 +6,39 @@ function Register(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [showError, toggleError] = useState(false);
-    const errorMessage = "Passwords don't match";
-
+    const [formErrors, setFormErrors] = useState({});
     //Validation
-
+    useEffect(() => {
+        console.log(formErrors);
+    }, [formErrors]);
     const validatePassword = () => {
-        if (password !== confirmPassword) {
-            toggleError(true);
-        } else {
-            toggleError(false);
+        let errors = {};
+
+        //Form validation
+        username.length < 6 && (errors.usernameLengthError = true);
+
+        email.length < 6 && (errors.emailLengthError = true);
+        !email.includes("@") && (errors.emailError = true);
+
+        password.length < 8 && (errors.passwordLengthError = true);
+
+        password !== confirmPassword && (errors.passwordMatchError = true);
+
+        //Check errors obj is empty
+        if (Object.keys(errors).length === 0 && errors.constructor === Object) {
             props.register({ username, email, password });
+        } else {
+            setFormErrors(errors);
         }
     };
-    // validation(type) {
-    //     let validation = this.state.regErrors;
 
-    //     //Form validation
-    //     if (type === "regUsername") {
-    //         this.state.regUsername.length < 6
-    //             ? (validation.usernameLengthError = true)
-    //             : (validation.usernameLengthError = false);
-    //     }
-
-    //     if (type === "regEmail") {
-    //         this.state.regEmail.length < 6 || !this.state.regEmail.includes("@")
-    //             ? (validation.emailError = true)
-    //             : (validation.emailError = false);
-    //     }
-
-    //     if (type === "regPassword") {
-    //         this.state.regPassword.length < 6
-    //             ? (validation.passwordLengthError = true)
-    //             : (validation.passwordLengthError = false);
-    //     }
-
-    //     if (type === "regRepeatPassword") {
-    //         this.state.regPassword !== this.state.regRepeatPassword
-    //             ? (validation.passwordMatchError = true)
-    //             : (validation.passwordMatchError = false);
-    //     }
-
-    // }
     const handleSubmit = (e) => {
         console.log("ba");
         e.preventDefault();
         validatePassword();
     };
     return (
-        <form className="registration" onSubmit={handleSubmit}>
+        <form className="registration" onSubmit={handleSubmit} novalidate>
             <div className="login-head">
                 <img src="/login.png" alt="login" />
                 <h2>Register</h2>
@@ -69,20 +53,20 @@ function Register(props) {
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    // required
                 ></input>
                 {/* Conditional style based on error boolean and success */}
-                {/* <p
-                    className={
-                        !errors.usernameLengthError && props.username.length > 1
-                            ? "validationPass"
-                            : "errorMessage"
+                <p
+                    className="errorMessage"
+                    style={
+                        !formErrors.usernameLengthError
+                            ? { display: "none" }
+                            : {}
                     }
                 >
-                    {errors.usernameLengthError &&
+                    {formErrors.usernameLengthError &&
                         window.innerWidth > 600 &&
                         "Username must be at least 6 characters"}
-                </p> */}
+                </p>
             </div>
 
             {/* Email field */}
@@ -91,22 +75,18 @@ function Register(props) {
                 <input
                     id="regEmail"
                     name="regEmail"
-                    type="email"
+                    type="text"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    // required
                 ></input>
-                {/* <p
-                    className={
-                        !errors.emailError && props.email.length > 1
-                            ? "validationPass"
-                            : "errorMessage"
-                    }
+                <p
+                    className="errorMessage"
+                    style={!formErrors.emailError ? { display: "none" } : {}}
                 >
-                    {errors.emailError &&
+                    {formErrors.emailError &&
                         window.innerWidth > 1200 &&
                         "Invalid email. Please try again"}
-                </p> */}
+                </p>
             </div>
             {/* Password field */}
             <div className="row">
@@ -117,19 +97,19 @@ function Register(props) {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    // required
                 ></input>
-                {/* <p
-                    className={
-                        !errors.passwordLengthError && props.password.length > 1
-                            ? "validationPass"
-                            : "errorMessage"
+                <p
+                    className="errorMessage"
+                    style={
+                        !formErrors.passwordLengthError
+                            ? { display: "none" }
+                            : {}
                     }
                 >
-                    {errors.passwordLengthError &&
+                    {formErrors.passwordLengthError &&
                         window.innerWidth > 1200 &&
-                        "Password must be at least 6 characters"}
-                </p> */}
+                        "Password must be at least 8 characters"}
+                </p>
             </div>
 
             {/* Repeat Password field */}
@@ -141,21 +121,20 @@ function Register(props) {
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    // required
                 ></input>
-                {showError && <p className="errorMessage">{errorMessage}</p>}
-                {/* <p
-                    className={
-                        !errors.passwordMatchError &&
-                        props.repeatPassword.length > 1
-                            ? "validationPass"
-                            : "errorMessage"
+
+                <p
+                    className="errorMessage"
+                    style={
+                        !formErrors.passwordMatchError
+                            ? { display: "none" }
+                            : {}
                     }
                 >
-                    {errors.passwordMatchError &&
+                    {formErrors.passwordMatchError &&
                         window.innerWidth > 1200 &&
                         "Passwords do not match"}
-                </p> */}
+                </p>
             </div>
             <br />
             <input className="button" type="submit" value="Register" />

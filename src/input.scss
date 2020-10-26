@@ -238,7 +238,10 @@ nav {
     }
     .errorMessage {
         position: absolute;
-        right: 0;
+        right: -125%;
+        top: 44%;
+        width: 125%;
+        padding: 0.5em 0.25em;
     }
 }
 .registration input {
@@ -340,18 +343,6 @@ table {
     border-collapse: collapse;
 }
 
-tr:first-child td:first-child {
-    border-top-left-radius: 10px;
-}
-tr:first-child td:last-child {
-    border-top-right-radius: 10px;
-}
-tr:last-child td:first-child {
-    border-bottom-left-radius: 10px;
-}
-tr:last-child td:last-child {
-    border-bottom-right-radius: 10px;
-}
 .randomBeer {
     border: 2px black solid;
     position: relative;
