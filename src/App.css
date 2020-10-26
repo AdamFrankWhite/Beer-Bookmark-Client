@@ -150,23 +150,34 @@ nav {
   width: 30%;
   max-width: 300px;
   margin: auto;
-  text-align: center;
   line-height: 1em;
   font-size: 0.8em;
+}
+
+.row {
+  display: block;
+  position: relative;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+.row:hover {
+  cursor: pointer;
+}
+.row label {
+  display: block;
+  margin-left: -1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.row .errorMessage {
+  position: absolute;
+  right: 0;
 }
 
 .registration input {
   width: 90%;
   margin: auto;
   padding: 0.75em;
-}
-
-.registration label {
-  text-transform: uppercase;
-  font-size: 0.9em;
-}
-.registration label:hover {
-  cursor: pointer;
 }
 
 .errorMessage {

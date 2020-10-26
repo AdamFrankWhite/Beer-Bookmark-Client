@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BeerRow from "./BeerRow";
 import Brewery from "./Brewery";
 import axios from "axios";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { searchBeer } from "../redux/actions/userActions";
+import RandomBeer from "./RandomBeer";
 function Search(props) {
     const [searchTerm, setSearchTerm] = useState("");
     const center = { margin: "auto", height: 150, width: 200 };
-
+    const [randomBeerData, setRandomBeerData] = useState([]);
+    const [beerType, setBeerType] = useState(["ipa"]);
     // Beer Components
     const beers = props.user.searchResults.map((item) => {
         return (
@@ -27,6 +29,35 @@ function Search(props) {
             />
         );
     });
+    useEffect(() => {
+        // https://api.untappd.com/v4/search/beer/?q=${beerType}
+        axios
+            .get(`https://api.untappd.com/v4/search/beer/?q=${beerType}`, {
+                params: {
+                    client_id: "F94775549BAC795E436858A50A3616690D3CD446",
+                    client_secret: "844CF3E397DB0294FC89ACE34560918CAFD035FB",
+                },
+            })
+            .then((res) => {
+                const randomNum = () =>
+                    Math.floor(Math.random() * res.data.response.beers.count);
+
+                const randomBeers = [];
+                for (let i = 0; randomBeers.length < 5; i++) {
+                    let randomBeer =
+                        res.data.response.beers.items[randomNum()].beer;
+                    if (
+                        !JSON.stringify(randomBeers).includes(
+                            JSON.stringify(randomBeer)
+                        )
+                    ) {
+                        randomBeers.push(randomBeer);
+                    }
+                }
+
+                setRandomBeerData(randomBeers);
+            });
+    }, []);
 
     // Brewery Components
     // const breweries = breweryData.map((item) => (
@@ -73,6 +104,27 @@ function Search(props) {
                         <input name="searchType" type="radio" value="brewery" onChange={this.props.handleChange}></input>
                     </label> */}
 
+                    {/* Random Beers Container */}
+                    <div className="beer-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {randomBeerData.map((beer) => (
+                                    <RandomBeer beerData={beer} />
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                     {/* Beer Container */}
                     <div className="beer-container">
                         <table>

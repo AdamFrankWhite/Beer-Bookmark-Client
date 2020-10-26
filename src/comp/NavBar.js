@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../redux/actions/userActions";
-function Header(props) {
+function NavBar(props) {
     return (
         <header>
             <nav className="navbar navbar-dark bg-primary">
@@ -21,7 +21,7 @@ function Header(props) {
                     <Link to="/random-beer" className="link">
                         Random Beer
                     </Link>
-                    {!props.loggedIn && (
+                    {!props.user.loggedIn && (
                         <Link to="/register" className="link">
                             Register
                         </Link>
@@ -48,4 +48,4 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = {
     logout,
 };
-export default connect(mapStateToProps, mapActionsToProps)(Header);
+export default connect(mapStateToProps, mapActionsToProps)(NavBar);

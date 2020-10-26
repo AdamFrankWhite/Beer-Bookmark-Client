@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-import Header from "./comp/Header";
+import NavBar from "./comp/NavBar";
 import Login from "./comp/Login";
 import Register from "./comp/Register";
 import Search from "./comp/Search";
@@ -49,7 +49,7 @@ class App extends React.Component {
         // this.login = this.login.bind(this);
         // this.logout = this.logout.bind(this);
         // this.register = this.register.bind(this);
-        this.validation = this.validation.bind(this);
+        // this.validation = this.validation.bind(this);
         this.renderRedirect = this.renderRedirect.bind(this);
         // this.handleChange = this.handleChange.bind(this);
         // this.searchBeer = this.searchBeer.bind(this);
@@ -57,10 +57,6 @@ class App extends React.Component {
         // this.changeTab = this.changeTab.bind(this);
         this.updateBeer = this.updateBeer.bind(this);
     }
-
-    // Add Beer
-
-    // Delete Beer
 
     // Update Beer Rating
     updateBeer(beer, rating) {
@@ -75,43 +71,6 @@ class App extends React.Component {
             .then((res) => {
                 this.setState({ favouriteBeers: res.data });
             });
-    }
-
-    // Login
-
-    // Logout
-
-    //Register
-
-    validation(type) {
-        let validation = this.state.regErrors;
-
-        //Form validation
-        if (type === "regUsername") {
-            this.state.regUsername.length < 6
-                ? (validation.usernameLengthError = true)
-                : (validation.usernameLengthError = false);
-        }
-
-        if (type === "regEmail") {
-            this.state.regEmail.length < 6 || !this.state.regEmail.includes("@")
-                ? (validation.emailError = true)
-                : (validation.emailError = false);
-        }
-
-        if (type === "regPassword") {
-            this.state.regPassword.length < 6
-                ? (validation.passwordLengthError = true)
-                : (validation.passwordLengthError = false);
-        }
-
-        if (type === "regRepeatPassword") {
-            this.state.regPassword !== this.state.regRepeatPassword
-                ? (validation.passwordMatchError = true)
-                : (validation.passwordMatchError = false);
-        }
-
-        this.setState({ regErrors: validation });
     }
 
     renderRedirect() {
@@ -180,7 +139,7 @@ class App extends React.Component {
     render() {
         return (
             <Router>
-                <Header loggedIn={this.state.loggedIn} logout={this.logout} />
+                <NavBar loggedIn={this.state.loggedIn} logout={this.logout} />
                 {this.renderRedirect()}
                 <div className="tab-frame">
                     <Route path="/" exact component={Home} />
@@ -261,7 +220,7 @@ class App extends React.Component {
                     />
 
                     {/* Random Beer Router */}
-                    <Route
+                    {/* <Route
                         path="/random-beer"
                         render={(routeProps) => (
                             <RandomBeer
@@ -272,7 +231,7 @@ class App extends React.Component {
                                 favouriteBeers={this.state.favouriteBeers}
                             />
                         )}
-                    />
+                    /> */}
                 </div>
             </Router>
         );
