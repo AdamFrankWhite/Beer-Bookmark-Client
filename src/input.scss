@@ -238,26 +238,28 @@ nav {
     }
     .errorMessage {
         position: absolute;
-        right: -125%;
+        right: -130%;
         top: 44%;
         width: 125%;
         padding: 0.5em 0.25em;
+        background-color: rgb(248, 217, 113);
+        border-radius: 5px;
+        color: darkgoldenrod;
+        &:before {
+            content: "";
+            border-style: solid;
+            border-width: 10px 25px 10px 0;
+            border-color: transparent rgb(248, 217, 113) transparent transparent;
+            position: absolute;
+            left: -10px;
+            top: 20%;
+        }
     }
 }
 .registration input {
     width: 90%;
     margin: auto;
     padding: 0.75em;
-}
-
-.errorMessage {
-    background-color: rgb(248, 217, 113);
-    width: fit-content;
-    // position: absolute;
-    // left: 105%;
-    // padding: 0.25em;
-    border-radius: 5px;
-    color: darkgoldenrod;
 }
 
 .login-head {

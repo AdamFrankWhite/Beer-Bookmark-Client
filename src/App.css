@@ -208,23 +208,28 @@ nav {
 }
 .row .errorMessage {
   position: absolute;
-  right: -125%;
+  right: -130%;
   top: 44%;
   width: 125%;
   padding: 0.5em 0.25em;
+  background-color: #f8d971;
+  border-radius: 5px;
+  color: darkgoldenrod;
+}
+.row .errorMessage:before {
+  content: "";
+  border-style: solid;
+  border-width: 10px 25px 10px 0;
+  border-color: transparent #f8d971 transparent transparent;
+  position: absolute;
+  left: -10px;
+  top: 20%;
 }
 
 .registration input {
   width: 90%;
   margin: auto;
   padding: 0.75em;
-}
-
-.errorMessage {
-  background-color: #f8d971;
-  width: fit-content;
-  border-radius: 5px;
-  color: darkgoldenrod;
 }
 
 .login-head {
