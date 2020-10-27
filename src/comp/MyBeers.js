@@ -113,21 +113,8 @@ const MyBeers = (props) => {
                     />
                 )}
                 <div className="my-beers-cont">
-                    {/* <FlipMove> */}
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>{sortedBeers}</tbody>
-                    </table>
+                    {sortedBeers}
+
                     {/* </FlipMove> */}
                 </div>
             </div>

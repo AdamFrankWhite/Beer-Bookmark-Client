@@ -76,14 +76,15 @@ export const register = (data) => (dispatch) => {
 
 export const addBeer = (data) => (dispatch) => {
     const { username, beerData, brewery } = data;
+    console.log(beerData);
     const postData = {
-        id: beerData.bid,
+        id: beerData.id,
         username,
-        beerName: beerData.beer_name,
-        abv: beerData.beer_abv.toString(),
+        beerName: beerData.beerName,
+        abv: beerData.abv.toString(),
         beerDescription: beerData.beer_style,
-        breweryName: brewery.brewery_name,
-        breweryContact: brewery.contact,
+        breweryName: beerData.brewery_name,
+        breweryContact: beerData.breweryContact.url,
         stars: "1",
         date: new Date(),
         img: beerData.beer_label,
@@ -189,7 +190,7 @@ export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
             for (let i = 0; randomBeers.length < 5; i++) {
                 let randomBeerData = res.data.response.beers.items[randomNum()];
                 const cleanBeer = {
-                    id: randomBeerData.bid,
+                    id: randomBeerData.beer.bid,
                     beerName: randomBeerData.beer.beer_name,
                     abv: randomBeerData.beer.beer_abv.toString(),
                     beerDescription: randomBeerData.beer.beer_style,

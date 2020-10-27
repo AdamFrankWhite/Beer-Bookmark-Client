@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
 function BeerRow(props) {
     const checkBeerIncluded =
-        props.search && JSON.stringify(props.user.beers).includes(props.id);
+        props.search &&
+        JSON.stringify(props.user.beers).includes(props.beerData.id);
     const center = { margin: "auto", height: 25, width: 25 };
     const clickTextStyle = checkBeerIncluded && "click-text-saved";
     const [clickText, setClickText] = useState(
