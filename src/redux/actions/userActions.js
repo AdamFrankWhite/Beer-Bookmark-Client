@@ -109,8 +109,19 @@ export const deleteBeer = (data) => (dispatch) => {
         });
 };
 
-export const rateBeer = (beer, rating) => (dispatch) => {
-    console.log(beer, rating);
+export const rateBeer = (beerData, username, rating) => (dispatch) => {
+    dispatch({ type: SET_LOADING, payload: true });
+    let updateData = {
+        beerData,
+        username,
+        newRating: rating,
+    };
+    axios
+        .put(`http://localhost:5000/users/my-beers/update`, updateData)
+        .then((res) => {
+            dispatch({ type: GET_BEERS, payload: res.data });
+            dispatch({ type: SET_LOADING, payload: false });
+        });
 };
 
 export const searchBeer = (searchTerm, searchType = "beer") => (dispatch) => {

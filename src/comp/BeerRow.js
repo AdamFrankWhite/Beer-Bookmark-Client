@@ -1,11 +1,11 @@
-import { set } from "mongoose";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
 function BeerRow(props) {
     const checkBeerIncluded =
         props.search && JSON.stringify(props.user.beers).includes(props.id);
-
+    const center = { margin: "auto", height: 25, width: 25 };
     const clickTextStyle = checkBeerIncluded && "click-text-saved";
     const [clickText, setClickText] = useState(
         checkBeerIncluded ? "Saved" : "Add to favourites"
@@ -13,9 +13,8 @@ function BeerRow(props) {
     const [confirmDelete, toggleDelete] = useState(false);
     const [rating, setRating] = useState("");
     const [editRating, setEditRating] = useState(false);
-    // checks to see if favourite beers includes this beer, if so render saved
-
-    //FIX CHECK INCLUDED
+    //Selected Beer
+    const [selectedBeer, setSelectedBeer] = useState(null);
 
     return (
         <tr className="beer">
@@ -46,47 +45,65 @@ function BeerRow(props) {
                     {props.beerData.beerDescription}
                 </h5>
             </td>
-
-            <td>
-                {editRating ? (
-                    <div className="set-rating">
-                        <div className="set-rating-row-1">
-                            <span>&#127866;</span>
-                            <input
-                                type="number"
-                                max="10"
-                                min="1"
-                                onChange={(e) => {
-                                    setRating(e.target.value);
-                                }}
-                            />
+            {props.myBeers && (
+                <td>
+                    {editRating ? (
+                        <div className="set-rating">
+                            <div className="set-rating-row-1">
+                                <span>&#127866;</span>
+                                <input
+                                    type="number"
+                                    max="10"
+                                    min="1"
+                                    onChange={(e) => {
+                                        setRating(e.target.value);
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <span
+                                    onClick={() => {
+                                        props.rateBeer(
+                                            props.beerData,
+                                            props.user.userData.username,
+                                            rating
+                                        );
+                                        setEditRating(false);
+                                    }}
+                                    className="tick"
+                                >
+                                    &#9989;
+                                </span>
+                                <span
+                                    className="cross"
+                                    onClick={() => setEditRating(false)}
+                                >
+                                    &#10062;
+                                </span>
+                            </div>
                         </div>
-                        <div>
-                            <span
-                                onClick={() =>
-                                    props.rateBeer(props.beerData, rating)
-                                }
-                                className="tick"
-                            >
-                                &#9989;
-                            </span>
-                            <span
-                                className="cross"
-                                onClick={() => setEditRating(false)}
-                            >
-                                &#10062;
-                            </span>
-                        </div>
-                    </div>
-                ) : (
-                    <span
-                        className="buttons"
-                        onClick={() => setEditRating(true)}
-                    >
-                        &#127866; {props.beerData.stars}
-                    </span>
-                )}
-            </td>
+                    ) : (
+                        <span
+                            className="buttons"
+                            onClick={() => {
+                                setSelectedBeer(props.beerData);
+                                setEditRating(true);
+                            }}
+                        >
+                            {props.user.loading &&
+                            selectedBeer == props.beerData ? (
+                                <ReactLoading
+                                    style={center}
+                                    type="spin"
+                                    color="black"
+                                />
+                            ) : (
+                                <span>&#127866; {props.beerData.stars}</span>
+                            )}
+                        </span>
+                    )}
+                </td>
+            )}
 
             {/* {props.myBeers && (
                     <span className="ratings">

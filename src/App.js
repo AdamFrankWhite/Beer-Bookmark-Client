@@ -55,23 +55,10 @@ class App extends React.Component {
         // this.searchBeer = this.searchBeer.bind(this);
         this.sortBeers = this.sortBeers.bind(this);
         // this.changeTab = this.changeTab.bind(this);
-        this.updateBeer = this.updateBeer.bind(this);
+        // this.updateBeer = this.updateBeer.bind(this);
     }
 
     // Update Beer Rating
-    updateBeer(beer, rating) {
-        let updateData = {
-            beerData: beer,
-            username: this.state.username,
-            newRating: rating,
-        };
-        console.log(beer.stars);
-        axios
-            .put(`${this.baseUrl}/users/my-beers/update`, updateData)
-            .then((res) => {
-                this.setState({ favouriteBeers: res.data });
-            });
-    }
 
     renderRedirect() {
         let redirect = this.props.user.redirect;
