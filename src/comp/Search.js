@@ -73,6 +73,7 @@ function Search(props) {
                     </label> */}
 
                     {/* Random Beers Container */}
+
                     <div className="beer-container">
                         <table>
                             <thead>
