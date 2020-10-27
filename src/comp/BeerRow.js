@@ -11,7 +11,7 @@ function BeerRow(props) {
         checkBeerIncluded ? "Saved" : "Add to favourites"
     );
     const [confirmDelete, toggleDelete] = useState(false);
-
+    const [editRating, setEditRating] = useState(false);
     // checks to see if favourite beers includes this beer, if so render saved
 
     //FIX CHECK INCLUDED
@@ -34,16 +34,39 @@ function BeerRow(props) {
                 </a>
             </td>
             <td>
-                <h4>ABV: {props.abv || props.beerData.abv}%</h4>
+                <h5>ABV: {props.abv || props.beerData.abv}%</h5>
             </td>
             <td>
-                <p className="description">
+                <h5 className="description">
                     {props.style || props.beerData.beerDescription}
-                </p>
+                </h5>
             </td>
 
             <td>
-                <span className="buttons">&#127866;{props.beerData.stars}</span>
+                {editRating ? (
+                    <div className="set-rating">
+                        <div>
+                            <span>&#127866;</span>
+                            <input type="number" max="10" min="1" />
+                        </div>
+                        <div>
+                            <span className="tick">&#9989;</span>
+                            <span
+                                className="cross"
+                                onClick={() => setEditRating(false)}
+                            >
+                                &#10062;
+                            </span>
+                        </div>
+                    </div>
+                ) : (
+                    <span
+                        className="buttons"
+                        onClick={() => setEditRating(true)}
+                    >
+                        &#127866; {props.beerData.stars}
+                    </span>
+                )}
             </td>
 
             {/* {props.myBeers && (

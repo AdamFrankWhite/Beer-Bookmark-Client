@@ -378,6 +378,7 @@ table {
     min-width: 250px;
     padding: 0.5em;
     width: 100%;
+    font-size: 0.95em;
     // @media (min-width: 1400px) {
     //     width: 48%;
     // }
@@ -395,22 +396,38 @@ table {
         text-align: left;
     }
     h3 {
-        font-size: 1.25em;
+        font-size: 1.2em;
         font-weight: bold;
     }
     a {
-        font-size: 1.2em;
+        font-size: 1.1em;
+    }
+    .description {
+        font-size: 0.9em;
+        text-transform: uppercase;
+        font-weight: 400;
+    }
+    h4 {
+        font-size: 1em;
+    }
+    h5 {
+        font-size: 0.9em;
+    }
+    input[type="number"] {
+        width: 2.5em;
+    }
+    .tick,
+    .cross {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .set-rating {
+        display: flex;
+        flex-direction: column;
     }
 }
 
-.beer h4 {
-    font-size: 1em;
-}
-
-.beer .description {
-    font-size: 0.9em;
-    text-transform: uppercase;
-}
 // .beer:hover {
 //     overflow: visible;
 //     z-index: 10000;
@@ -461,13 +478,13 @@ table {
 /* == My Beers == */
 
 .my-beers-wrapper {
-    width: 90%;
-    margin: 2em auto;
+    width: 100%;
+    margin: auto;
     // border: rgb(175, 2, 2) solid 2px;
     border-radius: 5px;
     .my-beers-banner {
         width: 100%;
-        min-height: 500px;
+        min-height: 350px;
         border-radius: 5px 5px 0 0;
         background-image: url("/beer-1074950_1280.jpg");
         background-size: cover;
@@ -521,8 +538,11 @@ table {
     justify-content: center;
     align-items: center;
 }
-tr > th:nth-of-type(7),
 tr > td:nth-of-type(7) {
+    width: 10%;
+    text-align: center;
+}
+tr > td:nth-of-type(6) {
     width: 10%;
     text-align: center;
 }
