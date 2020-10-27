@@ -88,7 +88,7 @@ export const addBeer = (data) => (dispatch) => {
         stars: "1",
         date: new Date(),
         img: beerData.img,
-        beerInfo: beerData.beerDescription,
+        beerInfo: beerData.beerInfo,
     };
     console.log(postData);
     axios

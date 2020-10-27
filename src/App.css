@@ -351,7 +351,6 @@ table {
   width: 100%;
   font-size: 0.95em;
   overflow: hidden;
-  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -415,10 +414,18 @@ table {
 .beer .more-info:hover {
   cursor: pointer;
 }
+.beer:last-of-type {
+  border-bottom: 2px solid black;
+}
 
 .more-info-cont {
+  overflow: hidden;
   border-left: black 2px solid;
   border-right: black 2px solid;
+}
+
+.slide-down {
+  animation: slide-down 1s forwards;
 }
 
 .click-text-saved {

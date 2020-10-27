@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
@@ -19,6 +19,9 @@ function BeerRow(props) {
 
     const [showRow, toggleShowRow] = useState();
 
+    const hiddenDiv = useRef();
+    const hiddenDivHeight = hiddenDiv.clientHeight;
+    console.log(hiddenDivHeight);
     return (
         <>
             <div className="beer">
@@ -174,15 +177,31 @@ function BeerRow(props) {
                 )}
                 <span
                     className="more-info"
-                    onClick={() => toggleShowRow(!showRow)}
+                    onClick={() => {
+                        console.log(hiddenDivHeight);
+
+                        toggleShowRow(!showRow);
+                    }}
                 >
                     more info
                 </span>
-                {/* {!props.myBeers && <p>Details</p>} // TODO - add modal window with beer details */}
             </div>
-            {showRow && (
-                <div className="more-info-cont">{props.beerData.beerInfo}</div>
-            )}
+
+            <div
+                ref={hiddenDiv}
+                className="more-info-cont"
+                style={
+                    showRow
+                        ? {
+                              height: "100px",
+                              visibility: "visible",
+                              transition: "all 1s",
+                          }
+                        : { height: 0, transition: "all 1s" }
+                }
+            >
+                {props.beerData.beerInfo}
+            </div>
         </>
     );
 }
