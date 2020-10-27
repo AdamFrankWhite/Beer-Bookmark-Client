@@ -424,7 +424,11 @@ table {
     }
     .set-rating {
         display: flex;
+        justify-content: flex-start;
         flex-direction: column;
+        .set-rating-row-1 {
+            display: flex;
+        }
     }
 }
 
@@ -543,8 +547,10 @@ tr > td:nth-of-type(7) {
     text-align: center;
 }
 tr > td:nth-of-type(6) {
-    width: 10%;
+    width: 5%;
     text-align: center;
+
+    // text-align: center;
 }
 .delete-beer:hover {
     color: black;

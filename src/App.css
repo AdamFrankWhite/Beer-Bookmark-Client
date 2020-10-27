@@ -390,7 +390,11 @@ table {
 }
 .beer .set-rating {
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
+}
+.beer .set-rating .set-rating-row-1 {
+  display: flex;
 }
 
 .click-text-saved {
@@ -496,7 +500,7 @@ tr > td:nth-of-type(7) {
 }
 
 tr > td:nth-of-type(6) {
-  width: 10%;
+  width: 5%;
   text-align: center;
 }
 

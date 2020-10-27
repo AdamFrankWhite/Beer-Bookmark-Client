@@ -45,7 +45,7 @@ function BeerRow(props) {
             <td>
                 {editRating ? (
                     <div className="set-rating">
-                        <div>
+                        <div className="set-rating-row-1">
                             <span>&#127866;</span>
                             <input type="number" max="10" min="1" />
                         </div>
