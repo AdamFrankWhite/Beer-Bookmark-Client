@@ -379,8 +379,10 @@ table {
 }
 
 .beer {
-    border: black 2px solid;
-    border-radius: 10px;
+    border-top: black 2px solid;
+    border-left: black 2px solid;
+    border-right: black 2px solid;
+    // border-radius: 5px;
     min-width: 250px;
     padding: 0.5em;
     width: 100%;
@@ -388,7 +390,7 @@ table {
     // @media (min-width: 1400px) {
     //     width: 48%;
     // }
-    margin: 10px;
+
     overflow: hidden;
     position: relative;
 
@@ -400,16 +402,18 @@ table {
     * {
         margin: auto;
     }
-    td {
-        // margin-left: 0;
-        text-align: left;
-    }
     h3 {
         font-size: 1.2em;
         font-weight: bold;
+        text-align: left;
+        margin: auto 0;
+        width: 20%;
+        padding-left: 1em;
     }
+
     a {
         font-size: 1.1em;
+        width: 25%;
     }
     .description {
         font-size: 0.9em;
@@ -418,9 +422,12 @@ table {
     }
     h4 {
         font-size: 1em;
+        text-align: left;
     }
     h5 {
         font-size: 0.9em;
+        width: 15%;
+        text-align: left;
     }
     input[type="number"] {
         width: 2.5em;
@@ -439,8 +446,16 @@ table {
             display: flex;
         }
     }
+    .more-info {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
-
+.more-info-cont {
+    border-left: black 2px solid;
+    border-right: black 2px solid;
+}
 // .beer:hover {
 //     overflow: visible;
 //     z-index: 10000;
@@ -551,26 +566,7 @@ table {
     justify-content: center;
     align-items: center;
 }
-tr > .more-info {
-    // width: 100%;
-    position: absolute;
-    display: block;
-    width: 100%;
-}
-tr > td:nth-of-type(2),
-tr > td:nth-of-type(3) {
-    width: 20%;
-}
-tr > td:nth-of-type(7) {
-    width: 10%;
-    text-align: center;
-}
-tr > td:nth-of-type(6) {
-    width: 5%;
-    text-align: center;
 
-    // text-align: center;
-}
 .delete-beer:hover {
     color: black;
     background-color: gray;

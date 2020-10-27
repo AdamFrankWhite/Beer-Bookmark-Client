@@ -171,11 +171,16 @@ function BeerRow(props) {
                         {props.user.loggedIn && clickText}
                     </span>
                 )}
-                <td onClick={() => toggleShowRow(!showRow)}>more info</td>
+                <span
+                    className="more-info"
+                    onClick={() => toggleShowRow(!showRow)}
+                >
+                    more info
+                </span>
                 {/* {!props.myBeers && <p>Details</p>} // TODO - add modal window with beer details */}
             </div>
             {showRow && (
-                <div className="more-info">{props.beerData.beerInfo}</div>
+                <div className="more-info-cont">{props.beerData.beerInfo}</div>
             )}
         </>
     );

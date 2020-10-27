@@ -355,13 +355,13 @@ table {
 }
 
 .beer {
-  border: black 2px solid;
-  border-radius: 10px;
+  border-top: black 2px solid;
+  border-left: black 2px solid;
+  border-right: black 2px solid;
   min-width: 250px;
   padding: 0.5em;
   width: 100%;
   font-size: 0.95em;
-  margin: 10px;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -372,15 +372,17 @@ table {
 .beer * {
   margin: auto;
 }
-.beer td {
-  text-align: left;
-}
 .beer h3 {
   font-size: 1.2em;
   font-weight: bold;
+  text-align: left;
+  margin: auto 0;
+  width: 20%;
+  padding-left: 1em;
 }
 .beer a {
   font-size: 1.1em;
+  width: 25%;
 }
 .beer .description {
   font-size: 0.9em;
@@ -389,9 +391,12 @@ table {
 }
 .beer h4 {
   font-size: 1em;
+  text-align: left;
 }
 .beer h5 {
   font-size: 0.9em;
+  width: 15%;
+  text-align: left;
 }
 .beer input[type=number] {
   width: 2.5em;
@@ -407,6 +412,14 @@ table {
 }
 .beer .set-rating .set-rating-row-1 {
   display: flex;
+}
+.beer .more-info:hover {
+  cursor: pointer;
+}
+
+.more-info-cont {
+  border-left: black 2px solid;
+  border-right: black 2px solid;
 }
 
 .click-text-saved {
@@ -504,27 +517,6 @@ table {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-tr > .more-info {
-  position: absolute;
-  display: block;
-  width: 100%;
-}
-
-tr > td:nth-of-type(2),
-tr > td:nth-of-type(3) {
-  width: 20%;
-}
-
-tr > td:nth-of-type(7) {
-  width: 10%;
-  text-align: center;
-}
-
-tr > td:nth-of-type(6) {
-  width: 5%;
-  text-align: center;
 }
 
 .delete-beer:hover {
