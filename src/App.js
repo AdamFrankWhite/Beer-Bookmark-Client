@@ -49,7 +49,7 @@ class App extends React.Component {
         // this.logout = this.logout.bind(this);
         // this.register = this.register.bind(this);
         // this.validation = this.validation.bind(this);
-        this.renderRedirect = this.renderRedirect.bind(this);
+        // this.renderRedirect = this.renderRedirect.bind(this);
         // this.handleChange = this.handleChange.bind(this);
         // this.searchBeer = this.searchBeer.bind(this);
         this.sortBeers = this.sortBeers.bind(this);

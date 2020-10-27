@@ -384,9 +384,13 @@ table {
     // }
     margin: 10px;
     overflow: hidden;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+    @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     position: relative;
     * {
         margin: auto;

@@ -357,6 +357,14 @@ table {
   overflow: hidden;
   position: relative;
 }
+@media (max-width: 1000px) {
+  .beer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
 .beer * {
   margin: auto;
 }
