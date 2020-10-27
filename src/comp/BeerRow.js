@@ -16,12 +16,23 @@ function BeerRow(props) {
     const [editRating, setEditRating] = useState(false);
     //Selected Beer
     const [selectedBeer, setSelectedBeer] = useState(null);
-
-    const [showRow, toggleShowRow] = useState();
-
+    //Init null to avoid initial collapse animation
+    const [showRow, toggleShowRow] = useState(null);
+    let infoStyle;
     const targetRef = useRef();
     const [height, setHeight] = useState(0);
-
+    if (showRow) {
+        infoStyle = {
+            height: `calc(${height} + 2em)`,
+            transition: "all 1s",
+        };
+    }
+    if (showRow === false) {
+        infoStyle = {
+            transition: "margin-bottom 0.5s",
+            marginBottom: -height,
+        };
+    }
     useLayoutEffect(() => {
         if (targetRef.current) {
             setHeight(targetRef.current.clientHeight);
@@ -191,22 +202,11 @@ function BeerRow(props) {
                     more info
                 </span>
             </div>
-
+            {/* Style condition prevent initial animation */}
             <div
                 ref={targetRef}
                 className="more-info-cont"
-                style={
-                    showRow
-                        ? {
-                              height: `calc(${height} + 2em)`,
-                              transition: "all 1s",
-                          }
-                        : {
-                              transition: "margin-bottom 1s",
-
-                              marginBottom: -height,
-                          }
-                }
+                style={infoStyle ? infoStyle : { marginBottom: -height }}
             >
                 {props.beerData.beerInfo}
             </div>
