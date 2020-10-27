@@ -163,7 +163,7 @@ function BeerRow(props) {
                                 props.user.loggedIn &&
                                 props.addBeer({
                                     username: props.user.userData.username,
-                                    brewery: props.brewery,
+                                    // brewery: props.brewery,
                                     beerData: props.beerData,
                                 });
                         }}

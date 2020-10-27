@@ -75,20 +75,20 @@ export const register = (data) => (dispatch) => {
 };
 
 export const addBeer = (data) => (dispatch) => {
-    const { username, beerData, brewery } = data;
+    const { username, beerData } = data;
     console.log(beerData);
     const postData = {
         id: beerData.id,
         username,
         beerName: beerData.beerName,
         abv: beerData.abv.toString(),
-        beerDescription: beerData.beer_style,
-        breweryName: beerData.brewery_name,
+        beerDescription: beerData.beerDescription,
+        breweryName: beerData.breweryName,
         breweryContact: beerData.breweryContact.url,
         stars: "1",
         date: new Date(),
-        img: beerData.beer_label,
-        beerInfo: beerData.beer_description,
+        img: beerData.img,
+        beerInfo: beerData.beerDescription,
     };
     console.log(postData);
     axios
