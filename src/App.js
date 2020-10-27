@@ -7,7 +7,6 @@ import Register from "./comp/Register";
 import Search from "./comp/Search";
 import MyBeers from "./comp/MyBeers";
 import Home from "./comp/Home";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 const App = (props) => {
