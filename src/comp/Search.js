@@ -100,9 +100,10 @@ function Search(props) {
                             </thead>
                             <tbody>
                                 {randomBeerData &&
-                                    randomBeerData.map((beer) => (
-                                        <RandomBeer beerData={beer} />
-                                    ))}
+                                    randomBeerData.map((beer) => {
+                                        console.log(beer);
+                                        return <RandomBeer beerData={beer} />;
+                                    })}
                             </tbody>
                         </table>
                     </div>

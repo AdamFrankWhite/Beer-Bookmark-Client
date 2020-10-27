@@ -82,7 +82,8 @@ export const addBeer = (data) => (dispatch) => {
         beerName: beerData.beer_name,
         abv: beerData.beer_abv.toString(),
         beerDescription: beerData.beer_style,
-        brewery: brewery,
+        breweryName: brewery.brewery_name,
+        breweryContact: brewery.contact,
         stars: "1",
         date: new Date(),
         img: beerData.beer_label,
@@ -171,8 +172,10 @@ export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
 
             const randomBeers = [];
             for (let i = 0; randomBeers.length < 5; i++) {
-                let randomBeer =
-                    res.data.response.beers.items[randomNum()].beer;
+                let randomBeerData = res.data.response.beers.items[randomNum()];
+                let randomBeer = randomBeerData.beer;
+                randomBeer.breweryName = randomBeerData.brewery.brewery_name;
+                randomBeer.breweryContact = randomBeerData.brewery.contact;
                 if (
                     !JSON.stringify(randomBeers).includes(
                         JSON.stringify(randomBeer)

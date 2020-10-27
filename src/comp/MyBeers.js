@@ -18,43 +18,24 @@ const MyBeers = (props) => {
     const [orderAsc, setOrderAsc] = useState(false);
     const sortBeers = (searchType) => {
         let sortedBeers;
-        if (searchType === "beerName") {
-            if (orderAsc) {
-                sortedBeers = props.user.beers.sort((a, b) =>
-                    a[searchType] > b[searchType]
-                        ? 1
-                        : b[searchType] > a[searchType]
-                        ? -1
-                        : 0
-                );
-            } else {
-                sortedBeers = props.user.beers.sort((a, b) =>
-                    a[searchType] < b[searchType]
-                        ? 1
-                        : b[searchType] < a[searchType]
-                        ? -1
-                        : 0
-                );
-            }
-        } else if (searchType === "stars") {
-            if (orderAsc) {
-                sortedBeers = props.user.beers.sort((a, b) =>
-                    a[searchType] < b[searchType]
-                        ? 1
-                        : b[searchType] < a[searchType]
-                        ? -1
-                        : 0
-                );
-            } else {
-                sortedBeers = props.user.beers.sort((a, b) =>
-                    a[searchType] > b[searchType]
-                        ? 1
-                        : b[searchType] > a[searchType]
-                        ? -1
-                        : 0
-                );
-            }
+        if (orderAsc) {
+            sortedBeers = props.user.beers.sort((a, b) =>
+                a[searchType] > b[searchType]
+                    ? 1
+                    : b[searchType] > a[searchType]
+                    ? -1
+                    : 0
+            );
+        } else {
+            sortedBeers = props.user.beers.sort((a, b) =>
+                a[searchType] < b[searchType]
+                    ? 1
+                    : b[searchType] < a[searchType]
+                    ? -1
+                    : 0
+            );
         }
+
         setSortedBeers(
             sortedBeers.map((beer) => (
                 <BeerRow
@@ -92,6 +73,33 @@ const MyBeers = (props) => {
                         }}
                     >
                         Top Rated
+                    </span>
+                    <span
+                        className="sort-btn"
+                        onClick={() => {
+                            sortBeers("beerDescription");
+                            setOrderAsc(!orderAsc);
+                        }}
+                    >
+                        Type
+                    </span>
+                    <span
+                        className="sort-btn"
+                        onClick={() => {
+                            sortBeers("abv");
+                            setOrderAsc(!orderAsc);
+                        }}
+                    >
+                        ABV
+                    </span>
+                    <span
+                        className="sort-btn"
+                        onClick={() => {
+                            sortBeers("brewery");
+                            setOrderAsc(!orderAsc);
+                        }}
+                    >
+                        Brewery
                     </span>
                 </div>
 

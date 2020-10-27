@@ -29,13 +29,14 @@ function BeerRow(props) {
                 <h3>{props.beerData.beerName}</h3>
             </td>
             <td>
-                <a
+                {/* <a
                     href={
-                        props.brewery.contact.url && props.brewery.contact.url
+                        props.beerData.breweryContact.url &&
+                        props.beerData.breweryContact.url
                     }
                 >
-                    <h4>{props.brewery.brewery_name}</h4>
-                </a>
+                    <h4>{props.beerData.breweryName}</h4>
+                </a> */}
             </td>
             <td>
                 <h5>ABV: {props.beerData.abv}%</h5>

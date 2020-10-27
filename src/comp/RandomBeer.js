@@ -39,22 +39,20 @@ const RandomBeer = (props) => {
             <td>
                 <img src={props.beerData.beer_label} alt="beer logo"></img>
             </td>
-
             <td>
                 <h4>{props.beerData.beer_name}</h4>
             </td>
-
             {/* Brewery Name/Link */}
-            <td>Brewery</td>
-            {/* <a
-                    href={props.beerData.brewery.url}
+            <td>
+                <a
+                    href={props.beerData.breweryContact.url}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <h5>{props.beerBrewery.name}</h5>
-                </a> */}
-
-            {/* Beer ABV */}
+                    <h5>{props.beerData.breweryName}</h5>
+                </a>
+            </td>
+            {/* Beer ABV
             <td>
                 <h5>ABV: {props.beerData.beer_abv}%</h5>
             </td>
@@ -63,12 +61,10 @@ const RandomBeer = (props) => {
             <td>
                 <h6>{props.beerData.beer_style}</h6>
             </td>
-
             {/* Beer Description */}
             <td>
                 <p className="description">{props.beerData.beer_description}</p>
             </td>
-
             <td>
                 {" "}
                 {props.user.loggedIn && (
