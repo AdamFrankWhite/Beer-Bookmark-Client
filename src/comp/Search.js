@@ -9,7 +9,9 @@ import RandomBeer from "./RandomBeer";
 function Search(props) {
     const [searchTerm, setSearchTerm] = useState("");
     const center = { margin: "auto", height: 150, width: 200 };
-    const [randomBeerData, setRandomBeerData] = useState([]);
+    const [randomBeerData, setRandomBeerData] = useState(
+        props.user.randomBeers
+    );
     const [beerType, setBeerType] = useState(["ipa"]);
     // Beer Components
     const beers = props.user.searchResults
@@ -97,10 +99,9 @@ function Search(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {props.user.randombeers &&
-                                    props.user.randomBeers.map((beer) => (
-                                        <RandomBeer beerData={beer} />
-                                    ))}
+                                {randomBeerData.map((beer) => (
+                                    <RandomBeer beerData={beer} />
+                                ))}
                             </tbody>
                         </table>
                     </div>
