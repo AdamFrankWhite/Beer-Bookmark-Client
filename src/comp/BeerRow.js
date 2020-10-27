@@ -1,7 +1,7 @@
 import { set } from "mongoose";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addBeer, deleteBeer } from "../redux/actions/userActions";
+import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
 function BeerRow(props) {
     const checkBeerIncluded =
         props.search && JSON.stringify(props.user.beers).includes(props.id);
@@ -11,6 +11,7 @@ function BeerRow(props) {
         checkBeerIncluded ? "Saved" : "Add to favourites"
     );
     const [confirmDelete, toggleDelete] = useState(false);
+    const [rating, setRating] = useState("");
     const [editRating, setEditRating] = useState(false);
     // checks to see if favourite beers includes this beer, if so render saved
 
@@ -19,10 +20,14 @@ function BeerRow(props) {
     return (
         <tr className="beer">
             <td>
-                <img className="thumb" alt="beer" src={props.src}></img>
+                <img
+                    className="thumb"
+                    alt="beer"
+                    src={props.beerData.img}
+                ></img>
             </td>
             <td>
-                <h3>{props.name || props.beerData.beerName}</h3>
+                <h3>{props.beerData.beerName}</h3>
             </td>
             <td>
                 <a
@@ -34,11 +39,11 @@ function BeerRow(props) {
                 </a>
             </td>
             <td>
-                <h5>ABV: {props.abv || props.beerData.abv}%</h5>
+                <h5>ABV: {props.beerData.abv}%</h5>
             </td>
             <td>
                 <h5 className="description">
-                    {props.style || props.beerData.beerDescription}
+                    {props.beerData.beerDescription}
                 </h5>
             </td>
 
@@ -47,10 +52,24 @@ function BeerRow(props) {
                     <div className="set-rating">
                         <div className="set-rating-row-1">
                             <span>&#127866;</span>
-                            <input type="number" max="10" min="1" />
+                            <input
+                                type="number"
+                                max="10"
+                                min="1"
+                                onChange={(e) => {
+                                    setRating(e.target.value);
+                                }}
+                            />
                         </div>
                         <div>
-                            <span className="tick">&#9989;</span>
+                            <span
+                                onClick={() =>
+                                    props.rateBeer(props.beerData, rating)
+                                }
+                                className="tick"
+                            >
+                                &#9989;
+                            </span>
                             <span
                                 className="cross"
                                 onClick={() => setEditRating(false)}
@@ -192,5 +211,6 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = {
     deleteBeer,
     addBeer,
+    rateBeer,
 };
 export default connect(mapStateToProps, mapActionsToProps)(BeerRow);

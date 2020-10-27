@@ -109,6 +109,10 @@ export const deleteBeer = (data) => (dispatch) => {
         });
 };
 
+export const rateBeer = (beer, rating) => (dispatch) => {
+    console.log(beer, rating);
+};
+
 export const searchBeer = (searchTerm, searchType = "beer") => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     axios

@@ -39,16 +39,16 @@ class MyBeers extends React.Component {
                 // />
                 <BeerRow
                     myBeers={true}
-                    favouriteBeers={this.props.user.beers}
+                    // favouriteBeers={this.props.user.beers}
                     beerData={beer}
-                    src={beer.img}
-                    id={beer._id}
-                    name={beer.name}
-                    abv={beer.abv}
-                    description={beer.description}
-                    addBeer={this.props.addBeer}
-                    deleteBeer={this.props.deleteBeer}
-                    updateBeer={this.props.updateBeer}
+                    // src={beer.img}
+                    // id={beer._id}
+                    // name={beer.name}
+                    // abv={beer.abv}
+                    // description={beer.description}
+                    // addBeer={this.props.addBeer}
+                    // deleteBeer={this.props.deleteBeer}
+                    // updateBeer={this.props.updateBeer}
                     brewery={beer.brewery}
                 />
             ));
