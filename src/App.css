@@ -322,17 +322,6 @@ nav {
   margin: auto;
 }
 
-.thumb {
-  width: 5vw;
-  min-width: 75px;
-  height: auto;
-}
-@media (min-width: 1400px) {
-  .thumb {
-    width: 4vw;
-  }
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -359,18 +348,28 @@ table {
   border-left: black 2px solid;
   border-right: black 2px solid;
   min-width: 250px;
-  padding: 0.5em;
   width: 100%;
   font-size: 0.95em;
   overflow: hidden;
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: relative;
 }
 .beer * {
   margin: auto;
+}
+.beer .thumb {
+  width: 5vw;
+  min-width: 75px;
+  margin: 0;
+  height: auto;
+}
+@media (min-width: 1400px) {
+  .beer .thumb {
+    width: 4vw;
+  }
 }
 .beer h3 {
   font-size: 1.2em;

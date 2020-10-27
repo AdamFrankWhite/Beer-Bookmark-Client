@@ -347,15 +347,7 @@ nav {
     width: 90%;
     margin: auto;
 }
-.thumb {
-    width: 5vw;
-    min-width: 75px;
-    @media (min-width: 1400px) {
-        width: 4vw;
-    }
 
-    height: auto;
-}
 table {
     width: 100%;
 
@@ -384,7 +376,7 @@ table {
     border-right: black 2px solid;
     // border-radius: 5px;
     min-width: 250px;
-    padding: 0.5em;
+    // padding: 0.5em;
     width: 100%;
     font-size: 0.95em;
     // @media (min-width: 1400px) {
@@ -395,12 +387,21 @@ table {
     position: relative;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
     position: relative;
     * {
         margin: auto;
+    }
+    .thumb {
+        width: 5vw;
+        min-width: 75px;
+        @media (min-width: 1400px) {
+            width: 4vw;
+        }
+        margin: 0;
+        height: auto;
     }
     h3 {
         font-size: 1.2em;
