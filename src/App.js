@@ -74,11 +74,13 @@ class App extends React.Component {
     }
 
     renderRedirect() {
-        if (this.props.user.redirect === "login") {
-            return <Redirect to="/login" />;
-        } else if (this.props.user.redirect === "my-beers") {
-            return <Redirect to="/my-beers" />;
-        }
+        let redirect = this.props.user.redirect;
+        return <Redirect to={`/${redirect}`} />;
+        // if (this.props.user.redirect === "login") {
+        //     return <Redirect to="/login" />;
+        // } else if (this.props.user.redirect === "my-beers") {
+        //     return <Redirect to="/my-beers" />;
+        // }
     }
 
     // handleChange(e) {

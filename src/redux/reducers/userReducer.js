@@ -56,11 +56,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 randomBeers: action.payload,
+                redirect: "search",
             };
         case SET_SEARCH_RESULTS:
             return {
                 ...state,
                 searchResults: action.payload,
+                redirect: "search",
             };
         case LOGOUT: {
             return {
