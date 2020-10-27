@@ -365,6 +365,7 @@ table {
   margin: 10px;
   overflow: hidden;
   position: relative;
+  position: relative;
 }
 @media (max-width: 1000px) {
   .beer {
@@ -509,6 +510,12 @@ table {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+tr > .more-info {
+  position: absolute;
+  display: block;
+  width: 100%;
 }
 
 tr > td:nth-of-type(2),

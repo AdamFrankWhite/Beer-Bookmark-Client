@@ -16,98 +16,103 @@ function BeerRow(props) {
     //Selected Beer
     const [selectedBeer, setSelectedBeer] = useState(null);
 
+    const [showRow, toggleShowRow] = useState();
+
     return (
-        <tr className="beer">
-            <td>
-                <img
-                    className="thumb"
-                    alt="beer"
-                    src={props.beerData.img}
-                ></img>
-            </td>
-            <td>
-                <h3>{props.beerData.beerName}</h3>
-            </td>
-            <td>
-                <a
-                    href={
-                        props.beerData.breweryContact.url &&
-                        props.beerData.breweryContact.url
-                    }
-                >
-                    <h4>{props.beerData.breweryName}</h4>
-                </a>
-            </td>
-            <td>
-                <h5>ABV: {props.beerData.abv}%</h5>
-            </td>
-            <td>
-                <h5 className="description">
-                    {props.beerData.beerDescription}
-                </h5>
-            </td>
-
-            {props.myBeers && (
+        <>
+            <tr className="beer">
                 <td>
-                    {editRating ? (
-                        <div className="set-rating">
-                            <div className="set-rating-row-1">
-                                <span>&#127866;</span>
-                                <input
-                                    type="number"
-                                    max="10"
-                                    min="1"
-                                    onChange={(e) => {
-                                        setRating(+e.target.value);
-                                    }}
-                                />
-                            </div>
-                            <div>
-                                <span
-                                    onClick={() => {
-                                        props.rateBeer(
-                                            props.beerData,
-                                            props.user.userData.username,
-                                            rating
-                                        );
-                                        setEditRating(false);
-                                    }}
-                                    className="tick"
-                                >
-                                    &#9989;
-                                </span>
-                                <span
-                                    className="cross"
-                                    onClick={() => setEditRating(false)}
-                                >
-                                    &#10062;
-                                </span>
-                            </div>
-                        </div>
-                    ) : (
-                        <span
-                            className="buttons"
-                            onClick={() => {
-                                setSelectedBeer(props.beerData);
-                                setEditRating(true);
-                            }}
-                        >
-                            {props.user.loading &&
-                            selectedBeer == props.beerData ? (
-                                <ReactLoading
-                                    style={center}
-                                    type="spin"
-                                    color="black"
-                                />
-                            ) : (
-                                <span>&#127866; {props.beerData.stars}</span>
-                            )}
-                        </span>
-                    )}
+                    <img
+                        className="thumb"
+                        alt="beer"
+                        src={props.beerData.img}
+                    ></img>
                 </td>
-            )}
+                <td>
+                    <h3>{props.beerData.beerName}</h3>
+                </td>
+                <td>
+                    <a
+                        href={
+                            props.beerData.breweryContact.url &&
+                            props.beerData.breweryContact.url
+                        }
+                    >
+                        <h4>{props.beerData.breweryName}</h4>
+                    </a>
+                </td>
+                <td>
+                    <h5>ABV: {props.beerData.abv}%</h5>
+                </td>
+                <td>
+                    <h5 className="description">
+                        {props.beerData.beerDescription}
+                    </h5>
+                </td>
 
-            {/* {props.myBeers && (
+                {props.myBeers && (
+                    <td>
+                        {editRating ? (
+                            <div className="set-rating">
+                                <div className="set-rating-row-1">
+                                    <span>&#127866;</span>
+                                    <input
+                                        type="number"
+                                        max="10"
+                                        min="1"
+                                        onChange={(e) => {
+                                            setRating(+e.target.value);
+                                        }}
+                                    />
+                                </div>
+                                <div>
+                                    <span
+                                        onClick={() => {
+                                            props.rateBeer(
+                                                props.beerData,
+                                                props.user.userData.username,
+                                                rating
+                                            );
+                                            setEditRating(false);
+                                        }}
+                                        className="tick"
+                                    >
+                                        &#9989;
+                                    </span>
+                                    <span
+                                        className="cross"
+                                        onClick={() => setEditRating(false)}
+                                    >
+                                        &#10062;
+                                    </span>
+                                </div>
+                            </div>
+                        ) : (
+                            <span
+                                className="buttons"
+                                onClick={() => {
+                                    setSelectedBeer(props.beerData);
+                                    setEditRating(true);
+                                }}
+                            >
+                                {props.user.loading &&
+                                selectedBeer == props.beerData ? (
+                                    <ReactLoading
+                                        style={center}
+                                        type="spin"
+                                        color="black"
+                                    />
+                                ) : (
+                                    <span>
+                                        &#127866; {props.beerData.stars}
+                                    </span>
+                                )}
+                            </span>
+                        )}
+                    </td>
+                )}
+
+                {/* {props.myBeers && (
                     <span className="ratings">
                         Rate:
                         <span
@@ -148,8 +153,8 @@ function BeerRow(props) {
                     </span>
                 )} */}
 
-            {/* //TODO - add buy button and affiliate <a target="_blank" href={`https://www.beerhawk.co.uk/search/?q=${props.beerData.beerName||props.name}+${props.brewery}`}><span>Buy</span></a> */}
-            {/* {props.myBeers && (
+                {/* //TODO - add buy button and affiliate <a target="_blank" href={`https://www.beerhawk.co.uk/search/?q=${props.beerData.beerName||props.name}+${props.brewery}`}><span>Buy</span></a> */}
+                {/* {props.myBeers && (
                     <span
                         onClick={setState({ confirmDelete: true })}
                         className="delete-beer"
@@ -157,67 +162,72 @@ function BeerRow(props) {
                         Delete
                     </span>
                 )} */}
-            <td>
-                {props.myBeers && confirmDelete && (
-                    <div className="delete-confirm">
-                        <span>Are you sure?</span>
-                        <div>
-                            <span
-                                onClick={() => {
-                                    props.deleteBeer({
+                <td>
+                    {props.myBeers && confirmDelete && (
+                        <div className="delete-confirm">
+                            <span>Are you sure?</span>
+                            <div>
+                                <span
+                                    onClick={() => {
+                                        props.deleteBeer({
+                                            username:
+                                                props.user.userData.username,
+                                            beerData: props.beerData,
+                                        });
+                                        toggleDelete(false);
+                                    }}
+                                    className="delete-beer"
+                                >
+                                    Yes
+                                </span>
+                                <span
+                                    onClick={() => {
+                                        toggleDelete(false);
+                                    }}
+                                    className="delete-beer"
+                                >
+                                    No
+                                </span>
+                            </div>
+                        </div>
+                    )}
+                    {props.myBeers && !confirmDelete && (
+                        <span
+                            onClick={() => toggleDelete(true)}
+                            className="delete-beer"
+                        >
+                            Remove
+                        </span>
+                    )}
+                </td>
+                {/* Bookmark Cell */}
+                {props.search && (
+                    <td>
+                        <span
+                            onClick={() => {
+                                //only add to favourites if not already included
+                                setClickText("Saved");
+                                !checkBeerIncluded &&
+                                    props.user.loggedIn &&
+                                    props.addBeer({
                                         username: props.user.userData.username,
+                                        brewery: props.brewery,
                                         beerData: props.beerData,
                                     });
-                                    toggleDelete(false);
-                                }}
-                                className="delete-beer"
-                            >
-                                Yes
-                            </span>
-                            <span
-                                onClick={() => {
-                                    toggleDelete(false);
-                                }}
-                                className="delete-beer"
-                            >
-                                No
-                            </span>
-                        </div>
-                    </div>
+                            }}
+                            className={clickTextStyle + " buttons"}
+                        >
+                            {props.user.loggedIn && clickText}
+                        </span>
+                    </td>
                 )}
-                {props.myBeers && !confirmDelete && (
-                    <span
-                        onClick={() => toggleDelete(true)}
-                        className="delete-beer"
-                    >
-                        Remove
-                    </span>
-                )}
-            </td>
-            {/* Bookmark Cell */}
-            {props.search && (
-                <td>
-                    <span
-                        onClick={() => {
-                            //only add to favourites if not already included
-                            setClickText("Saved");
-                            !checkBeerIncluded &&
-                                props.user.loggedIn &&
-                                props.addBeer({
-                                    username: props.user.userData.username,
-                                    brewery: props.brewery,
-                                    beerData: props.beerData,
-                                });
-                        }}
-                        className={clickTextStyle + " buttons"}
-                    >
-                        {props.user.loggedIn && clickText}
-                    </span>
-                </td>
+                <td onClick={() => toggleShowRow(!showRow)}>more info</td>
+                {/* {!props.myBeers && <p>Details</p>} // TODO - add modal window with beer details */}
+            </tr>
+            {showRow && (
+                <div className="more-info">{props.beerData.beerInfo}</div>
             )}
-
-            {/* {!props.myBeers && <p>Details</p>} // TODO - add modal window with beer details */}
-        </tr>
+        </>
     );
 }
 

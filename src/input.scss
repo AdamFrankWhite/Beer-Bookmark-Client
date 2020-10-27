@@ -391,6 +391,7 @@ table {
     // }
     margin: 10px;
     overflow: hidden;
+    position: relative;
     @media (max-width: 1000px) {
         display: flex;
         flex-direction: column;
@@ -553,7 +554,12 @@ table {
     justify-content: center;
     align-items: center;
 }
-
+tr > .more-info {
+    // width: 100%;
+    position: absolute;
+    display: block;
+    width: 100%;
+}
 tr > td:nth-of-type(2),
 tr > td:nth-of-type(3) {
     width: 20%;

@@ -87,6 +87,7 @@ export const addBeer = (data) => (dispatch) => {
         stars: "1",
         date: new Date(),
         img: beerData.beer_label,
+        beerInfo: beerData.beer_description,
     };
     console.log(postData);
     axios
@@ -149,6 +150,7 @@ export const searchBeer = (searchTerm, searchType = "beer") => (dispatch) => {
                     breweryName: item.brewery.brewery_name,
                     breweryContact: item.brewery.contact,
                     img: item.beer.beer_label,
+                    beerInfo: item.beer.beer_description,
                 };
             });
 
@@ -194,6 +196,7 @@ export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
                     breweryName: randomBeerData.brewery.brewery_name,
                     breweryContact: randomBeerData.brewery.contact,
                     img: randomBeerData.beer.beer_label,
+                    beerInfo: randomBeerData.beer.beer_description,
                 };
 
                 if (
