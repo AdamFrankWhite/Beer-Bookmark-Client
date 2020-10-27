@@ -1,5 +1,8 @@
 /* == Root Styles == */
 
+html {
+    overflow: overlay;
+}
 #root,
 .App {
     text-align: center;
@@ -24,6 +27,7 @@
     /* Rules below not implemented in browsers yet */
     -o-user-select: none;
     user-select: none;
+    overflow-x: overlay;
 }
 
 * {
