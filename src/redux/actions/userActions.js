@@ -186,15 +186,22 @@ export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
             const randomBeers = [];
             for (let i = 0; randomBeers.length < 5; i++) {
                 let randomBeerData = res.data.response.beers.items[randomNum()];
-                let randomBeer = randomBeerData.beer;
-                randomBeer.breweryName = randomBeerData.brewery.brewery_name;
-                randomBeer.breweryContact = randomBeerData.brewery.contact;
+                const cleanBeer = {
+                    id: randomBeerData.bid,
+                    beerName: randomBeerData.beer.beer_name,
+                    abv: randomBeerData.beer.beer_abv.toString(),
+                    beerDescription: randomBeerData.beer.beer_style,
+                    breweryName: randomBeerData.brewery.brewery_name,
+                    breweryContact: randomBeerData.brewery.contact,
+                    img: randomBeerData.beer.beer_label,
+                };
+
                 if (
                     !JSON.stringify(randomBeers).includes(
-                        JSON.stringify(randomBeer)
+                        JSON.stringify(cleanBeer.id)
                     )
                 ) {
-                    randomBeers.push(randomBeer);
+                    randomBeers.push(cleanBeer);
                 }
             }
             dispatch({ type: SET_LOADING, payload: false });

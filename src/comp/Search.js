@@ -22,7 +22,8 @@ function Search(props) {
         : [];
     useEffect(() => {
         // https://api.untappd.com/v4/search/beer/?q=${beerType}
-
+        console.log(randomBeerData);
+        console.log(props.user.searchResults);
         props.getRandomBeers();
     }, []);
 
@@ -88,7 +89,12 @@ function Search(props) {
                             <tbody>
                                 {randomBeerData &&
                                     randomBeerData.map((beer) => {
-                                        return <RandomBeer beerData={beer} />;
+                                        return (
+                                            <BeerRow
+                                                search={true}
+                                                beerData={beer}
+                                            />
+                                        );
                                     })}
                             </tbody>
                         </table>
