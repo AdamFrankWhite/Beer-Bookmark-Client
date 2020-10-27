@@ -34,7 +34,6 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
@@ -365,15 +364,10 @@ table {
   margin: 10px;
   overflow: hidden;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-}
-@media (max-width: 1000px) {
-  .beer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 }
 .beer * {
   margin: auto;

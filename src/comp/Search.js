@@ -75,48 +75,15 @@ function Search(props) {
                     {/* Random Beers Container */}
 
                     <div className="beer-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {randomBeerData &&
-                                    randomBeerData.map((beer) => {
-                                        return (
-                                            <BeerRow
-                                                search={true}
-                                                beerData={beer}
-                                            />
-                                        );
-                                    })}
-                            </tbody>
-                        </table>
+                        {randomBeerData &&
+                            randomBeerData.map((beer) => {
+                                return (
+                                    <BeerRow search={true} beerData={beer} />
+                                );
+                            })}
                     </div>
                     {/* Beer Container */}
-                    <div className="beer-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>{beers}</tbody>
-                        </table>
-                    </div>
+                    <div className="beer-container">{beers}</div>
                 </div>
             )}
         </div>
