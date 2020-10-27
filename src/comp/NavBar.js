@@ -6,9 +6,9 @@ function NavBar(props) {
     return (
         <header>
             <nav className="navbar">
-                <a className="nav-title" href="/">
+                <Link to="/" className="nav-title">
                     BeerMe
-                </a>
+                </Link>
                 <div>
                     {props.user.loggedIn ? (
                         <Link to="/my-beers" className="link">
