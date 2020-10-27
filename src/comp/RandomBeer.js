@@ -19,7 +19,6 @@ const RandomBeer = (props) => {
         "session",
         "fruit",
     ];
-    console.log(props.beerData);
 
     return (
         // <div>
@@ -52,7 +51,7 @@ const RandomBeer = (props) => {
                     <h5>{props.beerData.breweryName}</h5>
                 </a>
             </td>
-            {/* Beer ABV
+            {/* Beer ABV */}
             <td>
                 <h5>ABV: {props.beerData.beer_abv}%</h5>
             </td>

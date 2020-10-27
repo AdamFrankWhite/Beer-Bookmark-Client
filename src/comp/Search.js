@@ -14,23 +14,10 @@ function Search(props) {
     );
     const [beerType, setBeerType] = useState(["ipa"]);
     // Beer Components
+
     const beers = props.user.searchResults
         ? props.user.searchResults.map((item) => {
-              return (
-                  <BeerRow
-                      search={true}
-                      src={item.beer.beer_label}
-                      id={item.beer.bid}
-                      name={item.beer.beer_name}
-                      abv={item.beer.beer_abv}
-                      style={item.beer.beer_style}
-                      description={item.beer.beer_description}
-                      beerData={item.beer}
-                      // favouriteBeers={this.props.favouriteBeers}
-                      // addBeer={this.props.addBeer}
-                      brewery={item.brewery}
-                  />
-              );
+              return <BeerRow search={true} beerData={item} />;
           })
         : [];
     useEffect(() => {
@@ -101,7 +88,6 @@ function Search(props) {
                             <tbody>
                                 {randomBeerData &&
                                     randomBeerData.map((beer) => {
-                                        console.log(beer);
                                         return <RandomBeer beerData={beer} />;
                                     })}
                             </tbody>

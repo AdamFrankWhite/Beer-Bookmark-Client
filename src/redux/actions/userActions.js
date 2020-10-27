@@ -139,10 +139,23 @@ export const searchBeer = (searchTerm, searchType = "beer") => (dispatch) => {
             }
         )
         .then((response) => {
+            const cleanData = response.data.response.beers.items.map((item) => {
+                console.log(item);
+                return {
+                    id: item.beer.bid,
+                    beerName: item.beer.beer_name,
+                    abv: item.beer.beer_abv.toString(),
+                    beerDescription: item.beer.beer_style,
+                    breweryName: item.brewery.brewery_name,
+                    breweryContact: item.brewery.contact,
+                    img: item.beer.beer_label,
+                };
+            });
+
             dispatch({ type: SET_LOADING, payload: false });
             dispatch({
                 type: SET_SEARCH_RESULTS,
-                payload: response.data.response.beers.items,
+                payload: cleanData,
             });
             // searchType === "beer" &&
             //     this.setState({
