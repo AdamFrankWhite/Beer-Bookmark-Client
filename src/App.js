@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Redirect } from "react-router-dom";
 import NavBar from "./comp/NavBar";
 import Login from "./comp/Login";
 import Register from "./comp/Register";
@@ -60,16 +59,6 @@ class App extends React.Component {
 
     // Update Beer Rating
 
-    renderRedirect() {
-        let redirect = this.props.user.redirect;
-        return <Redirect to={`/${redirect}`} />;
-        // if (this.props.user.redirect === "login") {
-        //     return <Redirect to="/login" />;
-        // } else if (this.props.user.redirect === "my-beers") {
-        //     return <Redirect to="/my-beers" />;
-        // }
-    }
-
     // handleChange(e) {
     //     // Update form fields and validation
     //     let changeType = e.target.name;
@@ -122,14 +111,10 @@ class App extends React.Component {
         console.log(sortedBeers);
     }
 
-    // changeTab(selectedTab) {
-    //     this.setState({ searchType: selectedTab });
-    // }
     render() {
         return (
             <Router>
-                <NavBar loggedIn={this.state.loggedIn} logout={this.logout} />
-                {this.renderRedirect()}
+                <NavBar loggedIn={this.props.loggedIn} logout={this.logout} />
                 <div className="tab-frame">
                     <Route path="/" exact component={Home} />
                     {/* Register Router */}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import ReactLoading from "react-loading";
 import { login } from "../redux/actions/userActions";
-
+import { Redirect } from "react-router-dom";
 function Login(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -91,6 +91,7 @@ function Login(props) {
                 {props.showError && (
                     <p className="loginError">{props.errorMessage}</p>
                 )}
+                {props.user.loggedIn && <Redirect to="/my-beers" />}
             </div>
         );
     } else {

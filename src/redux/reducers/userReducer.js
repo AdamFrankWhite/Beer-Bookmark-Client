@@ -17,7 +17,6 @@ import {
 const initialState = {
     beers: [],
     loading: false,
-    redirect: "",
     searchResults: [],
     randomBeers: [],
     //
@@ -39,7 +38,6 @@ export default function (state = initialState, action) {
                 ...state,
                 beers: action.payload.beers,
                 userData: action.payload,
-                redirect: "my-beers",
                 loggedIn: true,
             };
         case GET_BEERS:
@@ -56,13 +54,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 randomBeers: action.payload,
-                // redirect: "search",
             };
         case SET_SEARCH_RESULTS:
             return {
                 ...state,
                 searchResults: action.payload,
-                // redirect: "search",
             };
         case LOGOUT: {
             return {
