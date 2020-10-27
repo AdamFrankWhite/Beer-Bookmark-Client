@@ -321,10 +321,11 @@ nav {
   width: 90%;
   margin: auto;
 }
-
-table {
-  width: 100%;
-  border-collapse: collapse;
+.my-beers-cont .beer:last-of-type {
+  border-top: 2px solid black;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
 }
 
 .randomBeer {
@@ -347,14 +348,16 @@ table {
   border-top: black 2px solid;
   border-left: black 2px solid;
   border-right: black 2px solid;
+  background-color: white;
   min-width: 250px;
   width: 100%;
   font-size: 0.95em;
   overflow: hidden;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  z-index: 1000;
 }
 .beer * {
   margin: auto;
@@ -419,6 +422,9 @@ table {
 }
 
 .more-info-cont {
+  width: 100%;
+  padding: 1em;
+  text-align: center;
   overflow: hidden;
   border-left: black 2px solid;
   border-right: black 2px solid;

@@ -354,12 +354,12 @@ nav {
 .my-beers-cont {
     width: 90%;
     margin: auto;
-}
-
-table {
-    width: 100%;
-
-    border-collapse: collapse;
+    .beer:last-of-type {
+        border-top: 2px solid black;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+    }
 }
 
 .randomBeer {
@@ -382,7 +382,7 @@ table {
     border-top: black 2px solid;
     border-left: black 2px solid;
     border-right: black 2px solid;
-    // border-radius: 5px;
+    background-color: white;
     min-width: 250px;
     // padding: 0.5em;
     width: 100%;
@@ -392,13 +392,14 @@ table {
     // }
 
     overflow: hidden;
-    // position: relative;
+    position: relative;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    position: relative;
+    z-index: 1000;
+
     * {
         margin: auto;
     }
@@ -465,6 +466,9 @@ table {
     }
 }
 .more-info-cont {
+    width: 100%;
+    padding: 1em;
+    text-align: center;
     // visibility: hidden;
     overflow: hidden;
     // opacity: 0;
@@ -472,6 +476,10 @@ table {
     border-right: black 2px solid;
     // animation: slide-down 5s forwards;
 }
+
+// .show {
+//     visibility: visible;
+// }
 .slide-down {
     animation: slide-down 1s forwards;
 }

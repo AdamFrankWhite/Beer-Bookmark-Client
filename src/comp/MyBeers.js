@@ -114,6 +114,8 @@ const MyBeers = (props) => {
                 )}
                 <div className="my-beers-cont">
                     {sortedBeers}
+                    {/* Empty div for slideAnimation of last beer */}
+                    <div className="beer" style={{ height: "200px" }}></div>
 
                     {/* </FlipMove> */}
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
@@ -19,9 +19,14 @@ function BeerRow(props) {
 
     const [showRow, toggleShowRow] = useState();
 
-    const hiddenDiv = useRef();
-    const hiddenDivHeight = hiddenDiv.clientHeight;
-    console.log(hiddenDivHeight);
+    const targetRef = useRef();
+    const [height, setHeight] = useState(0);
+
+    useLayoutEffect(() => {
+        if (targetRef.current) {
+            setHeight(targetRef.current.clientHeight);
+        }
+    }, []);
     return (
         <>
             <div className="beer">
@@ -178,7 +183,7 @@ function BeerRow(props) {
                 <span
                     className="more-info"
                     onClick={() => {
-                        console.log(hiddenDivHeight);
+                        console.log(height);
 
                         toggleShowRow(!showRow);
                     }}
@@ -188,16 +193,19 @@ function BeerRow(props) {
             </div>
 
             <div
-                ref={hiddenDiv}
+                ref={targetRef}
                 className="more-info-cont"
                 style={
                     showRow
                         ? {
-                              height: "100px",
-                              visibility: "visible",
+                              height: `calc(${height} + 2em)`,
                               transition: "all 1s",
                           }
-                        : { height: 0, transition: "all 1s" }
+                        : {
+                              transition: "margin-bottom 1s",
+
+                              marginBottom: -height,
+                          }
                 }
             >
                 {props.beerData.beerInfo}
