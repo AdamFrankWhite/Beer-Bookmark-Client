@@ -110,6 +110,7 @@ export const deleteBeer = (data) => (dispatch) => {
 };
 
 export const rateBeer = (beerData, username, rating) => (dispatch) => {
+    console.log(typeof rating);
     dispatch({ type: SET_LOADING, payload: true });
     let updateData = {
         beerData,

@@ -56,7 +56,7 @@ function BeerRow(props) {
                                     max="10"
                                     min="1"
                                     onChange={(e) => {
-                                        setRating(e.target.value);
+                                        setRating(+e.target.value);
                                     }}
                                 />
                             </div>
