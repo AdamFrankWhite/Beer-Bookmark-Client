@@ -20,7 +20,7 @@ const App = (props) => {
                 <Route path="/register" component={Register} />
 
                 {/* Login Router */}
-                <Route path="/login" comonent={Login} />
+                <Route path="/login" component={Login} />
 
                 {/* My Beers Router */}
                 {props.user.loggedIn && (
