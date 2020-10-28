@@ -556,8 +556,12 @@ nav {
 }
 .settings-cont .settings-nav {
   width: 20%;
-  background: #006a8d;
+  height: 90vh;
+  background: #363636;
   color: white;
+  position: absolute;
+  animation: panel-slide 0.5s forwards;
+  left: 100vw;
 }
 .settings-cont .settings-nav h1 {
   font-size: 1.5em;
@@ -572,6 +576,14 @@ nav {
   background: white;
 }
 
+@keyframes panel-slide {
+  0% {
+    left: 100vw;
+  }
+  100% {
+    left: 80%;
+  }
+}
 /* == Mobile/Tab == */
 @media (max-width: 767px) {
   /* Fix bootstrap issue */
