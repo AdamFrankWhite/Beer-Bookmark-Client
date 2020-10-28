@@ -85,7 +85,8 @@ function BeerRow(props) {
                                             props.rateBeer(
                                                 props.beerData,
                                                 props.user.userData.username,
-                                                rating
+                                                rating,
+                                                props.user.sortType
                                             );
                                             setEditRating(false);
                                         }}

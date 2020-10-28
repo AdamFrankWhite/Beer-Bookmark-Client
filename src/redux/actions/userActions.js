@@ -6,6 +6,7 @@ import {
     SET_SEARCH_RESULTS,
     LOGOUT,
     SORT_MY_BEERS,
+    SET_SORT_TYPE,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -113,8 +114,10 @@ export const deleteBeer = (data) => (dispatch) => {
         });
 };
 
-export const rateBeer = (beerData, username, rating) => (dispatch) => {
-    console.log(typeof rating);
+export const rateBeer = (beerData, username, rating, sortType) => (
+    dispatch
+) => {
+    console.log(sortType);
     dispatch({ type: SET_LOADING, payload: true });
     let updateData = {
         beerData,
@@ -124,7 +127,13 @@ export const rateBeer = (beerData, username, rating) => (dispatch) => {
     axios
         .put(`http://localhost:5000/users/my-beers/update`, updateData)
         .then((res) => {
-            dispatch({ type: GET_BEERS, payload: res.data });
+            const sortedBeers = sortBeersFunc(
+                res.data,
+                sortType.searchType,
+                sortType.orderAsc
+            );
+            dispatch({ type: GET_BEERS, payload: sortedBeers });
+            dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
             dispatch({ type: SET_LOADING, payload: false });
         });
 };
@@ -233,7 +242,35 @@ export const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
                 : 0
         );
     }
+    dispatch({ type: SET_SORT_TYPE, payload: { searchType, orderAsc } });
     dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
+    // setSortedBeers(
+    //     sortedBeers.map((beer) => (
+    //         <BeerRow myBeers={true} beerData={beer} brewery={beer.brewery} />
+    //     ))
+    // );
+};
+
+const sortBeersFunc = (beers, searchType, orderAsc) => {
+    let sortedBeers;
+    if (orderAsc) {
+        sortedBeers = beers.sort((a, b) =>
+            a[searchType] > b[searchType]
+                ? 1
+                : b[searchType] > a[searchType]
+                ? -1
+                : 0
+        );
+    } else {
+        sortedBeers = beers.sort((a, b) =>
+            a[searchType] < b[searchType]
+                ? 1
+                : b[searchType] < a[searchType]
+                ? -1
+                : 0
+        );
+    }
+    return sortedBeers;
     // setSortedBeers(
     //     sortedBeers.map((beer) => (
     //         <BeerRow myBeers={true} beerData={beer} brewery={beer.brewery} />
