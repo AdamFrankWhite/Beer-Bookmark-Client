@@ -37,6 +37,16 @@ const MyBeers = (props) => {
                         }}
                     >
                         Name
+                        {props.user.sortType &&
+                            props.user.sortType.searchType == "beerName" &&
+                            props.user.sortType.orderAsc && (
+                                <span>&#9650;</span>
+                            )}
+                        {props.user.sortType &&
+                            props.user.sortType.searchType == "beerName" &&
+                            !props.user.sortType.orderAsc && (
+                                <span>&#9660;</span>
+                            )}
                     </span>
                     <span
                         className="sort-btn"
@@ -50,6 +60,16 @@ const MyBeers = (props) => {
                         }}
                     >
                         Top Rated
+                        {props.user.sortType &&
+                            props.user.sortType.searchType == "stars" &&
+                            props.user.sortType.orderAsc && (
+                                <span>&#9650;</span>
+                            )}
+                        {props.user.sortType &&
+                            props.user.sortType.searchType == "stars" &&
+                            !props.user.sortType.orderAsc && (
+                                <span>&#9660;</span>
+                            )}
                     </span>
                     <span
                         className="sort-btn"
@@ -63,6 +83,18 @@ const MyBeers = (props) => {
                         }}
                     >
                         Type
+                        {props.user.sortType &&
+                            props.user.sortType.searchType ==
+                                "beerDescription" &&
+                            props.user.sortType.orderAsc && (
+                                <span>&#9650;</span>
+                            )}
+                        {props.user.sortType &&
+                            props.user.sortType.searchType ==
+                                "beerDescription" &&
+                            !props.user.sortType.orderAsc && (
+                                <span>&#9660;</span>
+                            )}
                     </span>
                     <span
                         className="sort-btn"
@@ -72,6 +104,16 @@ const MyBeers = (props) => {
                         }}
                     >
                         ABV
+                        {props.user.sortType &&
+                            props.user.sortType.searchType == "abv" &&
+                            props.user.sortType.orderAsc && (
+                                <span>&#9650;</span>
+                            )}
+                        {props.user.sortType &&
+                            props.user.sortType.searchType == "abv" &&
+                            !props.user.sortType.orderAsc && (
+                                <span>&#9660;</span>
+                            )}
                     </span>
                     <span
                         className="sort-btn"
