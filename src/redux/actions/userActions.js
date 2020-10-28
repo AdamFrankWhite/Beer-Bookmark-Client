@@ -5,6 +5,7 @@ import {
     SET_RANDOM_BEERS,
     SET_SEARCH_RESULTS,
     LOGOUT,
+    SORT_MY_BEERS,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -211,4 +212,31 @@ export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
             dispatch({ type: SET_LOADING, payload: false });
             dispatch({ type: SET_RANDOM_BEERS, payload: randomBeers });
         });
+};
+
+export const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
+    let sortedBeers;
+    if (orderAsc) {
+        sortedBeers = beers.sort((a, b) =>
+            a[searchType] > b[searchType]
+                ? 1
+                : b[searchType] > a[searchType]
+                ? -1
+                : 0
+        );
+    } else {
+        sortedBeers = beers.sort((a, b) =>
+            a[searchType] < b[searchType]
+                ? 1
+                : b[searchType] < a[searchType]
+                ? -1
+                : 0
+        );
+    }
+    dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
+    // setSortedBeers(
+    //     sortedBeers.map((beer) => (
+    //         <BeerRow myBeers={true} beerData={beer} brewery={beer.brewery} />
+    //     ))
+    // );
 };

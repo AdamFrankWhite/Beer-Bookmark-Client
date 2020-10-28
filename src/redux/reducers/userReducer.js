@@ -5,6 +5,7 @@ import {
     SET_RANDOM_BEERS,
     SET_SEARCH_RESULTS,
     LOGOUT,
+    SORT_MY_BEERS,
     //
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
@@ -19,6 +20,7 @@ const initialState = {
     loading: false,
     searchResults: [],
     randomBeers: [],
+    sortedBeers: [],
     //
     authenticated: false,
     token: "",
@@ -45,6 +47,12 @@ export default function (state = initialState, action) {
                 ...state,
                 beers: action.payload,
             };
+        case SORT_MY_BEERS: {
+            return {
+                ...state,
+                sortedBeers: action.payload,
+            };
+        }
         case SET_LOADING:
             return {
                 ...state,

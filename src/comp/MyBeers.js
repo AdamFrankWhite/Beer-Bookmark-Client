@@ -4,48 +4,17 @@ import ReactLoading from "react-loading";
 import FlipMove from "react-flip-move";
 import { connect } from "react-redux";
 import userReducer from "../redux/reducers/userReducer";
+import { sortBeers } from "../redux/actions/userActions";
 const MyBeers = (props) => {
     const center = { margin: "auto" };
 
-    const beers = props.user.beers.map((beer) => (
-        <BeerRow myBeers={true} beerData={beer} brewery={beer.brewery} />
-    ));
-    const [sortedBeers, setSortedBeers] = useState(beers);
+    // const [sortedBeers, setSortedBeers] = useState(beers);
+    // //Populate array on component mount
     useEffect(() => {
-        setSortedBeers(beers);
+        props.sortBeers(props.user.beers);
     }, [props.user.beers]);
     //Set order asc/desc
     const [orderAsc, setOrderAsc] = useState(false);
-    const sortBeers = (searchType) => {
-        let sortedBeers;
-        if (orderAsc) {
-            sortedBeers = props.user.beers.sort((a, b) =>
-                a[searchType] > b[searchType]
-                    ? 1
-                    : b[searchType] > a[searchType]
-                    ? -1
-                    : 0
-            );
-        } else {
-            sortedBeers = props.user.beers.sort((a, b) =>
-                a[searchType] < b[searchType]
-                    ? 1
-                    : b[searchType] < a[searchType]
-                    ? -1
-                    : 0
-            );
-        }
-
-        setSortedBeers(
-            sortedBeers.map((beer) => (
-                <BeerRow
-                    myBeers={true}
-                    beerData={beer}
-                    brewery={beer.brewery}
-                />
-            ))
-        );
-    };
 
     return (
         <div className="App">
@@ -59,7 +28,11 @@ const MyBeers = (props) => {
                     <span
                         className="sort-btn"
                         onClick={() => {
-                            sortBeers("beerName");
+                            props.sortBeers(
+                                props.user.beers,
+                                "beerName",
+                                orderAsc
+                            );
                             setOrderAsc(!orderAsc);
                         }}
                     >
@@ -68,7 +41,11 @@ const MyBeers = (props) => {
                     <span
                         className="sort-btn"
                         onClick={() => {
-                            sortBeers("stars");
+                            props.sortBeers(
+                                props.user.beers,
+                                "stars",
+                                orderAsc
+                            );
                             setOrderAsc(!orderAsc);
                         }}
                     >
@@ -77,7 +54,11 @@ const MyBeers = (props) => {
                     <span
                         className="sort-btn"
                         onClick={() => {
-                            sortBeers("beerDescription");
+                            props.sortBeers(
+                                props.user.beers,
+                                "beerDescription",
+                                orderAsc
+                            );
                             setOrderAsc(!orderAsc);
                         }}
                     >
@@ -86,7 +67,7 @@ const MyBeers = (props) => {
                     <span
                         className="sort-btn"
                         onClick={() => {
-                            sortBeers("abv");
+                            props.sortBeers(props.user.beers, "abv", orderAsc);
                             setOrderAsc(!orderAsc);
                         }}
                     >
@@ -95,7 +76,11 @@ const MyBeers = (props) => {
                     <span
                         className="sort-btn"
                         onClick={() => {
-                            sortBeers("brewery");
+                            props.sortBeers(
+                                props.user.beers,
+                                "brewery",
+                                orderAsc
+                            );
                             setOrderAsc(!orderAsc);
                         }}
                     >
@@ -113,7 +98,13 @@ const MyBeers = (props) => {
                     />
                 )}
                 <div className="my-beers-cont">
-                    {sortedBeers}
+                    {props.user.sortedBeers.map((beer) => (
+                        <BeerRow
+                            myBeers={true}
+                            beerData={beer}
+                            brewery={beer.brewery}
+                        />
+                    ))}
                     {/* Empty div for slideAnimation of last beer */}
                     <div className="beer" style={{ height: "200px" }}></div>
 
@@ -134,5 +125,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapActionsToProps = {};
+const mapActionsToProps = {
+    sortBeers,
+};
 export default connect(mapStateToProps, mapActionsToProps)(MyBeers);
