@@ -177,6 +177,8 @@ export const searchBeer = (searchTerm, searchType = "beer") => (dispatch) => {
             });
 
             dispatch({ type: SET_LOADING, payload: false });
+            //reset ordering
+            dispatch({ type: SET_SEARCH_SORT_TYPE, payload: {} });
             dispatch({
                 type: SET_SEARCH_RESULTS,
                 payload: cleanData,

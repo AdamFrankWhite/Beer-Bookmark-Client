@@ -12,7 +12,7 @@ import {
 import RandomBeer from "./RandomBeer";
 function Search(props) {
     const [searchTerm, setSearchTerm] = useState("");
-    const [orderAsc, setOrderAsc] = useState(false);
+    const [orderAsc, setOrderAsc] = useState(true);
     const center = { margin: "auto", height: 150, width: 200 };
     const [randomBeerData, setRandomBeerData] = useState(
         props.user.randomBeers
@@ -116,12 +116,15 @@ function Search(props) {
                                 Name
                                 {props.user.searchSortType &&
                                     props.user.searchSortType.searchType ==
-                                        "beerName" && <span>&#9650;</span>}
+                                        "beerName" &&
+                                    props.user.searchSortType.orderAsc && (
+                                        <span>&#9660;</span>
+                                    )}
                                 {props.user.searchSortType &&
                                     props.user.searchSortType.searchType ==
                                         "beerName" &&
                                     !props.user.searchSortType.orderAsc && (
-                                        <span>&#9660;</span>
+                                        <span>&#9650;</span>
                                     )}
                             </span>
 
@@ -139,14 +142,15 @@ function Search(props) {
                                 Type
                                 {props.user.searchSortType &&
                                     props.user.searchSortType.searchType ==
-                                        "beerDescription" && (
-                                        <span>&#9650;</span>
+                                        "beerDescription" &&
+                                    props.user.searchSortType.orderAsc && (
+                                        <span>&#9660;</span>
                                     )}
                                 {props.user.searchSortType &&
                                     props.user.searchSortType.searchType ==
                                         "beerDescription" &&
                                     !props.user.searchSortType.orderAsc && (
-                                        <span>&#9660;</span>
+                                        <span>&#9650;</span>
                                     )}
                             </span>
                             <span
@@ -161,17 +165,18 @@ function Search(props) {
                                 }}
                             >
                                 ABV
-                                <span>
-                                    {props.user.searchSortType &&
-                                        props.user.searchSortType.searchType ==
-                                            "abv" && <span>&#9650;</span>}
-                                    {props.user.searchSortType &&
-                                        !props.user.searchSortType.searchType ==
-                                            "abv" &&
-                                        props.user.searchSortType.orderAsc && (
-                                            <span>&#9660;</span>
-                                        )}
-                                </span>
+                                {props.user.searchSortType &&
+                                    props.user.searchSortType.searchType ==
+                                        "abv" &&
+                                    props.user.searchSortType.orderAsc && (
+                                        <span>&#9650;</span>
+                                    )}
+                                {props.user.searchSortType &&
+                                    props.user.searchSortType.searchType ==
+                                        "abv" &&
+                                    !props.user.searchSortType.orderAsc && (
+                                        <span>&#9660;</span>
+                                    )}
                             </span>
                             {/* <span
                                 className="sort-btn"
