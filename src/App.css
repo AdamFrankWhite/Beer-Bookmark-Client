@@ -390,6 +390,14 @@ nav {
   font-size: 1.1em;
   width: 25%;
 }
+.beer h5 {
+  font-size: 0.9em;
+  width: 15%;
+  text-align: left;
+}
+.beer .buttons {
+  width: 10%;
+}
 .beer .description {
   font-size: 0.9em;
   text-transform: uppercase;
@@ -397,11 +405,6 @@ nav {
 }
 .beer h4 {
   font-size: 1em;
-  text-align: left;
-}
-.beer h5 {
-  font-size: 0.9em;
-  width: 15%;
   text-align: left;
 }
 .beer input[type=number] {
@@ -429,10 +432,11 @@ nav {
 .more-info-cont {
   width: 100%;
   padding: 1em;
-  text-align: center;
+  text-align: left;
   overflow: hidden;
   border-left: black 2px solid;
   border-right: black 2px solid;
+  background: white;
 }
 
 .slide-down {

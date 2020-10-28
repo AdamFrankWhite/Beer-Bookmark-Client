@@ -429,6 +429,14 @@ nav {
         font-size: 1.1em;
         width: 25%;
     }
+    h5 {
+        font-size: 0.9em;
+        width: 15%;
+        text-align: left;
+    }
+    .buttons {
+        width: 10%;
+    }
     .description {
         font-size: 0.9em;
         text-transform: uppercase;
@@ -438,11 +446,7 @@ nav {
         font-size: 1em;
         text-align: left;
     }
-    h5 {
-        font-size: 0.9em;
-        width: 15%;
-        text-align: left;
-    }
+
     input[type="number"] {
         width: 2.5em;
     }
@@ -472,13 +476,12 @@ nav {
 .more-info-cont {
     width: 100%;
     padding: 1em;
-    text-align: center;
-    // visibility: hidden;
+    text-align: left;
     overflow: hidden;
     // opacity: 0;
     border-left: black 2px solid;
     border-right: black 2px solid;
-    // animation: slide-down 5s forwards;
+    background: white;
 }
 
 // .show {
