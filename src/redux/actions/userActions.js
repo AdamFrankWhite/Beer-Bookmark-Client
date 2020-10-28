@@ -127,12 +127,14 @@ export const rateBeer = (beerData, username, rating, sortType) => (
     axios
         .put(`http://localhost:5000/users/my-beers/update`, updateData)
         .then((res) => {
+            console.log(sortType.searchType);
             const sortedBeers = sortBeersFunc(
                 res.data,
                 sortType.searchType,
                 sortType.orderAsc
             );
             dispatch({ type: GET_BEERS, payload: sortedBeers });
+
             dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
             dispatch({ type: SET_LOADING, payload: false });
         });
@@ -225,6 +227,7 @@ export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
 
 export const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
     let sortedBeers;
+
     if (orderAsc) {
         sortedBeers = beers.sort((a, b) =>
             a[searchType] > b[searchType]
@@ -253,6 +256,7 @@ export const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
 
 const sortBeersFunc = (beers, searchType, orderAsc) => {
     let sortedBeers;
+
     if (orderAsc) {
         sortedBeers = beers.sort((a, b) =>
             a[searchType] > b[searchType]
@@ -271,9 +275,4 @@ const sortBeersFunc = (beers, searchType, orderAsc) => {
         );
     }
     return sortedBeers;
-    // setSortedBeers(
-    //     sortedBeers.map((beer) => (
-    //         <BeerRow myBeers={true} beerData={beer} brewery={beer.brewery} />
-    //     ))
-    // );
 };
