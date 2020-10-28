@@ -199,8 +199,9 @@ function BeerRow(props) {
 
                         toggleShowRow(!showRow);
                     }}
+                    style={{ padding: "0 0.5em" }}
                 >
-                    more info
+                    &#x25BC;
                 </span>
             </div>
             {/* Style condition prevent initial animation */}
