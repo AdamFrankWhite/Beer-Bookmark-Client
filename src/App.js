@@ -7,6 +7,7 @@ import Register from "./comp/Register";
 import Search from "./comp/Search";
 import MyBeers from "./comp/MyBeers";
 import Home from "./comp/Home";
+import Settings from "./comp/Settings";
 import "./App.css";
 
 const App = (props) => {
@@ -15,18 +16,21 @@ const App = (props) => {
             <NavBar loggedIn={props.loggedIn} />
             <div className="tab-frame">
                 <Route path="/" exact component={Home} />
-                {/* Register Router */}
+                {/* Register Route */}
                 <Route path="/register" component={Register} />
 
-                {/* Login Router */}
+                {/* Login Route */}
                 <Route path="/login" component={Login} />
 
-                {/* My Beers Router */}
+                {/* My Beers Route */}
                 {props.user.loggedIn && (
                     <Route path="/my-beers" component={MyBeers} />
                 )}
-
-                {/* Search Router */}
+                {/* Dashboard route*/}
+                {props.user.loggedIn && (
+                    <Route path="/settings" component={Settings} />
+                )}
+                {/* Search Route */}
                 <Route path="/search" component={Search} />
             </div>
         </Router>

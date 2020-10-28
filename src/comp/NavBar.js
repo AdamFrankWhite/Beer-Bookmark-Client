@@ -15,6 +15,7 @@ function NavBar(props) {
                             My Beers
                         </Link>
                     ) : null}
+
                     <Link to="/search" className="link">
                         Search
                     </Link>
@@ -26,6 +27,11 @@ function NavBar(props) {
                             Register
                         </Link>
                     )}
+                    {props.user.loggedIn ? (
+                        <Link to="/settings" className="link">
+                            Settings
+                        </Link>
+                    ) : null}
                     <Link to="/login" className="link">
                         {props.user.loggedIn ? (
                             <span onClick={() => props.logout()}>Logout</span>

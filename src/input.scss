@@ -608,6 +608,32 @@ nav {
     transition: 0.1s;
 }
 
+// Settings
+
+.settings-cont {
+    width: 100%;
+    height: 100%;
+    min-height: 90vh;
+    display: flex;
+    .settings-nav {
+        h1 {
+            font-size: 1.5em;
+        }
+        width: 20%;
+        background: rgb(0, 106, 141);
+        color: white;
+        nav {
+            display: flex;
+            flex-direction: column;
+            font-size: 1.25em;
+        }
+    }
+    .settings-tab {
+        width: 80%;
+        background: white;
+    }
+}
+
 /* == Mobile/Tab == */
 @media (max-width: 767px) {
     /* Fix bootstrap issue */
