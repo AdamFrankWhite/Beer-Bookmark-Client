@@ -5,7 +5,13 @@ import { logout } from "../redux/actions/userActions";
 function NavBar(props) {
     return (
         <header>
-            <nav className="navbar">
+            <nav
+                className={
+                    props.user.colorScheme == "light"
+                        ? "navbar"
+                        : "navbar navbar-dark"
+                }
+            >
                 <Link to="/" className="nav-title">
                     BeerMe
                 </Link>

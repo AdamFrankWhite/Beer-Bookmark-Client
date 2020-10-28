@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Route, Link } from "react-router-dom";
 import Privacy from "./Privacy";
 import Account from "./Account";
+import { connect } from "react-redux";
 function Settings(props) {
     return (
         <div className="settings-cont">
@@ -12,7 +13,13 @@ function Settings(props) {
                     <Link to="/settings/privacy">Privacy Settings</Link>
                 </nav>
             </div>
-            <div className="settings-tab">
+            <div
+                className={
+                    props.user.colorScheme == "light"
+                        ? "settings-tab"
+                        : "settings-tab dark-theme"
+                }
+            >
                 <Route path="/settings/account" component={Account} />
                 <Route path="/settings/privacy" component={Privacy} />
             </div>
@@ -20,4 +27,9 @@ function Settings(props) {
     );
 }
 
-export default Settings;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    };
+};
+export default connect(mapStateToProps)(Settings);

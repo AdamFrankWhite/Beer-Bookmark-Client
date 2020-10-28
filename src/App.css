@@ -1,6 +1,7 @@
 /* == Root Styles == */
 html {
   overflow: overlay;
+  overflow-x: hidden;
 }
 
 #root,
@@ -42,8 +43,14 @@ a {
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.dark-theme {
+  background: #0c0c0c !important;
+  color: white;
+}
+
+.dark-theme-secondary {
+  background: #141414 !important;
+  color: #bbbbbb;
 }
 
 p {
@@ -75,6 +82,10 @@ nav {
 }
 .navbar a {
   text-decoration: none;
+}
+
+.navbar-dark {
+  background-color: #001820;
 }
 
 .nav-title {
@@ -561,7 +572,6 @@ nav {
   color: white;
   position: absolute;
   animation: panel-slide 0.5s forwards;
-  left: 100vw;
 }
 .settings-cont .settings-nav h1 {
   font-size: 1.5em;

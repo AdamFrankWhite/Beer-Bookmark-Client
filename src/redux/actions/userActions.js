@@ -9,6 +9,7 @@ import {
     SET_SORT_TYPE,
     SET_SEARCH_SORT_TYPE,
     SORT_SEARCH_RESULTS,
+    SET_COLOR_SCHEME,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -292,12 +293,12 @@ export const sortSearchResults = (beers, searchType, orderAsc) => (
     }
     dispatch({ type: SET_SEARCH_SORT_TYPE, payload: { searchType, orderAsc } });
     dispatch({ type: SORT_SEARCH_RESULTS, payload: sortedBeers });
-    // setSortedBeers(
-    //     sortedBeers.map((beer) => (
-    //         <BeerRow myBeers={true} beerData={beer} brewery={beer.brewery} />
-    //     ))
-    // );
 };
+
+export const setColorScheme = (color) => (dispatch) => {
+    dispatch({ type: SET_COLOR_SCHEME, payload: color });
+};
+
 const sortBeersFunc = (beers, searchType, orderAsc) => {
     let sortedBeers;
 

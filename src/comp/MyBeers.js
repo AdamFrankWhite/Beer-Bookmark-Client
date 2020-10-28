@@ -149,7 +149,14 @@ const MyBeers = (props) => {
                             />
                         ))}
                     {/* Empty div for slideAnimation of last beer */}
-                    <div className="beer" style={{ height: "200px" }}></div>
+                    <div
+                        className={
+                            props.user.colorScheme == "light"
+                                ? "beer"
+                                : "beer dark-theme-secondary"
+                        }
+                        style={{ height: "200px" }}
+                    ></div>
 
                     {/* </FlipMove> */}
                 </div>

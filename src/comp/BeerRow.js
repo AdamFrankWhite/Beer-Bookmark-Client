@@ -41,7 +41,13 @@ function BeerRow(props) {
     });
     return (
         <>
-            <div className="beer">
+            <div
+                className={
+                    props.user.colorScheme == "light"
+                        ? "beer"
+                        : "beer dark-theme-secondary"
+                }
+            >
                 <img
                     className="thumb"
                     alt="beer"

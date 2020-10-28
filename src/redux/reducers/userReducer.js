@@ -16,6 +16,7 @@ import {
     SET_ERRORS,
     GET_USER_MESSAGES,
     GET_ALL_USERS,
+    SET_COLOR_SCHEME,
 } from "../types";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
     sortedBeers: [],
     sortType: {},
     searchSortType: { searchType: "", orderAsc: false },
+    colorScheme: "light",
     //
     authenticated: false,
     token: "",
@@ -85,7 +87,12 @@ export default function (state = initialState, action) {
                 searchSortType: action.payload,
             };
         }
-
+        case SET_COLOR_SCHEME: {
+            return {
+                ...state,
+                colorScheme: action.payload,
+            };
+        }
         case LOGOUT: {
             return {
                 initialState,

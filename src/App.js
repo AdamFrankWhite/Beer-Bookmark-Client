@@ -14,7 +14,13 @@ const App = (props) => {
     return (
         <Router>
             <NavBar loggedIn={props.loggedIn} />
-            <div className="tab-frame">
+            <div
+                className={
+                    props.user.colorScheme == "light"
+                        ? "tab-frame"
+                        : "tab-frame dark-theme"
+                }
+            >
                 <Route path="/" exact component={Home} />
                 {/* Register Route */}
                 <Route path="/register" component={Register} />

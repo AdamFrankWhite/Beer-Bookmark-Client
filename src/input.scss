@@ -2,6 +2,7 @@
 
 html {
     overflow: overlay;
+    overflow-x: hidden;
 }
 #root,
 .App {
@@ -49,8 +50,13 @@ a {
     color: white;
 }
 
-.App-link {
-    color: #09d3ac;
+.dark-theme {
+    background: rgb(12, 12, 12) !important;
+    color: white;
+}
+.dark-theme-secondary {
+    background: rgb(20, 20, 20) !important;
+    color: rgb(187, 187, 187);
 }
 h1,
 h2,
@@ -103,7 +109,9 @@ nav {
         text-decoration: none;
     }
 }
-
+.navbar-dark {
+    background-color: rgb(0, 24, 32);
+}
 .nav-title {
     color: white;
     font-size: 1.6em;
@@ -626,7 +634,7 @@ nav {
         color: white;
         position: absolute;
         animation: panel-slide 0.5s forwards;
-        left: 100vw;
+        // left: 100vw;
         nav {
             display: flex;
             flex-direction: column;
