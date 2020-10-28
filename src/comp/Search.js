@@ -23,7 +23,7 @@ function Search(props) {
     useEffect(() => {
         // https://api.untappd.com/v4/search/beer/?q=${beerType}
 
-        props.getRandomBeers();
+        !props.user.searchResults && props.getRandomBeers();
     }, []);
 
     // Brewery Components
@@ -72,17 +72,31 @@ function Search(props) {
                     </label> */}
 
                     {/* Random Beers Container */}
+                    {!props.user.searchResults && (
+                        <div className="beer-container">
+                            <h2>Random Beers</h2>
+                            {randomBeerData &&
+                                randomBeerData.map((beer) => {
+                                    return (
+                                        <BeerRow
+                                            search={true}
+                                            beerData={beer}
+                                        />
+                                    );
+                                })}
+                            {/* Empty div for slideAnimation of last beer */}
+                            <div
+                                className="beer"
+                                style={{ height: "75px" }}
+                            ></div>
+                        </div>
+                    )}
+                    {/* Beer Container */}
 
                     <div className="beer-container">
-                        {randomBeerData &&
-                            randomBeerData.map((beer) => {
-                                return (
-                                    <BeerRow search={true} beerData={beer} />
-                                );
-                            })}
+                        <h2>Results</h2>
+                        {beers}
                     </div>
-                    {/* Beer Container */}
-                    <div className="beer-container">{beers}</div>
                 </div>
             )}
         </div>
