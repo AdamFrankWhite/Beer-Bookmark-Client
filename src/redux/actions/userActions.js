@@ -22,7 +22,9 @@ import axios from "axios";
 export const getBeers = (username) => (dispatch) => {
     console.log(username);
     axios
-        .get(`http://localhost:5000/users/my-beers/${username}`)
+        .get(
+            `http://fierce-plateau-38188.herokuapp.com/users/my-beers/${username}`
+        )
         .then((res) => {
             dispatch({ type: GET_BEERS, payload: res.data });
             console.log(res);
@@ -32,7 +34,10 @@ export const getBeers = (username) => (dispatch) => {
 export const login = (loginData) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     axios
-        .post(`http://localhost:5000/users/login`, loginData)
+        .post(
+            `http://fierce-plateau-38188.herokuapp.com/users/login`,
+            loginData
+        )
         .then((res) => {
             console.log(res.data);
             dispatch({ type: SET_USER, payload: res.data });
@@ -53,7 +58,7 @@ export const register = (data) => (dispatch) => {
     const { username, email, password } = data;
 
     axios
-        .post("http://localhost:5000/users/register", {
+        .post("http://fierce-plateau-38188.herokuapp.com/users/register", {
             username,
             email,
             password,
@@ -68,7 +73,7 @@ export const register = (data) => (dispatch) => {
         })
         .then((res) => {
             axios
-                .post("http://localhost:5000/users/login", {
+                .post("http://fierce-plateau-38188.herokuapp.com/users/login", {
                     username,
                     password,
                 })
@@ -97,7 +102,10 @@ export const addBeer = (data) => (dispatch) => {
     };
     console.log(postData);
     axios
-        .post("http://localhost:5000/users/my-beers/add", postData)
+        .post(
+            "http://fierce-plateau-38188.herokuapp.com/users/my-beers/add",
+            postData
+        )
         .then((res) => {
             dispatch({ type: GET_BEERS, payload: res.data });
             console.log(res.data);
@@ -111,7 +119,10 @@ export const deleteBeer = (data) => (dispatch) => {
     };
     console.log(deleteData);
     axios
-        .put("http://localhost:5000/users/my-beers/delete-beer", deleteData)
+        .put(
+            "http://fierce-plateau-38188.herokuapp.com/users/my-beers/delete-beer",
+            deleteData
+        )
         .then((res) => {
             dispatch({ type: GET_BEERS, payload: res.data });
         });
@@ -127,7 +138,10 @@ export const rateBeer = (beerData, username, rating, sortType) => (
         newRating: rating,
     };
     axios
-        .put(`http://localhost:5000/users/my-beers/update`, updateData)
+        .put(
+            `http://fierce-plateau-38188.herokuapp.com/users/my-beers/update`,
+            updateData
+        )
         .then((res) => {
             const sortedBeers = sortBeersFunc(
                 res.data,
