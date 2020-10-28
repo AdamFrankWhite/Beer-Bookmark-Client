@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
@@ -29,15 +29,15 @@ function BeerRow(props) {
     }
     if (showRow === false) {
         infoStyle = {
-            transition: "margin-bottom 0.5s",
+            // transition: "margin-bottom 0.5s",
             marginBottom: -height,
         };
     }
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (targetRef.current) {
             setHeight(targetRef.current.clientHeight);
         }
-    }, []);
+    });
     return (
         <>
             <div className="beer">
