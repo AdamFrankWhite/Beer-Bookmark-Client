@@ -5,6 +5,7 @@ import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
 function BeerRow(props) {
     const checkBeerIncluded =
         props.search &&
+        props.user.beers &&
         JSON.stringify(props.user.beers).includes(props.beerData.id);
     const center = { margin: "auto", height: 25, width: 25 };
     const clickTextStyle = checkBeerIncluded && "click-text-saved";

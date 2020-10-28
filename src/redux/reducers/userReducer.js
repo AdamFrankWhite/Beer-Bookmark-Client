@@ -7,6 +7,8 @@ import {
     LOGOUT,
     SORT_MY_BEERS,
     SET_SORT_TYPE,
+    SET_SEARCH_SORT_TYPE,
+    SORT_SEARCH_RESULTS,
     //
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
@@ -23,6 +25,7 @@ const initialState = {
     randomBeers: [],
     sortedBeers: [],
     sortType: {},
+    searchSortType: { searchType: "", orderAsc: false },
     //
     authenticated: false,
     token: "",
@@ -76,6 +79,13 @@ export default function (state = initialState, action) {
                 ...state,
                 searchResults: action.payload,
             };
+        case SET_SEARCH_SORT_TYPE: {
+            return {
+                ...state,
+                searchSortType: action.payload,
+            };
+        }
+
         case LOGOUT: {
             return {
                 initialState,

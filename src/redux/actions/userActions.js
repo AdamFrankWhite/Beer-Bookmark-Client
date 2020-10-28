@@ -7,6 +7,8 @@ import {
     LOGOUT,
     SORT_MY_BEERS,
     SET_SORT_TYPE,
+    SET_SEARCH_SORT_TYPE,
+    SORT_SEARCH_RESULTS,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -165,7 +167,7 @@ export const searchBeer = (searchTerm, searchType = "beer") => (dispatch) => {
                 return {
                     id: item.beer.bid,
                     beerName: item.beer.beer_name,
-                    abv: item.beer.beer_abv.toString(),
+                    abv: item.beer.beer_abv,
                     beerDescription: item.beer.beer_style,
                     breweryName: item.brewery.brewery_name,
                     breweryContact: item.brewery.contact,
@@ -261,6 +263,39 @@ export const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
     // );
 };
 
+export const sortSearchResults = (beers, searchType, orderAsc) => (
+    dispatch
+) => {
+    if (!beers) {
+        return [];
+    }
+    let sortedBeers;
+
+    if (orderAsc) {
+        sortedBeers = beers.sort((a, b) =>
+            a[searchType] > b[searchType]
+                ? 1
+                : b[searchType] > a[searchType]
+                ? -1
+                : 0
+        );
+    } else {
+        sortedBeers = beers.sort((a, b) =>
+            a[searchType] < b[searchType]
+                ? 1
+                : b[searchType] < a[searchType]
+                ? -1
+                : 0
+        );
+    }
+    dispatch({ type: SET_SEARCH_SORT_TYPE, payload: { searchType, orderAsc } });
+    dispatch({ type: SORT_SEARCH_RESULTS, payload: sortedBeers });
+    // setSortedBeers(
+    //     sortedBeers.map((beer) => (
+    //         <BeerRow myBeers={true} beerData={beer} brewery={beer.brewery} />
+    //     ))
+    // );
+};
 const sortBeersFunc = (beers, searchType, orderAsc) => {
     let sortedBeers;
 

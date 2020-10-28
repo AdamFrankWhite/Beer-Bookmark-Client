@@ -98,13 +98,14 @@ const MyBeers = (props) => {
                     />
                 )}
                 <div className="my-beers-cont">
-                    {props.user.sortedBeers.map((beer) => (
-                        <BeerRow
-                            myBeers={true}
-                            beerData={beer}
-                            brewery={beer.brewery}
-                        />
-                    ))}
+                    {props.user.sortedBeers &&
+                        props.user.sortedBeers.map((beer) => (
+                            <BeerRow
+                                myBeers={true}
+                                beerData={beer}
+                                brewery={beer.brewery}
+                            />
+                        ))}
                     {/* Empty div for slideAnimation of last beer */}
                     <div className="beer" style={{ height: "200px" }}></div>
 

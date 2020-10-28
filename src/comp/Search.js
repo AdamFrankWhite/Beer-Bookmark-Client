@@ -4,10 +4,15 @@ import Brewery from "./Brewery";
 import axios from "axios";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
-import { searchBeer, getRandomBeers } from "../redux/actions/userActions";
+import {
+    searchBeer,
+    getRandomBeers,
+    sortSearchResults,
+} from "../redux/actions/userActions";
 import RandomBeer from "./RandomBeer";
 function Search(props) {
     const [searchTerm, setSearchTerm] = useState("");
+    const [orderAsc, setOrderAsc] = useState(false);
     const center = { margin: "auto", height: 150, width: 200 };
     const [randomBeerData, setRandomBeerData] = useState(
         props.user.randomBeers
@@ -75,6 +80,7 @@ function Search(props) {
                     {!props.user.searchResults && (
                         <div className="beer-container">
                             <h2>Random Beers</h2>
+
                             {randomBeerData &&
                                 randomBeerData.map((beer) => {
                                     return (
@@ -94,6 +100,93 @@ function Search(props) {
                     {/* Beer Container */}
 
                     <div className="beer-container">
+                        <div className="sort-btn-group">
+                            <span>Sort by: </span>
+                            <span
+                                className="sort-btn"
+                                onClick={() => {
+                                    props.sortSearchResults(
+                                        props.user.searchResults,
+                                        "beerName",
+                                        orderAsc
+                                    );
+                                    setOrderAsc(!orderAsc);
+                                }}
+                            >
+                                Name
+                                {props.user.searchSortType &&
+                                    props.user.searchSortType.searchType ==
+                                        "beerName" && <span>&#9650;</span>}
+                                {props.user.searchSortType &&
+                                    props.user.searchSortType.searchType ==
+                                        "beerName" &&
+                                    !props.user.searchSortType.orderAsc && (
+                                        <span>&#9660;</span>
+                                    )}
+                            </span>
+
+                            <span
+                                className="sort-btn"
+                                onClick={() => {
+                                    props.sortSearchResults(
+                                        props.user.searchResults,
+                                        "beerDescription",
+                                        orderAsc
+                                    );
+                                    setOrderAsc(!orderAsc);
+                                }}
+                            >
+                                Type
+                                {props.user.searchSortType &&
+                                    props.user.searchSortType.searchType ==
+                                        "beerDescription" && (
+                                        <span>&#9650;</span>
+                                    )}
+                                {props.user.searchSortType &&
+                                    props.user.searchSortType.searchType ==
+                                        "beerDescription" &&
+                                    !props.user.searchSortType.orderAsc && (
+                                        <span>&#9660;</span>
+                                    )}
+                            </span>
+                            <span
+                                className="sort-btn"
+                                onClick={() => {
+                                    props.sortSearchResults(
+                                        props.user.searchResults,
+                                        "abv",
+                                        orderAsc
+                                    );
+                                    setOrderAsc(!orderAsc);
+                                }}
+                            >
+                                ABV
+                                <span>
+                                    {props.user.searchSortType &&
+                                        props.user.searchSortType.searchType ==
+                                            "abv" && <span>&#9650;</span>}
+                                    {props.user.searchSortType &&
+                                        !props.user.searchSortType.searchType ==
+                                            "abv" &&
+                                        props.user.searchSortType.orderAsc && (
+                                            <span>&#9660;</span>
+                                        )}
+                                </span>
+                            </span>
+                            {/* <span
+                                className="sort-btn"
+                                onClick={() => {
+                                    props.sortSearchResults(
+                                        props.user.searchResults,
+                                        "brewery",
+                                        orderAsc
+                                    );
+                                    setOrderAsc(!orderAsc);
+                                }}
+                            >
+                                Brewery
+                            </span> */}
+                        </div>
                         <h2>Results</h2>
                         {beers}
                     </div>
@@ -112,6 +205,7 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = {
     searchBeer,
     getRandomBeers,
+    sortSearchResults,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Search);
