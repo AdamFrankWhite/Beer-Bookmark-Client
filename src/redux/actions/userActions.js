@@ -133,7 +133,7 @@ export const rateBeer = (beerData, username, rating, sortType) => (
             );
             console.log(sortType);
             dispatch({ type: GET_BEERS, payload: res.data });
-
+            // Necessary to avoid sorting bug - state.sortType kept getting overwritten on second rating
             dispatch({
                 type: SET_SORT_TYPE,
                 payload: {
