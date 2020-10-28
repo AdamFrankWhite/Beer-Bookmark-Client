@@ -117,7 +117,6 @@ export const deleteBeer = (data) => (dispatch) => {
 export const rateBeer = (beerData, username, rating, sortType) => (
     dispatch
 ) => {
-    console.log(sortType);
     dispatch({ type: SET_LOADING, payload: true });
     let updateData = {
         beerData,
@@ -127,15 +126,23 @@ export const rateBeer = (beerData, username, rating, sortType) => (
     axios
         .put(`http://localhost:5000/users/my-beers/update`, updateData)
         .then((res) => {
-            console.log(sortType.searchType);
             const sortedBeers = sortBeersFunc(
                 res.data,
                 sortType.searchType,
                 sortType.orderAsc
             );
-            dispatch({ type: GET_BEERS, payload: sortedBeers });
+            console.log(sortType);
+            dispatch({ type: GET_BEERS, payload: res.data });
 
-            dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
+            dispatch({
+                type: SET_SORT_TYPE,
+                payload: {
+                    searchType: sortType.searchType,
+                    orderAsc: sortType.orderAsc,
+                },
+            });
+            sortType.searchType == "stars" &&
+                dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
             dispatch({ type: SET_LOADING, payload: false });
         });
 };

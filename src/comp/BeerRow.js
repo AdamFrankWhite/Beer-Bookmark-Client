@@ -82,6 +82,7 @@ function BeerRow(props) {
                                 <div>
                                     <span
                                         onClick={() => {
+                                            console.log(props.user.searchType);
                                             props.rateBeer(
                                                 props.beerData,
                                                 props.user.userData.username,
