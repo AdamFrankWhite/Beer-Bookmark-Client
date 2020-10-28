@@ -4,9 +4,9 @@ import { loadState } from "../localStorage";
 import userReducer from "./reducers/userReducer";
 const persistedState = loadState();
 const initialState = {};
-const reduxDevTools =
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__();
+const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__
+    ? window.__REDUX_DEVTOOLS_EXTENSION__()
+    : compose;
 const middleware = [thunk];
 
 const reducers = combineReducers({
