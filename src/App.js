@@ -16,7 +16,7 @@ const App = (props) => {
             <NavBar loggedIn={props.loggedIn} />
             <div
                 className={
-                    props.user.colorScheme == "light"
+                    props.user.colorScheme !== "dark"
                         ? "tab-frame"
                         : "tab-frame dark-theme"
                 }

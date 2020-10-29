@@ -14,11 +14,11 @@ function Settings(props) {
                 </nav>
             </div>
             <div
-                className={
-                    props.user.colorScheme == "light"
-                        ? "settings-tab"
-                        : "settings-tab dark-theme"
-                }
+            // className={
+            //     props.user.colorScheme !== "dark"
+            //         ? "settings-tab"
+            //         : "settings-tab dark-theme"
+            // }
             >
                 <Route path="/settings/account" component={Account} />
                 <Route path="/settings/privacy" component={Privacy} />

@@ -43,7 +43,7 @@ function BeerRow(props) {
         <>
             <div
                 className={
-                    props.user.colorScheme == "light"
+                    props.user.colorScheme !== "dark"
                         ? "beer"
                         : "beer dark-theme-secondary"
                 }

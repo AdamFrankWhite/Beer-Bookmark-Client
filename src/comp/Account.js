@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { setColorScheme } from "../redux/actions/userActions";
 function Account(props) {
     const [checked, setChecked] = useState(
-        props.user.colorScheme == "light" ? false : true
+        props.user.colorScheme !== "dark" ? false : true
     );
     useEffect(() => {
         !checked ? props.setColorScheme("light") : props.setColorScheme("dark");

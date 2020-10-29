@@ -151,7 +151,7 @@ const MyBeers = (props) => {
                     {/* Empty div for slideAnimation of last beer */}
                     <div
                         className={
-                            props.user.colorScheme == "light"
+                            props.user.colorScheme !== "dark"
                                 ? "beer"
                                 : "beer dark-theme-secondary"
                         }

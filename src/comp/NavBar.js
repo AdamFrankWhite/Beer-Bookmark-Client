@@ -7,7 +7,7 @@ function NavBar(props) {
         <header>
             <nav
                 className={
-                    props.user.colorScheme == "light"
+                    props.user.colorScheme !== "dark"
                         ? "navbar"
                         : "navbar navbar-dark"
                 }
