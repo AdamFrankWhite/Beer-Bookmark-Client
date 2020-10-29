@@ -41,6 +41,8 @@ export const login = (loginData) => (dispatch) => {
         })
         .catch((err) => {
             //dispatch error
+            console.log(err);
+            dispatch({ type: SET_LOADING, payload: false });
         });
 };
 
