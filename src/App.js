@@ -9,6 +9,7 @@ import MyBeers from "./comp/MyBeers";
 import Home from "./comp/Home";
 import Settings from "./comp/Settings";
 import NewPassword from "./comp/NewPassword";
+import ForgotPassword from "./comp/ForgotPassword";
 import "./App.css";
 
 const App = (props) => {
@@ -42,6 +43,7 @@ const App = (props) => {
 
                 {/* Password Reset Route */}
                 <Route path="/reset" component={NewPassword} />
+                <Route path="/forgot" component={ForgotPassword} />
             </div>
         </Router>
     );

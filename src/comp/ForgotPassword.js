@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { resetPassword } from "../redux/actions/userActions";
 function ForgotPassword(props) {
     const [email, setEmail] = useState("");
@@ -19,9 +20,7 @@ function ForgotPassword(props) {
             />
             <button onClick={() => props.resetPassword(email)}>Reset</button>
             <p>{errorMessage}</p>
-            <p onClick={() => props.toggleForgotPassword(false)}>
-                Back to login
-            </p>
+            <Link to="/login">Back to login</Link>
         </div>
     );
 }

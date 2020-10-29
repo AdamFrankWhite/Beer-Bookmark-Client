@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Route } from "react-router-dom";
 
 import ForgotPassword from "./ForgotPassword";
 import LoginForm from "./LoginForm";
 function Login(props) {
-    const [forgotPassword, toggleForgotPassword] = useState(false);
     return (
         <div className="registration">
-            {forgotPassword ? (
-                <ForgotPassword
-                    forgotPassword={forgotPassword}
-                    toggleForgotPassword={toggleForgotPassword}
-                />
-            ) : (
-                <LoginForm
-                    forgotPassword={forgotPassword}
-                    toggleForgotPassword={toggleForgotPassword}
-                />
-            )}
+            <LoginForm />
         </div>
     );
 }

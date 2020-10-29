@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import ReactLoading from "react-loading";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/userActions";
+import ForgotPassword from "./ForgotPassword";
 function LoginForm(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -53,13 +54,8 @@ function LoginForm(props) {
                     className="spinner"
                 />
             )}
-            <p
-                onClick={() =>
-                    props.toggleForgotPassword(!props.forgotPassword)
-                }
-            >
-                Forgot Password?
-            </p>
+            <Link to="/forgot">Forgot Password?</Link>
+
             {props.user.loggedIn && <Redirect to="/my-beers" />}
         </div>
     );
