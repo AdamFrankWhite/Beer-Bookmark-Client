@@ -19,7 +19,6 @@ import {
     SET_ERRORS,
 } from "../types";
 import axios from "axios";
-
 export const getBeers = (username) => (dispatch) => {
     console.log(username);
     axios
@@ -84,7 +83,7 @@ export const register = (data) => (dispatch) => {
 
 export const resetPassword = (email) => (dispatch) => {
     axios
-        .post("http://localhost:5000/users/reset-password", { email })
+        .post("http://localhost:5000/users/forgot", { email })
         .then((res) => {
             console.log(res.data);
             res.data.sent

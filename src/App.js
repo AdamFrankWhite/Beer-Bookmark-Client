@@ -8,6 +8,7 @@ import Search from "./comp/Search";
 import MyBeers from "./comp/MyBeers";
 import Home from "./comp/Home";
 import Settings from "./comp/Settings";
+import NewPassword from "./comp/NewPassword";
 import "./App.css";
 
 const App = (props) => {
@@ -38,6 +39,9 @@ const App = (props) => {
                 )}
                 {/* Search Route */}
                 <Route path="/search" component={Search} />
+
+                {/* Password Reset Route */}
+                <Route path="/reset" component={NewPassword} />
             </div>
         </Router>
     );
