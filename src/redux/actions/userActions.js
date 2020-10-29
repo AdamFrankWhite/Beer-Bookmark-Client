@@ -10,6 +10,7 @@ import {
     SET_SEARCH_SORT_TYPE,
     SORT_SEARCH_RESULTS,
     SET_COLOR_SCHEME,
+    RESET_EMAIL_MESSAGE,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -79,6 +80,22 @@ export const register = (data) => (dispatch) => {
                     dispatch({ type: SET_USER, payload: res.data });
                 });
         });
+};
+
+export const resetPassword = (email) => (dispatch) => {
+    axios
+        .post("http://localhost:5000/users/reset-password", { email })
+        .then((res) => {
+            console.log(res.data);
+            res.data.sent
+                ? dispatch({ type: RESET_EMAIL_MESSAGE, payload: "Reset Sent" })
+                : dispatch({
+                      type: RESET_EMAIL_MESSAGE,
+                      payload: "Email not found",
+                  });
+            console.log("yo");
+        })
+        .catch((err) => console.log(err));
 };
 
 export const addBeer = (data) => (dispatch) => {

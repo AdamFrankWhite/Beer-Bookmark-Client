@@ -9,6 +9,7 @@ import {
     SET_SORT_TYPE,
     SET_SEARCH_SORT_TYPE,
     SORT_SEARCH_RESULTS,
+    RESET_EMAIL_MESSAGE,
     //
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
@@ -28,6 +29,7 @@ const initialState = {
     sortType: {},
     searchSortType: { searchType: "", orderAsc: false },
     colorScheme: "light",
+    resetEmailMessage: null,
     //
     authenticated: false,
     token: "",
@@ -66,6 +68,13 @@ export default function (state = initialState, action) {
                 sortType: action.payload,
             };
         }
+
+        case RESET_EMAIL_MESSAGE: {
+            return {
+                ...state,
+                resetEmailMessage: action.payload,
+            };
+        }
         case SET_LOADING:
             return {
                 ...state,
@@ -93,6 +102,7 @@ export default function (state = initialState, action) {
                 colorScheme: action.payload,
             };
         }
+
         case LOGOUT: {
             return {
                 initialState,

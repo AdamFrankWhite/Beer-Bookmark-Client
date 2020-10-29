@@ -1,10 +1,14 @@
 export const loadState = () => {
     try {
         const serializedState = localStorage.getItem("state");
+
         if (serializedState === null) {
             return undefined;
         }
-        return JSON.parse(serializedState);
+        //Reset fields on refresh
+        const parsedState = JSON.parse(serializedState);
+        parsedState.user.resetEmailMessage = null;
+        return parsedState;
     } catch (err) {
         return undefined;
     }
