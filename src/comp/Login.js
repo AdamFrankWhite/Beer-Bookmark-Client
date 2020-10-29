@@ -6,41 +6,7 @@ import { Redirect } from "react-router-dom";
 function Login(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    //     // Set loading animation
-    //     this.setState({ loading: true });
-    //     if (!this.state.username) {
-    //         this.setState({
-    //             showError: true,
-    //             errorMessage: "Please enter username",
-    //             loading: false,
-    //         });
-    //     } else {
-    //         axios
-    //             .post(`${this.baseUrl}/users/login`, userCredentials)
-    //             .then((res) => {
-    //                 window.localStorage.setItem("access_token", res.data.token);
-    //                 this.setState({
-    //                     redirect: "profile",
-    //                     favouriteBeers: res.data.beers || [],
-    //                     loggedIn: true,
-    //                     showError: false,
-    //                     loading: true,
-    //                     currentUser: res.data.user.username,
-    //                 });
-    //                 this.props.getUser(res.data.user.username);
-    //                 // this.props.getBeers(res.data.user.username);
-    //             })
-    //             .catch(() =>
-    //                 this.setState({
-    //                     showError: true,
-    //                     errorMessage: "Incorrect password. Please try again",
-    //                     loading: false,
-    //                 })
-    //             );
 
-    //     }
-    // }
-    // if (!props.user.loggedIn) {
     return (
         <div className="registration">
             <div className="login-head">
@@ -88,9 +54,7 @@ function Login(props) {
                     className="spinner"
                 />
             )}
-            {props.showError && (
-                <p className="loginError">{props.errorMessage}</p>
-            )}
+            <p onClick={() => console.log("Too bad!")}>Forgot Password?</p>
             {props.user.loggedIn && <Redirect to="/my-beers" />}
         </div>
     );

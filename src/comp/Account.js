@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { setColorScheme } from "../redux/actions/userActions";
 function Account(props) {
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(
+        props.user.colorScheme == "light" ? false : true
+    );
     useEffect(() => {
         !checked ? props.setColorScheme("light") : props.setColorScheme("dark");
     }, [checked]);
@@ -16,6 +18,7 @@ function Account(props) {
                     <input
                         type="checkbox"
                         onChange={(e) => setChecked(e.target.checked)}
+                        checked={checked}
                     />
                     <span class="slider round"></span>
                 </label>
