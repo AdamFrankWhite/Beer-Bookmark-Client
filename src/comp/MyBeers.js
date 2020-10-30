@@ -120,13 +120,23 @@ const MyBeers = (props) => {
                         onClick={() => {
                             props.sortBeers(
                                 props.user.beers,
-                                "brewery",
+                                "breweryName",
                                 orderAsc
                             );
                             setOrderAsc(!orderAsc);
                         }}
                     >
                         Brewery
+                        {props.user.sortType &&
+                            props.user.sortType.searchType == "breweryName" &&
+                            props.user.sortType.orderAsc && (
+                                <span>&#9650;</span>
+                            )}
+                        {props.user.sortType &&
+                            props.user.sortType.searchType == "breweryName" &&
+                            !props.user.sortType.orderAsc && (
+                                <span>&#9660;</span>
+                            )}
                     </span>
                 </div>
 

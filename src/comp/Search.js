@@ -178,19 +178,31 @@ function Search(props) {
                                         <span>&#9660;</span>
                                     )}
                             </span>
-                            {/* <span
+                            <span
                                 className="sort-btn"
                                 onClick={() => {
                                     props.sortSearchResults(
                                         props.user.searchResults,
-                                        "brewery",
+                                        "breweryName",
                                         orderAsc
                                     );
                                     setOrderAsc(!orderAsc);
                                 }}
                             >
                                 Brewery
-                            </span> */}
+                                {props.user.searchSortType &&
+                                    props.user.searchSortType.searchType ==
+                                        "breweryName" &&
+                                    props.user.searchSortType.orderAsc && (
+                                        <span>&#9650;</span>
+                                    )}
+                                {props.user.searchSortType &&
+                                    props.user.searchSortType.searchType ==
+                                        "breweryName" &&
+                                    !props.user.searchSortType.orderAsc && (
+                                        <span>&#9660;</span>
+                                    )}
+                            </span>
                         </div>
                         <h2>Results</h2>
                         {beers}
