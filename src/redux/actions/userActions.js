@@ -204,7 +204,7 @@ export const searchBeer = (searchTerm, searchType = "beer") => (dispatch) => {
                     abv: item.beer.beer_abv,
                     beerDescription: item.beer.beer_style,
                     breweryName: item.brewery.brewery_name,
-                    breweryContact: item.brewery.contact,
+                    breweryContact: item.brewery.contact.url,
                     img: item.beer.beer_label,
                     beerInfo: item.beer.beer_description,
                 };

@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 function BeerRow(props) {
     let checkBeerIncluded = beerCheck();
     function beerCheck() {
@@ -72,8 +75,8 @@ function BeerRow(props) {
 
                 <a
                     href={
-                        props.beerData.breweryContact.url &&
-                        props.beerData.breweryContact.url
+                        props.beerData.breweryContact &&
+                        props.beerData.breweryContact
                     }
                 >
                     <h4>{props.beerData.breweryName}</h4>
@@ -227,7 +230,7 @@ function BeerRow(props) {
                     }}
                     style={{ padding: "0 0.5em" }}
                 >
-                    &#x25BC;
+                    <FontAwesomeIcon icon={faChevronDown} />
                 </span>
             </div>
             {/* Style condition prevent initial animation */}

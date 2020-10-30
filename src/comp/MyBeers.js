@@ -8,8 +8,8 @@ import { sortBeers } from "../redux/actions/userActions";
 const MyBeers = (props) => {
     const center = { margin: "auto" };
 
-    // const [sortedBeers, setSortedBeers] = useState(beers);
-    // //Populate array on component mount
+    const [sortedBeers, setSortedBeers] = useState(props.user.beers);
+    //Populate array on component mount
     useEffect(() => {
         props.sortBeers(props.user.beers);
     }, [props.user.beers]);
@@ -151,7 +151,7 @@ const MyBeers = (props) => {
                 )}
                 <div className="my-beers-cont">
                     {props.user.sortedBeers &&
-                        props.user.sortedBeers.map((beer) => (
+                        sortedBeers.map((beer) => (
                             <BeerRow
                                 myBeers={true}
                                 beerData={beer}
@@ -163,7 +163,7 @@ const MyBeers = (props) => {
                         className={
                             props.user.colorScheme !== "dark"
                                 ? "beer"
-                                : "beer dark-theme-secondary"
+                                : "beer dark-theme"
                         }
                         style={{ height: "200px" }}
                     ></div>

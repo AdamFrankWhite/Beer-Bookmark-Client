@@ -9,7 +9,10 @@ import {
     getRandomBeers,
     sortSearchResults,
 } from "../redux/actions/userActions";
-import RandomBeer from "./RandomBeer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
+
+const element = <FontAwesomeIcon icon={faSearch} />;
 function Search(props) {
     const [searchTerm, setSearchTerm] = useState("");
     const [orderAsc, setOrderAsc] = useState(true);
@@ -42,173 +45,173 @@ function Search(props) {
     // ));
     return (
         <div className="App">
-            {/* Loading animation */}
-            {props.user.loading && (
-                <ReactLoading style={center} type="bubbles" color="black" />
-            )}
-
             {/* Loaded  */}
-            {!props.user.loading && (
-                <div>
-                    <p>
-                        Can't quite remember that awesome beer you had last
-                        night? Bookmark it with BeerMe
-                    </p>
+            <>
+                <div className="search-banner">
+                    <div className="search-banner-content">
+                        <h2>
+                            Can't quite remember that awesome beer you had last
+                            night? Bookmark it with BeerMe
+                        </h2>
 
-                    {/* Search Box */}
-                    <label htmlFor="searchTerm">
-                        Search:
-                        <input
-                            type="text"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            name="searchTerm"
-                        ></input>
-                    </label>
-                    <button onClick={() => props.searchBeer(searchTerm)}>
-                        Go
-                    </button>
-                    <br></br>
-                    {/* <label htmlFor="searchType">Beer: 
+                        {/* Search Box */}
+                        <label htmlFor="searchTerm">Search:</label>
+                        <div className="row">
+                            <input
+                                type="text"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                name="searchTerm"
+                            ></input>
+                            <span
+                                onClick={() => props.searchBeer(searchTerm)}
+                                className="button"
+                            >
+                                <FontAwesomeIcon icon={faSearch} />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <br></br>
+                {/* <label htmlFor="searchType">Beer: 
                         <input name="searchType" type="radio" value="beer" onChange={this.props.handleChange}></input>
                     </label>
                     <label htmlFor="searchType">Brewery: 
                         <input name="searchType" type="radio" value="brewery" onChange={this.props.handleChange}></input>
                     </label> */}
-
-                    {/* Random Beers Container */}
-                    {!props.user.searchResults && (
-                        <div className="beer-container">
-                            <h2>Random Beers</h2>
-
-                            {randomBeerData &&
-                                randomBeerData.map((beer) => {
-                                    return (
-                                        <BeerRow
-                                            search={true}
-                                            beerData={beer}
-                                        />
-                                    );
-                                })}
-                            {/* Empty div for slideAnimation of last beer */}
-                            <div
-                                className="beer"
-                                style={{ height: "75px" }}
-                            ></div>
-                        </div>
-                    )}
-                    {/* Beer Container */}
-
+                {/* Random Beers Container */} {/* Loading animation */}
+                {props.user.loading && (
+                    <ReactLoading style={center} type="bubbles" color="black" />
+                )}
+                {!props.user.searchResults && !props.user.loading && (
                     <div className="beer-container">
-                        <div className="sort-btn-group">
-                            <span>Sort by: </span>
-                            <span
-                                className="sort-btn"
-                                onClick={() => {
-                                    props.sortSearchResults(
-                                        props.user.searchResults,
-                                        "beerName",
-                                        orderAsc
-                                    );
-                                    setOrderAsc(!orderAsc);
-                                }}
-                            >
-                                Name
-                                {props.user.searchSortType &&
-                                    props.user.searchSortType.searchType ==
-                                        "beerName" &&
-                                    props.user.searchSortType.orderAsc && (
-                                        <span>&#9660;</span>
-                                    )}
-                                {props.user.searchSortType &&
-                                    props.user.searchSortType.searchType ==
-                                        "beerName" &&
-                                    !props.user.searchSortType.orderAsc && (
-                                        <span>&#9650;</span>
-                                    )}
-                            </span>
+                        <h2>Random Beers</h2>
 
-                            <span
-                                className="sort-btn"
-                                onClick={() => {
-                                    props.sortSearchResults(
-                                        props.user.searchResults,
-                                        "beerDescription",
-                                        orderAsc
-                                    );
-                                    setOrderAsc(!orderAsc);
-                                }}
-                            >
-                                Type
-                                {props.user.searchSortType &&
-                                    props.user.searchSortType.searchType ==
-                                        "beerDescription" &&
-                                    props.user.searchSortType.orderAsc && (
-                                        <span>&#9660;</span>
-                                    )}
-                                {props.user.searchSortType &&
-                                    props.user.searchSortType.searchType ==
-                                        "beerDescription" &&
-                                    !props.user.searchSortType.orderAsc && (
-                                        <span>&#9650;</span>
-                                    )}
-                            </span>
-                            <span
-                                className="sort-btn"
-                                onClick={() => {
-                                    props.sortSearchResults(
-                                        props.user.searchResults,
-                                        "abv",
-                                        orderAsc
-                                    );
-                                    setOrderAsc(!orderAsc);
-                                }}
-                            >
-                                ABV
-                                {props.user.searchSortType &&
-                                    props.user.searchSortType.searchType ==
-                                        "abv" &&
-                                    props.user.searchSortType.orderAsc && (
-                                        <span>&#9650;</span>
-                                    )}
-                                {props.user.searchSortType &&
-                                    props.user.searchSortType.searchType ==
-                                        "abv" &&
-                                    !props.user.searchSortType.orderAsc && (
-                                        <span>&#9660;</span>
-                                    )}
-                            </span>
-                            <span
-                                className="sort-btn"
-                                onClick={() => {
-                                    props.sortSearchResults(
-                                        props.user.searchResults,
-                                        "breweryName",
-                                        orderAsc
-                                    );
-                                    setOrderAsc(!orderAsc);
-                                }}
-                            >
-                                Brewery
-                                {props.user.searchSortType &&
-                                    props.user.searchSortType.searchType ==
-                                        "breweryName" &&
-                                    props.user.searchSortType.orderAsc && (
-                                        <span>&#9650;</span>
-                                    )}
-                                {props.user.searchSortType &&
-                                    props.user.searchSortType.searchType ==
-                                        "breweryName" &&
-                                    !props.user.searchSortType.orderAsc && (
-                                        <span>&#9660;</span>
-                                    )}
-                            </span>
-                        </div>
-                        <h2>Results</h2>
-                        {beers}
+                        {randomBeerData &&
+                            randomBeerData.map((beer) => {
+                                return (
+                                    <BeerRow search={true} beerData={beer} />
+                                );
+                            })}
+                        {/* Empty div for slideAnimation of last beer */}
+                        <div className="beer" style={{ height: "75px" }}></div>
                     </div>
-                </div>
-            )}
+                )}
+                {/* Beer Container */}
+                {!props.user.loading && (
+                    <>
+                        <h2>Results</h2>
+                        <div className="beer-container">
+                            <div className="sort-btn-group">
+                                <span>Sort by: </span>
+                                <span
+                                    className="sort-btn"
+                                    onClick={() => {
+                                        props.sortSearchResults(
+                                            props.user.searchResults,
+                                            "beerName",
+                                            orderAsc
+                                        );
+                                        setOrderAsc(!orderAsc);
+                                    }}
+                                >
+                                    Name
+                                    {props.user.searchSortType &&
+                                        props.user.searchSortType.searchType ==
+                                            "beerName" &&
+                                        props.user.searchSortType.orderAsc && (
+                                            <span>&#9660;</span>
+                                        )}
+                                    {props.user.searchSortType &&
+                                        props.user.searchSortType.searchType ==
+                                            "beerName" &&
+                                        !props.user.searchSortType.orderAsc && (
+                                            <span>&#9650;</span>
+                                        )}
+                                </span>
+
+                                <span
+                                    className="sort-btn"
+                                    onClick={() => {
+                                        props.sortSearchResults(
+                                            props.user.searchResults,
+                                            "beerDescription",
+                                            orderAsc
+                                        );
+                                        setOrderAsc(!orderAsc);
+                                    }}
+                                >
+                                    Type
+                                    {props.user.searchSortType &&
+                                        props.user.searchSortType.searchType ==
+                                            "beerDescription" &&
+                                        props.user.searchSortType.orderAsc && (
+                                            <span>&#9660;</span>
+                                        )}
+                                    {props.user.searchSortType &&
+                                        props.user.searchSortType.searchType ==
+                                            "beerDescription" &&
+                                        !props.user.searchSortType.orderAsc && (
+                                            <span>&#9650;</span>
+                                        )}
+                                </span>
+                                <span
+                                    className="sort-btn"
+                                    onClick={() => {
+                                        props.sortSearchResults(
+                                            props.user.searchResults,
+                                            "abv",
+                                            orderAsc
+                                        );
+                                        setOrderAsc(!orderAsc);
+                                    }}
+                                >
+                                    ABV
+                                    {props.user.searchSortType &&
+                                        props.user.searchSortType.searchType ==
+                                            "abv" &&
+                                        props.user.searchSortType.orderAsc && (
+                                            <span>&#9650;</span>
+                                        )}
+                                    {props.user.searchSortType &&
+                                        props.user.searchSortType.searchType ==
+                                            "abv" &&
+                                        !props.user.searchSortType.orderAsc && (
+                                            <span>&#9660;</span>
+                                        )}
+                                </span>
+                                <span
+                                    className="sort-btn"
+                                    onClick={() => {
+                                        props.sortSearchResults(
+                                            props.user.searchResults,
+                                            "breweryName",
+                                            orderAsc
+                                        );
+                                        setOrderAsc(!orderAsc);
+                                    }}
+                                >
+                                    Brewery
+                                    {props.user.searchSortType &&
+                                        props.user.searchSortType.searchType ==
+                                            "breweryName" &&
+                                        props.user.searchSortType.orderAsc && (
+                                            <span>&#9650;</span>
+                                        )}
+                                    {props.user.searchSortType &&
+                                        props.user.searchSortType.searchType ==
+                                            "breweryName" &&
+                                        !props.user.searchSortType.orderAsc && (
+                                            <span>&#9660;</span>
+                                        )}
+                                </span>
+                            </div>
+
+                            {beers}
+                        </div>
+                    </>
+                )}
+            </>
         </div>
     );
 }

@@ -89,7 +89,7 @@ nav {
   text-align: center;
 }
 nav img[src="/logo.png"] {
-  height: 2.25em;
+  height: 2.1em;
   width: auto;
   padding-top: 0.18em;
   margin-right: 0.25em;
@@ -114,16 +114,16 @@ nav img[src="/logo.png"] {
   margin: -0.2em 0;
 }
 .logo-cont .text-cont h1 {
-  font-size: 1.35em;
+  font-size: 1.25em;
   margin-left: -0.02em;
 }
 .logo-cont .text-cont h2 {
-  font-size: 0.8em;
+  font-size: 0.7em;
 }
 
 .navbar {
   display: flex;
-  padding: 1em;
+  padding: 1em 2em;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -470,7 +470,6 @@ nav img[src="/logo.png"] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000;
 }
 .beer * {
   margin: auto;
@@ -497,6 +496,12 @@ nav img[src="/logo.png"] {
 .beer a {
   font-size: 1.1em;
   width: 25%;
+  color: white;
+  text-decoration: none;
+}
+.beer a:hover {
+  color: orange !important;
+  transition: color 0.2s;
 }
 .beer h5 {
   font-size: 0.9em;
@@ -523,6 +528,9 @@ nav img[src="/logo.png"] {
 .beer .tick:hover,
 .beer .cross:hover {
   cursor: pointer;
+}
+.beer span:not(.click-text-saved):hover {
+  text-decoration: underline;
 }
 .beer .set-rating {
   display: flex;
@@ -555,7 +563,32 @@ nav img[src="/logo.png"] {
 }
 
 .click-text-saved {
-  color: blue;
+  color: #04c8bf;
+}
+
+.search-banner {
+  width: 100%;
+  height: 30vh;
+  min-height: 350px;
+  background-image: url("/search-banner.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-banner .search-banner-content {
+  width: 30%;
+  min-width: 300px;
+  margin: auto;
+  padding: 1em;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  text-align: left;
+}
+.search-banner .search-banner-content .button {
+  width: 10%;
+  margin: auto;
+  display: inline-block;
 }
 
 /* == Random Beer == */
