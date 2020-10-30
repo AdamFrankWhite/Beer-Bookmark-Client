@@ -265,6 +265,22 @@ nav {
   color: darkgoldenrod;
   animation: fade-in 0.2s forwards;
 }
+.reset-pass-cont .reset-success {
+  padding: 0.5em 0.25em;
+  background-color: rgba(202, 24, 0, 0.7);
+  border-radius: 5px;
+  color: white;
+  animation: fade-in 0.2s forwards;
+  margin: 0.5em 0;
+}
+.reset-pass-cont .reset-success {
+  padding: 0.5em 0.25em;
+  background-color: rgba(33, 128, 24, 0.7);
+  border-radius: 5px;
+  color: white;
+  animation: fade-in 0.2s forwards;
+  margin: 0.5em 0;
+}
 
 .row {
   margin: auto;
@@ -358,7 +374,7 @@ nav {
 .button {
   text-transform: uppercase;
   display: block;
-  width: 90%;
+  width: 100%;
   margin: auto;
   text-align: center;
   background: #0e7ad3;

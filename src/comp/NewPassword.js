@@ -8,14 +8,16 @@ const NewPassword = ({ match, location }) => {
 
     //New password
     const [newPassword, setNewPassword] = useState("");
+    const [success, setSuccess] = useState(null);
+    const [error, setError] = useState(null);
     return (
-        <div>
+        <div className="reset-pass-cont">
             <h1>New Password</h1>
             <input
                 type="password"
                 onChange={(e) => setNewPassword(e.target.value)}
             />
-            <button
+            <span
                 onClick={() => {
                     axios
                         .put("http://localhost:5000/users/reset", {
@@ -23,13 +25,21 @@ const NewPassword = ({ match, location }) => {
                             newPassword,
                         })
                         .then((res) => {
-                            console.log(res.data);
+                            console.log(res);
+                            if (res.status == 200) {
+                                setSuccess(true);
+                            } else {
+                                setError("Error. Please try again.");
+                            }
                         });
                     console.log(requestId, newPassword);
                 }}
+                className="button"
             >
                 Submit
-            </button>
+            </span>
+            {success && <p className="reset-success">password changed</p>}
+            {error && <p className="reset-error">{error}</p>}
         </div>
     );
 };
