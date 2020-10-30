@@ -151,7 +151,7 @@ const MyBeers = (props) => {
                 )}
                 <div className="my-beers-cont">
                     {props.user.sortedBeers &&
-                        sortedBeers.map((beer) => (
+                        props.user.sortedBeers.map((beer) => (
                             <BeerRow
                                 myBeers={true}
                                 beerData={beer}
