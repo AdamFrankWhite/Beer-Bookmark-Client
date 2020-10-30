@@ -284,6 +284,13 @@ nav {
         padding: 0.5em;
         margin: 0.5em 0;
     }
+    .forget-error {
+        padding: 0.5em 0.25em;
+        background-color: rgb(248, 217, 113);
+        border-radius: 5px;
+        color: darkgoldenrod;
+        animation: fade-in 0.2s forwards;
+    }
 }
 .row {
     margin: auto;

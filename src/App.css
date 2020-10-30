@@ -258,6 +258,13 @@ nav {
   padding: 0.5em;
   margin: 0.5em 0;
 }
+.reset-pass-cont .forget-error {
+  padding: 0.5em 0.25em;
+  background-color: #f8d971;
+  border-radius: 5px;
+  color: darkgoldenrod;
+  animation: fade-in 0.2s forwards;
+}
 
 .row {
   margin: auto;

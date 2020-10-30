@@ -11,10 +11,7 @@ function ForgotPassword(props) {
             : setErrorMessage("");
     }, [props.user.resetEmailMessage]);
     return (
-        <form
-            className="reset-pass-cont"
-            OnSubmit={() => props.resetPassword(email)}
-        >
+        <div className="reset-pass-cont">
             <h2>Reset Password</h2>
             <label htmlFor="email">Email</label>
             <div className="row">
@@ -25,10 +22,24 @@ function ForgotPassword(props) {
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </div>
-            <input type="submit" value="Send Link" className="button" />
-            <p>{errorMessage}</p>
+            <input
+                type="submit"
+                value="Send Link"
+                className="button"
+                onClick={() => props.resetPassword(email)}
+            />
+            <p
+                className={errorMessage ? "forget-error" : ""}
+                style={
+                    errorMessage != "Email not found"
+                        ? { background: "rgba(91,189,0, 0.6)", color: "white" }
+                        : {}
+                }
+            >
+                {errorMessage}
+            </p>
             <Link to="/login">Back to login</Link>
-        </form>
+        </div>
     );
 }
 
