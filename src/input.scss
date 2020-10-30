@@ -117,8 +117,38 @@ input {
 /* == Header/Nav == */
 nav {
     text-align: center;
+    img[src="/logo.png"] {
+        height: 2.25em;
+        width: auto;
+        padding-top: 0.18em;
+        margin-right: 0.25em;
+    }
 }
-
+.logo-cont {
+    display: flex;
+    align-items: center;
+    .text-cont {
+        display: flex;
+        flex-direction: column;
+        text-transform: uppercase;
+        color: white;
+        align-items: flex-start;
+        justify-content: space-around;
+        h1,
+        h2 {
+            margin: 0;
+            font-family: "Oswald", sans-serif;
+            margin: -0.2em 0;
+        }
+        h1 {
+            font-size: 1.35em;
+            margin-left: -0.02em;
+        }
+        h2 {
+            font-size: 0.8em;
+        }
+    }
+}
 .navbar {
     display: flex;
     padding: 1em;
@@ -138,11 +168,9 @@ nav {
 }
 .nav-title {
     color: white;
-    font-size: 1.6em;
     display: block;
     font-family: "Luckiest Guy", cursive;
-    text-shadow: 3px 3px 3px navy;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.05em;
 }
 
 .link {

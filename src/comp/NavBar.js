@@ -13,7 +13,13 @@ function NavBar(props) {
                 }
             >
                 <Link to="/" className="nav-title">
-                    BeerMe
+                    <div className="logo-cont">
+                        <img src="/logo.png" alt="BeerBookmark logo" />
+                        <div className="text-cont">
+                            <h1>Beer</h1>
+                            <h2>Bookmark</h2>
+                        </div>
+                    </div>
                 </Link>
                 <div>
                     {props.user.loggedIn ? (
