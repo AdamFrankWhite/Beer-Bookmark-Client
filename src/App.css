@@ -406,7 +406,8 @@ nav {
   width: 10%;
   text-align: left;
 }
-.beer .buttons {
+.beer .buttons,
+.beer .set-rating {
   width: 10%;
 }
 .beer .description {
