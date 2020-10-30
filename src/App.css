@@ -1,5 +1,6 @@
 /* == Root Styles == */
 html {
+  overflow: overlay;
   overflow-x: hidden;
   overflow-y: overlay;
 }
@@ -27,6 +28,27 @@ html {
 
 body {
   margin: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1743d3;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #180058;
 }
 
 a {
@@ -210,9 +232,31 @@ nav {
 .registration {
   width: 30%;
   max-width: 300px;
-  margin: 20vh auto;
+  margin: 15vh auto 0 auto;
   line-height: 1em;
   font-size: 0.8em;
+}
+.registration a[href="/forgot"] {
+  padding-top: 1em;
+  display: block;
+}
+
+.reset-pass-cont {
+  border: 1px gray solid;
+  border-radius: 5px;
+  padding: 2em;
+  margin-top: 10vh;
+}
+.reset-pass-cont label {
+  display: block;
+  margin-left: -1em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.reset-pass-cont input {
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.5em 0;
 }
 
 .row {
@@ -263,7 +307,7 @@ nav {
 .registration input {
   width: 90%;
   margin: auto;
-  padding: 0.75em;
+  padding: 0.5em;
 }
 
 .login-head {

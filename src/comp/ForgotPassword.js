@@ -11,17 +11,24 @@ function ForgotPassword(props) {
             : setErrorMessage("");
     }, [props.user.resetEmailMessage]);
     return (
-        <div>
-            <p>Reset Password</p>
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <button onClick={() => props.resetPassword(email)}>Reset</button>
+        <form
+            className="reset-pass-cont"
+            OnSubmit={() => props.resetPassword(email)}
+        >
+            <h2>Reset Password</h2>
+            <label htmlFor="email">Email</label>
+            <div className="row">
+                <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </div>
+            <input type="submit" value="Send Link" className="button" />
             <p>{errorMessage}</p>
             <Link to="/login">Back to login</Link>
-        </div>
+        </form>
     );
 }
 

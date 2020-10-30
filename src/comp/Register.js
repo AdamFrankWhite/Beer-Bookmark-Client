@@ -40,7 +40,7 @@ function Register(props) {
     return (
         <form className="registration" onSubmit={handleSubmit} novalidate>
             <div className="login-head">
-                <img src="/login.png" alt="login" />
+                <img src="/register.png" alt="login" />
                 <h2>Register</h2>
             </div>
 

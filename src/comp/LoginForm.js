@@ -8,7 +8,7 @@ function LoginForm(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     return (
-        <div>
+        <>
             <div className="login-head">
                 <img src="/login.png" alt="login" />
                 <h2>Login</h2>
@@ -57,7 +57,7 @@ function LoginForm(props) {
             <Link to="/forgot">Forgot Password?</Link>
 
             {props.user.loggedIn && <Redirect to="/my-beers" />}
-        </div>
+        </>
     );
 }
 const mapStateToProps = (state) => {
