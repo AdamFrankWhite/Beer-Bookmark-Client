@@ -1,8 +1,9 @@
 /* == Root Styles == */
 
 html {
-    overflow: overlay;
+    // overflow: overlay;
     overflow-x: hidden;
+    overflow-y: overlay;
 }
 #root,
 .App {
