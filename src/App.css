@@ -566,6 +566,14 @@ nav img[src="/logo.png"] {
   color: #04c8bf;
 }
 
+.flex-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
 .search-banner {
   width: 100%;
   height: 30vh;
@@ -695,6 +703,7 @@ nav img[src="/logo.png"] {
   height: 100%;
   min-height: 90vh;
   display: flex;
+  margin: auto;
 }
 .settings-cont .settings-nav {
   width: 20%;
@@ -707,6 +716,15 @@ nav img[src="/logo.png"] {
 .settings-cont .settings-nav h1 {
   font-size: 1.5em;
 }
+.settings-cont .settings-nav a {
+  font-size: 1.25em;
+  color: white;
+  margin: 1em auto;
+}
+.settings-cont .settings-nav a:hover {
+  color: orange;
+  transition: color 0.2s;
+}
 .settings-cont .settings-nav nav {
   display: flex;
   flex-direction: column;
@@ -715,6 +733,19 @@ nav img[src="/logo.png"] {
 .settings-cont .settings-tab {
   width: 80%;
   background: white;
+}
+
+.account-cont,
+.privacy-cont {
+  margin: 1em auto auto 0;
+  width: 80%;
+}
+
+.reset-pass-cont {
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  margin: auto;
 }
 
 .slider-div {

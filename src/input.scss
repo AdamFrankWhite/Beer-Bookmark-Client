@@ -620,6 +620,16 @@ nav {
     color: rgb(4, 200, 191);
 }
 
+// Icons
+
+.flex-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
 // == Search ==
 
 .search-banner {
@@ -758,10 +768,20 @@ nav {
     height: 100%;
     min-height: 90vh;
     display: flex;
+    margin: auto;
 
     .settings-nav {
         h1 {
             font-size: 1.5em;
+        }
+        a {
+            font-size: 1.25em;
+            color: white;
+            margin: 1em auto;
+            &:hover {
+                color: orange;
+                transition: color 0.2s;
+            }
         }
         width: 20%;
         height: 90vh;
@@ -781,6 +801,19 @@ nav {
 
         background: white;
     }
+}
+
+.account-cont,
+.privacy-cont {
+    margin: 1em auto auto 0;
+    width: 80%;
+}
+
+.reset-pass-cont {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    margin: auto;
 }
 //Color Theme Slider
 .slider-div {
