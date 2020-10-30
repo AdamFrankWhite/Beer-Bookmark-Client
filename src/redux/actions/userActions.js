@@ -121,7 +121,7 @@ export const addBeer = (data) => (dispatch) => {
             console.log(res.data);
         });
 };
-export const deleteBeer = (data) => (dispatch) => {
+export const deleteBeer = (data, currentSortType) => (dispatch) => {
     const { username, beerData } = data;
     let deleteData = {
         beerData,
@@ -131,11 +131,27 @@ export const deleteBeer = (data) => (dispatch) => {
     axios
         .put("http://localhost:5000/users/my-beers/delete-beer", deleteData)
         .then((res) => {
+            const sortedBeers = sortBeersFunc(
+                res.data,
+                currentSortType.searchType,
+                currentSortType.orderAsc
+            );
             dispatch({ type: GET_BEERS, payload: res.data });
+            // Necessary to avoid sorting bug - state.sortType kept getting overwritten on second rating
+            dispatch({
+                type: SET_SORT_TYPE,
+                payload: {
+                    searchType: currentSortType.searchType,
+                    orderAsc: currentSortType.orderAsc,
+                },
+            });
+            currentSortType.searchType == "stars" &&
+                dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
+            dispatch({ type: SET_LOADING, payload: false });
         });
 };
 
-export const rateBeer = (beerData, username, rating, sortType) => (
+export const rateBeer = (beerData, username, rating, currentSortType) => (
     dispatch
 ) => {
     dispatch({ type: SET_LOADING, payload: true });
@@ -149,20 +165,19 @@ export const rateBeer = (beerData, username, rating, sortType) => (
         .then((res) => {
             const sortedBeers = sortBeersFunc(
                 res.data,
-                sortType.searchType,
-                sortType.orderAsc
+                currentSortType.searchType,
+                currentSortType.orderAsc
             );
-            console.log(sortType);
             dispatch({ type: GET_BEERS, payload: res.data });
             // Necessary to avoid sorting bug - state.sortType kept getting overwritten on second rating
             dispatch({
                 type: SET_SORT_TYPE,
                 payload: {
-                    searchType: sortType.searchType,
-                    orderAsc: sortType.orderAsc,
+                    searchType: currentSortType.searchType,
+                    orderAsc: currentSortType.orderAsc,
                 },
             });
-            sortType.searchType == "stars" &&
+            currentSortType.searchType == "stars" &&
                 dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
             dispatch({ type: SET_LOADING, payload: false });
         });

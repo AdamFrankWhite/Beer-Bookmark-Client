@@ -165,10 +165,14 @@ function BeerRow(props) {
                         <div>
                             <span
                                 onClick={() => {
-                                    props.deleteBeer({
-                                        username: props.user.userData.username,
-                                        beerData: props.beerData,
-                                    });
+                                    props.deleteBeer(
+                                        {
+                                            username:
+                                                props.user.userData.username,
+                                            beerData: props.beerData,
+                                        },
+                                        props.user.sortType
+                                    );
                                     toggleDelete(false);
                                 }}
                                 className="delete-beer"
