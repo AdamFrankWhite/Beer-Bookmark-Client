@@ -3,15 +3,35 @@ import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
 function BeerRow(props) {
-    const checkBeerIncluded =
-        props.search &&
-        props.user.beers &&
-        JSON.stringify(props.user.beers).includes(props.beerData.id);
+    const [checkBeerIncluded, updateCheckBeerIncluded] = useState(beerCheck());
+    function beerCheck() {
+        return (
+            props.search &&
+            props.user.beers &&
+            JSON.stringify(props.user.beers).includes(props.beerData.id)
+        );
+    }
+
     const center = { margin: "auto", height: 25, width: 25 };
     const clickTextStyle = checkBeerIncluded && "click-text-saved";
-    const [clickText, setClickText] = useState(
-        checkBeerIncluded ? "Saved" : "Add to favourites"
-    );
+    const clickText = checkBeerIncluded ? "Saved" : "Add to favourites";
+
+    useEffect(() => {
+        updateCheckBeerIncluded(beerCheck());
+    }, [props.user.searchSortType, props.user.beers]);
+    // function beerCheck() {
+    //     return (
+    //         props.search &&
+    //         props.user.beers &&
+    //         JSON.stringify(props.user.beers).includes(props.beerData.id)
+    //     );
+    // }
+    // const [checkBeerIncluded, updateCheckBeerIncluded] = useState(beerCheck());
+    // useEffect(() => {
+    //     updateCheckBeerIncluded(beerCheck());
+    //     console.log(beerCheck());
+    // }, [props.user.searchSortType]);
+
     const [confirmDelete, toggleDelete] = useState(false);
     const [rating, setRating] = useState("");
     const [editRating, setEditRating] = useState(false);
@@ -192,7 +212,7 @@ function BeerRow(props) {
                     <span
                         onClick={() => {
                             //only add to favourites if not already included
-                            setClickText("Saved");
+
                             !checkBeerIncluded &&
                                 props.user.loggedIn &&
                                 props.addBeer({
