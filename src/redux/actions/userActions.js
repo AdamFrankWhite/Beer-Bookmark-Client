@@ -328,8 +328,14 @@ export const sortSearchResults = (beers, searchType, orderAsc) => (
     dispatch({ type: SORT_SEARCH_RESULTS, payload: sortedBeers });
 };
 
-export const setColorScheme = (color) => (dispatch) => {
-    dispatch({ type: SET_COLOR_SCHEME, payload: color });
+export const setColorScheme = (username, color) => (dispatch) => {
+    console.log(username, color);
+    axios
+        .put("http://localhost:5000/users/set-theme", { username, color })
+        .then((res) => {
+            console.log(res);
+            dispatch({ type: SET_COLOR_SCHEME, payload: color });
+        });
 };
 
 const sortBeersFunc = (beers, searchType, orderAsc) => {

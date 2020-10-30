@@ -28,7 +28,7 @@ const initialState = {
     sortedBeers: [],
     sortType: {},
     searchSortType: { searchType: "", orderAsc: false },
-    colorScheme: "light",
+    colorScheme: "",
     resetEmailMessage: null,
     //
     authenticated: false,
@@ -50,6 +50,7 @@ export default function (state = initialState, action) {
                 beers: action.payload.beers,
                 userData: action.payload,
                 loggedIn: true,
+                colorScheme: action.payload.theme,
             };
         case GET_BEERS:
             return {

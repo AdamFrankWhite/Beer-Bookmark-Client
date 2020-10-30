@@ -6,7 +6,9 @@ function Account(props) {
         props.user.colorScheme !== "dark" ? false : true
     );
     useEffect(() => {
-        !checked ? props.setColorScheme("light") : props.setColorScheme("dark");
+        !checked
+            ? props.setColorScheme(props.user.userData.username, "light")
+            : props.setColorScheme(props.user.userData.username, "dark");
     }, [checked]);
     return (
         <div>
