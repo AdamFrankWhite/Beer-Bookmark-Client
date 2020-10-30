@@ -231,9 +231,14 @@ function BeerRow(props) {
                 </span>
             </div>
             {/* Style condition prevent initial animation */}
+            {/* More Info Scroll */}
             <div
                 ref={targetRef}
-                className="more-info-cont"
+                className={
+                    props.user.colorScheme !== "dark"
+                        ? "more-info-cont"
+                        : "more-info-cont dark-theme-secondary"
+                }
                 style={infoStyle ? infoStyle : { marginBottom: -height }}
             >
                 {props.beerData.beerInfo}
