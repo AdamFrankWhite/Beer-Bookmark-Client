@@ -3,7 +3,7 @@ import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
 function BeerRow(props) {
-    const [checkBeerIncluded, updateCheckBeerIncluded] = useState(beerCheck());
+    let checkBeerIncluded = beerCheck();
     function beerCheck() {
         return (
             props.search &&
@@ -17,20 +17,8 @@ function BeerRow(props) {
     const clickText = checkBeerIncluded ? "Saved" : "Add to favourites";
 
     useEffect(() => {
-        updateCheckBeerIncluded(beerCheck());
+        checkBeerIncluded = beerCheck();
     }, [props.user.searchSortType, props.user.beers]);
-    // function beerCheck() {
-    //     return (
-    //         props.search &&
-    //         props.user.beers &&
-    //         JSON.stringify(props.user.beers).includes(props.beerData.id)
-    //     );
-    // }
-    // const [checkBeerIncluded, updateCheckBeerIncluded] = useState(beerCheck());
-    // useEffect(() => {
-    //     updateCheckBeerIncluded(beerCheck());
-    //     console.log(beerCheck());
-    // }, [props.user.searchSortType]);
 
     const [confirmDelete, toggleDelete] = useState(false);
     const [rating, setRating] = useState("");
