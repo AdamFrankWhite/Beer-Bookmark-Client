@@ -703,7 +703,7 @@ nav img[src="/logo.png"] {
   height: 100%;
   min-height: 90vh;
   display: flex;
-  margin: auto;
+  justify-content: center;
 }
 .settings-cont .settings-nav {
   width: 20%;
@@ -738,12 +738,31 @@ nav img[src="/logo.png"] {
 .account-cont,
 .privacy-cont {
   margin: 1em auto auto 0;
-  width: 80%;
+  width: 40%;
+  border: 1px gray solid;
+  border-radius: 5px;
+  margin: 1em;
+  padding: 1em;
+}
+.account-cont h1,
+.account-cont .icon,
+.privacy-cont h1,
+.privacy-cont .icon {
+  font-size: 1.5em;
+  margin: 0 auto;
+}
+.account-cont .row,
+.privacy-cont .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  margin: auto;
 }
 
 .reset-pass-cont {
   display: flex;
-  width: 30%;
+  width: 70%;
   flex-direction: column;
   margin: auto;
 }
@@ -751,6 +770,7 @@ nav img[src="/logo.png"] {
 .slider-div {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 /* The switch - the box around the slider */
@@ -824,13 +844,46 @@ input:checked + .slider:before {
     left: 80%;
   }
 }
-/* == Mobile/Tab == */
-@media (max-width: 767px) {
-  /* Fix bootstrap issue */
-  .navbar-brand {
-    margin: auto !important;
-  }
+footer {
+  width: 100%;
+  padding: 2em;
+  background-color: #141414;
 }
+footer .footer-cont {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  margin: auto;
+}
+footer .about {
+  width: 30%;
+  text-align: left;
+  padding-right: 5%;
+}
+footer .about p {
+  margin: 0;
+  margin-top: 0.5em;
+}
+footer .about .logo-cont img {
+  width: 18px;
+  height: auto;
+  margin-right: 0.25em;
+}
+footer .links,
+footer .subscribe {
+  width: 15%;
+  text-align: left;
+}
+footer .links h3,
+footer .subscribe h3 {
+  margin: 0.5em 0;
+}
+footer ul {
+  list-style-type: none;
+  color: lightgray;
+  padding-left: 0;
+}
+
 /* == Mobile == */
 @media (min-width: 768px) {
   .link {

@@ -257,6 +257,7 @@ nav {
 
 .home {
     font-size: 1.05em;
+
     hr {
         width: 5em;
         background-color: black;
@@ -768,7 +769,7 @@ nav {
     height: 100%;
     min-height: 90vh;
     display: flex;
-    margin: auto;
+    justify-content: center;
 
     .settings-nav {
         h1 {
@@ -806,12 +807,28 @@ nav {
 .account-cont,
 .privacy-cont {
     margin: 1em auto auto 0;
-    width: 80%;
+    width: 40%;
+    border: 1px gray solid;
+    border-radius: 5px;
+    margin: 1em;
+    padding: 1em;
+    h1,
+    .icon {
+        font-size: 1.5em;
+        margin: 0 auto;
+    }
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 70%;
+        margin: auto;
+    }
 }
 
 .reset-pass-cont {
     display: flex;
-    width: 30%;
+    width: 70%;
     flex-direction: column;
     margin: auto;
 }
@@ -819,6 +836,7 @@ nav {
 .slider-div {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 /* The switch - the box around the slider */
 .switch {
@@ -890,13 +908,50 @@ input:checked + .slider:before {
         left: 80%;
     }
 }
-/* == Mobile/Tab == */
-@media (max-width: 767px) {
-    /* Fix bootstrap issue */
-    .navbar-brand {
-        margin: auto !important;
+
+// Footer
+footer {
+    width: 100%;
+
+    padding: 2em;
+    background-color: rgb(20, 20, 20);
+    .footer-cont {
+        display: flex;
+        justify-content: space-evenly;
+        width: 80%;
+        margin: auto;
+    }
+
+    .about {
+        width: 30%;
+        text-align: left;
+        padding-right: 5%;
+        p {
+            margin: 0;
+            margin-top: 0.5em;
+        }
+        .logo-cont img {
+            width: 18px;
+            height: auto;
+            margin-right: 0.25em;
+        }
+    }
+
+    .links,
+    .subscribe {
+        width: 15%;
+        text-align: left;
+        h3 {
+            margin: 0.5em 0;
+        }
+    }
+    ul {
+        list-style-type: none;
+        color: lightgray;
+        padding-left: 0;
     }
 }
+
 /* == Mobile == */
 @media (min-width: 768px) {
     .link {
