@@ -11,6 +11,7 @@ import {
     SORT_SEARCH_RESULTS,
     SET_COLOR_SCHEME,
     RESET_EMAIL_MESSAGE,
+    UPDATE_EMAIL,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -81,7 +82,19 @@ export const register = (data) => (dispatch) => {
         });
 };
 
+export const changeEmail = (username, email) => (dispatch) => {
+    dispatch({ type: SET_LOADING, payload: true });
+    console.log(username);
+    axios
+        .put("http://localhost:5000/users/email", { username, email })
+        .then((res) => {
+            console.log(res.data);
+            dispatch({ type: UPDATE_EMAIL, payload: res.data });
+            dispatch({ type: SET_LOADING, payload: false });
+        });
+};
 export const resetPassword = (email) => (dispatch) => {
+    dispatch({ type: SET_LOADING, payload: true });
     axios
         .post("http://localhost:5000/users/forgot", { email })
         .then((res) => {
@@ -93,6 +106,7 @@ export const resetPassword = (email) => (dispatch) => {
                       payload: "Email not found",
                   });
             console.log("yo");
+            dispatch({ type: SET_LOADING, payload: false });
         })
         .catch((err) => console.log(err));
 };

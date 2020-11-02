@@ -10,6 +10,7 @@ import {
     SET_SEARCH_SORT_TYPE,
     SORT_SEARCH_RESULTS,
     RESET_EMAIL_MESSAGE,
+    UPDATE_EMAIL,
     //
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
@@ -69,7 +70,12 @@ export default function (state = initialState, action) {
                 sortType: action.payload,
             };
         }
-
+        case UPDATE_EMAIL: {
+            return {
+                ...state,
+                userData: action.payload,
+            };
+        }
         case RESET_EMAIL_MESSAGE: {
             return {
                 ...state,
