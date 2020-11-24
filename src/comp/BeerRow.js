@@ -3,8 +3,10 @@ import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
+
+import MouseTooltip from "react-sticky-mouse-tooltip";
+
 function BeerRow(props) {
     let checkBeerIncluded = beerCheck();
     function beerCheck() {
@@ -22,7 +24,7 @@ function BeerRow(props) {
     useEffect(() => {
         checkBeerIncluded = beerCheck();
     }, [props.user.searchSortType, props.user.beers]);
-
+    const [toggleTooltip, setToggleToolTip] = useState(false);
     const [confirmDelete, toggleDelete] = useState(false);
     const [rating, setRating] = useState("");
     const [editRating, setEditRating] = useState(false);
@@ -144,9 +146,27 @@ function BeerRow(props) {
                                         color="black"
                                     />
                                 ) : (
-                                    <span>
-                                        &#127866; {props.beerData.stars}
-                                    </span>
+                                    <>
+                                        <span
+                                            onMouseEnter={() =>
+                                                setToggleToolTip(true)
+                                            }
+                                            onMouseLeave={() =>
+                                                setToggleToolTip(false)
+                                            }
+                                        >
+                                            &#127866; {props.beerData.stars}
+                                        </span>
+                                        <MouseTooltip
+                                            visible={toggleTooltip}
+                                            offsetX={13}
+                                            offsetY={7}
+                                        >
+                                            <span className="tooltip">
+                                                edit
+                                            </span>
+                                        </MouseTooltip>
+                                    </>
                                 )}
                             </span>
                         )}

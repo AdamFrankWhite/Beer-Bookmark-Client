@@ -511,6 +511,21 @@ nav img[src="/logo.png"] {
 .beer .buttons,
 .beer .set-rating {
   width: 10%;
+  position: relative;
+}
+.beer .tooltip {
+  background: black;
+  color: white;
+  border-radius: 5px;
+  padding: 0.25em;
+  position: absolute;
+  opacity: 0;
+  left: 40%;
+  font-size: 0.8em;
+}
+.beer .buttons:hover .tooltip {
+  opacity: 1;
+  transition: opacity 0.5s;
 }
 .beer .description {
   font-size: 0.9em;
@@ -529,7 +544,7 @@ nav img[src="/logo.png"] {
 .beer .cross:hover {
   cursor: pointer;
 }
-.beer span:not(.click-text-saved):hover {
+.beer span.false:hover {
   text-decoration: underline;
 }
 .beer .set-rating {
@@ -669,6 +684,7 @@ nav img[src="/logo.png"] {
   background: black;
   color: white;
   border-radius: 10px;
+  text-decoration: none;
 }
 
 .buttons:hover {

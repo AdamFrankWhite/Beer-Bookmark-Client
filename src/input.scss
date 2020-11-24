@@ -549,6 +549,21 @@ nav {
     .buttons,
     .set-rating {
         width: 10%;
+        position: relative;
+    }
+    .tooltip {
+        background: rgb(0, 0, 0);
+        color: white;
+        border-radius: 5px;
+        padding: 0.25em;
+        position: absolute;
+        opacity: 0;
+        left: 40%;
+        font-size: 0.8em;
+    }
+    .buttons:hover .tooltip {
+        opacity: 1;
+        transition: opacity 0.5s;
     }
     .description {
         font-size: 0.9em;
@@ -570,7 +585,7 @@ nav {
             cursor: pointer;
         }
     }
-    span:not(.click-text-saved):hover {
+    span.false:hover {
         text-decoration: underline;
     }
     .set-rating {
@@ -732,6 +747,7 @@ nav {
     background: black;
     color: white;
     border-radius: 10px;
+    text-decoration: none;
 }
 
 .buttons:hover {
