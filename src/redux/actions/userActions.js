@@ -165,25 +165,48 @@ export const deleteBeer = (data, currentSortType) => (dispatch) => {
         });
 };
 
-export const rateBeer = (beerData, username, rating, currentSortType) => (
-    dispatch
-) => {
+export const rateBeer = (
+    beerData,
+    username,
+    rating,
+    currentSortType,
+    currentBeerList
+) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     let updateData = {
         beerData,
         username,
         newRating: rating,
     };
+
     axios
         .put(`http://localhost:5000/users/my-beers/update`, updateData)
         .then((res) => {
+            //Handle list update client side using current list, to avoid list re-ordering issues
+            let updatedBeer = res.data;
+            //Remove beer to be edited
+            let updatedBeerList = currentBeerList.filter(
+                (beer) => beer.id != updatedBeer.id
+            );
+
+            let index = currentBeerList.findIndex(
+                (beer) => beer.id === updatedBeer.id
+            );
+
+            //Insert updated beer
+            updatedBeerList.splice(index, 0, updatedBeer);
             const sortedBeers = sortBeersFunc(
-                res.data,
+                updatedBeerList,
                 currentSortType.searchType,
                 currentSortType.orderAsc
             );
-            console.log(res.data);
-            dispatch({ type: GET_BEERS, payload: res.data });
+            console.log(currentSortType);
+            if (currentSortType !== undefined) {
+                dispatch({ type: GET_BEERS, payload: sortedBeers });
+            } else {
+                dispatch({ type: GET_BEERS, payload: updatedBeerList });
+            }
+
             // Necessary to avoid sorting bug - state.sortType kept getting overwritten on second rating
             dispatch({
                 type: SET_SORT_TYPE,
@@ -195,6 +218,9 @@ export const rateBeer = (beerData, username, rating, currentSortType) => (
             currentSortType.searchType == "stars" &&
                 dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
             dispatch({ type: SET_LOADING, payload: false });
+        })
+        .catch((err) => {
+            console.log(err);
         });
 };
 
