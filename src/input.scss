@@ -756,6 +756,10 @@ nav {
     align-items: center;
 }
 
+.delete-beer,
+.delete-confirm {
+    width: 8%;
+}
 .delete-beer:hover {
     color: black;
     background-color: gray;

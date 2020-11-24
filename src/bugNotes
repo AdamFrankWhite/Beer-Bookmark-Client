@@ -13,4 +13,5 @@ BUG: mybeers rating update re-ordering issue - when updating rating, order of id
 SOLUTION: when updating a rating, just return the updated beer from db, then splice into current ordered list on the client side.
 At first, I thought it was sort being unstable, however after fixing that, then realising it was fixing anyway with ECMA2019, i then realised the problem lay elsewhere.
 
-BUG: anchor links only showing on some beers
+BUG: need dynamic heights of hidden div offset for smooth scroll effect, based on sized of text
+SOLUTION: useRef, useEffect and clientHeight
