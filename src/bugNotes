@@ -11,3 +11,6 @@ newArray.push() - bug, returning number, because assigning Array.push() TO A VAR
 
 BUG: mybeers rating update re-ordering issue - when updating rating, order of identical items in list would change, following receiving the updated list (with no order) from db, then re-ordering using sort. so essentially, running a new sort on the unsorted list.
 SOLUTION: when updating a rating, just return the updated beer from db, then splice into current ordered list on the client side.
+At first, I thought it was sort being unstable, however after fixing that, then realising it was fixing anyway with ECMA2019, i then realised the problem lay elsewhere.
+
+BUG: anchor links only showing on some beers

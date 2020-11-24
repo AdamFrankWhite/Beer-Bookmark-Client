@@ -121,7 +121,7 @@ export const addBeer = (data) => (dispatch) => {
         abv: beerData.abv.toString(),
         beerDescription: beerData.beerDescription,
         breweryName: beerData.breweryName,
-        breweryContact: beerData.breweryContact.url,
+        breweryContact: beerData.breweryContact,
         stars: "1",
         date: new Date(),
         img: beerData.img,
