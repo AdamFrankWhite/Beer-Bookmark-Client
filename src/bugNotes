@@ -15,3 +15,6 @@ At first, I thought it was sort being unstable, however after fixing that, then 
 
 BUG: need dynamic heights of hidden div offset for smooth scroll effect, based on sized of text
 SOLUTION: useRef, useEffect and clientHeight
+
+TODO:
+takes two clicks to change order when changing category

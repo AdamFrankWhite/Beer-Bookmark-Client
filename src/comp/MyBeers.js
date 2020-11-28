@@ -7,12 +7,6 @@ import userReducer from "../redux/reducers/userReducer";
 import { sortBeers } from "../redux/actions/userActions";
 const MyBeers = (props) => {
     const center = { margin: "auto" };
-
-    const [sortedBeers, setSortedBeers] = useState(props.user.beers);
-    //Populate array on component mount
-    useEffect(() => {
-        props.sortBeers(props.user.beers);
-    }, [props.user.beers]);
     //Set order asc/desc
     const [orderAsc, setOrderAsc] = useState(false);
 
@@ -23,6 +17,15 @@ const MyBeers = (props) => {
         abv: false,
         rating: false,
     });
+    const [sortedBeers, setSortedBeers] = useState(props.user.beers);
+    const [orderType, setOrderType] = useState("");
+    //Populate array on component mount
+    useEffect(() => {
+        props.sortBeers(props.user.beers);
+    }, [props.user.beers]);
+    useEffect(() => {
+        props.sortBeers(props.user.beers, orderType, orderAsc);
+    }, [orderType, orderAsc]);
 
     return (
         <div className="App">
@@ -46,11 +49,7 @@ const MyBeers = (props) => {
                         <span
                             className="sort-btn name-col"
                             onClick={() => {
-                                props.sortBeers(
-                                    props.user.beers,
-                                    "beerName",
-                                    orderAsc
-                                );
+                                setOrderType("beerName");
                                 setOrderAsc(
                                     props.user.sortType.searchType == "beerName"
                                         ? !orderAsc
@@ -78,22 +77,18 @@ const MyBeers = (props) => {
                             {props.user.sortType &&
                                 props.user.sortType.searchType == "beerName" &&
                                 props.user.sortType.orderAsc && (
-                                    <span>&#9660;</span>
+                                    <span className="descend">&#9650;</span>
                                 )}
                             {props.user.sortType &&
                                 props.user.sortType.searchType == "beerName" &&
                                 !props.user.sortType.orderAsc && (
-                                    <span>&#9660;</span>
+                                    <span className="ascend">&#9660;</span>
                                 )}
                         </span>
                         <span
                             className="sort-btn brewery-col"
                             onClick={() => {
-                                props.sortBeers(
-                                    props.user.beers,
-                                    "breweryName",
-                                    orderAsc
-                                );
+                                setOrderType("breweryName");
                                 setOrderAsc(
                                     props.user.sortType.searchType ==
                                         "breweryName"
@@ -135,11 +130,7 @@ const MyBeers = (props) => {
                         <span
                             className="sort-btn abv-col"
                             onClick={() => {
-                                props.sortBeers(
-                                    props.user.beers,
-                                    "abv",
-                                    orderAsc
-                                );
+                                setOrderType("abv");
                                 setOrderAsc(
                                     props.user.sortType.searchType == "abv"
                                         ? !orderAsc
@@ -177,11 +168,7 @@ const MyBeers = (props) => {
                         <span
                             className="sort-btn desc-col"
                             onClick={() => {
-                                props.sortBeers(
-                                    props.user.beers,
-                                    "beerDescription",
-                                    orderAsc
-                                );
+                                setOrderType("beerDescription");
                                 setOrderAsc(
                                     props.user.sortType.searchType ==
                                         "beerDescription"
@@ -223,11 +210,7 @@ const MyBeers = (props) => {
                         <span
                             className="sort-btn rate-col"
                             onClick={() => {
-                                props.sortBeers(
-                                    props.user.beers,
-                                    "stars",
-                                    orderAsc
-                                );
+                                setOrderType("stars");
                                 setOrderAsc(
                                     props.user.sortType.searchType == "stars"
                                         ? !orderAsc
