@@ -51,7 +51,11 @@ const MyBeers = (props) => {
                                     "beerName",
                                     orderAsc
                                 );
-                                setOrderAsc(!orderAsc);
+                                setOrderAsc(
+                                    props.user.sortType.searchType == "beerName"
+                                        ? !orderAsc
+                                        : false
+                                );
                             }}
                             onMouseEnter={() =>
                                 toggleHover((prevState) => {
@@ -66,7 +70,11 @@ const MyBeers = (props) => {
                             Name
                             {hover.name &&
                                 props.user.sortType.searchType !==
-                                    "beerName" && <span>&#9660;</span>}
+                                    "beerName" && (
+                                    <span style={{ color: "gray" }}>
+                                        &#9660;
+                                    </span>
+                                )}
                             {props.user.sortType &&
                                 props.user.sortType.searchType == "beerName" &&
                                 props.user.sortType.orderAsc && (
@@ -86,7 +94,12 @@ const MyBeers = (props) => {
                                     "breweryName",
                                     orderAsc
                                 );
-                                setOrderAsc(!orderAsc);
+                                setOrderAsc(
+                                    props.user.sortType.searchType ==
+                                        "breweryName"
+                                        ? !orderAsc
+                                        : false
+                                );
                             }}
                             onMouseEnter={() =>
                                 toggleHover((prevState) => {
@@ -101,7 +114,11 @@ const MyBeers = (props) => {
                             Brewery
                             {hover.brewery &&
                                 props.user.sortType.searchType !==
-                                    "breweryName" && <span>&#9660;</span>}
+                                    "breweryName" && (
+                                    <span style={{ color: "gray" }}>
+                                        &#9660;
+                                    </span>
+                                )}
                             {props.user.sortType &&
                                 props.user.sortType.searchType ==
                                     "breweryName" &&
@@ -123,7 +140,11 @@ const MyBeers = (props) => {
                                     "abv",
                                     orderAsc
                                 );
-                                setOrderAsc(!orderAsc);
+                                setOrderAsc(
+                                    props.user.sortType.searchType == "abv"
+                                        ? !orderAsc
+                                        : false
+                                );
                             }}
                             onMouseEnter={() =>
                                 toggleHover((prevState) => {
@@ -138,7 +159,9 @@ const MyBeers = (props) => {
                             ABV
                             {hover.abv &&
                                 props.user.sortType.searchType !== "abv" && (
-                                    <span>&#9660;</span>
+                                    <span style={{ color: "gray" }}>
+                                        &#9660;
+                                    </span>
                                 )}
                             {props.user.sortType &&
                                 props.user.sortType.searchType == "abv" &&
@@ -159,7 +182,12 @@ const MyBeers = (props) => {
                                     "beerDescription",
                                     orderAsc
                                 );
-                                setOrderAsc(!orderAsc);
+                                setOrderAsc(
+                                    props.user.sortType.searchType ==
+                                        "beerDescription"
+                                        ? !orderAsc
+                                        : false
+                                );
                             }}
                             onMouseEnter={() =>
                                 toggleHover((prevState) => {
@@ -174,7 +202,11 @@ const MyBeers = (props) => {
                             Type
                             {hover.type &&
                                 props.user.sortType.searchType !==
-                                    "beerDescription" && <span>&#9660;</span>}
+                                    "beerDescription" && (
+                                    <span style={{ color: "gray" }}>
+                                        &#9660;
+                                    </span>
+                                )}
                             {props.user.sortType &&
                                 props.user.sortType.searchType ==
                                     "beerDescription" &&
@@ -196,7 +228,11 @@ const MyBeers = (props) => {
                                     "stars",
                                     orderAsc
                                 );
-                                setOrderAsc(!orderAsc);
+                                setOrderAsc(
+                                    props.user.sortType.searchType == "stars"
+                                        ? !orderAsc
+                                        : false
+                                );
                             }}
                             onMouseEnter={() =>
                                 toggleHover((prevState) => {
@@ -211,7 +247,9 @@ const MyBeers = (props) => {
                             Rating
                             {hover.rating &&
                                 props.user.sortType.searchType !== "stars" && (
-                                    <span>&#9660;</span>
+                                    <span style={{ color: "gray" }}>
+                                        &#9660;
+                                    </span>
                                 )}
                             {props.user.sortType &&
                                 props.user.sortType.searchType == "stars" &&
