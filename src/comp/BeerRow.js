@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
@@ -32,6 +32,7 @@ function BeerRow(props) {
     const [selectedBeer, setSelectedBeer] = useState(null);
     //Init null to avoid initial collapse animation
     const [showRow, toggleShowRow] = useState(null);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     let infoStyle;
     const targetRef = useRef();
     const [height, setHeight] = useState(0);
@@ -47,11 +48,20 @@ function BeerRow(props) {
             marginBottom: -height,
         };
     }
+    const handleWindowResize = useCallback(() => {
+        setWindowWidth(window.innerWidth);
+    }, []);
     useEffect(() => {
         if (targetRef.current) {
             setHeight(targetRef.current.clientHeight);
         }
-    });
+        console.log(targetRef.current.clientHeight);
+        window.addEventListener("resize", handleWindowResize);
+
+        return () => {
+            window.removeEventListener("resize", handleWindowResize);
+        };
+    }, [windowWidth]);
 
     // let beerTypeStyle;
     // if (props.beerData.beerDescription.toLowerCase().includes("ipa")) {
