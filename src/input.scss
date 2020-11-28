@@ -536,6 +536,7 @@ nav {
         width: 25%;
         color: white;
         text-decoration: none;
+        margin-left: 0;
         &:hover {
             color: orange !important;
             transition: color 0.2s;
@@ -545,6 +546,10 @@ nav {
         font-size: 0.9em;
         width: 10%;
         text-align: left;
+        margin-left: 0;
+    }
+    .buttons {
+        margin-left: 0;
     }
     .buttons,
     .set-rating {
@@ -695,12 +700,41 @@ nav {
 }
 
 .sort-btn-group {
-    text-align: right;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
     margin-right: 1em;
+    .blank-col {
+        width: 5vw;
+        min-width: 75px;
+        // @media (min-width: 1400px) {
+        //     width: 4vw;
+        // }
+        margin: 0;
+        height: auto;
+    }
+    .name-col {
+        width: 20%;
+
+        padding-left: 1em;
+    }
+    .brewery-col {
+        width: 25%;
+    }
+    .abv-col {
+        width: 10%;
+    }
+    .desc-col {
+        width: 25%;
+    }
+    .rate-col {
+        width: 10%;
+    }
 }
 
 .sort-btn {
-    padding: 0.5em;
+    margin: auto 0;
+    text-align: left;
 }
 .sort-btn:hover {
     cursor: pointer;

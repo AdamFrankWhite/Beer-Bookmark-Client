@@ -52,6 +52,7 @@ function BeerRow(props) {
             setHeight(targetRef.current.clientHeight);
         }
     });
+
     // let beerTypeStyle;
     // if (props.beerData.beerDescription.toLowerCase().includes("ipa")) {
     //     beerTypeStyle = { backgroundColor: "blue" };
@@ -79,6 +80,11 @@ function BeerRow(props) {
                     href={
                         props.beerData.breweryContact &&
                         props.beerData.breweryContact
+                    }
+                    style={
+                        props.user.colorScheme !== "dark"
+                            ? { color: "black" }
+                            : { color: "white" }
                     }
                 >
                     <h4>{props.beerData.breweryName}</h4>

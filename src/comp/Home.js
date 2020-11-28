@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Footer from "./Footer";
+
 export default function Home() {
     return (
         <>
@@ -52,7 +52,6 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 }

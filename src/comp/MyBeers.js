@@ -16,128 +16,19 @@ const MyBeers = (props) => {
     //Set order asc/desc
     const [orderAsc, setOrderAsc] = useState(false);
 
+    const [hover, toggleHover] = useState({
+        name: false,
+        brewery: false,
+        type: false,
+        abv: false,
+        rating: false,
+    });
+
     return (
         <div className="App">
             <div className="my-beers-wrapper">
                 <div className="my-beers-banner">
                     <h1>My Favourite Beers</h1>
-                </div>
-
-                <div className="sort-btn-group">
-                    <span>Sort by: </span>
-                    <span
-                        className="sort-btn"
-                        onClick={() => {
-                            props.sortBeers(
-                                props.user.beers,
-                                "beerName",
-                                orderAsc
-                            );
-                            setOrderAsc(!orderAsc);
-                        }}
-                    >
-                        Name
-                        {props.user.sortType &&
-                            props.user.sortType.searchType == "beerName" &&
-                            props.user.sortType.orderAsc && (
-                                <span>&#9650;</span>
-                            )}
-                        {props.user.sortType &&
-                            props.user.sortType.searchType == "beerName" &&
-                            !props.user.sortType.orderAsc && (
-                                <span>&#9660;</span>
-                            )}
-                    </span>
-                    <span
-                        className="sort-btn"
-                        onClick={() => {
-                            props.sortBeers(
-                                props.user.beers,
-                                "stars",
-                                orderAsc
-                            );
-                            setOrderAsc(!orderAsc);
-                        }}
-                    >
-                        Top Rated
-                        {props.user.sortType &&
-                            props.user.sortType.searchType == "stars" &&
-                            props.user.sortType.orderAsc && (
-                                <span>&#9650;</span>
-                            )}
-                        {props.user.sortType &&
-                            props.user.sortType.searchType == "stars" &&
-                            !props.user.sortType.orderAsc && (
-                                <span>&#9660;</span>
-                            )}
-                    </span>
-                    <span
-                        className="sort-btn"
-                        onClick={() => {
-                            props.sortBeers(
-                                props.user.beers,
-                                "beerDescription",
-                                orderAsc
-                            );
-                            setOrderAsc(!orderAsc);
-                        }}
-                    >
-                        Type
-                        {props.user.sortType &&
-                            props.user.sortType.searchType ==
-                                "beerDescription" &&
-                            props.user.sortType.orderAsc && (
-                                <span>&#9650;</span>
-                            )}
-                        {props.user.sortType &&
-                            props.user.sortType.searchType ==
-                                "beerDescription" &&
-                            !props.user.sortType.orderAsc && (
-                                <span>&#9660;</span>
-                            )}
-                    </span>
-                    <span
-                        className="sort-btn"
-                        onClick={() => {
-                            props.sortBeers(props.user.beers, "abv", orderAsc);
-                            setOrderAsc(!orderAsc);
-                        }}
-                    >
-                        ABV
-                        {props.user.sortType &&
-                            props.user.sortType.searchType == "abv" &&
-                            props.user.sortType.orderAsc && (
-                                <span>&#9650;</span>
-                            )}
-                        {props.user.sortType &&
-                            props.user.sortType.searchType == "abv" &&
-                            !props.user.sortType.orderAsc && (
-                                <span>&#9660;</span>
-                            )}
-                    </span>
-                    <span
-                        className="sort-btn"
-                        onClick={() => {
-                            props.sortBeers(
-                                props.user.beers,
-                                "breweryName",
-                                orderAsc
-                            );
-                            setOrderAsc(!orderAsc);
-                        }}
-                    >
-                        Brewery
-                        {props.user.sortType &&
-                            props.user.sortType.searchType == "breweryName" &&
-                            props.user.sortType.orderAsc && (
-                                <span>&#9650;</span>
-                            )}
-                        {props.user.sortType &&
-                            props.user.sortType.searchType == "breweryName" &&
-                            !props.user.sortType.orderAsc && (
-                                <span>&#9660;</span>
-                            )}
-                    </span>
                 </div>
 
                 {props.user.isLoading && (
@@ -150,6 +41,191 @@ const MyBeers = (props) => {
                     />
                 )}
                 <div className="my-beers-cont">
+                    <div className="sort-btn-group">
+                        <span className="blank-col">Sort by: </span>
+                        <span
+                            className="sort-btn name-col"
+                            onClick={() => {
+                                props.sortBeers(
+                                    props.user.beers,
+                                    "beerName",
+                                    orderAsc
+                                );
+                                setOrderAsc(!orderAsc);
+                            }}
+                            onMouseEnter={() =>
+                                toggleHover((prevState) => {
+                                    return {
+                                        ...prevState,
+                                        ...{ name: true },
+                                    };
+                                })
+                            }
+                            onMouseLeave={() => toggleHover(false)}
+                        >
+                            Name
+                            {hover.name &&
+                                props.user.sortType.searchType !==
+                                    "beerName" && <span>&#9660;</span>}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "beerName" &&
+                                props.user.sortType.orderAsc && (
+                                    <span>&#9660;</span>
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "beerName" &&
+                                !props.user.sortType.orderAsc && (
+                                    <span>&#9660;</span>
+                                )}
+                        </span>
+                        <span
+                            className="sort-btn brewery-col"
+                            onClick={() => {
+                                props.sortBeers(
+                                    props.user.beers,
+                                    "breweryName",
+                                    orderAsc
+                                );
+                                setOrderAsc(!orderAsc);
+                            }}
+                            onMouseEnter={() =>
+                                toggleHover((prevState) => {
+                                    return {
+                                        ...prevState,
+                                        ...{ brewery: true },
+                                    };
+                                })
+                            }
+                            onMouseLeave={() => toggleHover(false)}
+                        >
+                            Brewery
+                            {hover.brewery &&
+                                props.user.sortType.searchType !==
+                                    "breweryName" && <span>&#9660;</span>}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType ==
+                                    "breweryName" &&
+                                props.user.sortType.orderAsc && (
+                                    <span>&#9650;</span>
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType ==
+                                    "breweryName" &&
+                                !props.user.sortType.orderAsc && (
+                                    <span>&#9660;</span>
+                                )}
+                        </span>
+                        <span
+                            className="sort-btn abv-col"
+                            onClick={() => {
+                                props.sortBeers(
+                                    props.user.beers,
+                                    "abv",
+                                    orderAsc
+                                );
+                                setOrderAsc(!orderAsc);
+                            }}
+                            onMouseEnter={() =>
+                                toggleHover((prevState) => {
+                                    return {
+                                        ...prevState,
+                                        ...{ abv: true },
+                                    };
+                                })
+                            }
+                            onMouseLeave={() => toggleHover(false)}
+                        >
+                            ABV
+                            {hover.abv &&
+                                props.user.sortType.searchType !== "abv" && (
+                                    <span>&#9660;</span>
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "abv" &&
+                                props.user.sortType.orderAsc && (
+                                    <span>&#9650;</span>
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "abv" &&
+                                !props.user.sortType.orderAsc && (
+                                    <span>&#9660;</span>
+                                )}
+                        </span>
+                        <span
+                            className="sort-btn desc-col"
+                            onClick={() => {
+                                props.sortBeers(
+                                    props.user.beers,
+                                    "beerDescription",
+                                    orderAsc
+                                );
+                                setOrderAsc(!orderAsc);
+                            }}
+                            onMouseEnter={() =>
+                                toggleHover((prevState) => {
+                                    return {
+                                        ...prevState,
+                                        ...{ type: true },
+                                    };
+                                })
+                            }
+                            onMouseLeave={() => toggleHover(false)}
+                        >
+                            Type
+                            {hover.type &&
+                                props.user.sortType.searchType !==
+                                    "beerDescription" && <span>&#9660;</span>}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType ==
+                                    "beerDescription" &&
+                                props.user.sortType.orderAsc && (
+                                    <span>&#9650;</span>
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType ==
+                                    "beerDescription" &&
+                                !props.user.sortType.orderAsc && (
+                                    <span>&#9660;</span>
+                                )}
+                        </span>
+                        <span
+                            className="sort-btn rate-col"
+                            onClick={() => {
+                                props.sortBeers(
+                                    props.user.beers,
+                                    "stars",
+                                    orderAsc
+                                );
+                                setOrderAsc(!orderAsc);
+                            }}
+                            onMouseEnter={() =>
+                                toggleHover((prevState) => {
+                                    return {
+                                        ...prevState,
+                                        ...{ rating: true },
+                                    };
+                                })
+                            }
+                            onMouseLeave={() => toggleHover(false)}
+                        >
+                            Rating
+                            {hover.rating &&
+                                props.user.sortType.searchType !== "stars" && (
+                                    <span>&#9660;</span>
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "stars" &&
+                                props.user.sortType.orderAsc && (
+                                    <span>&#9650;</span>
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "stars" &&
+                                !props.user.sortType.orderAsc && (
+                                    <span>&#9660;</span>
+                                )}
+                        </span>
+                    </div>
+
                     {props.user.sortedBeers &&
                         props.user.sortedBeers.map((beer) => (
                             <BeerRow

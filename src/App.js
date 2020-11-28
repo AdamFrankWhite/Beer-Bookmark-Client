@@ -10,6 +10,7 @@ import Home from "./comp/Home";
 import Settings from "./comp/Settings";
 import NewPassword from "./comp/NewPassword";
 import ForgotPassword from "./comp/ForgotPassword";
+import Footer from "./comp/Footer";
 import "./App.css";
 
 const App = (props) => {
@@ -24,27 +25,21 @@ const App = (props) => {
                 }
             >
                 <Route path="/" exact component={Home} />
-                {/* Register Route */}
                 <Route path="/register" component={Register} />
-
-                {/* Login Route */}
                 <Route path="/login" component={Login} />
-
-                {/* My Beers Route */}
                 {props.user.loggedIn && (
                     <Route path="/my-beers" component={MyBeers} />
                 )}
-                {/* Dashboard route*/}
                 {props.user.loggedIn && (
                     <Route path="/settings" component={Settings} />
                 )}
-                {/* Search Route */}
                 <Route path="/search" component={Search} />
 
                 {/* Password Reset Route */}
                 <Route path="/reset" component={NewPassword} />
                 <Route path="/forgot" component={ForgotPassword} />
             </div>
+            <Footer />
         </Router>
     );
 };
