@@ -61,7 +61,7 @@ function BeerRow(props) {
         return () => {
             window.removeEventListener("resize", handleWindowResize);
         };
-    }, [windowWidth]);
+    });
 
     // let beerTypeStyle;
     // if (props.beerData.beerDescription.toLowerCase().includes("ipa")) {
