@@ -14,13 +14,7 @@ const MyBeers = (props) => {
     //Set order asc/desc
     const [orderAsc, setOrderAsc] = useState(false);
 
-    const [hover, toggleHover] = useState({
-        name: false,
-        brewery: false,
-        type: false,
-        abv: false,
-        rating: false,
-    });
+    const [hover, toggleHover] = useState("");
     const [sortedBeers, setSortedBeers] = useState(props.user.beers);
     const [orderType, setOrderType] = useState("");
     //Populate array on component mount
@@ -60,18 +54,11 @@ const MyBeers = (props) => {
                                         : true
                                 );
                             }}
-                            onMouseEnter={() =>
-                                toggleHover((prevState) => {
-                                    return {
-                                        ...prevState,
-                                        ...{ name: true },
-                                    };
-                                })
-                            }
+                            onMouseEnter={() => toggleHover("name")}
                             onMouseLeave={() => toggleHover(false)}
                         >
                             Name
-                            {hover.name &&
+                            {hover == "name" &&
                                 props.user.sortType.searchType !==
                                     "beerName" && (
                                     <FontAwesomeIcon
@@ -91,7 +78,7 @@ const MyBeers = (props) => {
                                     // <span className="ascend">&#9660;</span>
                                     <FontAwesomeIcon icon={faSortAlphaUp} />
                                 )}
-                            {!hover.name &&
+                            {hover == "name" &&
                                 props.user.sortType.searchType !==
                                     "beerName" && (
                                     <FontAwesomeIcon
@@ -111,25 +98,20 @@ const MyBeers = (props) => {
                                         : true
                                 );
                             }}
-                            onMouseEnter={() =>
-                                toggleHover((prevState) => {
-                                    return {
-                                        ...prevState,
-                                        ...{ brewery: true },
-                                    };
-                                })
-                            }
+                            onMouseEnter={() => toggleHover("brewery")}
                             onMouseLeave={() => toggleHover(false)}
                         >
                             Brewery
-                            {hover.brewery &&
-                                props.user.sortType.searchType !==
-                                    "breweryName" && (
-                                    <FontAwesomeIcon
-                                        style={{ color: "black" }}
-                                        icon={faSortAlphaDown}
-                                    />
-                                )}
+                            {
+                                (hover = "brewery" &&
+                                    props.user.sortType.searchType !==
+                                        "breweryName" && (
+                                        <FontAwesomeIcon
+                                            style={{ color: "black" }}
+                                            icon={faSortAlphaDown}
+                                        />
+                                    ))
+                            }
                             {props.user.sortType &&
                                 props.user.sortType.searchType ==
                                     "breweryName" &&
@@ -144,7 +126,7 @@ const MyBeers = (props) => {
                                     // <span className="ascend">&#9660;</span>
                                     <FontAwesomeIcon icon={faSortAlphaUp} />
                                 )}
-                            {!hover.brewery &&
+                            {hover == "brewery" &&
                                 props.user.sortType.searchType !==
                                     "breweryName" && (
                                     <FontAwesomeIcon
@@ -163,18 +145,11 @@ const MyBeers = (props) => {
                                         : true
                                 );
                             }}
-                            onMouseEnter={() =>
-                                toggleHover((prevState) => {
-                                    return {
-                                        ...prevState,
-                                        ...{ abv: true },
-                                    };
-                                })
-                            }
+                            onMouseEnter={() => toggleHover("abv")}
                             onMouseLeave={() => toggleHover(false)}
                         >
                             ABV
-                            {hover.abv &&
+                            {hover == "abv" &&
                                 props.user.sortType.searchType !== "abv" && (
                                     <FontAwesomeIcon
                                         style={{ color: "black" }}
@@ -193,7 +168,7 @@ const MyBeers = (props) => {
                                     // <span className="ascend">&#9660;</span>
                                     <FontAwesomeIcon icon={faSortNumericUp} />
                                 )}
-                            {!hover.abv &&
+                            {hover == "abv" &&
                                 props.user.sortType.searchType !== "abv" && (
                                     <FontAwesomeIcon
                                         style={{ color: "gray" }}
@@ -212,18 +187,11 @@ const MyBeers = (props) => {
                                         : true
                                 );
                             }}
-                            onMouseEnter={() =>
-                                toggleHover((prevState) => {
-                                    return {
-                                        ...prevState,
-                                        ...{ type: true },
-                                    };
-                                })
-                            }
+                            onMouseEnter={() => toggleHover("type")}
                             onMouseLeave={() => toggleHover(false)}
                         >
                             Type
-                            {hover.type &&
+                            {hover == "type" &&
                                 props.user.sortType.searchType !==
                                     "beerDescription" && (
                                     <FontAwesomeIcon
@@ -245,7 +213,7 @@ const MyBeers = (props) => {
                                     // <span className="ascend">&#9660;</span>
                                     <FontAwesomeIcon icon={faSortAlphaDown} />
                                 )}
-                            {!hover.type &&
+                            {!hover == "type" &&
                                 props.user.sortType.searchType !==
                                     "beerDescription" && (
                                     <FontAwesomeIcon
@@ -264,18 +232,11 @@ const MyBeers = (props) => {
                                         : false
                                 );
                             }}
-                            onMouseEnter={() =>
-                                toggleHover((prevState) => {
-                                    return {
-                                        ...prevState,
-                                        ...{ rating: true },
-                                    };
-                                })
-                            }
+                            onMouseEnter={() => toggleHover("rating")}
                             onMouseLeave={() => toggleHover(false)}
                         >
                             Rating
-                            {hover.rating &&
+                            {hover == "rating" &&
                                 props.user.sortType.searchType !== "stars" && (
                                     <FontAwesomeIcon
                                         style={{ color: "black" }}
@@ -294,7 +255,7 @@ const MyBeers = (props) => {
                                     // <span className="ascend">&#9660;</span>
                                     <FontAwesomeIcon icon={faSortNumericUp} />
                                 )}
-                            {!hover.rating &&
+                            {!hover == "rating" &&
                                 props.user.sortType.searchType !== "stars" && (
                                     <FontAwesomeIcon
                                         style={{ color: "gray" }}
