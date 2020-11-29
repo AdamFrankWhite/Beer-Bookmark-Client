@@ -21,4 +21,6 @@ takes two clicks to change order when changing category
 FIX: needed to useEffect to ensure update once category/order type had changed - moved action to useEffect
 
 TODO:
-fix asc/des icon
+fix asc/des icon - DONE
+fix search sort spacing
+add grouping function, add wishlist - make add to favourites a drop down
