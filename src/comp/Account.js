@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ReactLoading from "react-loading";
 import {
     setColorScheme,
-    resetPassword,
+    changePassword,
     changeEmail,
 } from "../redux/actions/userActions";
 import axios from "axios";
@@ -109,25 +109,29 @@ function Account(props) {
                 <label htmlFor="currentPassword">Current password</label>
                 <input
                     id="currentPassword"
-                    type="text"
+                    type="password"
                     onChange={(e) => setCurrentPassword(e.target.value)}
                 />
                 <label htmlFor="newPassword">New password</label>
                 <input
                     id="newPassword"
-                    type="text"
+                    type="password"
                     onChange={(e) => setNewPassword(e.target.value)}
                 />
                 <label htmlFor="confirmNewPassword">Confirm new password</label>
                 <input
                     id="confirmNewPassword"
-                    type="text"
+                    type="password"
                     onChange={(e) => setConfirmNewPassword(e.target.value)}
                 />
                 <span
                     className="button"
                     onClick={() =>
-                        props.resetPassword(props.user.userData.email)
+                        props.changePassword(
+                            props.user.userData.username,
+                            currentPassword,
+                            newPassword
+                        )
                     }
                 >
                     {props.user.loading && (
@@ -154,7 +158,7 @@ const mapStateToProps = (state) => {
 
 const mapActionsToProps = {
     setColorScheme,
-    resetPassword,
+    changePassword,
     changeEmail,
 };
 export default connect(mapStateToProps, mapActionsToProps)(Account);

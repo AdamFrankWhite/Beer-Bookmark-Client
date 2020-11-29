@@ -111,6 +111,23 @@ export const resetPassword = (email) => (dispatch) => {
         .catch((err) => console.log(err));
 };
 
+export const changePassword = (username, oldPassword, newPassword) => (
+    dispatch
+) => {
+    dispatch({ type: SET_LOADING, payload: true });
+    axios
+        .put("http://localhost:5000/users/change-password", {
+            username,
+            oldPassword,
+            newPassword,
+        })
+        .then((res) => {
+            console.log(res.data);
+            dispatch({ type: SET_LOADING, payload: false });
+        })
+        .catch((err) => console.log(err));
+};
+
 export const addBeer = (data) => (dispatch) => {
     const { username, beerData } = data;
     console.log(beerData);
@@ -343,6 +360,7 @@ export const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
 export const sortSearchResults = (beers, searchType, orderAsc) => (
     dispatch
 ) => {
+    console.log(searchType);
     if (!beers) {
         return [];
     }

@@ -3,7 +3,9 @@ import BeerRow from "./BeerRow";
 import ReactLoading from "react-loading";
 import FlipMove from "react-flip-move";
 import { connect } from "react-redux";
-import userReducer from "../redux/reducers/userReducer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortAlphaDown } from "@fortawesome/free-solid-svg-icons/faSortAlphaDown";
+import { faSortAlphaUp } from "@fortawesome/free-solid-svg-icons/faSortAlphaUp";
 import { sortBeers } from "../redux/actions/userActions";
 const MyBeers = (props) => {
     const center = { margin: "auto" };
@@ -70,20 +72,29 @@ const MyBeers = (props) => {
                             {hover.name &&
                                 props.user.sortType.searchType !==
                                     "beerName" && (
-                                    <span style={{ color: "gray" }}>
-                                        &#9660;
-                                    </span>
+                                    <FontAwesomeIcon
+                                        style={{ color: "black" }}
+                                        icon={faSortAlphaDown}
+                                    />
                                 )}
                             {props.user.sortType &&
                                 props.user.sortType.searchType == "beerName" &&
                                 props.user.sortType.orderAsc && (
-                                    <span className="descend">&#9650;</span>
+                                    // <span className="descend">&#9650;</span>
+                                    <FontAwesomeIcon icon={faSortAlphaDown} />
                                 )}
                             {props.user.sortType &&
                                 props.user.sortType.searchType == "beerName" &&
                                 !props.user.sortType.orderAsc && (
-                                    <span className="ascend">&#9660;</span>
+                                    // <span className="ascend">&#9660;</span>
+                                    <FontAwesomeIcon icon={faSortAlphaUp} />
                                 )}
+                            {!hover.name && (
+                                <FontAwesomeIcon
+                                    style={{ color: "gray" }}
+                                    icon={faSortAlphaDown}
+                                />
+                            )}
                         </span>
                         <span
                             className="sort-btn brewery-col"

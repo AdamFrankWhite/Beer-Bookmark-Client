@@ -16,6 +16,9 @@ At first, I thought it was sort being unstable, however after fixing that, then 
 BUG: need dynamic heights of hidden div offset for smooth scroll effect, based on sized of text
 SOLUTION: useEffect and useCallback to listen for window resize, then update height of covering div,
 
-TODO:
+
 takes two clicks to change order when changing category
 FIX: needed to useEffect to ensure update once category/order type had changed - moved action to useEffect
+
+TODO:
+fix asc/des icon

@@ -55,7 +55,6 @@ function BeerRow(props) {
         if (targetRef.current) {
             setHeight(targetRef.current.clientHeight);
         }
-        console.log(targetRef.current.clientHeight);
         window.addEventListener("resize", handleWindowResize);
 
         return () => {
