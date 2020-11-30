@@ -17,10 +17,11 @@ function BeerRow(props) {
         );
     }
 
-    const center = { margin: "auto", height: 25, width: 25 };
+    const spinnerStyle = { marginLeft: 0, height: 25, width: 25, fill: "blue" };
     const clickTextStyle = checkBeerIncluded && "click-text-saved";
     const clickText = checkBeerIncluded ? "Saved" : "Add to favourites";
-
+    const conditionalTextColor =
+        props.user.colorScheme == "light" ? "#000000" : "#ffffff";
     useEffect(() => {
         checkBeerIncluded = beerCheck();
     }, [props.user.searchSortType, props.user.beers]);
@@ -113,14 +114,16 @@ function BeerRow(props) {
                                     <span>&#127866;</span>
                                     <input
                                         type="number"
+                                        placeholder="1"
                                         max="10"
                                         min="1"
+                                        style={{ color: conditionalTextColor }}
                                         onChange={(e) => {
                                             setRating(+e.target.value);
                                         }}
                                     />
                                 </div>
-                                <div>
+                                <div className="delete-buttons">
                                     <span
                                         onClick={() => {
                                             console.log(props.user.searchType);
@@ -156,9 +159,8 @@ function BeerRow(props) {
                                 {props.user.loading &&
                                 selectedBeer == props.beerData ? (
                                     <ReactLoading
-                                        style={center}
+                                        style={spinnerStyle}
                                         type="spin"
-                                        color="black"
                                     />
                                 ) : (
                                     <>
