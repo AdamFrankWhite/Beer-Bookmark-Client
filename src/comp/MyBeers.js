@@ -9,25 +9,30 @@ import { faSortAlphaUp } from "@fortawesome/free-solid-svg-icons/faSortAlphaUp";
 import { faSortNumericDown } from "@fortawesome/free-solid-svg-icons/faSortNumericDown";
 import { faSortNumericUp } from "@fortawesome/free-solid-svg-icons/faSortNumericUp";
 import { sortBeers } from "../redux/actions/userActions";
-const MyBeers = ({ user }) => {
-    let searchType = user.sortType.searchType;
+const MyBeers = (props) => {
     const center = { margin: "auto" };
     //Set order asc/desc
     const [orderAsc, setOrderAsc] = useState(false);
 
-    const [hover, toggleHover] = useState("");
-    const [sortedBeers, setSortedBeers] = useState(user.beers);
+    const [hover, toggleHover] = useState({
+        name: false,
+        brewery: false,
+        type: false,
+        abv: false,
+        rating: false,
+    });
+    const [sortedBeers, setSortedBeers] = useState(props.user.beers);
     const [orderType, setOrderType] = useState("");
     //Populate array on component mount
     useEffect(() => {
-        sortBeers(user.beers);
-    }, [user.beers]);
+        props.sortBeers(props.user.beers);
+    }, [props.user.beers]);
     useEffect(() => {
-        sortBeers(user.beers, orderType, orderAsc);
+        props.sortBeers(props.user.beers, orderType, orderAsc);
     }, [orderType, orderAsc]);
     const setOrder = (type) => {
         setOrderType(type);
-        setOrderAsc(searchType == type ? !orderAsc : true);
+        setOrderAsc(props.user.sortType.searchType == type ? !orderAsc : true);
     };
     return (
         <div className="App">
@@ -36,7 +41,7 @@ const MyBeers = ({ user }) => {
                     <h1>My Favourite Beers</h1>
                 </div>
 
-                {user.isLoading && (
+                {props.user.isLoading && (
                     <ReactLoading
                         style={center}
                         type="bubbles"
@@ -53,67 +58,87 @@ const MyBeers = ({ user }) => {
                             onClick={() => {
                                 setOrder("beerName");
                             }}
-                            onMouseEnter={() => toggleHover("name")}
+                            onMouseEnter={() =>
+                                toggleHover((prevState) => {
+                                    return {
+                                        ...prevState,
+                                        ...{ name: true },
+                                    };
+                                })
+                            }
                             onMouseLeave={() => toggleHover(false)}
                         >
                             Name
-                            {hover == "name" && searchType !== "beerName" && (
-                                <FontAwesomeIcon
-                                    style={{ color: "black" }}
-                                    icon={faSortAlphaDown}
-                                />
-                            )}
-                            {user.sortType &&
-                                searchType == "beerName" &&
-                                orderAsc && (
+                            {hover.name &&
+                                props.user.sortType.searchType !==
+                                    "beerName" && (
+                                    <FontAwesomeIcon
+                                        style={{ color: "black" }}
+                                        icon={faSortAlphaDown}
+                                    />
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "beerName" &&
+                                props.user.sortType.orderAsc && (
                                     // <span className="descend">&#9650;</span>
                                     <FontAwesomeIcon icon={faSortAlphaDown} />
                                 )}
-                            {user.sortType &&
-                                searchType == "beerName" &&
-                                !orderAsc && (
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "beerName" &&
+                                !props.user.sortType.orderAsc && (
                                     // <span className="ascend">&#9660;</span>
                                     <FontAwesomeIcon icon={faSortAlphaUp} />
                                 )}
-                            {hover == "name" && searchType !== "beerName" && (
-                                <FontAwesomeIcon
-                                    style={{ color: "gray" }}
-                                    icon={faSortAlphaDown}
-                                />
-                            )}
+                            {!hover.name &&
+                                props.user.sortType.searchType !==
+                                    "beerName" && (
+                                    <FontAwesomeIcon
+                                        style={{ color: "gray" }}
+                                        icon={faSortAlphaDown}
+                                    />
+                                )}
                         </span>
                         <span
                             className="sort-btn brewery-col"
                             onClick={() => {
                                 setOrder("breweryName");
                             }}
-                            onMouseEnter={() => toggleHover("brewery")}
+                            onMouseEnter={() =>
+                                toggleHover((prevState) => {
+                                    return {
+                                        ...prevState,
+                                        ...{ brewery: true },
+                                    };
+                                })
+                            }
                             onMouseLeave={() => toggleHover(false)}
                         >
                             Brewery
-                            {
-                                (hover = "brewery" &&
-                                    searchType !== "breweryName" && (
-                                        <FontAwesomeIcon
-                                            style={{ color: "black" }}
-                                            icon={faSortAlphaDown}
-                                        />
-                                    ))
-                            }
-                            {user.sortType &&
-                                searchType == "breweryName" &&
-                                orderAsc && (
+                            {hover.brewery &&
+                                props.user.sortType.searchType !==
+                                    "breweryName" && (
+                                    <FontAwesomeIcon
+                                        style={{ color: "black" }}
+                                        icon={faSortAlphaDown}
+                                    />
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType ==
+                                    "breweryName" &&
+                                props.user.sortType.orderAsc && (
                                     // <span className="descend">&#9650;</span>
                                     <FontAwesomeIcon icon={faSortAlphaDown} />
                                 )}
-                            {user.sortType &&
-                                searchType == "breweryName" &&
-                                !orderAsc && (
+                            {props.user.sortType &&
+                                props.user.sortType.searchType ==
+                                    "breweryName" &&
+                                !props.user.sortType.orderAsc && (
                                     // <span className="ascend">&#9660;</span>
                                     <FontAwesomeIcon icon={faSortAlphaUp} />
                                 )}
-                            {hover == "brewery" &&
-                                searchType !== "breweryName" && (
+                            {!hover.brewery &&
+                                props.user.sortType.searchType !==
+                                    "breweryName" && (
                                     <FontAwesomeIcon
                                         style={{ color: "gray" }}
                                         icon={faSortAlphaDown}
@@ -125,61 +150,85 @@ const MyBeers = ({ user }) => {
                             onClick={() => {
                                 setOrder("abv");
                             }}
-                            onMouseEnter={() => toggleHover("abv")}
+                            onMouseEnter={() =>
+                                toggleHover((prevState) => {
+                                    return {
+                                        ...prevState,
+                                        ...{ abv: true },
+                                    };
+                                })
+                            }
                             onMouseLeave={() => toggleHover(false)}
                         >
                             ABV
-                            {hover == "abv" && searchType !== "abv" && (
-                                <FontAwesomeIcon
-                                    style={{ color: "black" }}
-                                    icon={faSortNumericDown}
-                                />
-                            )}
-                            {user.sortType && searchType == "abv" && orderAsc && (
-                                // <span className="descend">&#9650;</span>
-                                <FontAwesomeIcon icon={faSortNumericDown} />
-                            )}
-                            {user.sortType && searchType == "abv" && !orderAsc && (
-                                // <span className="ascend">&#9660;</span>
-                                <FontAwesomeIcon icon={faSortNumericUp} />
-                            )}
-                            {hover == "abv" && searchType !== "abv" && (
-                                <FontAwesomeIcon
-                                    style={{ color: "gray" }}
-                                    icon={faSortNumericDown}
-                                />
-                            )}
+                            {hover.abv &&
+                                props.user.sortType.searchType !== "abv" && (
+                                    <FontAwesomeIcon
+                                        style={{ color: "black" }}
+                                        icon={faSortNumericDown}
+                                    />
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "abv" &&
+                                props.user.sortType.orderAsc && (
+                                    // <span className="descend">&#9650;</span>
+                                    <FontAwesomeIcon icon={faSortNumericDown} />
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "abv" &&
+                                !props.user.sortType.orderAsc && (
+                                    // <span className="ascend">&#9660;</span>
+                                    <FontAwesomeIcon icon={faSortNumericUp} />
+                                )}
+                            {!hover.abv &&
+                                props.user.sortType.searchType !== "abv" && (
+                                    <FontAwesomeIcon
+                                        style={{ color: "gray" }}
+                                        icon={faSortNumericDown}
+                                    />
+                                )}
                         </span>
                         <span
                             className="sort-btn desc-col"
                             onClick={() => {
                                 setOrder("beerDescription");
                             }}
-                            onMouseEnter={() => toggleHover("type")}
+                            onMouseEnter={() =>
+                                toggleHover((prevState) => {
+                                    return {
+                                        ...prevState,
+                                        ...{ type: true },
+                                    };
+                                })
+                            }
                             onMouseLeave={() => toggleHover(false)}
                         >
                             Type
-                            {hover == "type" &&
-                                searchType !== "beerDescription" && (
+                            {hover.type &&
+                                props.user.sortType.searchType !==
+                                    "beerDescription" && (
                                     <FontAwesomeIcon
                                         style={{ color: "black" }}
                                         icon={faSortAlphaDown}
                                     />
                                 )}
-                            {user.sortType &&
-                                searchType == "beerDescription" &&
-                                !orderAsc && (
+                            {props.user.sortType &&
+                                props.user.sortType.searchType ==
+                                    "beerDescription" &&
+                                !props.user.sortType.orderAsc && (
                                     // <span className="descend">&#9650;</span>
                                     <FontAwesomeIcon icon={faSortAlphaUp} />
                                 )}
-                            {user.sortType &&
-                                searchType == "beerDescription" &&
-                                orderAsc && (
+                            {props.user.sortType &&
+                                props.user.sortType.searchType ==
+                                    "beerDescription" &&
+                                props.user.sortType.orderAsc && (
                                     // <span className="ascend">&#9660;</span>
                                     <FontAwesomeIcon icon={faSortAlphaDown} />
                                 )}
-                            {!hover == "type" &&
-                                searchType !== "beerDescription" && (
+                            {!hover.type &&
+                                props.user.sortType.searchType !==
+                                    "beerDescription" && (
                                     <FontAwesomeIcon
                                         style={{ color: "gray" }}
                                         icon={faSortAlphaDown}
@@ -191,39 +240,48 @@ const MyBeers = ({ user }) => {
                             onClick={() => {
                                 setOrder("stars");
                             }}
-                            onMouseEnter={() => toggleHover("rating")}
+                            onMouseEnter={() =>
+                                toggleHover((prevState) => {
+                                    return {
+                                        ...prevState,
+                                        ...{ rating: true },
+                                    };
+                                })
+                            }
                             onMouseLeave={() => toggleHover(false)}
                         >
                             Rating
-                            {hover == "rating" && searchType !== "stars" && (
-                                <FontAwesomeIcon
-                                    style={{ color: "black" }}
-                                    icon={faSortNumericDown}
-                                />
-                            )}
-                            {user.sortType &&
-                                searchType == "stars" &&
-                                orderAsc && (
+                            {hover.rating &&
+                                props.user.sortType.searchType !== "stars" && (
+                                    <FontAwesomeIcon
+                                        style={{ color: "black" }}
+                                        icon={faSortNumericDown}
+                                    />
+                                )}
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "stars" &&
+                                props.user.sortType.orderAsc && (
                                     // <span className="descend">&#9650;</span>
                                     <FontAwesomeIcon icon={faSortNumericDown} />
                                 )}
-                            {user.sortType &&
-                                searchType == "stars" &&
-                                !orderAsc && (
+                            {props.user.sortType &&
+                                props.user.sortType.searchType == "stars" &&
+                                !props.user.sortType.orderAsc && (
                                     // <span className="ascend">&#9660;</span>
                                     <FontAwesomeIcon icon={faSortNumericUp} />
                                 )}
-                            {!hover == "rating" && searchType !== "stars" && (
-                                <FontAwesomeIcon
-                                    style={{ color: "gray" }}
-                                    icon={faSortNumericDown}
-                                />
-                            )}
+                            {!hover.rating &&
+                                props.user.sortType.searchType !== "stars" && (
+                                    <FontAwesomeIcon
+                                        style={{ color: "gray" }}
+                                        icon={faSortNumericDown}
+                                    />
+                                )}
                         </span>
                     </div>
 
-                    {user.sortedBeers &&
-                        user.sortedBeers.map((beer) => (
+                    {props.user.sortedBeers &&
+                        props.user.sortedBeers.map((beer) => (
                             <BeerRow
                                 myBeers={true}
                                 beerData={beer}
@@ -233,7 +291,7 @@ const MyBeers = ({ user }) => {
                     {/* Empty div for slideAnimation of last beer */}
                     <div
                         className={
-                            user.colorScheme !== "dark"
+                            props.user.colorScheme !== "dark"
                                 ? "beer"
                                 : "beer dark-theme"
                         }
