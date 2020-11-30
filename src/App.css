@@ -643,20 +643,20 @@ nav img[src="/logo.png"] {
   margin: 0;
   height: auto;
 }
-.sort-btn-group .name-col {
+.sort-btn-group .beerName-col {
   width: 20%;
   padding-left: 1em;
 }
-.sort-btn-group .brewery-col {
+.sort-btn-group .breweryName-col {
   width: 25%;
 }
 .sort-btn-group .abv-col {
   width: 10%;
 }
-.sort-btn-group .desc-col {
+.sort-btn-group .beerDescription-col {
   width: 25%;
 }
-.sort-btn-group .rate-col {
+.sort-btn-group .stars-col {
   width: 10%;
 }
 

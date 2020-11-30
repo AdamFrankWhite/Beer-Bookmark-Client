@@ -4,11 +4,9 @@ import ReactLoading from "react-loading";
 import FlipMove from "react-flip-move";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSortAlphaDown } from "@fortawesome/free-solid-svg-icons/faSortAlphaDown";
-import { faSortAlphaUp } from "@fortawesome/free-solid-svg-icons/faSortAlphaUp";
-import { faSortNumericDown } from "@fortawesome/free-solid-svg-icons/faSortNumericDown";
 import { faSort } from "@fortawesome/free-solid-svg-icons/faSort";
 import { sortBeers } from "../redux/actions/userActions";
+import SortButton from "./SortButton";
 const MyBeers = ({ user, sortBeers }) => {
     const center = { margin: "auto" };
     //Set order asc/desc
@@ -34,6 +32,13 @@ const MyBeers = ({ user, sortBeers }) => {
             ? "black"
             : "gray";
     };
+    const sortTypes = [
+        { name: "Beer", type: "beerName" },
+        { name: "Brewer", type: "breweryName" },
+        { name: "ABV", type: "abv" },
+        { name: "Type", type: "beerDescription" },
+        { name: "Rating", type: "stars" },
+    ];
     return (
         <div className="App">
             <div className="my-beers-wrapper">
@@ -53,76 +58,15 @@ const MyBeers = ({ user, sortBeers }) => {
                 <div className="my-beers-cont">
                     <div className="sort-btn-group">
                         <span className="blank-col">Sort by: </span>
-                        <span
-                            className="sort-btn name-col"
-                            onClick={() => {
-                                setOrder("beerName");
-                            }}
-                            onMouseEnter={() => toggleHover("beerName")}
-                            onMouseLeave={() => toggleHover(false)}
-                        >
-                            Name
-                            <FontAwesomeIcon
-                                style={{ color: checkHover("beerName") }}
-                                icon={faSort}
+                        {sortTypes.map((sortType) => (
+                            <SortButton
+                                name={sortType.name}
+                                sortType={sortType.type}
+                                toggleHover={toggleHover}
+                                checkHover={checkHover}
+                                setOrder={setOrder}
                             />
-                        </span>
-                        <span
-                            className="sort-btn brewery-col"
-                            onClick={() => {
-                                setOrder("breweryName");
-                            }}
-                            onMouseEnter={() => toggleHover("breweryName")}
-                            onMouseLeave={() => toggleHover(false)}
-                        >
-                            Brewery
-                            <FontAwesomeIcon
-                                style={{ color: checkHover("breweryName") }}
-                                icon={faSort}
-                            />
-                        </span>
-                        <span
-                            className="sort-btn abv-col"
-                            onClick={() => {
-                                setOrder("abv");
-                            }}
-                            onMouseEnter={() => toggleHover("abv")}
-                            onMouseLeave={() => toggleHover(false)}
-                        >
-                            ABV
-                            <FontAwesomeIcon
-                                style={{ color: checkHover("abv") }}
-                                icon={faSort}
-                            />
-                        </span>
-                        <span
-                            className="sort-btn desc-col"
-                            onClick={() => {
-                                setOrder("beerDescription");
-                            }}
-                            onMouseEnter={() => toggleHover("beerDescription")}
-                            onMouseLeave={() => toggleHover(false)}
-                        >
-                            Type
-                            <FontAwesomeIcon
-                                style={{ color: checkHover("beerDescription") }}
-                                icon={faSort}
-                            />
-                        </span>
-                        <span
-                            className="sort-btn rate-col"
-                            onClick={() => {
-                                setOrder("stars");
-                            }}
-                            onMouseEnter={() => toggleHover("stars")}
-                            onMouseLeave={() => toggleHover(false)}
-                        >
-                            Rating
-                            <FontAwesomeIcon
-                                style={{ color: checkHover("stars") }}
-                                icon={faSort}
-                            />
-                        </span>
+                        ))}
                     </div>
 
                     {user.sortedBeers &&
