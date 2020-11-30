@@ -528,7 +528,7 @@ nav {
         text-align: left;
         margin: auto 0;
         width: 20%;
-        padding-left: 1em;
+        padding-left: 18px;
     }
 
     a {
@@ -537,6 +537,7 @@ nav {
         color: white;
         text-decoration: none;
         margin-left: 0;
+        margin-right: 0;
         &:hover {
             color: orange !important;
             transition: color 0.2s;
@@ -547,14 +548,21 @@ nav {
         width: 10%;
         text-align: left;
         margin-left: 0;
+        margin-right: 0;
     }
     .buttons {
         margin-left: 0;
+        text-align: left;
+        padding-left: 15px;
     }
     .buttons,
     .set-rating {
-        width: 10%;
+        width: 12%;
         position: relative;
+        margin: auto 0;
+    }
+    .delete-buttons {
+        margin-left: 0.25em;
     }
     .tooltip {
         background: rgb(0, 0, 0);
@@ -596,9 +604,19 @@ nav {
     .set-rating {
         display: flex;
         justify-content: flex-start;
-        flex-direction: column;
         .set-rating-row-1 {
             display: flex;
+            margin: auto 0;
+            input {
+                background: transparent;
+                border: white 1px solid;
+                border-radius: 5px;
+                // color: white;
+                padding: 0.25em;
+            }
+            input[type="number"]::-webkit-inner-spin-button {
+                opacity: 1;
+            }
         }
     }
     .more-info {
@@ -716,7 +734,7 @@ nav {
     .beerName-col {
         width: 20%;
 
-        padding-left: 1em;
+        padding-left: 18px;
     }
     .breweryName-col {
         width: 25%;
@@ -725,11 +743,12 @@ nav {
         width: 10%;
     }
     .beerDescription-col {
-        width: 25%;
+        width: 15%;
     }
     .stars-col {
         width: 10%;
     }
+
     // .descend:hover,
     // .ascend:hover {
     //     display: inline-block;
