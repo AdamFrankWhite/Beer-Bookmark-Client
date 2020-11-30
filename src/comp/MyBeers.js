@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BeerRow from "./BeerRow";
 import ReactLoading from "react-loading";
-import FlipMove from "react-flip-move";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSort } from "@fortawesome/free-solid-svg-icons/faSort";
 import { sortBeers } from "../redux/actions/userActions";
 import SortButton from "./SortButton";
 const MyBeers = ({ user, sortBeers }) => {
@@ -86,8 +83,6 @@ const MyBeers = ({ user, sortBeers }) => {
                         }
                         style={{ height: "200px" }}
                     ></div>
-
-                    {/* </FlipMove> */}
                 </div>
             </div>
 
