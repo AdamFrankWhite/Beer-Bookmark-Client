@@ -14,7 +14,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
 import SortButton from "./SortButton";
 
 const element = <FontAwesomeIcon icon={faSearch} />;
-const Search = ({ user, sortSearchResults }) => {
+const Search = ({ user, sortSearchResults, searchBeer }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [orderAsc, setOrderAsc] = useState(false);
     const setOrder = (type) => {
