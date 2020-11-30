@@ -22,5 +22,6 @@ FIX: needed to useEffect to ensure update once category/order type had changed -
 
 TODO:
 fix asc/des icon - DONE
+continue refactoring
 fix search sort spacing
 add grouping function, add wishlist - make add to favourites a drop down
