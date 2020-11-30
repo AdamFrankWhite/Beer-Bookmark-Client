@@ -48,6 +48,7 @@ export default function (state = initialState, action) {
             console.log(action.payload);
             return {
                 ...state,
+                sortType: {},
                 beers: action.payload.beers,
                 userData: action.payload,
                 loggedIn: true,
