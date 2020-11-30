@@ -14,7 +14,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
 import SortButton from "./SortButton";
 
 const element = <FontAwesomeIcon icon={faSearch} />;
-const Search = ({ user, sortSearchResults, searchBeer }) => {
+const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [orderAsc, setOrderAsc] = useState(false);
     const setOrder = (type) => {
@@ -36,7 +36,7 @@ const Search = ({ user, sortSearchResults, searchBeer }) => {
     useEffect(() => {
         // https://api.untappd.com/v4/search/beer/?q=${beerType}
 
-        !user.searchResults && getRandomBeers();
+        user.searchResults.length == 0 && getRandomBeers();
     }, []);
 
     useEffect(() => {
@@ -102,18 +102,15 @@ const Search = ({ user, sortSearchResults, searchBeer }) => {
                     </label> */}
                 {/* Random Beers Container */} {/* Loading animation */}
                 {user.loading && (
-                    <ReactLoading style={center} type="bubbles" color="black" />
+                    <ReactLoading style={center} type="bubbles" color="blue" />
                 )}
-                {!user.searchResults && !user.loading && (
+                {user.searchResults.length == 0 && !user.loading && (
                     <div className="my-beers-cont">
                         <h2>Random Beers</h2>
 
-                        {randomBeerData &&
-                            randomBeerData.map((beer) => {
-                                return (
-                                    <BeerRow search={true} beerData={beer} />
-                                );
-                            })}
+                        {randomBeerData.map((beer) => {
+                            return <BeerRow search={true} beerData={beer} />;
+                        })}
                         {/* Empty div for slideAnimation of last beer */}
                         <div className="beer" style={{ height: "75px" }}></div>
                     </div>
