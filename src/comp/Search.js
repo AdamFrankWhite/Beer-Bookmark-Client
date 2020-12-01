@@ -112,7 +112,7 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                             return <BeerRow search={true} beerData={beer} />;
                         })}
                         {/* Empty div for slideAnimation of last beer */}
-                        <div className="beer" style={{ height: "75px" }}></div>
+                        <div className="beer" style={{ height: "120px" }}></div>
                     </div>
                 )}
                 {/* Beer Container */}
