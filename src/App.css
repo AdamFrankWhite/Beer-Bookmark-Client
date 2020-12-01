@@ -837,9 +837,9 @@ nav img[src="/logo.png"] {
   margin: auto;
 }
 
-.reset-pass-cont {
+.change-pass-cont {
   display: flex;
-  width: 70%;
+  width: 100%;
   flex-direction: column;
   margin: auto;
 }

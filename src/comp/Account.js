@@ -7,6 +7,8 @@ import {
     changeEmail,
 } from "../redux/actions/userActions";
 import axios from "axios";
+import { SlideDown } from "react-slidedown";
+import "react-slidedown/lib/slidedown.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons/faUserCircle";
@@ -17,7 +19,7 @@ function Account(props) {
     const [checked, setChecked] = useState(
         props.user.colorScheme !== "dark" ? false : true
     );
-
+    const [showPasswordForm, togglePasswordForm] = useState(false);
     useEffect(() => {
         !checked
             ? props.setColorScheme(props.user.userData.username, "light")
@@ -32,14 +34,14 @@ function Account(props) {
     const [editEmail, toggleEditEmail] = useState(false);
     const [newEmail, setNewEmail] = useState(props.user.userData.email);
     const center = { margin: "auto", height: 25, width: 25 };
-    const updatePassword = (username, password, id) => {
-        axios
-            .put(`http://localhost:5000/users/reset?=${id}`, {
-                username,
-                password,
-            })
-            .then((res) => {});
-    };
+    // const updatePassword = (username, password, id) => {
+    //     axios
+    //         .put(`http://localhost:5000/users/reset?=${id}`, {
+    //             username,
+    //             password,
+    //         })
+    //         .then((res) => {});
+    // };
     return (
         <div className="account-cont">
             <span className="icon">
@@ -104,49 +106,76 @@ function Account(props) {
                     <p>{props.user.resetErrorMessage}</p>
                 )}
             </div>
-            <div className="reset-pass-cont">
-                <h2>Reset Password</h2>
-                <label htmlFor="currentPassword">Current password</label>
-                <input
-                    id="currentPassword"
-                    type="password"
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                />
-                <label htmlFor="newPassword">New password</label>
-                <input
-                    id="newPassword"
-                    type="password"
-                    onChange={(e) => setNewPassword(e.target.value)}
-                />
-                <label htmlFor="confirmNewPassword">Confirm new password</label>
-                <input
-                    id="confirmNewPassword"
-                    type="password"
-                    onChange={(e) => setConfirmNewPassword(e.target.value)}
-                />
-                <span
-                    className="button"
-                    onClick={() =>
-                        props.changePassword(
-                            props.user.userData.username,
-                            currentPassword,
-                            newPassword
-                        )
-                    }
-                >
-                    {props.user.loading && (
-                        <ReactLoading
-                            style={center}
-                            type="spin"
-                            color="black"
-                        />
-                    )}
-                    {props.user.resetErrorMessage
-                        ? props.user.resetErrorMessage
-                        : "Send"}
-                    {/* TODO: separate reset route */}
+
+            <div className="row">
+                <h4>Change Password</h4>
+                <span onClick={() => togglePasswordForm(!showPasswordForm)}>
+                    Edit
                 </span>
             </div>
+            <SlideDown className={"my-dropdown-slidedown"}>
+                {showPasswordForm && (
+                    <div className="change-pass-cont">
+                        <div className="row">
+                            <label htmlFor="currentPassword">
+                                Current password
+                            </label>
+                            <input
+                                id="currentPassword"
+                                type="password"
+                                onChange={(e) =>
+                                    setCurrentPassword(e.target.value)
+                                }
+                            />
+                        </div>
+                        <div className="row">
+                            <label htmlFor="newPassword">New password</label>
+                            <input
+                                id="newPassword"
+                                type="password"
+                                onChange={(e) => setNewPassword(e.target.value)}
+                            />
+                        </div>
+                        <div className="row">
+                            <label htmlFor="confirmNewPassword">
+                                Confirm new password
+                            </label>
+                            <input
+                                id="confirmNewPassword"
+                                type="password"
+                                onChange={(e) =>
+                                    setConfirmNewPassword(e.target.value)
+                                }
+                            />
+                        </div>
+                        <div className="row">
+                            <span
+                                className="button"
+                                onClick={() =>
+                                    props.changePassword(
+                                        props.user.userData.username,
+                                        currentPassword,
+                                        newPassword
+                                    )
+                                }
+                            >
+                                {props.user.loading && (
+                                    <ReactLoading
+                                        style={center}
+                                        type="spin"
+                                        color="black"
+                                    />
+                                )}
+                                {props.user.resetErrorMessage
+                                    ? props.user.resetErrorMessage
+                                    : "Send"}
+                                {/* TODO: separate reset route */}
+                            </span>
+                        </div>
+                    </div>
+                )}
+            </SlideDown>
+            <h1>Something else</h1>
         </div>
     );
 }

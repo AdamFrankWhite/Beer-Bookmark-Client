@@ -17,8 +17,9 @@ import Modal from "./comp/Modal";
 const App = (props) => {
     return (
         <Router>
-            <NavBar loggedIn={props.loggedIn} />
             {props.user.showModal && <Modal />}
+            <NavBar loggedIn={props.loggedIn} />
+
             <div
                 className={
                     props.user.colorScheme !== "dark"
