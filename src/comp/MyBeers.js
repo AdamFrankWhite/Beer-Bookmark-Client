@@ -23,10 +23,12 @@ const MyBeers = ({ user, sortBeers }) => {
         setOrderType(type);
         setOrderAsc(user.sortType.searchType == type ? !orderAsc : true);
     };
+    const isDarkTheme = user.colorScheme == "dark" ? true : false;
+    const hoverColorMain = isDarkTheme ? "white" : "black";
     const checkHover = (type) => {
         return (hover == type && user.sortType.searchType !== type) ||
             user.sortType.searchType == type
-            ? "black"
+            ? hoverColorMain
             : "gray";
     };
     const sortTypes = [
