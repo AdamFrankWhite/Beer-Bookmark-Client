@@ -8,7 +8,8 @@ import {
 } from "../redux/actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
-
+import { SlideDown } from "react-slidedown";
+import "react-slidedown/lib/slidedown.css";
 import MouseTooltip from "react-sticky-mouse-tooltip";
 
 function BeerRow(props) {
@@ -37,35 +38,6 @@ function BeerRow(props) {
     const [selectedBeer, setSelectedBeer] = useState(null);
     //Init null to avoid initial collapse animation
     const [showRow, toggleShowRow] = useState(null);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    let infoStyle;
-    const targetRef = useRef();
-    const [height, setHeight] = useState(0);
-    if (showRow) {
-        infoStyle = {
-            height: `calc(${height} + 2em)`,
-            transition: "all 1s",
-        };
-    }
-    if (showRow === false) {
-        infoStyle = {
-            // transition: "margin-bottom 0.5s",
-            marginBottom: -height,
-        };
-    }
-    const handleWindowResize = useCallback(() => {
-        setWindowWidth(window.innerWidth);
-    }, []);
-    useEffect(() => {
-        if (targetRef.current) {
-            setHeight(targetRef.current.clientHeight);
-        }
-        window.addEventListener("resize", handleWindowResize);
-
-        return () => {
-            window.removeEventListener("resize", handleWindowResize);
-        };
-    });
 
     // let beerTypeStyle;
     // if (props.beerData.beerDescription.toLowerCase().includes("ipa")) {
@@ -262,8 +234,6 @@ function BeerRow(props) {
                 <span
                     className="more-info"
                     onClick={() => {
-                        console.log(height);
-
                         toggleShowRow(!showRow);
                     }}
                     style={{ padding: "0 0.5em" }}
@@ -271,19 +241,10 @@ function BeerRow(props) {
                     <FontAwesomeIcon icon={faChevronDown} />
                 </span>
             </div>
-            {/* Style condition prevent initial animation */}
             {/* More Info Scroll */}
-            <div
-                ref={targetRef}
-                className={
-                    props.user.colorScheme !== "dark"
-                        ? "more-info-cont"
-                        : "more-info-cont dark-theme-secondary"
-                }
-                style={infoStyle ? infoStyle : { marginBottom: -height }}
-            >
-                {props.beerData.beerInfo}
-            </div>
+            <SlideDown className={"my-dropdown-slidedown"}>
+                {showRow && props.beerData.beerInfo}
+            </SlideDown>
         </>
     );
 }
