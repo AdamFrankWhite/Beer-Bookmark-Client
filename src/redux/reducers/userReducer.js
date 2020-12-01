@@ -11,6 +11,7 @@ import {
     SORT_SEARCH_RESULTS,
     RESET_EMAIL_MESSAGE,
     UPDATE_EMAIL,
+    SHOW_MODAL,
     //
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
@@ -36,7 +37,7 @@ const initialState = {
     token: "",
     userData: {},
     loggedIn: false,
-
+    showModal: false,
     messages: [],
     users: [],
 };
@@ -54,6 +55,15 @@ export default function (state = initialState, action) {
                 loggedIn: true,
                 colorScheme: action.payload.theme,
                 searchResults: [],
+                showModal: false,
+                randomBeers: [],
+                searchSortType: {},
+            };
+        case SHOW_MODAL:
+            return {
+                ...state,
+                showModal: action.payload.visibility,
+                addBeerData: action.payload.addBeerData || {},
             };
         case GET_BEERS:
             return {

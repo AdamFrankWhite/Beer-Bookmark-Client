@@ -12,11 +12,13 @@ import NewPassword from "./comp/NewPassword";
 import ForgotPassword from "./comp/ForgotPassword";
 import Footer from "./comp/Footer";
 import "./App.css";
+import Modal from "./comp/Modal";
 
 const App = (props) => {
     return (
         <Router>
             <NavBar loggedIn={props.loggedIn} />
+            {props.user.showModal && <Modal />}
             <div
                 className={
                     props.user.colorScheme !== "dark"

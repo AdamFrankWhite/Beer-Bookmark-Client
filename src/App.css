@@ -690,6 +690,21 @@ nav img[src="/logo.png"] {
   text-shadow: 0 0 0.02px black;
 }
 
+.add-modal {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+}
+.add-modal p {
+  background: white;
+  color: black;
+}
+
 /* == My Beers == */
 .my-beers-wrapper {
   width: 100%;

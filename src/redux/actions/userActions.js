@@ -12,6 +12,7 @@ import {
     SET_COLOR_SCHEME,
     RESET_EMAIL_MESSAGE,
     UPDATE_EMAIL,
+    SHOW_MODAL,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -149,6 +150,7 @@ export const addBeer = (data) => (dispatch) => {
         .post("http://localhost:5000/users/my-beers/add", postData)
         .then((res) => {
             dispatch({ type: GET_BEERS, payload: res.data });
+            dispatch({ type: SHOW_MODAL, payload: false });
             console.log(res.data);
         });
 };
@@ -387,6 +389,9 @@ export const sortSearchResults = (beers, searchType, orderAsc) => (
     dispatch({ type: SORT_SEARCH_RESULTS, payload: sortedBeers });
 };
 
+export const toggleModal = (visibility, addBeerData) => (dispatch) => {
+    dispatch({ type: SHOW_MODAL, payload: { visibility, addBeerData } });
+};
 export const setColorScheme = (username, color) => (dispatch) => {
     console.log(username, color);
     axios

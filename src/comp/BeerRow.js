@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
-import { addBeer, deleteBeer, rateBeer } from "../redux/actions/userActions";
+import {
+    toggleModal,
+    deleteBeer,
+    rateBeer,
+} from "../redux/actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 
@@ -248,11 +252,7 @@ function BeerRow(props) {
 
                             !checkBeerIncluded &&
                                 props.user.loggedIn &&
-                                props.addBeer({
-                                    username: props.user.userData.username,
-                                    // brewery: props.brewery,
-                                    beerData: props.beerData,
-                                });
+                                props.toggleModal(true, props.beerData);
                         }}
                         className={clickTextStyle + " buttons"}
                     >
@@ -296,7 +296,7 @@ const mapStateToProps = (state) => {
 
 const mapActionsToProps = {
     deleteBeer,
-    addBeer,
+    toggleModal,
     rateBeer,
 };
 export default connect(mapStateToProps, mapActionsToProps)(BeerRow);
