@@ -53,6 +53,7 @@ export default function (state = initialState, action) {
                 userData: action.payload,
                 loggedIn: true,
                 colorScheme: action.payload.theme,
+                searchResults: [],
             };
         case GET_BEERS:
             return {
