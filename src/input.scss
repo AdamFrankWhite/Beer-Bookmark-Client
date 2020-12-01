@@ -124,6 +124,7 @@ nav {
         margin-right: 0.25em;
     }
 }
+
 .logo-cont {
     display: flex;
     align-items: center;
@@ -149,6 +150,25 @@ nav {
         }
     }
 }
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-icon-text {
+    font-size: 0.9em;
+    padding-top: 0.25em;
+}
+
 .navbar {
     display: flex;
     padding: 1em 2em;
