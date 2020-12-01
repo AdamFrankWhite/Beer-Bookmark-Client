@@ -761,6 +761,9 @@ nav {
 .sort-btn {
     margin: auto 0;
     text-align: left;
+    svg {
+        margin-left: 0.25em;
+    }
 }
 .sort-btn:hover {
     cursor: pointer;

@@ -681,6 +681,9 @@ nav img[src="/logo.png"] {
   margin: auto 0;
   text-align: left;
 }
+.sort-btn svg {
+  margin-left: 0.25em;
+}
 
 .sort-btn:hover {
   cursor: pointer;
