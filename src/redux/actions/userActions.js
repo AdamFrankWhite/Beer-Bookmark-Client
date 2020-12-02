@@ -245,11 +245,12 @@ export const rateBeer = (
                 currentSortType.orderAsc
             );
             console.log(currentSortType);
-            if (currentSortType !== undefined) {
-                dispatch({ type: GET_BEERS, payload: sortedBeers });
-            } else {
-                dispatch({ type: GET_BEERS, payload: updatedBeerList });
-            }
+            // if (currentSortType !== undefined) {
+            dispatch({ type: GET_BEERS, payload: sortedBeers });
+            console.log("boo");
+            // } else {
+            //     dispatch({ type: GET_BEERS, payload: updatedBeerList });
+            // }
 
             // Necessary to avoid sorting bug - state.sortType kept getting overwritten on second rating
             dispatch({

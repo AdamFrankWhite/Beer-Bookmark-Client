@@ -11,9 +11,16 @@ const MyBeers = ({ user, sortBeers, sortBeersByGroup }) => {
     const [currentBeerList, setCurrentBeerList] = useState(user.beers);
     const [hover, toggleHover] = useState("");
     const [orderType, setOrderType] = useState("");
-    //Populate array on component mount
+    //Keep track of selected group
+    const [beerGroup, setBeerGroup] = useState(null);
+    //When db beers update, sortbeers conditionally
+    //Ensures instant rating update
     useEffect(() => {
-        sortBeers(user.sortedBeers);
+        if (beerGroup) {
+            sortBeersByGroup(user.beers, beerGroup);
+        } else {
+            sortBeers(user.sortedBeers);
+        }
     }, [user.beers]);
 
     useEffect(() => {
@@ -64,9 +71,10 @@ const MyBeers = ({ user, sortBeers, sortBeersByGroup }) => {
                     {user.beerGroups.map((beerGroup) => {
                         return (
                             <span
-                                onClick={() =>
-                                    sortBeersByGroup(user.beers, beerGroup)
-                                }
+                                onClick={() => {
+                                    setBeerGroup(beerGroup);
+                                    sortBeersByGroup(user.beers, beerGroup);
+                                }}
                             >
                                 {beerGroup}
                             </span>
