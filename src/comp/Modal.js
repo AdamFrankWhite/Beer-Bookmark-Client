@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
     addBeer,
@@ -8,18 +8,23 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons/faFolder";
 function Modal({ user, addBeer, toggleModal, addNewGroup }) {
-    const [beerGroup, setBeerGroup] = useState("my-beers");
+    const [selectedBeerGroup, setSelectedBeerGroup] = useState("my-beers");
     const [beerGroups, getBeerGroups] = useState(user.beerGroups || []);
     const [newGroup, setNewGroup] = useState("");
+    useEffect(() => {
+        getBeerGroups(user.beerGroups);
+    }, [user.beerGroups]);
     return (
         <div className="modal">
             <div className="modal-content">
                 <h2>Select group</h2>
                 <div
                     className={
-                        beerGroup == "my-beers" ? "highlight-folder" : "folder"
+                        selectedBeerGroup == "my-beers"
+                            ? "highlight-folder"
+                            : "folder"
                     }
-                    onClick={() => setBeerGroup("my-beers")}
+                    onClick={() => setSelectedBeerGroup("my-beers")}
                 >
                     <FontAwesomeIcon icon={faFolder} />
                     My Beers
@@ -38,39 +43,22 @@ function Modal({ user, addBeer, toggleModal, addNewGroup }) {
                         Add
                     </button>
                 </div>
-                <div
-                    className={
-                        beerGroup == "summer"
-                            ? "highlight-folder pl-1"
-                            : "folder pl-1"
-                    }
-                    onClick={() => setBeerGroup("summer")}
-                >
-                    <FontAwesomeIcon icon={faFolder} />
-                    Summer
-                </div>
-                <div
-                    className={
-                        beerGroup == "winter"
-                            ? "highlight-folder pl-1"
-                            : "folder pl-1"
-                    }
-                    onClick={() => setBeerGroup("winter")}
-                >
-                    <FontAwesomeIcon icon={faFolder} />
-                    Winter
-                </div>
-                <div
-                    className={
-                        beerGroup == "spain 2019"
-                            ? "highlight-folder pl-1"
-                            : "folder pl-1"
-                    }
-                    onClick={() => setBeerGroup("spain 2019")}
-                >
-                    <FontAwesomeIcon icon={faFolder} />
-                    Spain 2019
-                </div>
+                {/* Beer groups */}
+                {beerGroups.map((beerGroup) => {
+                    return (
+                        <div
+                            className={
+                                selectedBeerGroup == beerGroup
+                                    ? "highlight-folder pl-1"
+                                    : "folder pl-1"
+                            }
+                            onClick={() => setSelectedBeerGroup(beerGroup)}
+                        >
+                            <FontAwesomeIcon icon={faFolder} />
+                            {beerGroup}
+                        </div>
+                    );
+                })}
 
                 <p
                     onClick={() => {
@@ -78,7 +66,7 @@ function Modal({ user, addBeer, toggleModal, addNewGroup }) {
                             username: user.userData.username,
                             // brewery: props.brewery,
                             beerData: user.addBeerData,
-                            beerGroup,
+                            beerGroup: selectedBeerGroup,
                         });
                         toggleModal(false);
                     }}

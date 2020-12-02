@@ -497,6 +497,14 @@ nav img[src="/logo.png"] {
     width: 4vw;
   }
 }
+.beer h2 {
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: left;
+  margin: auto 0;
+  width: 20%;
+  padding-left: 18px;
+}
 .beer h3 {
   font-size: 1.2em;
   font-weight: bold;
