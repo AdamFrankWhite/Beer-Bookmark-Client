@@ -384,6 +384,12 @@ export const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
     // );
 };
 
+export const sortBeersByGroup = (allBeers, beerGroup) => (dispatch) => {
+    const filteredBeers = allBeers.filter(
+        (beer) => beer.beerGroup == beerGroup
+    );
+    dispatch({ type: SORT_MY_BEERS, payload: filteredBeers });
+};
 export const sortSearchResults = (beers, searchType, orderAsc) => (
     dispatch
 ) => {

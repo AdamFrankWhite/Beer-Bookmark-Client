@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import BeerRow from "./BeerRow";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
-import { sortBeers } from "../redux/actions/userActions";
+import { sortBeers, sortBeersByGroup } from "../redux/actions/userActions";
 import SortButton from "./SortButton";
-const MyBeers = ({ user, sortBeers }) => {
+const MyBeers = ({ user, sortBeers, sortBeersByGroup }) => {
     const center = { margin: "auto" };
     //Set order asc/desc
     const [orderAsc, setOrderAsc] = useState(false);
 
     const [hover, toggleHover] = useState("");
-    const [sortedBeers, setSortedBeers] = useState(user.beers);
     const [orderType, setOrderType] = useState("");
     //Populate array on component mount
     useEffect(() => {
@@ -55,6 +54,20 @@ const MyBeers = ({ user, sortBeers }) => {
                     />
                 )}
                 <div className="my-beers-cont">
+                    {/* My Beer Groups */}
+                    <h2>My Beer Groups</h2>
+                    <span onClick={() => sortBeers(user.beers)}>All Beers</span>
+                    {user.beerGroups.map((beerGroup) => {
+                        return (
+                            <span
+                                onClick={() =>
+                                    sortBeersByGroup(user.beers, beerGroup)
+                                }
+                            >
+                                {beerGroup}
+                            </span>
+                        );
+                    })}
                     <div className="sort-btn-group">
                         <span className="blank-col"></span>
                         {sortTypes.map((sortType) => (
@@ -67,7 +80,6 @@ const MyBeers = ({ user, sortBeers }) => {
                             />
                         ))}
                     </div>
-
                     {user.sortedBeers &&
                         user.sortedBeers.map((beer) => (
                             <BeerRow
@@ -103,5 +115,6 @@ const mapStateToProps = (state) => {
 
 const mapActionsToProps = {
     sortBeers,
+    sortBeersByGroup,
 };
 export default connect(mapStateToProps, mapActionsToProps)(MyBeers);
