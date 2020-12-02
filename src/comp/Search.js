@@ -24,7 +24,7 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
     const [hover, toggleHover] = useState("");
     const [orderType, setOrderType] = useState("");
     const center = { margin: "auto", height: 150, width: 200 };
-    const [randomBeerData, setRandomBeerData] = useState(user.randomBeers);
+    const [randomBeerData, setRandomBeerData] = useState([]);
     const [beerType, setBeerType] = useState(["ipa"]);
     // Beer Components
 
@@ -35,8 +35,8 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
         : [];
     useEffect(() => {
         // https://api.untappd.com/v4/search/beer/?q=${beerType}
-
-        user.searchResults.length == 0 && getRandomBeers();
+        getRandomBeers();
+        user.searchResults.length == 0 && setRandomBeerData(user.randomBeers);
     }, []);
 
     useEffect(() => {

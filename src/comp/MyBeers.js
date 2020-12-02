@@ -13,7 +13,7 @@ const MyBeers = ({ user, sortBeers, sortBeersByGroup }) => {
     const [orderType, setOrderType] = useState("");
     //Populate array on component mount
     useEffect(() => {
-        sortBeers(user.beers);
+        sortBeers(user.sortedBeers);
     }, [user.beers]);
 
     useEffect(() => {
