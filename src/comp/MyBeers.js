@@ -56,7 +56,7 @@ const MyBeers = ({ user, sortBeers }) => {
                 )}
                 <div className="my-beers-cont">
                     <div className="sort-btn-group">
-                        <span className="blank-col">Sort by: </span>
+                        <span className="blank-col"></span>
                         {sortTypes.map((sortType) => (
                             <SortButton
                                 name={sortType.name}
