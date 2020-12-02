@@ -11,6 +11,10 @@ import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons/faSignInAlt";
 import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
 function NavBar(props) {
+    const lightTheme =
+        props.user.colorScheme == "light" || !props.user.colorScheme
+            ? "light-theme"
+            : "";
     return (
         <header>
             <nav
@@ -31,7 +35,7 @@ function NavBar(props) {
                 </Link>
                 <div className="flex-row">
                     {props.user.loggedIn ? (
-                        <Link to="/my-beers" className="link">
+                        <Link to="/my-beers" className={`link ${lightTheme}`}>
                             <div className="flex-col">
                                 <FontAwesomeIcon icon={faBeer} />
                                 <span className="nav-icon-text">My Beers</span>
@@ -39,7 +43,7 @@ function NavBar(props) {
                         </Link>
                     ) : null}
 
-                    <Link to="/search" className="link">
+                    <Link to="/search" className={`link ${lightTheme}`}>
                         <div className="flex-col">
                             <FontAwesomeIcon icon={faSearch} />
                             <span className="nav-icon-text">Search</span>
@@ -49,7 +53,7 @@ function NavBar(props) {
                         Random Beer
                     </Link> */}
                     {!props.user.loggedIn && (
-                        <Link to="/register" className="link">
+                        <Link to="/register" className={`link ${lightTheme}`}>
                             <div className="flex-col">
                                 <FontAwesomeIcon icon={faUser} />
                                 <span className="nav-icon-text">Register</span>
@@ -57,14 +61,14 @@ function NavBar(props) {
                         </Link>
                     )}
                     {props.user.loggedIn ? (
-                        <Link to="/settings" className="link">
+                        <Link to="/settings" className={`link ${lightTheme}`}>
                             <div className="flex-col">
                                 <FontAwesomeIcon icon={faUserCircle} />
                                 <span className="nav-icon-text">Account</span>
                             </div>
                         </Link>
                     ) : null}
-                    <Link to="/login" className="link">
+                    <Link to="/login" className={`link ${lightTheme}`}>
                         {props.user.loggedIn ? (
                             <div className="flex-col">
                                 <FontAwesomeIcon icon={faSignOutAlt} />
