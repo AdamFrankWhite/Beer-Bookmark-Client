@@ -60,7 +60,7 @@ function BeerRow(props) {
                     src={props.beerData.img}
                 ></img>
 
-                <h3>{props.beerData.beerName}</h3>
+                <h2>{props.beerData.beerName}</h2>
 
                 <a
                     href={
