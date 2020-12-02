@@ -8,16 +8,20 @@ const MyBeers = ({ user, sortBeers, sortBeersByGroup }) => {
     const center = { margin: "auto" };
     //Set order asc/desc
     const [orderAsc, setOrderAsc] = useState(false);
-
+    const [currentBeerList, setCurrentBeerList] = useState(user.beers);
     const [hover, toggleHover] = useState("");
     const [orderType, setOrderType] = useState("");
     //Populate array on component mount
     useEffect(() => {
         sortBeers(user.beers);
     }, [user.beers]);
+
     useEffect(() => {
-        sortBeers(user.beers, orderType, orderAsc);
+        sortBeers(currentBeerList, orderType, orderAsc);
     }, [orderType, orderAsc]);
+    useEffect(() => {
+        setCurrentBeerList(user.sortedBeers);
+    }, [user.sortedBeers]);
     const setOrder = (type) => {
         setOrderType(type);
         setOrderAsc(user.sortType.searchType == type ? !orderAsc : true);
