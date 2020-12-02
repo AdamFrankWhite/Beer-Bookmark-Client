@@ -32,7 +32,7 @@ function BeerRow(props) {
     }, [props.user.searchSortType, props.user.beers]);
     const [toggleTooltip, setToggleToolTip] = useState(false);
     const [confirmDelete, toggleDelete] = useState(false);
-    const [rating, setRating] = useState("");
+    const [rating, setRating] = useState(1);
     const [editRating, setEditRating] = useState(false);
     //Selected Beer
     const [selectedBeer, setSelectedBeer] = useState(null);
@@ -90,9 +90,9 @@ function BeerRow(props) {
                                     <span>&#127866;</span>
                                     <input
                                         type="number"
-                                        placeholder="1"
                                         max="10"
                                         min="1"
+                                        value={rating}
                                         style={{ color: conditionalTextColor }}
                                         onChange={(e) => {
                                             setRating(+e.target.value);
