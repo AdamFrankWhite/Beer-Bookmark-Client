@@ -194,7 +194,7 @@ nav {
 }
 
 .link {
-    color: white !important;
+    color: white;
     font-size: 1em;
     padding: 0 0.25em;
     display: block;
@@ -203,12 +203,15 @@ nav {
 }
 
 .link:hover {
-    background: white;
-    color: #007bff !important;
+    // background: white;
+    color: #007bff;
     text-decoration: none !important;
     transition: 0.25s;
 }
 
+.light-theme:hover {
+    color: navy;
+}
 .heading {
     font-size: 1.5em;
 }
@@ -649,6 +652,10 @@ nav {
     }
 }
 
+.my-dropdown-slidedown {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
 .more-info-cont {
     width: 100%;
     padding: 1em;
@@ -739,6 +746,8 @@ nav {
 
 .sort-btn-group {
     width: 100%;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
     display: flex;
     justify-content: flex-start;
     margin-right: 1em;
@@ -791,7 +800,7 @@ nav {
 }
 // Modal
 
-.add-modal {
+.modal {
     position: fixed;
     z-index: 1000;
     display: flex;
@@ -800,12 +809,60 @@ nav {
     background: rgba(0, 0, 0, 0.5);
     width: 100vw;
     height: 100vh;
-    p {
-        background: white;
-        color: black;
+}
+.modal-content {
+    text-align: left;
+    border-radius: 5px;
+    padding: 1em 4em;
+    box-shadow: 2px 2px 5px rgb(56, 56, 56);
+    background: white;
+    color: black;
+    svg {
+        margin: 0 0.25em;
     }
 }
+.pl-1 {
+    margin-left: 1em !important;
+}
+.folder {
+    border-radius: 5px;
+    padding: 0.25em;
+    margin: 0.25em;
+    background: rgb(250, 235, 208);
+    &:hover {
+        background: rgb(247, 209, 140);
+        cursor: pointer;
+    }
+}
+.highlight-folder {
+    margin: 0.25em;
+    padding: 0.25em;
+    background: orange;
+    border-radius: 5px;
+}
 
+.add-fave-btn,
+.cancel-modal-btn {
+    text-align: center;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.add-fave-btn {
+    background: lightblue;
+    border-radius: 5px;
+    padding: 0.5em;
+    &:hover {
+        background: rgb(27, 194, 250);
+    }
+}
+.cancel-modal-btn {
+    font-size: 0.9em;
+    padding: 0.5em;
+    &:hover {
+        color: maroon;
+    }
+}
 /* == My Beers == */
 
 .my-beers-wrapper {
