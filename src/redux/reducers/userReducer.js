@@ -12,6 +12,7 @@ import {
     RESET_EMAIL_MESSAGE,
     UPDATE_EMAIL,
     SHOW_MODAL,
+    ADD_GROUP,
     //
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
@@ -40,6 +41,7 @@ const initialState = {
     showModal: false,
     messages: [],
     users: [],
+    beerGroups: [],
 };
 
 //NOTE - if dispatch is called without case for it, it will use default and reset state between dispatches
@@ -58,12 +60,18 @@ export default function (state = initialState, action) {
                 showModal: false,
                 randomBeers: [],
                 searchSortType: {},
+                beerGroups: action.payload.beerGroups,
             };
         case SHOW_MODAL:
             return {
                 ...state,
                 showModal: action.payload.visibility,
                 addBeerData: action.payload.addBeerData || {},
+            };
+        case ADD_GROUP:
+            return {
+                ...state,
+                beerGroups: action.payload,
             };
         case GET_BEERS:
             return {

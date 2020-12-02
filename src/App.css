@@ -159,7 +159,7 @@ nav img[src="/logo.png"] {
 }
 
 .link {
-  color: white !important;
+  color: white;
   font-size: 1em;
   padding: 0 0.25em;
   display: block;
@@ -168,10 +168,13 @@ nav img[src="/logo.png"] {
 }
 
 .link:hover {
-  background: white;
-  color: #007bff !important;
+  color: #007bff;
   text-decoration: none !important;
   transition: 0.25s;
+}
+
+.light-theme:hover {
+  color: navy;
 }
 
 .heading {
@@ -593,6 +596,11 @@ nav img[src="/logo.png"] {
   border-bottom: 2px solid black;
 }
 
+.my-dropdown-slidedown {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
 .more-info-cont {
   width: 100%;
   padding: 1em;
@@ -668,6 +676,8 @@ nav img[src="/logo.png"] {
 
 .sort-btn-group {
   width: 100%;
+  margin-top: 1em;
+  margin-bottom: 0.25em;
   display: flex;
   justify-content: flex-start;
   margin-right: 1em;
@@ -708,7 +718,7 @@ nav img[src="/logo.png"] {
   text-shadow: 0 0 0.02px black;
 }
 
-.add-modal {
+.modal {
   position: fixed;
   z-index: 1000;
   display: flex;
@@ -718,9 +728,65 @@ nav img[src="/logo.png"] {
   width: 100vw;
   height: 100vh;
 }
-.add-modal p {
+
+.modal-content {
+  text-align: left;
+  border-radius: 5px;
+  padding: 1em 4em;
+  box-shadow: 2px 2px 5px #383838;
   background: white;
   color: black;
+}
+.modal-content svg {
+  margin: 0 0.25em;
+}
+
+.pl-1 {
+  margin-left: 1em !important;
+}
+
+.folder {
+  border-radius: 5px;
+  padding: 0.25em;
+  margin: 0.25em;
+  background: #faebd0;
+}
+.folder:hover {
+  background: #f7d18c;
+  cursor: pointer;
+}
+
+.highlight-folder {
+  margin: 0.25em;
+  padding: 0.25em;
+  background: orange;
+  border-radius: 5px;
+}
+
+.add-fave-btn,
+.cancel-modal-btn {
+  text-align: center;
+}
+.add-fave-btn:hover,
+.cancel-modal-btn:hover {
+  cursor: pointer;
+}
+
+.add-fave-btn {
+  background: lightblue;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+.add-fave-btn:hover {
+  background: #1bc2fa;
+}
+
+.cancel-modal-btn {
+  font-size: 0.9em;
+  padding: 0.5em;
+}
+.cancel-modal-btn:hover {
+  color: maroon;
 }
 
 /* == My Beers == */

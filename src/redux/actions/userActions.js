@@ -13,6 +13,7 @@ import {
     RESET_EMAIL_MESSAGE,
     UPDATE_EMAIL,
     SHOW_MODAL,
+    ADD_GROUP,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -130,7 +131,7 @@ export const changePassword = (username, oldPassword, newPassword) => (
 };
 
 export const addBeer = (data) => (dispatch) => {
-    const { username, beerData } = data;
+    const { username, beerData, beerGroup } = data;
     console.log(beerData);
     const postData = {
         id: beerData.id,
@@ -144,6 +145,7 @@ export const addBeer = (data) => (dispatch) => {
         date: new Date(),
         img: beerData.img,
         beerInfo: beerData.beerInfo,
+        beerGroup,
     };
     console.log(postData);
     axios
@@ -152,7 +154,30 @@ export const addBeer = (data) => (dispatch) => {
             dispatch({ type: GET_BEERS, payload: res.data });
             dispatch({ type: SHOW_MODAL, payload: false });
             console.log(res.data);
-        });
+        })
+        .catch((err) => console.log(err));
+};
+
+export const addNewGroup = (username, newGroup) => (dispatch) => {
+    dispatch({ type: SET_LOADING, payload: true });
+    axios
+        .post("http://localhost:5000/users/my-beers/add-group", {
+            username,
+            newGroup,
+        })
+        .then((res) => {
+            console.log(res.data);
+            if (res.data.error) {
+                //deal with error
+                console.log(res.data.error);
+            } else {
+                const updatedGroups = res.data;
+                dispatch({ type: ADD_GROUP, payload: updatedGroups });
+            }
+
+            dispatch({ type: SET_LOADING, payload: false });
+        })
+        .catch((err) => console.log(err));
 };
 export const deleteBeer = (data, currentSortType) => (dispatch) => {
     const { username, beerData } = data;

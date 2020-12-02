@@ -1,53 +1,72 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addBeer, toggleModal } from "../redux/actions/userActions";
+import {
+    addBeer,
+    toggleModal,
+    addNewGroup,
+} from "../redux/actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons/faFolder";
-function Modal(props) {
-    const [folder, setFolder] = useState("my-beers");
-    const [folders, getFolders] = useState(props.user.beerGroups || []);
+function Modal({ user, addBeer, toggleModal, addNewGroup }) {
+    const [beerGroup, setBeerGroup] = useState("my-beers");
+    const [beerGroups, getBeerGroups] = useState(user.beerGroups || []);
+    const [newGroup, setNewGroup] = useState("");
     return (
         <div className="modal">
             <div className="modal-content">
-                <h2>Select folder</h2>
+                <h2>Select group</h2>
                 <div
                     className={
-                        folder == "my-beers" ? "highlight-folder" : "folder"
+                        beerGroup == "my-beers" ? "highlight-folder" : "folder"
                     }
-                    onClick={() => setFolder("my-beers")}
+                    onClick={() => setBeerGroup("my-beers")}
                 >
                     <FontAwesomeIcon icon={faFolder} />
                     My Beers
                 </div>
+                <div className="row">
+                    <h3>Add group</h3>
+                    <input
+                        type="text"
+                        onChange={(e) => setNewGroup(e.target.value)}
+                    />
+                    <button
+                        onClick={() =>
+                            addNewGroup(user.userData.username, newGroup)
+                        }
+                    >
+                        Add
+                    </button>
+                </div>
                 <div
                     className={
-                        folder == "summer"
+                        beerGroup == "summer"
                             ? "highlight-folder pl-1"
                             : "folder pl-1"
                     }
-                    onClick={() => setFolder("summer")}
+                    onClick={() => setBeerGroup("summer")}
                 >
                     <FontAwesomeIcon icon={faFolder} />
                     Summer
                 </div>
                 <div
                     className={
-                        folder == "winter"
+                        beerGroup == "winter"
                             ? "highlight-folder pl-1"
                             : "folder pl-1"
                     }
-                    onClick={() => setFolder("winter")}
+                    onClick={() => setBeerGroup("winter")}
                 >
                     <FontAwesomeIcon icon={faFolder} />
                     Winter
                 </div>
                 <div
                     className={
-                        folder == "spain 2019"
+                        beerGroup == "spain 2019"
                             ? "highlight-folder pl-1"
                             : "folder pl-1"
                     }
-                    onClick={() => setFolder("spain 2019")}
+                    onClick={() => setBeerGroup("spain 2019")}
                 >
                     <FontAwesomeIcon icon={faFolder} />
                     Spain 2019
@@ -55,12 +74,13 @@ function Modal(props) {
 
                 <p
                     onClick={() => {
-                        props.addBeer({
-                            username: props.user.userData.username,
+                        addBeer({
+                            username: user.userData.username,
                             // brewery: props.brewery,
-                            beerData: props.user.addBeerData,
+                            beerData: user.addBeerData,
+                            beerGroup,
                         });
-                        props.toggleModal(false);
+                        toggleModal(false);
                     }}
                     className="add-fave-btn"
                 >
@@ -68,7 +88,7 @@ function Modal(props) {
                 </p>
                 <p
                     onClick={() => {
-                        props.toggleModal(false);
+                        toggleModal(false);
                     }}
                     className="cancel-modal-btn"
                 >
@@ -87,5 +107,6 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = {
     addBeer,
     toggleModal,
+    addNewGroup,
 };
 export default connect(mapStateToProps, mapActionsToProps)(Modal);
