@@ -21,6 +21,7 @@ import {
     GET_USER_MESSAGES,
     GET_ALL_USERS,
     SET_COLOR_SCHEME,
+    SET_BREWERY,
 } from "../types";
 
 const initialState = {
@@ -77,6 +78,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 beers: action.payload,
+            };
+        case SET_BREWERY:
+            return {
+                ...state,
+                brewery: action.payload,
             };
         case SORT_MY_BEERS: {
             return {

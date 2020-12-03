@@ -11,6 +11,7 @@ import Settings from "./comp/Settings";
 import NewPassword from "./comp/NewPassword";
 import ForgotPassword from "./comp/ForgotPassword";
 import Footer from "./comp/Footer";
+import Brewery from "./comp/Brewery";
 import "./App.css";
 import Modal from "./comp/Modal";
 
@@ -30,6 +31,13 @@ const App = (props) => {
                 <Route path="/" exact component={Home} />
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
+                {props.user.brewery && (
+                    <Route
+                        path={`/brewery/${props.user.brewery.brewery_slug}`}
+                        brewery={props.user.brewery}
+                        component={Brewery}
+                    />
+                )}
                 {props.user.loggedIn && (
                     <Route path="/my-beers" component={MyBeers} />
                 )}

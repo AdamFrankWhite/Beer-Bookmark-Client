@@ -14,6 +14,7 @@ import {
     UPDATE_EMAIL,
     SHOW_MODAL,
     ADD_GROUP,
+    SET_BREWERY,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -140,7 +141,7 @@ export const addBeer = (data) => (dispatch) => {
         abv: beerData.abv.toString(),
         beerDescription: beerData.beerDescription,
         breweryName: beerData.breweryName,
-        breweryContact: beerData.breweryContact,
+        brewery: beerData.brewery,
         stars: "1",
         date: new Date(),
         img: beerData.img,
@@ -289,8 +290,7 @@ export const searchBeer = (searchTerm, searchType = "beer") => (dispatch) => {
                     beerName: item.beer.beer_name,
                     abv: item.beer.beer_abv,
                     beerDescription: item.beer.beer_style,
-                    breweryName: item.brewery.brewery_name,
-                    breweryContact: item.brewery.contact.url,
+                    brewery: item.brewery,
                     img: item.beer.beer_label,
                     beerInfo: item.beer.beer_description,
                 };
@@ -385,6 +385,9 @@ export const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
     // );
 };
 
+export const setBrewery = (breweryData) => (dispatch) => {
+    dispatch({ type: SET_BREWERY, payload: breweryData });
+};
 export const sortBeersByGroup = (allBeers, beerGroup) => (dispatch) => {
     const filteredBeers = allBeers.filter(
         (beer) => beer.beerGroup == beerGroup

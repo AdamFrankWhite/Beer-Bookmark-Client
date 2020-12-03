@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import {
     toggleModal,
     deleteBeer,
     rateBeer,
+    setBrewery,
 } from "../redux/actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
@@ -20,6 +22,7 @@ function BeerRow({
     rateBeer,
     beerData,
     myBeers,
+    setBrewery,
 }) {
     let checkBeerIncluded = beerCheck();
     function beerCheck() {
@@ -46,7 +49,9 @@ function BeerRow({
     const [selectedBeer, setSelectedBeer] = useState(null);
     //Init null to avoid initial collapse animation
     const [showRow, toggleShowRow] = useState(null);
-
+    useEffect(() => {
+        console.log(beerData);
+    });
     // let beerTypeStyle;
     // if (beerData.beerDescription.toLowerCase().includes("ipa")) {
     //     beerTypeStyle = { backgroundColor: "blue" };
@@ -66,16 +71,17 @@ function BeerRow({
 
                 <h2>{beerData.beerName}</h2>
 
-                <a
-                    href={beerData.breweryContact && beerData.breweryContact}
+                <Link
+                    to={`/brewery/${beerData.brewery.brewery_slug}`}
+                    onClick={() => setBrewery(beerData.brewery)}
                     style={
                         user.colorScheme !== "dark"
                             ? { color: "black" }
                             : { color: "white" }
                     }
                 >
-                    <h4>{beerData.breweryName}</h4>
-                </a>
+                    <h4>{beerData.brewery.brewery_name}</h4>
+                </Link>
 
                 <h5>ABV: {beerData.abv}%</h5>
 
@@ -256,5 +262,6 @@ const mapActionsToProps = {
     deleteBeer,
     toggleModal,
     rateBeer,
+    setBrewery,
 };
 export default connect(mapStateToProps, mapActionsToProps)(BeerRow);

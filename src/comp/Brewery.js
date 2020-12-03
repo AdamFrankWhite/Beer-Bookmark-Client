@@ -1,14 +1,26 @@
-import React from 'react'
-
-function Brewery(props) {
+import React from "react";
+import { connect } from "react-redux";
+function Brewery({ user }) {
+    console.log(user.brewery);
     return (
         <div>
-            <h2>Brewery: {props.name} </h2>
-            <h2>Beers: {props.beerNum}</h2>
-            <h2>Location: {props.location}</h2>
-            <img src={props.img} alt="brewery" />
+            <img src={user.brewery.brewery_label} alt="brewery" />
+            <h2>Brewery: {user.brewery.brewery_name} </h2>
+            {/* 
+            Need to search for beers by exact brewery
+            <h2>Beers: {user.beerNum}</h2> */}
+            <h2>Type: {user.brewery.brewery_type}</h2>
+            <h2>
+                Location: {user.brewery.location.brewery_city},{" "}
+                {user.brewery.country_name}
+            </h2>
         </div>
-    )
+    );
 }
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    };
+};
 
-export default Brewery
+export default connect(mapStateToProps)(Brewery);
