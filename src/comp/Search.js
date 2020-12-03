@@ -152,15 +152,6 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                             </div>
 
                             {beers}
-                            {/* Empty div for slideAnimation of last beer */}
-                            <div
-                                className={
-                                    user.colorScheme !== "dark"
-                                        ? "beer"
-                                        : "beer dark-theme"
-                                }
-                                style={{ height: "200px" }}
-                            ></div>
                         </div>
                     </>
                 )}
