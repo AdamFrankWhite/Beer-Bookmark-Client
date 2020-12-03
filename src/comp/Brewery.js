@@ -57,8 +57,15 @@ function Brewery({ user, sortSearchResults, setBrewerBeers }) {
                         beerInfo: item.beer.beer_description,
                     };
                 });
-                console.log(res.data.response.beers.items);
-                setBrewerBeers(cleanData);
+
+                //Check brewer name
+                const filterBrewer = cleanData.filter((beer) => {
+                    return (
+                        beer.brewery.brewery_name == user.brewery.brewery_name
+                    );
+                });
+
+                setBrewerBeers(filterBrewer);
             })
 
             .catch((err) => console.log(err));
@@ -69,6 +76,14 @@ function Brewery({ user, sortSearchResults, setBrewerBeers }) {
         <div className="brewery-cont">
             <img src={user.brewery.brewery_label} alt="brewery" />
             <h2>Brewery: {user.brewery.brewery_name} </h2>
+
+            <h2>Beers: {user.beerNum}</h2>
+            <h2>Type: {user.brewery.brewery_type}</h2>
+            <h2>
+                Location: {user.brewery.location.brewery_city},{" "}
+                {user.brewery.country_name}
+            </h2>
+            <h2>Beers: {user.beerNum}</h2>
             <div
                 className={
                     user.colorScheme !== "dark"
@@ -93,12 +108,6 @@ function Brewery({ user, sortSearchResults, setBrewerBeers }) {
                         <BeerRow search={true} beerData={beer} />
                     ))}
             </div>
-            <h2>Beers: {user.beerNum}</h2>
-            <h2>Type: {user.brewery.brewery_type}</h2>
-            <h2>
-                Location: {user.brewery.location.brewery_city},{" "}
-                {user.brewery.country_name}
-            </h2>
         </div>
     );
 }
