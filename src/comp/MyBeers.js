@@ -102,7 +102,13 @@ const MyBeers = ({ user, sortBeers, sortBeersByGroup }) => {
                         );
                     })}
                 </div>
-                <div className="my-beers-cont">
+                <div
+                    className={
+                        user.colorScheme !== "dark"
+                            ? "beers-cont my-beers-cont"
+                            : "beers-cont my-beers-cont dark-theme-secondary"
+                    }
+                >
                     {/* My Beer Groups */}
 
                     <div className="sort-btn-group">
@@ -125,15 +131,6 @@ const MyBeers = ({ user, sortBeers, sortBeersByGroup }) => {
                                 brewery={beer.brewery}
                             />
                         ))}
-                    {/* Empty div for slideAnimation of last beer */}
-                    <div
-                        className={
-                            user.colorScheme !== "dark"
-                                ? "beer"
-                                : "beer dark-theme"
-                        }
-                        style={{ height: "200px" }}
-                    ></div>
                 </div>
             </div>
             {/* </div> */}

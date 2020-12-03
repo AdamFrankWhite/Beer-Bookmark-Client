@@ -105,7 +105,13 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                     <ReactLoading style={center} type="bubbles" color="blue" />
                 )}
                 {user.searchResults.length == 0 && !user.loading && (
-                    <div className="my-beers-cont">
+                    <div
+                        className={
+                            user.colorScheme !== "dark"
+                                ? "beers-cont"
+                                : "beers-cont dark-theme-secondary"
+                        }
+                    >
                         <h2>Random Beers</h2>
 
                         {randomBeerData.map((beer) => {
@@ -119,8 +125,20 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                 {!user.loading && (
                     <>
                         <h2>Results</h2>
-                        <div className="my-beers-cont">
-                            <div className="sort-btn-group">
+                        <div
+                            className={
+                                user.colorScheme !== "dark"
+                                    ? "beers-cont"
+                                    : "beers-cont dark-theme-secondary"
+                            }
+                        >
+                            <div
+                                className={
+                                    user.colorScheme !== "dark"
+                                        ? "sort-btn-group sort-btns-light"
+                                        : "sort-btn-group sort-btns-dark"
+                                }
+                            >
                                 <span className="blank-col">Sort by: </span>
                                 {sortTypes.map((sortType) => (
                                     <SortButton
