@@ -12,13 +12,21 @@ import { SlideDown } from "react-slidedown";
 import "react-slidedown/lib/slidedown.css";
 import MouseTooltip from "react-sticky-mouse-tooltip";
 
-function BeerRow(props) {
+function BeerRow({
+    user,
+    search,
+    toggleModal,
+    deleteBeer,
+    rateBeer,
+    beerData,
+    myBeers,
+}) {
     let checkBeerIncluded = beerCheck();
     function beerCheck() {
         return (
-            props.search &&
-            props.user.beers &&
-            JSON.stringify(props.user.beers).includes(props.beerData.id)
+            search &&
+            user.beers &&
+            JSON.stringify(user.beers).includes(beerData.id)
         );
     }
 
@@ -26,10 +34,10 @@ function BeerRow(props) {
     const clickTextStyle = checkBeerIncluded && "click-text-saved";
     const clickText = checkBeerIncluded ? "Saved" : "Add to favourites";
     const conditionalTextColor =
-        props.user.colorScheme == "light" ? "#000000" : "#ffffff";
+        user.colorScheme == "light" ? "#000000" : "#ffffff";
     useEffect(() => {
         checkBeerIncluded = beerCheck();
-    }, [props.user.searchSortType, props.user.beers]);
+    }, [user.searchSortType, user.beers]);
     const [toggleTooltip, setToggleToolTip] = useState(false);
     const [confirmDelete, toggleDelete] = useState(false);
     const [rating, setRating] = useState(1);
@@ -40,49 +48,40 @@ function BeerRow(props) {
     const [showRow, toggleShowRow] = useState(null);
 
     // let beerTypeStyle;
-    // if (props.beerData.beerDescription.toLowerCase().includes("ipa")) {
+    // if (beerData.beerDescription.toLowerCase().includes("ipa")) {
     //     beerTypeStyle = { backgroundColor: "blue" };
-    // } else if (props.beerData.beerDescription.toLowerCase().includes("lager")) {
+    // } else if (beerData.beerDescription.toLowerCase().includes("lager")) {
     //     beerTypeStyle = { backgroundColor: "maroon" };
     // }
     return (
         <>
             <div
                 className={
-                    props.user.colorScheme !== "dark"
+                    user.colorScheme !== "dark"
                         ? "beer"
                         : "beer dark-theme-secondary"
                 }
             >
-                <img
-                    className="thumb"
-                    alt="beer"
-                    src={props.beerData.img}
-                ></img>
+                <img className="thumb" alt="beer" src={beerData.img}></img>
 
-                <h2>{props.beerData.beerName}</h2>
+                <h2>{beerData.beerName}</h2>
 
                 <a
-                    href={
-                        props.beerData.breweryContact &&
-                        props.beerData.breweryContact
-                    }
+                    href={beerData.breweryContact && beerData.breweryContact}
                     style={
-                        props.user.colorScheme !== "dark"
+                        user.colorScheme !== "dark"
                             ? { color: "black" }
                             : { color: "white" }
                     }
                 >
-                    <h4>{props.beerData.breweryName}</h4>
+                    <h4>{beerData.breweryName}</h4>
                 </a>
 
-                <h5>ABV: {props.beerData.abv}%</h5>
+                <h5>ABV: {beerData.abv}%</h5>
 
-                <h5 className="description">
-                    {props.beerData.beerDescription}
-                </h5>
+                <h5 className="description">{beerData.beerDescription}</h5>
 
-                {props.myBeers && (
+                {myBeers && (
                     <>
                         {editRating ? (
                             <div className="set-rating">
@@ -102,13 +101,13 @@ function BeerRow(props) {
                                 <div className="delete-buttons">
                                     <span
                                         onClick={() => {
-                                            console.log(props.user.searchType);
-                                            props.rateBeer(
-                                                props.beerData,
-                                                props.user.userData.username,
+                                            console.log(user.searchType);
+                                            rateBeer(
+                                                beerData,
+                                                user.userData.username,
                                                 rating,
-                                                props.user.sortType,
-                                                props.user.beers
+                                                user.sortType,
+                                                user.beers
                                             );
                                             setEditRating(false);
                                         }}
@@ -128,12 +127,11 @@ function BeerRow(props) {
                             <span
                                 className="buttons"
                                 onClick={() => {
-                                    setSelectedBeer(props.beerData);
+                                    setSelectedBeer(beerData);
                                     setEditRating(true);
                                 }}
                             >
-                                {props.user.loading &&
-                                selectedBeer == props.beerData ? (
+                                {user.loading && selectedBeer == beerData ? (
                                     <ReactLoading
                                         style={spinnerStyle}
                                         type="spin"
@@ -148,7 +146,7 @@ function BeerRow(props) {
                                                 setToggleToolTip(false)
                                             }
                                         >
-                                            &#127866; {props.beerData.stars}
+                                            &#127866; {beerData.stars}
                                         </span>
                                         <MouseTooltip
                                             visible={toggleTooltip}
@@ -166,8 +164,8 @@ function BeerRow(props) {
                     </>
                 )}
 
-                {/* //TODO - add buy button and affiliate <a target="_blank" href={`https://www.beerhawk.co.uk/search/?q=${props.beerData.beerName||props.name}+${props.brewery}`}><span>Buy</span></a> */}
-                {/* {props.myBeers && (
+                {/* //TODO - add buy button and affiliate <a target="_blank" href={`https://www.beerhawk.co.uk/search/?q=${beerData.beerName||name}+${brewery}`}><span>Buy</span></a> */}
+                {/* {myBeers && (
                     <span
                         onClick={setState({ confirmDelete: true })}
                         className="delete-beer"
@@ -176,19 +174,18 @@ function BeerRow(props) {
                     </span>
                 )} */}
 
-                {props.myBeers && confirmDelete && (
+                {myBeers && confirmDelete && (
                     <div className="delete-confirm">
                         <span>Are you sure?</span>
                         <div>
                             <span
                                 onClick={() => {
-                                    props.deleteBeer(
+                                    deleteBeer(
                                         {
-                                            username:
-                                                props.user.userData.username,
-                                            beerData: props.beerData,
+                                            username: user.userData.username,
+                                            beerData: beerData,
                                         },
-                                        props.user.sortType
+                                        user.sortType
                                     );
                                     toggleDelete(false);
                                 }}
@@ -207,7 +204,7 @@ function BeerRow(props) {
                         </div>
                     </div>
                 )}
-                {props.myBeers && !confirmDelete && (
+                {myBeers && !confirmDelete && (
                     <span
                         onClick={() => toggleDelete(true)}
                         className="delete-beer"
@@ -217,18 +214,18 @@ function BeerRow(props) {
                 )}
 
                 {/* Bookmark Cell */}
-                {props.search && (
+                {search && (
                     <span
                         onClick={() => {
                             //only add to favourites if not already included
 
                             !checkBeerIncluded &&
-                                props.user.loggedIn &&
-                                props.toggleModal(true, props.beerData);
+                                user.loggedIn &&
+                                toggleModal(true, beerData);
                         }}
                         className={clickTextStyle + " buttons"}
                     >
-                        {props.user.loggedIn && clickText}
+                        {user.loggedIn && clickText}
                     </span>
                 )}
                 <span
@@ -243,7 +240,7 @@ function BeerRow(props) {
             </div>
             {/* More Info Scroll */}
             <SlideDown className={"my-dropdown-slidedown"}>
-                {showRow && props.beerData.beerInfo}
+                {showRow && beerData.beerInfo}
             </SlideDown>
         </>
     );
