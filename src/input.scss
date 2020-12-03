@@ -475,18 +475,29 @@ nav {
 }
 /* == Beer Styles == */
 
-.beer-container {
+.my-beers-wrapper {
     display: flex;
     width: 90%;
-    flex-wrap: wrap;
     margin: auto;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+}
+.my-beer-groups {
+    display: flex;
+    flex-direction: column;
+    .folder,
+    .highlight-folder {
+        text-align: left;
+        padding: 0.5em 0.75em;
+    }
+    .text {
+        padding-left: 0.5em;
+    }
 }
 
-.my-beers-cont {
+.beers-cont {
     width: 90%;
-    margin: auto;
+    margin: 1em auto;
     .beer:last-of-type {
         border-top: 2px solid black;
         border-left: none;
@@ -494,7 +505,9 @@ nav {
         border-bottom: none;
     }
 }
-
+.my-beers-cont {
+    width: 70%;
+}
 .randomBeer {
     border: 2px black solid;
     position: relative;
@@ -665,7 +678,7 @@ nav {
     margin: 0.5em;
     border-radius: 5px;
     background: gray;
-    border: 1px white solid;
+    border: 1px white;
     &:hover {
         cursor: pointer;
     }
@@ -762,11 +775,21 @@ nav {
 .beer-types:hover {
     cursor: pointer;
 }
+.sort-btns-light {
+    background: rgb(173, 211, 255) !important;
+}
 
+.sort-btns-dark {
+    background: rgb(39, 39, 39) !important;
+}
 .sort-btn-group {
+    border-top: 2px black solid;
+    border-left: 2px black solid;
+    border-right: 2px black solid;
     width: 100%;
-    margin-top: 1em;
-    margin-bottom: 0.25em;
+    border-radius: 5px 5px 0 0;
+    // margin-bottom: 0.25em;
+    padding: 0.5em;
     display: flex;
     justify-content: flex-start;
     margin-right: 1em;
@@ -884,27 +907,22 @@ nav {
 }
 /* == My Beers == */
 
-.my-beers-wrapper {
+.my-beers-banner {
     width: 100%;
-    margin: auto;
-    // border: rgb(175, 2, 2) solid 2px;
-    border-radius: 5px;
-    .my-beers-banner {
-        width: 100%;
-        min-height: 350px;
-        border-radius: 5px 5px 0 0;
-        background-image: url("/beer-1074950_1280.jpg");
-        background-size: cover;
-        box-shadow: inset 0 0 0 1000px rgba(27, 27, 27, 0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        h1 {
-            color: rgb(224, 224, 224);
-        }
-        // background-position: center;
+    min-height: 350px;
+    border-radius: 5px 5px 0 0;
+    background-image: url("/beer-1074950_1280.jpg");
+    background-size: cover;
+    box-shadow: inset 0 0 0 1000px rgba(27, 27, 27, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        color: rgb(224, 224, 224);
     }
+    // background-position: center;
 }
+
 .ratings {
     // position: absolute;
     font-size: 0.8em;
