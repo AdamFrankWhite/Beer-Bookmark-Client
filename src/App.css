@@ -631,6 +631,11 @@ nav img[src="/logo.png"] {
   cursor: pointer;
 }
 
+.brewery-cont {
+  width: 90%;
+  margin: auto;
+}
+
 .my-dropdown-slidedown {
   border-left: 2px solid black;
   border-right: 2px solid black;
