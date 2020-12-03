@@ -22,3 +22,4 @@ export const GET_ALL_USERS = "GET_ALL_USERS";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const ADD_GROUP = "ADD_GROUP";
 export const SET_BREWERY = "SET_BREWERY";
+export const SET_BREWER_BEERS = "SET_BREWER_BEERS";

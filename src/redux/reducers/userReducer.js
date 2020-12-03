@@ -22,6 +22,7 @@ import {
     GET_ALL_USERS,
     SET_COLOR_SCHEME,
     SET_BREWERY,
+    SET_BREWER_BEERS,
 } from "../types";
 
 const initialState = {
@@ -43,6 +44,7 @@ const initialState = {
     messages: [],
     users: [],
     beerGroups: [],
+    brewerBeers: [],
 };
 
 //NOTE - if dispatch is called without case for it, it will use default and reset state between dispatches
@@ -83,6 +85,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 brewery: action.payload,
+            };
+        case SET_BREWER_BEERS:
+            return {
+                ...state,
+                brewerBeers: action.payload,
             };
         case SORT_MY_BEERS: {
             return {

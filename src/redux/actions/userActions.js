@@ -15,6 +15,7 @@ import {
     SHOW_MODAL,
     ADD_GROUP,
     SET_BREWERY,
+    SET_BREWER_BEERS,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -357,6 +358,9 @@ export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
         });
 };
 
+export const setBrewerBeers = (beers) => (dispatch) => {
+    dispatch({ type: SET_BREWER_BEERS, payload: beers });
+};
 export const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
     let sortedBeers;
 

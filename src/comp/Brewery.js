@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import axios from "axios";
 import BeerRow from "./BeerRow";
 import SortButton from "./SortButton";
-import { sortSearchResults } from "../redux/actions/userActions";
-function Brewery({ user, sortSearchResults }) {
-    const [brewerBeers, setBrewerBeers] = useState(null);
-
+import {
+    sortSearchResults,
+    setBrewerBeers,
+} from "../redux/actions/userActions";
+function Brewery({ user, sortSearchResults, setBrewerBeers }) {
     const sortTypes = [
         { name: "Beer", type: "beerName" },
         { name: "Brewer", type: "breweryName" },
@@ -29,8 +30,7 @@ function Brewery({ user, sortSearchResults }) {
     const [orderType, setOrderType] = useState("");
     useEffect(() => {
         console.log(user.searchResults, orderType, orderAsc);
-        const sortedBeers = sortBeers(user.searchResults, orderType, orderAsc);
-        setBrewerBeers(sortedBeers);
+        sortSearchResults(user.brewerBeers, orderType, orderAsc);
     }, [orderType, orderAsc]);
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -65,28 +65,6 @@ function Brewery({ user, sortSearchResults }) {
     }, []);
     console.log(user.brewery);
 
-    const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
-        let sortedBeers;
-
-        if (orderAsc) {
-            sortedBeers = beers.sort((a, b) =>
-                a[searchType] > b[searchType]
-                    ? 1
-                    : b[searchType] > a[searchType]
-                    ? -1
-                    : 0
-            );
-        } else {
-            sortedBeers = beers.sort((a, b) =>
-                a[searchType] < b[searchType]
-                    ? 1
-                    : b[searchType] < a[searchType]
-                    ? -1
-                    : 0
-            );
-        }
-        return sortedBeers;
-    };
     return (
         <div className="brewery-cont">
             <img src={user.brewery.brewery_label} alt="brewery" />
@@ -110,8 +88,8 @@ function Brewery({ user, sortSearchResults }) {
                 ))}
             </div>
             <div className="beers-cont">
-                {brewerBeers &&
-                    brewerBeers.map((beer) => (
+                {user.brewerBeers &&
+                    user.brewerBeers.map((beer) => (
                         <BeerRow search={true} beerData={beer} />
                     ))}
             </div>
@@ -132,6 +110,7 @@ const mapStateToProps = (state) => {
 
 const mapActionsToProps = {
     sortSearchResults,
+    setBrewerBeers,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Brewery);
