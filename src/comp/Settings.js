@@ -1,40 +1,53 @@
-import React, { useState } from "react";
-import { Route, Link } from "react-router-dom";
-import Privacy from "./Privacy";
-import Account from "./Account";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-
+import { setMarketingPref } from "../redux/actions/userActions";
 function Settings(props) {
+    const [marketingPref, toggleMarketingPref] = useState(
+        props.user.marketingPref
+    );
+    useEffect(() => {
+        toggleMarketingPref(props.user.marketingPref);
+    }, [props.user.marketingPref]);
     return (
-        <>
+        <div className="account-cont">
             <h1>Settings</h1>
-            <div className="settings-cont">
-                {/* <div className="settings-nav"> */}
-                <Account />
-                <Privacy />
-                {/* <nav>
-                    <Link to="/settings/account" className="flex-icon">
-                        <FontAwesomeIcon icon={faUserCircle} />
-                        Account
-                    </Link>
+            <h2>Dashboard / Privacy</h2>
+            <div className="settings-content">
+                <div className="flex-row">
+                    <input
+                        type="checkbox"
+                        defaultChecked={marketingPref}
+                        onClick={() => toggleMarketingPref(!marketingPref)}
+                    />
+                    <p>
+                        I would like to receive emails about beer offers and
+                        deals
+                    </p>
+                </div>
 
-                    <Link to="/settings/privacy" className="flex-icon">
-                        {" "}
-                        <FontAwesomeIcon icon={faCog} />
-                        Preferences
-                    </Link>
-                </nav>
-            </div> */}
-                {/* <Route path="/settings/account" component={Account} />
-            <Route path="/settings/privacy" component={Privacy} /> */}
+                <span
+                    className="button"
+                    onClick={() =>
+                        props.setMarketingPref(
+                            marketingPref,
+                            props.user.userData.username
+                        )
+                    }
+                >
+                    Update
+                </span>
             </div>
-        </>
+        </div>
     );
 }
-
 const mapStateToProps = (state) => {
     return {
         user: state.user,
     };
 };
-export default connect(mapStateToProps)(Settings);
+
+const mapActionsToProps = {
+    setMarketingPref,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Settings);

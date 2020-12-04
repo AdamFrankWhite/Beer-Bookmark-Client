@@ -16,6 +16,7 @@ import {
     ADD_GROUP,
     SET_BREWERY,
     SET_BREWER_BEERS,
+    SET_MARKETING_PREFERENCE,
     SET_AUTHENTICATION,
     SET_UNAUTHENTICATED,
     GET_USER_MESSAGES,
@@ -360,6 +361,26 @@ export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
 
 export const setBrewerBeers = (beers) => (dispatch) => {
     dispatch({ type: SET_BREWER_BEERS, payload: beers });
+};
+
+export const setMarketingPref = (preference, username) => (dispatch) => {
+    dispatch({ type: SET_LOADING, payload: true });
+    console.log({ preference });
+    axios
+        .post("http://localhost:5000/users/set-marketing", {
+            preference,
+            username,
+        })
+        .then((res) => {
+            dispatch({ type: SET_MARKETING_PREFERENCE, payload: preference });
+            console.log(
+                "Marketing preference changed:",
+                res.data.preference,
+                res.data.user
+            );
+            dispatch({ type: SET_LOADING, payload: false });
+        })
+        .catch((err) => console.log(err));
 };
 export const sortBeers = (beers, searchType, orderAsc) => (dispatch) => {
     let sortedBeers;

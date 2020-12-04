@@ -7,7 +7,7 @@ import Register from "./comp/Register";
 import Search from "./comp/Search";
 import MyBeers from "./comp/MyBeers";
 import Home from "./comp/Home";
-import Settings from "./comp/Settings";
+import Account from "./comp/Account";
 import NewPassword from "./comp/NewPassword";
 import ForgotPassword from "./comp/ForgotPassword";
 import Footer from "./comp/Footer";
@@ -42,7 +42,7 @@ const App = (props) => {
                     <Route path="/my-beers" component={MyBeers} />
                 )}
                 {props.user.loggedIn && (
-                    <Route path="/settings" component={Settings} />
+                    <Route path="/account" component={Account} />
                 )}
                 <Route path="/search" component={Search} />
 

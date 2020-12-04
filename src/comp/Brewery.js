@@ -77,7 +77,6 @@ function Brewery({ user, sortSearchResults, setBrewerBeers }) {
             <img src={user.brewery.brewery_label} alt="brewery" />
             <h2>Brewery: {user.brewery.brewery_name} </h2>
 
-            <h2>Beers: {user.beerNum}</h2>
             <h2>Type: {user.brewery.brewery_type}</h2>
             <h2>
                 Location: {user.brewery.location.brewery_city},{" "}

@@ -23,6 +23,7 @@ import {
     SET_COLOR_SCHEME,
     SET_BREWERY,
     SET_BREWER_BEERS,
+    SET_MARKETING_PREFERENCE,
 } from "../types";
 
 const initialState = {
@@ -45,6 +46,7 @@ const initialState = {
     users: [],
     beerGroups: [],
     brewerBeers: [],
+    marketingPref: true,
 };
 
 //NOTE - if dispatch is called without case for it, it will use default and reset state between dispatches
@@ -142,7 +144,12 @@ export default function (state = initialState, action) {
                 colorScheme: action.payload,
             };
         }
-
+        case SET_MARKETING_PREFERENCE: {
+            return {
+                ...state,
+                marketingPref: action.payload,
+            };
+        }
         case LOGOUT: {
             return {
                 initialState,

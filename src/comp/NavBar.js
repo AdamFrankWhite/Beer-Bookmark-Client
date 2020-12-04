@@ -61,7 +61,7 @@ function NavBar(props) {
                         </Link>
                     )}
                     {props.user.loggedIn ? (
-                        <Link to="/settings" className={`link ${lightTheme}`}>
+                        <Link to="/account" className={`link ${lightTheme}`}>
                             <div className="flex-col">
                                 <FontAwesomeIcon icon={faUserCircle} />
                                 <span className="nav-icon-text">Account</span>
