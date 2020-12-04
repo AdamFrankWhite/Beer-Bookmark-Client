@@ -117,12 +117,10 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                         {randomBeerData.map((beer) => {
                             return <BeerRow search={true} beerData={beer} />;
                         })}
-                        {/* Empty div for slideAnimation of last beer */}
-                        <div className="beer" style={{ height: "120px" }}></div>
                     </div>
                 )}
                 {/* Beer Container */}
-                {!user.loading && (
+                {!user.loading && user.searchResults.length > 0 && (
                     <>
                         <h2>Results</h2>
                         <div
