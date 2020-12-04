@@ -340,8 +340,7 @@ export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
                     beerName: randomBeerData.beer.beer_name,
                     abv: randomBeerData.beer.beer_abv.toString(),
                     beerDescription: randomBeerData.beer.beer_style,
-                    breweryName: randomBeerData.brewery.brewery_name,
-                    breweryContact: randomBeerData.brewery.contact,
+                    brewery: randomBeerData.brewery,
                     img: randomBeerData.beer.beer_label,
                     beerInfo: randomBeerData.beer.beer_description,
                 };
