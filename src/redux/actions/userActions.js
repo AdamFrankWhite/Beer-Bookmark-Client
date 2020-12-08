@@ -461,6 +461,31 @@ export const toggleModal = (visibility, isModalEdit, addBeerData) => (
         payload: { visibility, isModalEdit, addBeerData },
     });
 };
+
+export const amendGroupName = (existingBeerGroup, newGroupName, username) => (
+    dispatch
+) => {
+    dispatch({ type: SET_LOADING, payload: true });
+    axios
+        .post("http://localhost:5000/users/my-beers/edit-group", {
+            existingBeerGroup,
+            newGroupName,
+            username,
+        })
+        .then((res) => {
+            console.log(res.data);
+            if (res.data.error) {
+                //deal with error
+                console.log(res.data.error);
+            } else {
+                const updatedGroups = res.data;
+                dispatch({ type: ADD_GROUP, payload: updatedGroups });
+            }
+
+            dispatch({ type: SET_LOADING, payload: false });
+        })
+        .catch((err) => console.log(err));
+};
 export const setColorScheme = (username, color) => (dispatch) => {
     console.log(username, color);
     axios

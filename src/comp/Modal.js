@@ -4,6 +4,7 @@ import {
     addBeer,
     toggleModal,
     addNewGroup,
+    amendGroupName,
 } from "../redux/actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons/faFolder";
@@ -11,10 +12,11 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons/faEdit";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
-function Modal({ user, addBeer, toggleModal, addNewGroup }) {
+function Modal({ user, addBeer, toggleModal, addNewGroup, amendGroupName }) {
     const [selectedBeerGroup, setSelectedBeerGroup] = useState("my-beers");
     const [beerGroups, getBeerGroups] = useState(user.beerGroups || []);
     const [newGroup, setNewGroup] = useState("");
+    const [updateGroupName, setUpdateGroupName] = useState("");
     const [editState, setEditState] = useState(false);
     useEffect(() => {
         getBeerGroups(user.beerGroups);
@@ -59,6 +61,9 @@ function Modal({ user, addBeer, toggleModal, addNewGroup }) {
                                         className="group-edit-input"
                                         type="text"
                                         placeholder={beerGroup}
+                                        onChange={(e) =>
+                                            setUpdateGroupName(e.target.value)
+                                        }
                                     />
                                 </div>
                             ) : (
@@ -78,7 +83,16 @@ function Modal({ user, addBeer, toggleModal, addNewGroup }) {
                             )}
                             {editState && selectedBeerGroup == beerGroup ? (
                                 <>
-                                    <FontAwesomeIcon icon={faCheckCircle} />
+                                    <FontAwesomeIcon
+                                        icon={faCheckCircle}
+                                        onClick={() =>
+                                            amendGroupName(
+                                                beerGroup,
+                                                updateGroupName,
+                                                user.userData.username
+                                            )
+                                        }
+                                    />
                                     <FontAwesomeIcon
                                         onClick={() => {
                                             setSelectedBeerGroup("my-beers");
@@ -138,5 +152,6 @@ const mapActionsToProps = {
     addBeer,
     toggleModal,
     addNewGroup,
+    amendGroupName,
 };
 export default connect(mapStateToProps, mapActionsToProps)(Modal);
