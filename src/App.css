@@ -692,13 +692,22 @@ nav img[src="/logo.png"] {
   margin: auto;
   padding: 1em;
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(250, 241, 241, 0.8);
   text-align: left;
+}
+.search-banner .search-banner-content .row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.search-banner .search-banner-content input {
+  height: 1.9em;
 }
 .search-banner .search-banner-content .button {
   width: 10%;
-  margin: auto;
+  margin: 0;
   display: inline-block;
+  border-radius: 0 5px 5px 0;
 }
 .search-banner .search-banner-content h2 {
   color: #2a2a2a;
