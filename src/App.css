@@ -134,6 +134,7 @@ nav img[src="/logo.png"] {
   display: flex;
   padding: 1em 2em;
   flex-direction: column;
+  border-bottom: 1px solid gray;
   justify-content: space-between;
   align-items: center;
   background-color: #008cff;
@@ -691,13 +692,16 @@ nav img[src="/logo.png"] {
   margin: auto;
   padding: 1em;
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   text-align: left;
 }
 .search-banner .search-banner-content .button {
   width: 10%;
   margin: auto;
   display: inline-block;
+}
+.search-banner .search-banner-content h2 {
+  color: #2a2a2a;
 }
 
 /* == Random Beer == */
@@ -798,6 +802,19 @@ nav img[src="/logo.png"] {
 .modal-content svg {
   margin: 0 0.25em;
 }
+.modal-content .flex-row input {
+  width: 60%;
+}
+
+.group-edit-input {
+  color: #4747ff;
+  background: #1f1f1f;
+  border: none;
+}
+.group-edit-input:hover {
+  background: #f7d18c;
+  cursor: pointer;
+}
 
 .pl-1 {
   margin-left: 1em !important;
@@ -805,16 +822,20 @@ nav img[src="/logo.png"] {
 
 .folder {
   border-radius: 5px;
+  width: 80%;
   padding: 0.25em;
   margin: 0.25em;
-  background: #faebd0;
+  border: 1px solid #4747ff;
+  color: #4747ff;
+  background: #1f1f1f;
 }
-.folder:hover {
+.folder:hover, .folder:hover .group-edit-input {
   background: #f7d18c;
   cursor: pointer;
 }
 
 .highlight-folder {
+  width: 80%;
   margin: 0.25em;
   padding: 0.25em;
   background: orange;
@@ -935,6 +956,7 @@ nav img[src="/logo.png"] {
 .settings-sidebar {
   width: 20%;
   background: #004e4e;
+  border-right: 1px gray solid;
 }
 .settings-sidebar h2,
 .settings-sidebar .dash-icon {

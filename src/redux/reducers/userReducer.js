@@ -42,6 +42,7 @@ const initialState = {
     userData: {},
     loggedIn: false,
     showModal: false,
+    isModalEdit: false,
     messages: [],
     users: [],
     beerGroups: [],
@@ -71,6 +72,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 showModal: action.payload.visibility,
+                isModalEdit: action.payload.isModalEdit,
                 addBeerData: action.payload.addBeerData || {},
             };
         case ADD_GROUP:

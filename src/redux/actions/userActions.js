@@ -453,8 +453,13 @@ export const sortSearchResults = (beers, searchType, orderAsc) => (
     dispatch({ type: SORT_SEARCH_RESULTS, payload: sortedBeers });
 };
 
-export const toggleModal = (visibility, addBeerData) => (dispatch) => {
-    dispatch({ type: SHOW_MODAL, payload: { visibility, addBeerData } });
+export const toggleModal = (visibility, isModalEdit, addBeerData) => (
+    dispatch
+) => {
+    dispatch({
+        type: SHOW_MODAL,
+        payload: { visibility, isModalEdit, addBeerData },
+    });
 };
 export const setColorScheme = (username, color) => (dispatch) => {
     console.log(username, color);

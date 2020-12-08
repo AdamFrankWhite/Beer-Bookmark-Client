@@ -7,10 +7,15 @@ import {
 } from "../redux/actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons/faFolder";
+import { faEdit } from "@fortawesome/free-solid-svg-icons/faEdit";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+
 function Modal({ user, addBeer, toggleModal, addNewGroup }) {
     const [selectedBeerGroup, setSelectedBeerGroup] = useState("my-beers");
     const [beerGroups, getBeerGroups] = useState(user.beerGroups || []);
     const [newGroup, setNewGroup] = useState("");
+    const [editState, setEditState] = useState(false);
     useEffect(() => {
         getBeerGroups(user.beerGroups);
     }, [user.beerGroups]);
@@ -46,34 +51,71 @@ function Modal({ user, addBeer, toggleModal, addNewGroup }) {
                 {/* Beer groups */}
                 {beerGroups.map((beerGroup) => {
                     return (
-                        <div
-                            className={
-                                selectedBeerGroup == beerGroup
-                                    ? "highlight-folder pl-1"
-                                    : "folder pl-1"
-                            }
-                            onClick={() => setSelectedBeerGroup(beerGroup)}
-                        >
-                            <FontAwesomeIcon icon={faFolder} />
-                            {beerGroup}
+                        <div className="flex-row">
+                            {editState && selectedBeerGroup == beerGroup ? (
+                                <div className="folder">
+                                    <FontAwesomeIcon icon={faFolder} />
+                                    <input
+                                        className="group-edit-input"
+                                        type="text"
+                                        placeholder={beerGroup}
+                                    />
+                                </div>
+                            ) : (
+                                <div
+                                    className={
+                                        selectedBeerGroup == beerGroup
+                                            ? "highlight-folder pl-1"
+                                            : "folder pl-1"
+                                    }
+                                    onClick={() =>
+                                        setSelectedBeerGroup(beerGroup)
+                                    }
+                                >
+                                    <FontAwesomeIcon icon={faFolder} />
+                                    {beerGroup}
+                                </div>
+                            )}
+                            {editState && selectedBeerGroup == beerGroup ? (
+                                <>
+                                    <FontAwesomeIcon icon={faCheckCircle} />
+                                    <FontAwesomeIcon
+                                        onClick={() => {
+                                            setSelectedBeerGroup("my-beers");
+                                            setEditState(!editState);
+                                        }}
+                                        icon={faTimesCircle}
+                                    />
+                                </>
+                            ) : (
+                                <FontAwesomeIcon
+                                    icon={faEdit}
+                                    onClick={() => {
+                                        setSelectedBeerGroup(beerGroup);
+                                        setEditState(!editState);
+                                    }}
+                                />
+                            )}
                         </div>
                     );
                 })}
 
-                <p
-                    onClick={() => {
-                        addBeer({
-                            username: user.userData.username,
-                            // brewery: props.brewery,
-                            beerData: user.addBeerData,
-                            beerGroup: selectedBeerGroup,
-                        });
-                        toggleModal(false);
-                    }}
-                    className="add-fave-btn"
-                >
-                    Add to bookmarks
-                </p>
+                {!user.isModalEdit && (
+                    <p
+                        onClick={() => {
+                            addBeer({
+                                username: user.userData.username,
+                                // brewery: props.brewery,
+                                beerData: user.addBeerData,
+                                beerGroup: selectedBeerGroup,
+                            });
+                            toggleModal(false);
+                        }}
+                        className="add-fave-btn"
+                    >
+                        Add to bookmarks
+                    </p>
+                )}
                 <p
                     onClick={() => {
                         toggleModal(false);

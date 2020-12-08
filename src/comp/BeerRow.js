@@ -227,7 +227,7 @@ function BeerRow({
 
                             !checkBeerIncluded &&
                                 user.loggedIn &&
-                                toggleModal(true, beerData);
+                                toggleModal(true, false, beerData);
                         }}
                         className={clickTextStyle + " buttons"}
                     >

@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import BeerRow from "./BeerRow";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
-import { sortBeers, sortBeersByGroup } from "../redux/actions/userActions";
+import {
+    sortBeers,
+    sortBeersByGroup,
+    toggleModal,
+} from "../redux/actions/userActions";
 import SortButton from "./SortButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-solid-svg-icons/faFolder";
 
-const MyBeers = ({ user, sortBeers, sortBeersByGroup }) => {
+const MyBeers = ({ user, sortBeers, sortBeersByGroup, toggleModal }) => {
     const center = { margin: "auto" };
     //Set order asc/desc
     const [orderAsc, setOrderAsc] = useState(false);
@@ -101,6 +105,9 @@ const MyBeers = ({ user, sortBeers, sortBeersByGroup }) => {
                             </span>
                         );
                     })}
+                    <span onClick={() => toggleModal(true, true)}>
+                        Manage Groups
+                    </span>
                 </div>
                 <div
                     className={
@@ -151,5 +158,6 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = {
     sortBeers,
     sortBeersByGroup,
+    toggleModal,
 };
 export default connect(mapStateToProps, mapActionsToProps)(MyBeers);

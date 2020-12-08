@@ -21,6 +21,7 @@ function Theme(props) {
     );
     const [showPasswordForm, togglePasswordForm] = useState(false);
     useEffect(() => {
+        console.log(checked);
         !checked
             ? props.setColorScheme(props.user.userData.username, "light")
             : props.setColorScheme(props.user.userData.username, "dark");
