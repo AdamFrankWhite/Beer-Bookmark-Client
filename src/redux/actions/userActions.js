@@ -28,7 +28,9 @@ import axios from "axios";
 export const getBeers = (username) => (dispatch) => {
     console.log(username);
     axios
-        .get(`http://localhost:5000/users/my-beers/${username}`)
+        .get(
+            `https://fierce-plateau-38188.herokuapp.com/users/my-beers/${username}`
+        )
         .then((res) => {
             dispatch({ type: GET_BEERS, payload: res.data });
             console.log(res);
@@ -38,7 +40,10 @@ export const getBeers = (username) => (dispatch) => {
 export const login = (loginData) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     axios
-        .post(`http://localhost:5000/users/login`, loginData)
+        .post(
+            `https://fierce-plateau-38188.herokuapp.com/users/login`,
+            loginData
+        )
         .then((res) => {
             console.log(res.data);
             dispatch({ type: SET_USER, payload: res.data });
@@ -61,7 +66,7 @@ export const register = (data) => (dispatch) => {
     const { username, email, password } = data;
 
     axios
-        .post("http://localhost:5000/users/register", {
+        .post("https://fierce-plateau-38188.herokuapp.com/users/register", {
             username,
             email,
             password,
@@ -76,10 +81,13 @@ export const register = (data) => (dispatch) => {
         })
         .then((res) => {
             axios
-                .post("http://localhost:5000/users/login", {
-                    username,
-                    password,
-                })
+                .post(
+                    "https://fierce-plateau-38188.herokuapp.com/users/login",
+                    {
+                        username,
+                        password,
+                    }
+                )
                 .then((res) => {
                     console.log(res.data);
                     dispatch({ type: SET_USER, payload: res.data });
@@ -91,7 +99,10 @@ export const changeEmail = (username, email) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     console.log(username);
     axios
-        .put("http://localhost:5000/users/email", { username, email })
+        .put("https://fierce-plateau-38188.herokuapp.com/users/email", {
+            username,
+            email,
+        })
         .then((res) => {
             console.log(res.data);
             dispatch({ type: UPDATE_EMAIL, payload: res.data });
@@ -101,7 +112,9 @@ export const changeEmail = (username, email) => (dispatch) => {
 export const resetPassword = (email) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     axios
-        .post("http://localhost:5000/users/forgot", { email })
+        .post("https://fierce-plateau-38188.herokuapp.com/users/forgot", {
+            email,
+        })
         .then((res) => {
             console.log(res.data);
             res.data.sent
@@ -121,11 +134,14 @@ export const changePassword = (username, oldPassword, newPassword) => (
 ) => {
     dispatch({ type: SET_LOADING, payload: true });
     axios
-        .put("http://localhost:5000/users/change-password", {
-            username,
-            oldPassword,
-            newPassword,
-        })
+        .put(
+            "https://fierce-plateau-38188.herokuapp.com/users/change-password",
+            {
+                username,
+                oldPassword,
+                newPassword,
+            }
+        )
         .then((res) => {
             console.log(res.data);
             dispatch({ type: SET_LOADING, payload: false });
@@ -152,7 +168,10 @@ export const addBeer = (data) => (dispatch) => {
     };
     console.log(postData);
     axios
-        .post("http://localhost:5000/users/my-beers/add", postData)
+        .post(
+            "https://fierce-plateau-38188.herokuapp.com/users/my-beers/add",
+            postData
+        )
         .then((res) => {
             dispatch({ type: GET_BEERS, payload: res.data });
             dispatch({ type: SHOW_MODAL, payload: false });
@@ -164,10 +183,13 @@ export const addBeer = (data) => (dispatch) => {
 export const addNewGroup = (username, newGroup) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     axios
-        .post("http://localhost:5000/users/my-beers/add-group", {
-            username,
-            newGroup,
-        })
+        .post(
+            "https://fierce-plateau-38188.herokuapp.com/users/my-beers/add-group",
+            {
+                username,
+                newGroup,
+            }
+        )
         .then((res) => {
             console.log(res.data);
             if (res.data.error) {
@@ -190,7 +212,10 @@ export const deleteBeer = (data, currentSortType) => (dispatch) => {
     };
     console.log(deleteData);
     axios
-        .put("http://localhost:5000/users/my-beers/delete-beer", deleteData)
+        .put(
+            "https://fierce-plateau-38188.herokuapp.com/users/my-beers/delete-beer",
+            deleteData
+        )
         .then((res) => {
             const sortedBeers = sortBeersFunc(
                 res.data,
@@ -227,7 +252,10 @@ export const rateBeer = (
     };
 
     axios
-        .put(`http://localhost:5000/users/my-beers/update`, updateData)
+        .put(
+            `https://fierce-plateau-38188.herokuapp.com/users/my-beers/update`,
+            updateData
+        )
         .then((res) => {
             //Handle list update client side using current list, to avoid list re-ordering issues
             let updatedBeer = res.data;
@@ -366,10 +394,13 @@ export const setMarketingPref = (preference, username) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     console.log({ preference });
     axios
-        .post("http://localhost:5000/users/set-marketing", {
-            preference,
-            username,
-        })
+        .post(
+            "https://fierce-plateau-38188.herokuapp.com/users/set-marketing",
+            {
+                preference,
+                username,
+            }
+        )
         .then((res) => {
             dispatch({ type: SET_MARKETING_PREFERENCE, payload: preference });
             console.log(
@@ -467,11 +498,14 @@ export const amendGroupName = (existingBeerGroup, newGroupName, username) => (
 ) => {
     dispatch({ type: SET_LOADING, payload: true });
     axios
-        .post("http://localhost:5000/users/my-beers/edit-group", {
-            existingBeerGroup,
-            newGroupName,
-            username,
-        })
+        .post(
+            "https://fierce-plateau-38188.herokuapp.com/users/my-beers/edit-group",
+            {
+                existingBeerGroup,
+                newGroupName,
+                username,
+            }
+        )
         .then((res) => {
             console.log(res.data);
             if (res.data.error) {
@@ -489,7 +523,10 @@ export const amendGroupName = (existingBeerGroup, newGroupName, username) => (
 export const setColorScheme = (username, color) => (dispatch) => {
     console.log(username, color);
     axios
-        .put("http://localhost:5000/users/set-theme", { username, color })
+        .put("https://fierce-plateau-38188.herokuapp.com/users/set-theme", {
+            username,
+            color,
+        })
         .then((res) => {
             console.log(res);
             dispatch({ type: SET_COLOR_SCHEME, payload: color });

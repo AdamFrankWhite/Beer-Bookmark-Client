@@ -20,10 +20,13 @@ const NewPassword = ({ match, location }) => {
             <span
                 onClick={() => {
                     axios
-                        .put("http://localhost:5000/users/reset", {
-                            id: requestId,
-                            newPassword,
-                        })
+                        .put(
+                            "https://fierce-plateau-38188.herokuapp.com/users/reset",
+                            {
+                                id: requestId,
+                                newPassword,
+                            }
+                        )
                         .then((res) => {
                             console.log(res);
                             if (res.status == 200) {
