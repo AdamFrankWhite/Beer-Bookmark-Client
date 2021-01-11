@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
@@ -32,7 +33,7 @@ function BeerRow({
             JSON.stringify(user.beers).includes(beerData.id)
         );
     }
-
+    const isTabletOrMobile = useMediaQuery({ query: "(max-width: 700px)" });
     const spinnerStyle = { marginLeft: 0, height: 25, width: 25, fill: "blue" };
     const clickTextStyle = checkBeerIncluded && "click-text-saved";
     const clickText = checkBeerIncluded ? "Saved" : "Add to favourites";
@@ -67,7 +68,61 @@ function BeerRow({
                         : "beer dark-theme-secondary"
                 }
             >
-                <img className="thumb" alt="beer" src={beerData.img}></img>
+                {/* Check mobile */}
+                {isTabletOrMobile ? (
+                    <div className="beer-mob-row">
+                        <img
+                            className="thumb"
+                            alt="beer"
+                            src={beerData.img}
+                        ></img>
+                        <div className="flex-col">
+                            <h2>{beerData.beerName}</h2>
+                            <Link
+                                to={`/brewery/${beerData.brewery.brewery_slug}`}
+                                onClick={() => setBrewery(beerData.brewery)}
+                                style={
+                                    user.colorScheme !== "dark"
+                                        ? { color: "black" }
+                                        : { color: "white" }
+                                }
+                            >
+                                <h4>{beerData.brewery.brewery_name}</h4>
+                            </Link>
+                            <h5>ABV: {beerData.abv}%</h5>
+                            <h5 className="description">
+                                {beerData.beerDescription}
+                            </h5>
+                        </div>
+                    </div>
+                ) : (
+                    // Desktop
+                    <>
+                        <img
+                            className="thumb"
+                            alt="beer"
+                            src={beerData.img}
+                        ></img>
+
+                        <h2>{beerData.beerName}</h2>
+
+                        <Link
+                            to={`/brewery/${beerData.brewery.brewery_slug}`}
+                            onClick={() => setBrewery(beerData.brewery)}
+                            style={
+                                user.colorScheme !== "dark"
+                                    ? { color: "black" }
+                                    : { color: "white" }
+                            }
+                        >
+                            <h4>{beerData.brewery.brewery_name}</h4>
+                        </Link>
+                    </>
+                )}
+
+                {/* ///// */}
+
+                {/* <img className="thumb" alt="beer" src={beerData.img}></img>
 
                 <h2>{beerData.beerName}</h2>
 
@@ -81,97 +136,101 @@ function BeerRow({
                     }
                 >
                     <h4>{beerData.brewery.brewery_name}</h4>
-                </Link>
-
-                <h5>ABV: {beerData.abv}%</h5>
-
-                <h5 className="description">{beerData.beerDescription}</h5>
-
-                {myBeers && (
-                    <>
-                        {editRating ? (
-                            <div className="set-rating">
-                                <div className="set-rating-row-1">
-                                    <span>&#127866;</span>
-                                    <input
-                                        type="number"
-                                        max="10"
-                                        min="1"
-                                        value={rating}
-                                        style={{ color: conditionalTextColor }}
-                                        onChange={(e) => {
-                                            setRating(+e.target.value);
-                                        }}
-                                    />
-                                </div>
-                                <div className="delete-buttons">
-                                    <span
-                                        onClick={() => {
-                                            console.log(user.searchType);
-                                            rateBeer(
-                                                beerData,
-                                                user.userData.username,
-                                                rating,
-                                                user.sortType,
-                                                user.beers
-                                            );
-                                            setEditRating(false);
-                                        }}
-                                        className="tick"
-                                    >
-                                        &#9989;
-                                    </span>
-                                    <span
-                                        className="cross"
-                                        onClick={() => setEditRating(false)}
-                                    >
-                                        &#10062;
-                                    </span>
-                                </div>
-                            </div>
-                        ) : (
-                            <span
-                                className="buttons"
-                                onClick={() => {
-                                    setSelectedBeer(beerData);
-                                    setEditRating(true);
-                                }}
-                            >
-                                {user.loading && selectedBeer == beerData ? (
-                                    <ReactLoading
-                                        style={spinnerStyle}
-                                        type="spin"
-                                    />
-                                ) : (
-                                    <>
-                                        <span
-                                            onMouseEnter={() =>
-                                                setToggleToolTip(true)
-                                            }
-                                            onMouseLeave={() =>
-                                                setToggleToolTip(false)
-                                            }
-                                        >
-                                            &#127866; {beerData.stars}
-                                        </span>
-                                        <MouseTooltip
-                                            visible={toggleTooltip}
-                                            offsetX={13}
-                                            offsetY={7}
-                                        >
-                                            <span className="tooltip">
-                                                edit
+                </Link> */}
+                {isTabletOrMobile ? (
+                    <div className="beer-mob-row">
+                        {myBeers && (
+                            <>
+                                {editRating ? (
+                                    <div className="set-rating">
+                                        <div className="set-rating-row-1">
+                                            <span>&#127866;</span>
+                                            <input
+                                                type="number"
+                                                max="10"
+                                                min="1"
+                                                value={rating}
+                                                style={{
+                                                    color: conditionalTextColor,
+                                                }}
+                                                onChange={(e) => {
+                                                    setRating(+e.target.value);
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="delete-buttons">
+                                            <span
+                                                onClick={() => {
+                                                    console.log(
+                                                        user.searchType
+                                                    );
+                                                    rateBeer(
+                                                        beerData,
+                                                        user.userData.username,
+                                                        rating,
+                                                        user.sortType,
+                                                        user.beers
+                                                    );
+                                                    setEditRating(false);
+                                                }}
+                                                className="tick"
+                                            >
+                                                &#9989;
                                             </span>
-                                        </MouseTooltip>
-                                    </>
+                                            <span
+                                                className="cross"
+                                                onClick={() =>
+                                                    setEditRating(false)
+                                                }
+                                            >
+                                                &#10062;
+                                            </span>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <span
+                                        className="buttons"
+                                        onClick={() => {
+                                            setSelectedBeer(beerData);
+                                            setEditRating(true);
+                                        }}
+                                    >
+                                        {user.loading &&
+                                        selectedBeer == beerData ? (
+                                            <ReactLoading
+                                                style={spinnerStyle}
+                                                type="spin"
+                                            />
+                                        ) : (
+                                            <>
+                                                <span
+                                                    onMouseEnter={() =>
+                                                        setToggleToolTip(true)
+                                                    }
+                                                    onMouseLeave={() =>
+                                                        setToggleToolTip(false)
+                                                    }
+                                                >
+                                                    &#127866; {beerData.stars}
+                                                </span>
+                                                <MouseTooltip
+                                                    visible={toggleTooltip}
+                                                    offsetX={13}
+                                                    offsetY={7}
+                                                >
+                                                    <span className="tooltip">
+                                                        edit
+                                                    </span>
+                                                </MouseTooltip>
+                                            </>
+                                        )}
+                                    </span>
                                 )}
-                            </span>
+                            </>
                         )}
-                    </>
-                )}
 
-                {/* //TODO - add buy button and affiliate <a target="_blank" href={`https://www.beerhawk.co.uk/search/?q=${beerData.beerName||name}+${brewery}`}><span>Buy</span></a> */}
-                {/* {myBeers && (
+                        {/* //TODO - add buy button and affiliate <a target="_blank" href={`https://www.beerhawk.co.uk/search/?q=${beerData.beerName||name}+${brewery}`}><span>Buy</span></a> */}
+                        {/* {myBeers && (
                     <span
                         onClick={setState({ confirmDelete: true })}
                         className="delete-beer"
@@ -180,69 +239,245 @@ function BeerRow({
                     </span>
                 )} */}
 
-                {myBeers && confirmDelete && (
-                    <div className="delete-confirm">
-                        <span>Are you sure?</span>
-                        <div>
+                        {myBeers && confirmDelete && (
+                            <div className="delete-confirm">
+                                <span>Are you sure?</span>
+                                <div>
+                                    <span
+                                        onClick={() => {
+                                            deleteBeer(
+                                                {
+                                                    username:
+                                                        user.userData.username,
+                                                    beerData: beerData,
+                                                },
+                                                user.sortType
+                                            );
+                                            toggleDelete(false);
+                                        }}
+                                        className="delete-beer"
+                                    >
+                                        Yes
+                                    </span>
+                                    <span
+                                        onClick={() => {
+                                            toggleDelete(false);
+                                        }}
+                                        className="delete-beer"
+                                    >
+                                        No
+                                    </span>
+                                </div>
+                            </div>
+                        )}
+                        {myBeers && !confirmDelete && (
                             <span
-                                onClick={() => {
-                                    deleteBeer(
-                                        {
-                                            username: user.userData.username,
-                                            beerData: beerData,
-                                        },
-                                        user.sortType
-                                    );
-                                    toggleDelete(false);
-                                }}
+                                onClick={() => toggleDelete(true)}
                                 className="delete-beer"
                             >
-                                Yes
+                                Remove
                             </span>
+                        )}
+                        <span
+                            className="more-info"
+                            onClick={() => {
+                                toggleShowRow(!showRow);
+                            }}
+                            style={{ padding: "0 0.5em" }}
+                        >
+                            more info
+                            <FontAwesomeIcon icon={faChevronDown} />
+                        </span>
+                        {/* Bookmark Cell */}
+                        {search && (
                             <span
                                 onClick={() => {
-                                    toggleDelete(false);
+                                    //only add to favourites if not already included
+
+                                    !checkBeerIncluded &&
+                                        user.loggedIn &&
+                                        toggleModal(true, false, beerData);
                                 }}
-                                className="delete-beer"
+                                className={clickTextStyle + " buttons"}
                             >
-                                No
+                                {user.loggedIn && clickText}
                             </span>
-                        </div>
+                        )}
                     </div>
-                )}
-                {myBeers && !confirmDelete && (
+                ) : (
+                    <>
+                        <h5>ABV: {beerData.abv}%</h5>
+
+                        <h5 className="description">
+                            {beerData.beerDescription}
+                        </h5>
+
+                        {myBeers && (
+                            <>
+                                {editRating ? (
+                                    <div className="set-rating">
+                                        <div className="set-rating-row-1">
+                                            <span>&#127866;</span>
+                                            <input
+                                                type="number"
+                                                max="10"
+                                                min="1"
+                                                value={rating}
+                                                style={{
+                                                    color: conditionalTextColor,
+                                                }}
+                                                onChange={(e) => {
+                                                    setRating(+e.target.value);
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="delete-buttons">
+                                            <span
+                                                onClick={() => {
+                                                    console.log(
+                                                        user.searchType
+                                                    );
+                                                    rateBeer(
+                                                        beerData,
+                                                        user.userData.username,
+                                                        rating,
+                                                        user.sortType,
+                                                        user.beers
+                                                    );
+                                                    setEditRating(false);
+                                                }}
+                                                className="tick"
+                                            >
+                                                &#9989;
+                                            </span>
+                                            <span
+                                                className="cross"
+                                                onClick={() =>
+                                                    setEditRating(false)
+                                                }
+                                            >
+                                                &#10062;
+                                            </span>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <span
+                                        className="buttons"
+                                        onClick={() => {
+                                            setSelectedBeer(beerData);
+                                            setEditRating(true);
+                                        }}
+                                    >
+                                        {user.loading &&
+                                        selectedBeer == beerData ? (
+                                            <ReactLoading
+                                                style={spinnerStyle}
+                                                type="spin"
+                                            />
+                                        ) : (
+                                            <>
+                                                <span
+                                                    onMouseEnter={() =>
+                                                        setToggleToolTip(true)
+                                                    }
+                                                    onMouseLeave={() =>
+                                                        setToggleToolTip(false)
+                                                    }
+                                                >
+                                                    &#127866; {beerData.stars}
+                                                </span>
+                                                <MouseTooltip
+                                                    visible={toggleTooltip}
+                                                    offsetX={13}
+                                                    offsetY={7}
+                                                >
+                                                    <span className="tooltip">
+                                                        edit
+                                                    </span>
+                                                </MouseTooltip>
+                                            </>
+                                        )}
+                                    </span>
+                                )}
+                            </>
+                        )}
+
+                        {/* //TODO - add buy button and affiliate <a target="_blank" href={`https://www.beerhawk.co.uk/search/?q=${beerData.beerName||name}+${brewery}`}><span>Buy</span></a> */}
+                        {/* {myBeers && (
                     <span
-                        onClick={() => toggleDelete(true)}
+                        onClick={setState({ confirmDelete: true })}
                         className="delete-beer"
                     >
-                        Remove
+                        Delete
                     </span>
-                )}
+                )} */}
 
-                {/* Bookmark Cell */}
-                {search && (
-                    <span
-                        onClick={() => {
-                            //only add to favourites if not already included
+                        {myBeers && confirmDelete && (
+                            <div className="delete-confirm">
+                                <span>Are you sure?</span>
+                                <div>
+                                    <span
+                                        onClick={() => {
+                                            deleteBeer(
+                                                {
+                                                    username:
+                                                        user.userData.username,
+                                                    beerData: beerData,
+                                                },
+                                                user.sortType
+                                            );
+                                            toggleDelete(false);
+                                        }}
+                                        className="delete-beer"
+                                    >
+                                        Yes
+                                    </span>
+                                    <span
+                                        onClick={() => {
+                                            toggleDelete(false);
+                                        }}
+                                        className="delete-beer"
+                                    >
+                                        No
+                                    </span>
+                                </div>
+                            </div>
+                        )}
+                        {myBeers && !confirmDelete && (
+                            <span
+                                onClick={() => toggleDelete(true)}
+                                className="delete-beer"
+                            >
+                                Remove
+                            </span>
+                        )}
 
-                            !checkBeerIncluded &&
-                                user.loggedIn &&
-                                toggleModal(true, false, beerData);
-                        }}
-                        className={clickTextStyle + " buttons"}
-                    >
-                        {user.loggedIn && clickText}
-                    </span>
+                        {/* Bookmark Cell */}
+                        {search && (
+                            <span
+                                onClick={() => {
+                                    //only add to favourites if not already included
+
+                                    !checkBeerIncluded &&
+                                        user.loggedIn &&
+                                        toggleModal(true, false, beerData);
+                                }}
+                                className={clickTextStyle + " buttons"}
+                            >
+                                {user.loggedIn && clickText}
+                            </span>
+                        )}
+                        <span
+                            className="more-info"
+                            onClick={() => {
+                                toggleShowRow(!showRow);
+                            }}
+                            style={{ padding: "0 0.5em" }}
+                        >
+                            <FontAwesomeIcon icon={faChevronDown} />
+                        </span>
+                    </>
                 )}
-                <span
-                    className="more-info"
-                    onClick={() => {
-                        toggleShowRow(!showRow);
-                    }}
-                    style={{ padding: "0 0.5em" }}
-                >
-                    <FontAwesomeIcon icon={faChevronDown} />
-                </span>
             </div>
             {/* More Info Scroll */}
             <SlideDown className={"my-dropdown-slidedown"}>

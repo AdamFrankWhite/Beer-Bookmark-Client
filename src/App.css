@@ -85,10 +85,14 @@ nav img[src="/logo.png"] {
   padding-top: 0.18em;
   margin-right: 0.25em;
 }
+nav .flex-row {
+  padding-top: 0.5em;
+}
 
 .logo-cont {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .logo-cont .text-cont {
   display: flex;
@@ -126,14 +130,19 @@ nav img[src="/logo.png"] {
 }
 
 .nav-icon-text {
-  font-size: 0.8em;
+  font-size: 0.6em;
   padding-top: 0.25em;
+}
+@media (max-width: 727px) {
+  .nav-icon-text {
+    font-size: 0.4em;
+  }
 }
 
 .navbar {
   display: flex;
-  padding: 1em 2em;
-  flex-direction: column;
+  padding: 0.5em;
+  flex-direction: row;
   border-bottom: 1px solid gray;
   justify-content: space-between;
   align-items: center;
@@ -141,7 +150,7 @@ nav img[src="/logo.png"] {
 }
 @media (min-width: 800px) {
   .navbar {
-    flex-direction: row;
+    padding: 1em 2em;
   }
 }
 .navbar a {
@@ -161,7 +170,7 @@ nav img[src="/logo.png"] {
 
 .link {
   color: white;
-  font-size: 1em;
+  font-size: 1.2em;
   padding: 0 0.25em;
   display: block;
   text-transform: uppercase;
@@ -209,7 +218,7 @@ nav img[src="/logo.png"] {
   color: #0051ff;
 }
 .banner .banner-cont {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
   padding: 1em;
   text-align: left;
@@ -462,6 +471,17 @@ nav img[src="/logo.png"] {
   padding-left: 0.5em;
 }
 
+.my-dropdown-slidedown {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  padding: 1em;
+}
+@media (max-width: 899px) {
+  .my-dropdown-slidedown {
+    text-align: justify;
+  }
+}
+
 .beers-cont {
   width: 90%;
   margin: 1em auto;
@@ -475,11 +495,6 @@ nav img[src="/logo.png"] {
 
 .my-beers-cont {
   width: 70%;
-}
-.my-beers-cont .my-dropdown-slidedown {
-  border-left: 2px solid black;
-  border-right: 2px solid black;
-  padding: 1em;
 }
 
 .randomBeer {
@@ -498,6 +513,47 @@ nav img[src="/logo.png"] {
   margin: auto;
 }
 
+.beer-mob-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: space-evenly;
+  width: 100%;
+  font-size: 0.9em;
+}
+.beer-mob-row .flex-col {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.beer-mob-row .flex-col h2,
+.beer-mob-row .flex-col a,
+.beer-mob-row .flex-col h5 {
+  width: 100%;
+}
+.beer-mob-row h2 {
+  padding: 0 !important;
+}
+.beer-mob-row a {
+  padding: 0 !important;
+}
+.beer-mob-row .thumb {
+  width: 15% !important;
+}
+.beer-mob-row span.more-info {
+  margin: 1em;
+  width: 40%;
+}
+.beer-mob-row span.buttons {
+  width: 40%;
+  width: fit-content;
+  text-align: right;
+  padding: 0.2em 0.5em;
+  margin-right: 0.5em;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
 .beer {
   border-top: black 2px solid;
   border-left: black 2px solid;
@@ -511,6 +567,26 @@ nav img[src="/logo.png"] {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+@media (max-width: 699px) {
+  .beer {
+    flex-direction: column;
+  }
+}
+@media (max-width: 500px) {
+  .beer {
+    font-size: 0.7em;
+  }
+}
+@media (min-width: 501px) and (max-width: 1099px) {
+  .beer {
+    font-size: 0.8em;
+  }
+}
+@media (max-width: 1100px) {
+  .beer {
+    font-size: 0.9em;
+  }
 }
 .beer * {
   margin: auto;
@@ -533,6 +609,11 @@ nav img[src="/logo.png"] {
   margin: auto 0;
   width: 20%;
   padding-left: 18px;
+}
+@media (max-width: 900px) {
+  .beer h2 {
+    font-size: 1.2em;
+  }
 }
 .beer h3 {
   font-size: 1.2em;
@@ -748,16 +829,31 @@ nav img[src="/logo.png"] {
   border-right: 2px black solid;
   width: 100%;
   border-radius: 5px 5px 0 0;
-  padding: 0.5em;
+  padding: 0.5em 0;
   display: flex;
   justify-content: flex-start;
   margin-right: 1em;
+}
+@media (max-width: 899px) {
+  .sort-btn-group {
+    justify-content: space-evenly;
+  }
 }
 .sort-btn-group .blank-col {
   width: 5vw;
   min-width: 75px;
   margin: 0;
   height: auto;
+}
+@media (max-width: 899px) {
+  .sort-btn-group .blank-col {
+    display: none;
+  }
+}
+@media (min-width: 1400px) {
+  .sort-btn-group .blank-col {
+    width: 4vw;
+  }
 }
 .sort-btn-group .beerName-col {
   width: 20%;
@@ -782,6 +878,18 @@ nav img[src="/logo.png"] {
 }
 .sort-btn svg {
   margin-left: 0.25em;
+}
+@media (max-width: 899px) {
+  .sort-btn {
+    width: 20% !important;
+    padding: 0 !important;
+    text-align: center;
+  }
+}
+@media (max-width: 450px) {
+  .sort-btn {
+    font-size: 0.8em;
+  }
 }
 
 .sort-btn:hover {
@@ -1206,7 +1314,7 @@ footer ul {
 /* == Mobile == */
 @media (min-width: 768px) {
   .link {
-    font-size: 1.2em;
+    font-size: 1.5em;
     padding: 0.3em 0.7em;
     display: inline;
     border-radius: 10px;

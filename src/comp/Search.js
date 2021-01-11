@@ -137,7 +137,7 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                                         : "sort-btn-group sort-btns-dark"
                                 }
                             >
-                                <span className="blank-col">Sort by: </span>
+                                <span className="blank-col"></span>
                                 {sortTypes.map((sortType) => (
                                     <SortButton
                                         name={sortType.name}
