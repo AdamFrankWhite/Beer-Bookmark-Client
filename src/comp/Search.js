@@ -104,21 +104,25 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                 {user.loading && (
                     <ReactLoading style={center} type="bubbles" color="blue" />
                 )}
-                {user.searchResults.length == 0 && !user.loading && (
-                    <div
-                        className={
-                            user.colorScheme !== "dark"
-                                ? "beers-cont"
-                                : "beers-cont dark-theme-secondary"
-                        }
-                    >
-                        <h2>Random Beers</h2>
+                {user.searchResults &&
+                    user.searchResults.length == 0 &&
+                    !user.loading && (
+                        <div
+                            className={
+                                user.colorScheme !== "dark"
+                                    ? "beers-cont"
+                                    : "beers-cont dark-theme-secondary"
+                            }
+                        >
+                            <h2>Random Beers</h2>
 
-                        {randomBeerData.map((beer) => {
-                            return <BeerRow search={true} beerData={beer} />;
-                        })}
-                    </div>
-                )}
+                            {randomBeerData.map((beer) => {
+                                return (
+                                    <BeerRow search={true} beerData={beer} />
+                                );
+                            })}
+                        </div>
+                    )}
                 {/* Beer Container */}
                 {!user.loading && user.searchResults.length > 0 && (
                     <>
