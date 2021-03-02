@@ -104,7 +104,7 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                 {user.loading && (
                     <ReactLoading style={center} type="bubbles" color="blue" />
                 )}
-                {user.searchResults &&
+                {beers.length > 0 &&
                     user.searchResults.length == 0 &&
                     !user.loading && (
                         <div
@@ -124,39 +124,41 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                         </div>
                     )}
                 {/* Beer Container */}
-                {!user.loading && user.searchResults.length > 0 && (
-                    <>
-                        <h2>Results</h2>
-                        <div
-                            className={
-                                user.colorScheme !== "dark"
-                                    ? "beers-cont"
-                                    : "beers-cont dark-theme-secondary"
-                            }
-                        >
+                {!user.loading &&
+                    user.searchResults &&
+                    user.searchResults.length > 0 && (
+                        <>
+                            <h2>Results</h2>
                             <div
                                 className={
                                     user.colorScheme !== "dark"
-                                        ? "sort-btn-group sort-btns-light"
-                                        : "sort-btn-group sort-btns-dark"
+                                        ? "beers-cont"
+                                        : "beers-cont dark-theme-secondary"
                                 }
                             >
-                                <span className="blank-col"></span>
-                                {sortTypes.map((sortType) => (
-                                    <SortButton
-                                        name={sortType.name}
-                                        sortType={sortType.type}
-                                        toggleHover={toggleHover}
-                                        checkHover={checkHover}
-                                        setOrder={setOrder}
-                                    />
-                                ))}
-                            </div>
+                                <div
+                                    className={
+                                        user.colorScheme !== "dark"
+                                            ? "sort-btn-group sort-btns-light"
+                                            : "sort-btn-group sort-btns-dark"
+                                    }
+                                >
+                                    <span className="blank-col"></span>
+                                    {sortTypes.map((sortType) => (
+                                        <SortButton
+                                            name={sortType.name}
+                                            sortType={sortType.type}
+                                            toggleHover={toggleHover}
+                                            checkHover={checkHover}
+                                            setOrder={setOrder}
+                                        />
+                                    ))}
+                                </div>
 
-                            {beers}
-                        </div>
-                    </>
-                )}
+                                {beers}
+                            </div>
+                        </>
+                    )}
             </>
         </div>
     );
