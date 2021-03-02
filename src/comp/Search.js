@@ -36,9 +36,9 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
     useEffect(() => {
         // https://api.untappd.com/v4/search/beer/?q=${beerType}
         getRandomBeers();
-        user.searchResults &&
-            user.searchResults.length == 0 &&
-            setRandomBeerData(user.randomBeers);
+        !user.searchResults ||
+            (user.searchResults.length == 0 &&
+                setRandomBeerData(user.randomBeers));
     }, []);
 
     useEffect(() => {
