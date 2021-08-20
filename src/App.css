@@ -1273,7 +1273,7 @@ input:checked + .slider:before {
 }
 footer {
   width: 100%;
-  color: whitesmoke;
+  color: lightgray;
   padding: 2em;
   background-color: #141414;
 }
