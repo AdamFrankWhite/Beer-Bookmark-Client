@@ -1273,6 +1273,7 @@ input:checked + .slider:before {
 }
 footer {
   width: 100%;
+  color: whitesmoke;
   padding: 2em;
   background-color: #141414;
 }
@@ -1283,6 +1284,9 @@ footer .footer-cont {
   margin: auto;
 }
 footer .about {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 30%;
   text-align: left;
   padding-right: 5%;
