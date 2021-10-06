@@ -56,7 +56,6 @@ export default function (state = initialState, action) {
         case SET_USER:
             console.log(action.payload);
             return {
-                ...state,
                 sortType: {},
                 beers: action.payload.beers,
                 userData: action.payload,
