@@ -1083,8 +1083,9 @@ nav .flex-row {
 }
 .settings-sidebar h2,
 .settings-sidebar .dash-icon {
-  font-size: 1.25em;
+  font-size: 1.5em;
   margin: 0 auto;
+  color: white;
 }
 .settings-sidebar h2 {
   width: 60%;
@@ -1093,17 +1094,20 @@ nav .flex-row {
 .settings-sidebar nav {
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: 2em auto;
   align-items: center;
 }
 .settings-sidebar nav a {
   font-size: 1.1em;
-  margin-top: 0.5em;
+  margin: 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: #caf8f8;
+}
+.settings-sidebar nav a svg {
+  font-size: 1.5em;
 }
 .settings-sidebar nav a:hover {
   color: orange;

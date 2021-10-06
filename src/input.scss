@@ -1133,8 +1133,9 @@ nav {
     border-right: 1px gray solid;
     h2,
     .dash-icon {
-        font-size: 1.25em;
+        font-size: 1.5em;
         margin: 0 auto;
+        color: white;
     }
     h2 {
         width: 60%;
@@ -1143,17 +1144,20 @@ nav {
     nav {
         display: flex;
         flex-direction: column;
-        margin: auto;
+        margin: 2em auto;
         align-items: center;
 
         a {
             font-size: 1.1em;
-            margin-top: 0.5em;
+            margin: 1em;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            color: white;
+            color: rgb(202, 248, 248);
+            svg {
+                font-size: 1.5em;
+            }
             &:hover {
                 color: orange;
             }

@@ -480,8 +480,13 @@ function BeerRow({
                 )}
             </div>
             {/* More Info Scroll */}
-            <SlideDown className={"my-dropdown-slidedown"}>
-                {showRow && beerData.beerInfo}
+
+            <SlideDown>
+                {showRow && (
+                    <div className={"my-dropdown-slidedown"}>
+                        {beerData.beerInfo}
+                    </div>
+                )}
             </SlideDown>
         </>
     );
