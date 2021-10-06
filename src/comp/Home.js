@@ -7,7 +7,7 @@ export default function Home() {
             <div className="home">
                 <div className="banner">
                     <div className="banner-cont">
-                        <h1>BeerMe</h1>
+                        <h1>BeerBookmark</h1>
                         <h2>Your favourite beer bookmark app</h2>
                         <NavLink to="/register">
                             <span className="button mr-2">Signup</span>
