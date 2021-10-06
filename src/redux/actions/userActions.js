@@ -71,14 +71,7 @@ export const register = (data) => (dispatch) => {
             email,
             password,
         })
-        .then((res) => {
-            //TODO - Validate email
-            // dispatch({type:SET_USER, payload: res})
-            // redirect: "login",
-            // showError: false,
-            // regErrors: {},
-            // username: this.state.regUsername,
-        })
+
         .then((res) => {
             axios
                 .post(
@@ -129,25 +122,24 @@ export const resetPassword = (email) => (dispatch) => {
         .catch((err) => console.log(err));
 };
 
-export const changePassword = (username, oldPassword, newPassword) => (
-    dispatch
-) => {
-    dispatch({ type: SET_LOADING, payload: true });
-    axios
-        .put(
-            "https://fierce-plateau-38188.herokuapp.com/users/change-password",
-            {
-                username,
-                oldPassword,
-                newPassword,
-            }
-        )
-        .then((res) => {
-            console.log(res.data);
-            dispatch({ type: SET_LOADING, payload: false });
-        })
-        .catch((err) => console.log(err));
-};
+export const changePassword =
+    (username, oldPassword, newPassword) => (dispatch) => {
+        dispatch({ type: SET_LOADING, payload: true });
+        axios
+            .put(
+                "https://fierce-plateau-38188.herokuapp.com/users/change-password",
+                {
+                    username,
+                    oldPassword,
+                    newPassword,
+                }
+            )
+            .then((res) => {
+                console.log(res.data);
+                dispatch({ type: SET_LOADING, payload: false });
+            })
+            .catch((err) => console.log(err));
+    };
 
 export const addBeer = (data) => (dispatch) => {
     const { username, beerData, beerGroup } = data;
@@ -237,154 +229,158 @@ export const deleteBeer = (data, currentSortType) => (dispatch) => {
         });
 };
 
-export const rateBeer = (
-    beerData,
-    username,
-    rating,
-    currentSortType,
-    currentBeerList
-) => (dispatch) => {
-    dispatch({ type: SET_LOADING, payload: true });
-    let updateData = {
-        beerData,
-        username,
-        newRating: rating,
+export const rateBeer =
+    (beerData, username, rating, currentSortType, currentBeerList) =>
+    (dispatch) => {
+        dispatch({ type: SET_LOADING, payload: true });
+        let updateData = {
+            beerData,
+            username,
+            newRating: rating,
+        };
+
+        axios
+            .put(
+                `https://fierce-plateau-38188.herokuapp.com/users/my-beers/update`,
+                updateData
+            )
+            .then((res) => {
+                //Handle list update client side using current list, to avoid list re-ordering issues
+                let updatedBeer = res.data;
+                //Remove beer to be edited
+                let updatedBeerList = currentBeerList.filter(
+                    (beer) => beer.id != updatedBeer.id
+                );
+
+                let index = currentBeerList.findIndex(
+                    (beer) => beer.id === updatedBeer.id
+                );
+
+                //Insert updated beer
+                updatedBeerList.splice(index, 0, updatedBeer);
+                const sortedBeers = sortBeersFunc(
+                    updatedBeerList,
+                    currentSortType.searchType,
+                    currentSortType.orderAsc
+                );
+                console.log(currentSortType);
+                if (currentSortType !== undefined) {
+                    dispatch({ type: GET_BEERS, payload: sortedBeers });
+                    console.log("boo");
+                } else {
+                    dispatch({ type: GET_BEERS, payload: updatedBeerList });
+                }
+
+                // Necessary to avoid sorting bug - state.sortType kept getting overwritten on second rating
+                dispatch({
+                    type: SET_SORT_TYPE,
+                    payload: {
+                        searchType: currentSortType.searchType,
+                        orderAsc: currentSortType.orderAsc,
+                    },
+                });
+                currentSortType.searchType == "stars" &&
+                    dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
+                dispatch({ type: SET_LOADING, payload: false });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
-    axios
-        .put(
-            `https://fierce-plateau-38188.herokuapp.com/users/my-beers/update`,
-            updateData
-        )
-        .then((res) => {
-            //Handle list update client side using current list, to avoid list re-ordering issues
-            let updatedBeer = res.data;
-            //Remove beer to be edited
-            let updatedBeerList = currentBeerList.filter(
-                (beer) => beer.id != updatedBeer.id
-            );
+export const searchBeer =
+    (searchTerm, searchType = "beer") =>
+    (dispatch) => {
+        dispatch({ type: SET_LOADING, payload: true });
+        axios
+            .get(
+                `https://api.untappd.com/v4/search/${searchType}?q=${searchTerm}`,
+                {
+                    params: {
+                        client_id: "F94775549BAC795E436858A50A3616690D3CD446",
+                        client_secret:
+                            "844CF3E397DB0294FC89ACE34560918CAFD035FB",
+                    },
+                }
+            )
+            .then((response) => {
+                const cleanData = response.data.response.beers.items.map(
+                    (item) => {
+                        console.log(item);
+                        return {
+                            id: item.beer.bid,
+                            beerName: item.beer.beer_name,
+                            abv: item.beer.beer_abv,
+                            beerDescription: item.beer.beer_style,
+                            breweryName: item.brewery.brewery_name,
+                            brewery: item.brewery,
+                            img: item.beer.beer_label,
+                            beerInfo: item.beer.beer_description,
+                        };
+                    }
+                );
 
-            let index = currentBeerList.findIndex(
-                (beer) => beer.id === updatedBeer.id
-            );
-
-            //Insert updated beer
-            updatedBeerList.splice(index, 0, updatedBeer);
-            const sortedBeers = sortBeersFunc(
-                updatedBeerList,
-                currentSortType.searchType,
-                currentSortType.orderAsc
-            );
-            console.log(currentSortType);
-            if (currentSortType !== undefined) {
-                dispatch({ type: GET_BEERS, payload: sortedBeers });
-                console.log("boo");
-            } else {
-                dispatch({ type: GET_BEERS, payload: updatedBeerList });
-            }
-
-            // Necessary to avoid sorting bug - state.sortType kept getting overwritten on second rating
-            dispatch({
-                type: SET_SORT_TYPE,
-                payload: {
-                    searchType: currentSortType.searchType,
-                    orderAsc: currentSortType.orderAsc,
-                },
+                dispatch({ type: SET_LOADING, payload: false });
+                //reset ordering
+                dispatch({ type: SET_SEARCH_SORT_TYPE, payload: {} });
+                dispatch({
+                    type: SET_SEARCH_RESULTS,
+                    payload: cleanData,
+                });
+                // searchType === "beer" &&
+                //     this.setState({
+                //         beerData: response.data.response.beers.items,
+                //         isLoading: false,
+                //     });
+                // searchType === "brewery" &&
+                //     this.setState({
+                //         breweryData: response.data.response.brewery.items,
+                //     });
+                // console.log(this.state.beerData);
             });
-            currentSortType.searchType == "stars" &&
-                dispatch({ type: SORT_MY_BEERS, payload: sortedBeers });
-            dispatch({ type: SET_LOADING, payload: false });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-};
+    };
 
-export const searchBeer = (searchTerm, searchType = "beer") => (dispatch) => {
-    dispatch({ type: SET_LOADING, payload: true });
-    axios
-        .get(
-            `https://api.untappd.com/v4/search/${searchType}?q=${searchTerm}`,
-            {
+export const getRandomBeers =
+    (beerType = "ipa") =>
+    (dispatch) => {
+        dispatch({ type: SET_LOADING, payload: true });
+        axios
+            .get(`https://api.untappd.com/v4/search/beer/?q=${beerType}`, {
                 params: {
                     client_id: "F94775549BAC795E436858A50A3616690D3CD446",
                     client_secret: "844CF3E397DB0294FC89ACE34560918CAFD035FB",
                 },
-            }
-        )
-        .then((response) => {
-            const cleanData = response.data.response.beers.items.map((item) => {
-                console.log(item);
-                return {
-                    id: item.beer.bid,
-                    beerName: item.beer.beer_name,
-                    abv: item.beer.beer_abv,
-                    beerDescription: item.beer.beer_style,
-                    breweryName: item.brewery.brewery_name,
-                    brewery: item.brewery,
-                    img: item.beer.beer_label,
-                    beerInfo: item.beer.beer_description,
-                };
-            });
+            })
+            .then((res) => {
+                const randomNum = () =>
+                    Math.floor(Math.random() * res.data.response.beers.count);
 
-            dispatch({ type: SET_LOADING, payload: false });
-            //reset ordering
-            dispatch({ type: SET_SEARCH_SORT_TYPE, payload: {} });
-            dispatch({
-                type: SET_SEARCH_RESULTS,
-                payload: cleanData,
-            });
-            // searchType === "beer" &&
-            //     this.setState({
-            //         beerData: response.data.response.beers.items,
-            //         isLoading: false,
-            //     });
-            // searchType === "brewery" &&
-            //     this.setState({
-            //         breweryData: response.data.response.brewery.items,
-            //     });
-            // console.log(this.state.beerData);
-        });
-};
+                const randomBeers = [];
+                for (let i = 0; randomBeers.length < 5; i++) {
+                    let randomBeerData =
+                        res.data.response.beers.items[randomNum()];
+                    const cleanBeer = {
+                        id: randomBeerData.beer.bid,
+                        beerName: randomBeerData.beer.beer_name,
+                        abv: randomBeerData.beer.beer_abv.toString(),
+                        beerDescription: randomBeerData.beer.beer_style,
+                        brewery: randomBeerData.brewery,
+                        img: randomBeerData.beer.beer_label,
+                        beerInfo: randomBeerData.beer.beer_description,
+                    };
 
-export const getRandomBeers = (beerType = "ipa") => (dispatch) => {
-    dispatch({ type: SET_LOADING, payload: true });
-    axios
-        .get(`https://api.untappd.com/v4/search/beer/?q=${beerType}`, {
-            params: {
-                client_id: "F94775549BAC795E436858A50A3616690D3CD446",
-                client_secret: "844CF3E397DB0294FC89ACE34560918CAFD035FB",
-            },
-        })
-        .then((res) => {
-            const randomNum = () =>
-                Math.floor(Math.random() * res.data.response.beers.count);
-
-            const randomBeers = [];
-            for (let i = 0; randomBeers.length < 5; i++) {
-                let randomBeerData = res.data.response.beers.items[randomNum()];
-                const cleanBeer = {
-                    id: randomBeerData.beer.bid,
-                    beerName: randomBeerData.beer.beer_name,
-                    abv: randomBeerData.beer.beer_abv.toString(),
-                    beerDescription: randomBeerData.beer.beer_style,
-                    brewery: randomBeerData.brewery,
-                    img: randomBeerData.beer.beer_label,
-                    beerInfo: randomBeerData.beer.beer_description,
-                };
-
-                if (
-                    !JSON.stringify(randomBeers).includes(
-                        JSON.stringify(cleanBeer.id)
-                    )
-                ) {
-                    randomBeers.push(cleanBeer);
+                    if (
+                        !JSON.stringify(randomBeers).includes(
+                            JSON.stringify(cleanBeer.id)
+                        )
+                    ) {
+                        randomBeers.push(cleanBeer);
+                    }
                 }
-            }
-            dispatch({ type: SET_LOADING, payload: false });
-            dispatch({ type: SET_RANDOM_BEERS, payload: randomBeers });
-        });
-};
+                dispatch({ type: SET_LOADING, payload: false });
+                dispatch({ type: SET_RANDOM_BEERS, payload: randomBeers });
+            });
+    };
 
 export const setBrewerBeers = (beers) => (dispatch) => {
     dispatch({ type: SET_BREWER_BEERS, payload: beers });
@@ -454,72 +450,72 @@ export const sortBeersByGroup = (allBeers, beerGroup) => (dispatch) => {
         dispatch({ type: SORT_MY_BEERS, payload: allBeers });
     }
 };
-export const sortSearchResults = (beers, searchType, orderAsc) => (
-    dispatch
-) => {
-    console.log(searchType);
-    if (!beers) {
-        return [];
-    }
-    let sortedBeers;
+export const sortSearchResults =
+    (beers, searchType, orderAsc) => (dispatch) => {
+        console.log(searchType);
+        if (!beers) {
+            return [];
+        }
+        let sortedBeers;
 
-    if (orderAsc) {
-        sortedBeers = beers.sort((a, b) =>
-            a[searchType] > b[searchType]
-                ? 1
-                : b[searchType] > a[searchType]
-                ? -1
-                : 0
-        );
-    } else {
-        sortedBeers = beers.sort((a, b) =>
-            a[searchType] < b[searchType]
-                ? 1
-                : b[searchType] < a[searchType]
-                ? -1
-                : 0
-        );
-    }
-    dispatch({ type: SET_SEARCH_SORT_TYPE, payload: { searchType, orderAsc } });
-    dispatch({ type: SORT_SEARCH_RESULTS, payload: sortedBeers });
-};
+        if (orderAsc) {
+            sortedBeers = beers.sort((a, b) =>
+                a[searchType] > b[searchType]
+                    ? 1
+                    : b[searchType] > a[searchType]
+                    ? -1
+                    : 0
+            );
+        } else {
+            sortedBeers = beers.sort((a, b) =>
+                a[searchType] < b[searchType]
+                    ? 1
+                    : b[searchType] < a[searchType]
+                    ? -1
+                    : 0
+            );
+        }
+        dispatch({
+            type: SET_SEARCH_SORT_TYPE,
+            payload: { searchType, orderAsc },
+        });
+        dispatch({ type: SORT_SEARCH_RESULTS, payload: sortedBeers });
+    };
 
-export const toggleModal = (visibility, isModalEdit, addBeerData) => (
-    dispatch
-) => {
-    dispatch({
-        type: SHOW_MODAL,
-        payload: { visibility, isModalEdit, addBeerData },
-    });
-};
+export const toggleModal =
+    (visibility, isModalEdit, addBeerData) => (dispatch) => {
+        dispatch({
+            type: SHOW_MODAL,
+            payload: { visibility, isModalEdit, addBeerData },
+        });
+    };
 
-export const amendGroupName = (existingBeerGroup, newGroupName, username) => (
-    dispatch
-) => {
-    dispatch({ type: SET_LOADING, payload: true });
-    axios
-        .post(
-            "https://fierce-plateau-38188.herokuapp.com/users/my-beers/edit-group",
-            {
-                existingBeerGroup,
-                newGroupName,
-                username,
-            }
-        )
-        .then((res) => {
-            console.log(res.data);
-            if (res.data.error) {
-                //deal with error
-                console.log(res.data.error);
-            } else {
-                const updatedGroups = res.data;
-                dispatch({ type: ADD_GROUP, payload: updatedGroups });
-            }
+export const amendGroupName =
+    (existingBeerGroup, newGroupName, username) => (dispatch) => {
+        dispatch({ type: SET_LOADING, payload: true });
+        axios
+            .post(
+                "https://fierce-plateau-38188.herokuapp.com/users/my-beers/edit-group",
+                {
+                    existingBeerGroup,
+                    newGroupName,
+                    username,
+                }
+            )
+            .then((res) => {
+                console.log(res.data);
+                if (res.data.error) {
+                    //deal with error
+                    console.log(res.data.error);
+                } else {
+                    const updatedGroups = res.data;
+                    dispatch({ type: ADD_GROUP, payload: updatedGroups });
+                }
 
-            dispatch({ type: SET_LOADING, payload: false });
-        })
-        .catch((err) => console.log(err));
-};
+                dispatch({ type: SET_LOADING, payload: false });
+            })
+            .catch((err) => console.log(err));
+    };
 export const setColorScheme = (username, color) => (dispatch) => {
     console.log(username, color);
     axios
