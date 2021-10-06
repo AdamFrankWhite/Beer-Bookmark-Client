@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import BeerRow from "./BeerRow";
-import Brewery from "./Brewery";
-import axios from "axios";
 import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import {
@@ -33,13 +31,13 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
               return <BeerRow search={true} beerData={item} />;
           })
         : [];
+
     useEffect(() => {
-        // https://api.untappd.com/v4/search/beer/?q=${beerType}
         getRandomBeers();
-        !user.searchResults ||
-            (user.searchResults.length == 0 &&
-                setRandomBeerData(user.randomBeers));
     }, []);
+    useEffect(() => {
+        setRandomBeerData(user.randomBeers);
+    }, [user.randomBeers]);
 
     useEffect(() => {
         console.log(user.searchResults, orderType, orderAsc);
@@ -106,7 +104,7 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                 {user.loading && (
                     <ReactLoading style={center} type="bubbles" color="blue" />
                 )}
-                {beers.length > 0 &&
+                {beers.length == 0 &&
                     user.searchResults.length == 0 &&
                     !user.loading && (
                         <div
