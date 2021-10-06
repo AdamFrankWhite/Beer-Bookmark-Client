@@ -15,16 +15,9 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons/faTimesCircle";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 
-function Theme(props) {
-    const [checked, setChecked] = useState(
-        props.user.colorScheme !== "dark" ? false : true
-    );
+function Profile(props) {
     const [showPasswordForm, togglePasswordForm] = useState(false);
-    useEffect(() => {
-        !checked
-            ? props.setColorScheme(props.user.userData.username, "light")
-            : props.setColorScheme(props.user.userData.username, "dark");
-    }, [checked]);
+
     useEffect(() => {
         toggleEditEmail(false);
     }, [props.user]);
@@ -188,4 +181,4 @@ const mapActionsToProps = {
     changePassword,
     changeEmail,
 };
-export default connect(mapStateToProps, mapActionsToProps)(Theme);
+export default connect(mapStateToProps, mapActionsToProps)(Profile);
