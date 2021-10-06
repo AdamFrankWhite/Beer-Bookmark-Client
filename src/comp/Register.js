@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { register } from "../redux/actions/userActions";
 function Register(props) {
     const [username, setUsername] = useState("");
@@ -26,6 +27,7 @@ function Register(props) {
 
         //Check errors obj is empty
         if (Object.keys(errors).length === 0 && errors.constructor === Object) {
+            console.log(username, email, password);
             props.register({ username, email, password });
         } else {
             setFormErrors(errors);
@@ -43,7 +45,6 @@ function Register(props) {
                 <img src="/register.png" alt="login" />
                 <h2>Register</h2>
             </div>
-
             {/* Username field */}
             <div className="row">
                 <label htmlFor="regUsername">Username: </label>
@@ -63,7 +64,6 @@ function Register(props) {
                     </p>
                 )}
             </div>
-
             {/* Email field */}
             <div className="row">
                 <label htmlFor="regEmail">Email:</label>
@@ -105,7 +105,6 @@ function Register(props) {
                     </p>
                 )}
             </div>
-
             {/* Repeat Password field */}
             <div className="row">
                 <label htmlFor="confirmPassword">Repeat Password:</label>
@@ -121,7 +120,13 @@ function Register(props) {
                 )}
             </div>
             <br />
-            <input className="button" type="submit" value="Register" />
+            <input className="button" type="submit" value="Register" />{" "}
+            {props.user.loggedIn && props.user.beers.length > 0 && (
+                <Redirect to="/my-beers" />
+            )}
+            {props.user.loggedIn && props.user.beers.length == 0 && (
+                <Redirect to="/search" />
+            )}
         </form>
     );
 }

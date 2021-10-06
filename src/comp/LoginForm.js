@@ -56,7 +56,12 @@ function LoginForm(props) {
             )}
             <Link to="/forgot">Forgot Password?</Link>
 
-            {props.user.loggedIn && <Redirect to="/my-beers" />}
+            {props.user.loggedIn && props.user.beers.length > 0 && (
+                <Redirect to="/my-beers" />
+            )}
+            {props.user.loggedIn && props.user.beers.length == 0 && (
+                <Redirect to="/search" />
+            )}
         </>
     );
 }
