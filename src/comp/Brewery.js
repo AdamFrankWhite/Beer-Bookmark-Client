@@ -83,25 +83,26 @@ function Brewery({ user, sortSearchResults, setBrewerBeers }) {
                 {user.brewery.country_name}
             </h2>
             <h2>Beers: {user.beerNum}</h2>
-            <div
-                className={
-                    user.colorScheme !== "dark"
-                        ? "sort-btn-group sort-btns-light"
-                        : "sort-btn-group sort-btns-dark"
-                }
-            >
-                <span className="blank-col">Sort by: </span>
-                {sortTypes.map((sortType) => (
-                    <SortButton
-                        name={sortType.name}
-                        sortType={sortType.type}
-                        toggleHover={toggleHover}
-                        checkHover={checkHover}
-                        setOrder={setOrder}
-                    />
-                ))}
-            </div>
+
             <div className="beers-cont">
+                <div
+                    className={
+                        user.colorScheme !== "dark"
+                            ? "sort-btn-group sort-btns-light"
+                            : "sort-btn-group sort-btns-dark"
+                    }
+                >
+                    <span className="blank-col">Sort by: </span>
+                    {sortTypes.map((sortType) => (
+                        <SortButton
+                            name={sortType.name}
+                            sortType={sortType.type}
+                            toggleHover={toggleHover}
+                            checkHover={checkHover}
+                            setOrder={setOrder}
+                        />
+                    ))}
+                </div>
                 {user.brewerBeers &&
                     user.brewerBeers.map((beer) => (
                         <BeerRow search={true} beerData={beer} />
