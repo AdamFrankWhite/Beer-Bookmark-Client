@@ -72,8 +72,9 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                     <div className="search-banner-content">
                         <h2>
                             Can't quite remember that awesome beer you had last
-                            night? Bookmark it with BeerMe
+                            night?
                         </h2>
+                        <h3>Bookmark it with BeerBookmark.</h3>
 
                         {/* Search Box */}
                         <label htmlFor="searchTerm">Search:</label>
