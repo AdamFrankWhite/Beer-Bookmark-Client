@@ -458,7 +458,7 @@ nav .flex-row {
 .my-beers-wrapper {
   display: flex;
   width: 90%;
-  margin: auto;
+  margin: 4em auto;
   justify-content: center;
   align-items: flex-start;
 }
@@ -490,6 +490,7 @@ nav .flex-row {
 .beers-cont {
   width: 90%;
   margin: 1em auto;
+  border-bottom: 2px solid black;
 }
 .beers-cont .beer:last-of-type {
   border-top: 2px solid black;
@@ -499,7 +500,7 @@ nav .flex-row {
 }
 
 .my-beers-cont {
-  width: 70%;
+  width: 80%;
 }
 
 .randomBeer {
@@ -780,6 +781,7 @@ nav .flex-row {
   border-radius: 5px;
   background: rgba(250, 241, 241, 0.8);
   text-align: left;
+  color: black;
 }
 .search-banner .search-banner-content .row {
   display: flex;
@@ -795,7 +797,8 @@ nav .flex-row {
   display: inline-block;
   border-radius: 0 5px 5px 0;
 }
-.search-banner .search-banner-content h2 {
+.search-banner .search-banner-content h2,
+.search-banner .search-banner-content h3 {
   color: #2a2a2a;
   margin-top: 0;
 }
@@ -822,7 +825,11 @@ nav .flex-row {
 }
 
 .sort-btns-light {
-  background: #add3ff !important;
+  background: #0e54a5 !important;
+  color: white;
+}
+.sort-btns-light svg {
+  color: white;
 }
 
 .sort-btns-dark {
