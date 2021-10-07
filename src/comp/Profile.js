@@ -25,8 +25,16 @@ function Profile(props) {
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
     const [editEmail, toggleEditEmail] = useState(false);
+    // Track email field, using init state email
     const [newEmail, setNewEmail] = useState(props.user.userData.email);
+    // Current Email on file
+    const [currentEmail, setCurrentEmail] = useState(props.user.userData.email);
     const center = { margin: "auto", height: 25, width: 25 };
+
+    useEffect(() => {
+        setCurrentEmail(props.user.userData.email);
+    }, [props.user.userData.email]);
+
     // const updatePassword = (username, password, id) => {
     //     axios
     //         .put(`http://localhost:5000/users/reset?=${id}`, {
@@ -71,7 +79,7 @@ function Profile(props) {
                             </span>
                         </>
                     )}
-                    {!editEmail && <span>{props.user.userData.email}</span>}
+                    {!editEmail && <span>{currentEmail}</span>}
                     {!editEmail ? (
                         <span
                             className="button"

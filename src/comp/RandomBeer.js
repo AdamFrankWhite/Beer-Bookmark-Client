@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 
 const RandomBeer = (props) => {
     const checkBeerIncluded = JSON.stringify(props.user.beers).includes(
