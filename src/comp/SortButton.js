@@ -15,7 +15,7 @@ const SortButton = ({ sortType, name, toggleHover, setOrder, checkHover }) => {
         >
             {name}
             <FontAwesomeIcon
-                style={{ color: checkHover(sortType) }}
+                // style={{ color: checkHover(sortType) }}
                 icon={faSort}
             />
         </span>
