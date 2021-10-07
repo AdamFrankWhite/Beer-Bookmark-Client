@@ -47,7 +47,6 @@ export const login = (loginData) => (dispatch) => {
         .then((res) => {
             console.log(res.data);
             dispatch({ type: SET_USER, payload: res.data });
-            // dispatch({ type: GET_BEERS, payload: res.data });
             dispatch({ type: SET_LOADING, payload: false });
         })
         .catch((err) => {
