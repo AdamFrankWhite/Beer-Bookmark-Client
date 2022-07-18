@@ -40,7 +40,7 @@ function Register(props) {
         validatePassword();
     };
     return (
-        <form className="registration" onSubmit={handleSubmit} novalidate>
+        <form className="registration" onSubmit={handleSubmit} noValidate>
             <div className="login-head">
                 <img src="/register.png" alt="login" />
                 <h2>Register</h2>

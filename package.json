@@ -1,6 +1,6 @@
 {
   "name": "beer-app",
-  "homepage": "https://my-fave-beers.herokuapp.com",
+  "homepage": "https://beerbookmark.herokuapp.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

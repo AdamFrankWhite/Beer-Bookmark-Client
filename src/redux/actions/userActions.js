@@ -115,7 +115,6 @@ export const resetPassword = (email) => (dispatch) => {
                       type: RESET_EMAIL_MESSAGE,
                       payload: "Email not found",
                   });
-            console.log("yo");
             dispatch({ type: SET_LOADING, payload: false });
         })
         .catch((err) => console.log(err));
