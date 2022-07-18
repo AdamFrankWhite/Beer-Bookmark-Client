@@ -30,9 +30,8 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
-  "engines" : { 
-    "npm" : ">=7.0.0",
-    "node" : ">=16.0.0"
+  "engines": {
+    "node": "17.1.0"
   },
   "scripts": {
     "client": "npm start",
