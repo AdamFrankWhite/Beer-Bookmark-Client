@@ -30,6 +30,7 @@ export const getBeers = (username) => (dispatch) => {
     axios
         .get(
             `https://fierce-plateau-38188.herokuapp.com/users/my-beers/${username}`
+            // `http://localhost:5000/users/my-beers/${username}`
         )
         .then((res) => {
             dispatch({ type: GET_BEERS, payload: res.data });
@@ -42,6 +43,7 @@ export const login = (loginData) => (dispatch) => {
     axios
         .post(
             `https://fierce-plateau-38188.herokuapp.com/users/login`,
+            // `http://localhost:5000/users/login`,
             loginData
         )
         .then((res) => {
@@ -66,15 +68,16 @@ export const register = (data) => (dispatch) => {
 
     axios
         .post("https://fierce-plateau-38188.herokuapp.com/users/register", {
+            // .post("http://localhost:5000/users/register", {
             username,
             email,
             password,
         })
-
         .then((res) => {
             axios
                 .post(
                     "https://fierce-plateau-38188.herokuapp.com/users/login",
+                    // "http://localhost:5000/users/login",
                     {
                         username,
                         password,
@@ -159,7 +162,8 @@ export const addBeer = (data) => (dispatch) => {
     console.log(postData);
     axios
         .post(
-            "https://fierce-plateau-38188.herokuapp.com/users/my-beers/add",
+            // "https://fierce-plateau-38188.herokuapp.com/users/my-beers/add",
+            "http://localhost:5000/users/my-beers/add",
             postData
         )
         .then((res) => {
