@@ -30,6 +30,10 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
+  "engines" : { 
+    "npm" : ">=7.0.0",
+    "node" : ">=16.0.0"
+  },
   "scripts": {
     "client": "npm start",
     "start": "react-scripts start",
@@ -51,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }
