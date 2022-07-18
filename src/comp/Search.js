@@ -105,7 +105,7 @@ const Search = ({ user, sortSearchResults, searchBeer, getRandomBeers }) => {
                 {user.loading && (
                     <ReactLoading style={center} type="bubbles" color="blue" />
                 )}
-                {beers.length == 0 && !user.loading && (
+                {beers.length == 0 && randomBeerData && !user.loading && (
                     <div
                         className={
                             user.colorScheme !== "dark"
