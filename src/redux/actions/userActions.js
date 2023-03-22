@@ -29,7 +29,7 @@ export const getBeers = (username) => (dispatch) => {
     console.log(username);
     axios
         .get(
-            `https://fierce-plateau-38188.herokuapp.com/users/my-beers/${username}`
+            `http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/my-beers/${username}`
             // `http://localhost:5000/users/my-beers/${username}`
         )
         .then((res) => {
@@ -42,7 +42,7 @@ export const login = (loginData) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     axios
         .post(
-            `https://fierce-plateau-38188.herokuapp.com/users/login`,
+            `http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/login`,
             // `http://localhost:5000/users/login`,
             loginData
         )
@@ -67,16 +67,19 @@ export const register = (data) => (dispatch) => {
     const { username, email, password } = data;
 
     axios
-        .post("https://fierce-plateau-38188.herokuapp.com/users/register", {
-            // .post("http://localhost:5000/users/register", {
-            username,
-            email,
-            password,
-        })
+        .post(
+            "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/register",
+            {
+                // .post("http://localhost:5000/users/register", {
+                username,
+                email,
+                password,
+            }
+        )
         .then((res) => {
             axios
                 .post(
-                    "https://fierce-plateau-38188.herokuapp.com/users/login",
+                    "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/login",
                     // "http://localhost:5000/users/login",
                     {
                         username,
@@ -94,10 +97,13 @@ export const changeEmail = (username, email) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     console.log(username);
     axios
-        .put("https://fierce-plateau-38188.herokuapp.com/users/email", {
-            username,
-            email,
-        })
+        .put(
+            "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/email",
+            {
+                username,
+                email,
+            }
+        )
         .then((res) => {
             console.log(res.data);
             dispatch({ type: UPDATE_EMAIL, payload: res.data });
@@ -107,9 +113,12 @@ export const changeEmail = (username, email) => (dispatch) => {
 export const resetPassword = (email) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     axios
-        .post("https://fierce-plateau-38188.herokuapp.com/users/forgot", {
-            email,
-        })
+        .post(
+            "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/forgot",
+            {
+                email,
+            }
+        )
         .then((res) => {
             console.log(res.data);
             res.data.sent
@@ -128,7 +137,7 @@ export const changePassword =
         dispatch({ type: SET_LOADING, payload: true });
         axios
             .put(
-                "https://fierce-plateau-38188.herokuapp.com/users/change-password",
+                "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/change-password",
                 {
                     username,
                     oldPassword,
@@ -162,7 +171,7 @@ export const addBeer = (data) => (dispatch) => {
     console.log(postData);
     axios
         .post(
-            // "https://fierce-plateau-38188.herokuapp.com/users/my-beers/add",
+            // "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/my-beers/add",
             "http://localhost:5000/users/my-beers/add",
             postData
         )
@@ -178,7 +187,7 @@ export const addNewGroup = (username, newGroup) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     axios
         .post(
-            "https://fierce-plateau-38188.herokuapp.com/users/my-beers/add-group",
+            "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/my-beers/add-group",
             {
                 username,
                 newGroup,
@@ -207,7 +216,7 @@ export const deleteBeer = (data, currentSortType) => (dispatch) => {
     console.log(deleteData);
     axios
         .put(
-            "https://fierce-plateau-38188.herokuapp.com/users/my-beers/delete-beer",
+            "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/my-beers/delete-beer",
             deleteData
         )
         .then((res) => {
@@ -243,7 +252,7 @@ export const rateBeer =
 
         axios
             .put(
-                `https://fierce-plateau-38188.herokuapp.com/users/my-beers/update`,
+                `http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/my-beers/update`,
                 updateData
             )
             .then((res) => {
@@ -306,6 +315,7 @@ export const searchBeer =
                 }
             )
             .then((response) => {
+                console.log(response);
                 const cleanData = response.data.response.beers.items.map(
                     (item) => {
                         console.log(item);
@@ -354,6 +364,7 @@ export const getRandomBeers =
                 },
             })
             .then((res) => {
+                console.log(res);
                 const randomNum = () =>
                     Math.floor(Math.random() * res.data.response.beers.count);
 
@@ -393,7 +404,7 @@ export const setMarketingPref = (preference, username) => (dispatch) => {
     console.log({ preference });
     axios
         .post(
-            "https://fierce-plateau-38188.herokuapp.com/users/set-marketing",
+            "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/set-marketing",
             {
                 preference,
                 username,
@@ -497,7 +508,7 @@ export const amendGroupName =
         dispatch({ type: SET_LOADING, payload: true });
         axios
             .post(
-                "https://fierce-plateau-38188.herokuapp.com/users/my-beers/edit-group",
+                "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/my-beers/edit-group",
                 {
                     existingBeerGroup,
                     newGroupName,
@@ -521,10 +532,13 @@ export const amendGroupName =
 export const setColorScheme = (username, color) => (dispatch) => {
     console.log(username, color);
     axios
-        .put("https://fierce-plateau-38188.herokuapp.com/users/set-theme", {
-            username,
-            color,
-        })
+        .put(
+            "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/set-theme",
+            {
+                username,
+                color,
+            }
+        )
         .then((res) => {
             console.log(res);
             dispatch({ type: SET_COLOR_SCHEME, payload: color });

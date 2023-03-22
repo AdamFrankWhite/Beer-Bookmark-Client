@@ -21,7 +21,7 @@ const NewPassword = ({ match, location }) => {
                 onClick={() => {
                     axios
                         .put(
-                            "https://fierce-plateau-38188.herokuapp.com/users/reset",
+                            "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/reset",
                             {
                                 id: requestId,
                                 newPassword,
