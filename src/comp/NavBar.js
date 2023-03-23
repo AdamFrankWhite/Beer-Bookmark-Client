@@ -24,9 +24,9 @@ function NavBar(props) {
                         : "navbar navbar-dark"
                 }
             >
-                <Link to="/" className="nav-title">
+                <Link to="" className="nav-title">
                     <div className="logo-cont">
-                        <img src="/logo.png" alt="BeerBookmark logo" />
+                        <img src="images/logo.png" alt="BeerBookmark logo" />
                         <div className="text-cont">
                             <h1>Beer</h1>
                             <h2>Bookmark</h2>
@@ -35,7 +35,7 @@ function NavBar(props) {
                 </Link>
                 <div className="flex-row">
                     {props.user.loggedIn ? (
-                        <Link to="/my-beers" className={`link ${lightTheme}`}>
+                        <Link to="my-beers" className={`link ${lightTheme}`}>
                             <div className="flex-col">
                                 <FontAwesomeIcon icon={faBeer} />
                                 <span className="nav-icon-text">My Beers</span>
@@ -43,17 +43,17 @@ function NavBar(props) {
                         </Link>
                     ) : null}
 
-                    <Link to="/search" className={`link ${lightTheme}`}>
+                    <Link to="search" className={`link ${lightTheme}`}>
                         <div className="flex-col">
                             <FontAwesomeIcon icon={faSearch} />
                             <span className="nav-icon-text">Search</span>
                         </div>
                     </Link>
-                    {/* <Link to="/random-beer" className="link">
+                    {/* <Link to="random-beer" className="link">
                         Random Beer
                     </Link> */}
                     {!props.user.loggedIn && (
-                        <Link to="/register" className={`link ${lightTheme}`}>
+                        <Link to="register" className={`link ${lightTheme}`}>
                             <div className="flex-col">
                                 <FontAwesomeIcon icon={faUser} />
                                 <span className="nav-icon-text">Register</span>
@@ -61,14 +61,14 @@ function NavBar(props) {
                         </Link>
                     )}
                     {props.user.loggedIn ? (
-                        <Link to="/account" className={`link ${lightTheme}`}>
+                        <Link to="account" className={`link ${lightTheme}`}>
                             <div className="flex-col">
                                 <FontAwesomeIcon icon={faUserCircle} />
                                 <span className="nav-icon-text">Account</span>
                             </div>
                         </Link>
                     ) : null}
-                    <Link to="/login" className={`link ${lightTheme}`}>
+                    <Link to="login" className={`link ${lightTheme}`}>
                         {props.user.loggedIn ? (
                             <div className="flex-col">
                                 <FontAwesomeIcon icon={faSignOutAlt} />

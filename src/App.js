@@ -17,7 +17,7 @@ import Modal from "./comp/Modal";
 
 const App = (props) => {
     return (
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             {props.user.showModal && <Modal />}
             <NavBar loggedIn={props.loggedIn} />
 

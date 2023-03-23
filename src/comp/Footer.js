@@ -6,7 +6,7 @@ export default function Footer() {
             <div className="footer-cont">
                 <div className="about">
                     <div className="logo-cont">
-                        <img src="/logo.png" alt="BeerBookmark logo" />
+                        <img src="images/logo.png" alt="BeerBookmark logo" />
                         <div className="text-cont">
                             <h1>Beer</h1>
                             <h2>Bookmark</h2>

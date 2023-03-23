@@ -10,7 +10,7 @@ function LoginForm(props) {
     return (
         <>
             <div className="login-head">
-                <img src="/login.png" alt="login" />
+                <img src="images/login.png" alt="login" />
                 <h2>Login</h2>
             </div>
 
@@ -54,13 +54,13 @@ function LoginForm(props) {
                     className="spinner"
                 />
             )}
-            <Link to="/forgot">Forgot Password?</Link>
+            <Link to="forgot">Forgot Password?</Link>
 
             {props.user.loggedIn && props.user.beers.length > 0 && (
-                <Redirect to="/my-beers" />
+                <Redirect to="my-beers" />
             )}
             {props.user.loggedIn && props.user.beers.length == 0 && (
-                <Redirect to="/search" />
+                <Redirect to="search" />
             )}
         </>
     );

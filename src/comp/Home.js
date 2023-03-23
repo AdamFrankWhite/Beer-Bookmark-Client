@@ -9,10 +9,10 @@ export default function Home() {
                     <div className="banner-cont">
                         <h1>BeerBookmark</h1>
                         <h2>Your favourite beer bookmark app</h2>
-                        <NavLink to="/register">
+                        <NavLink to="register">
                             <span className="button mr-2">Signup</span>
                         </NavLink>
-                        <NavLink to="/login">
+                        <NavLink to="login">
                             <span className="button">Login</span>
                         </NavLink>
                     </div>
@@ -28,7 +28,7 @@ export default function Home() {
                 <hr />
                 <div className="features">
                     <div className="feature-card">
-                        <img src="/icons/icons8-star-80.png" alt="bookmark" />
+                        <img src="icons/icons8-star-80.png" alt="bookmark" />
                         <h3>Bookmark</h3>
                         <p>
                             Struggling to remember that awesome beer you had
@@ -37,12 +37,12 @@ export default function Home() {
                         </p>
                     </div>
                     <div className="feature-card">
-                        <img src="/icons/icons8-beer-80.png" alt="discover" />
+                        <img src="icons/icons8-beer-80.png" alt="discover" />
                         <h3>Discover</h3>
                         <p>Want to try something new? </p>
                     </div>
                     <div className="feature-card">
-                        <img src="/icons/icons8-team-80.png" alt="share" />
+                        <img src="icons/icons8-team-80.png" alt="share" />
                         <h3>Share</h3>
                         <p>
                             Think your friend would love that amazing hoppy IPA

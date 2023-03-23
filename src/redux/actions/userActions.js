@@ -162,8 +162,8 @@ export const addBeer = (data) => (dispatch) => {
     console.log(postData);
     axios
         .post(
-            // "https://beer-bookmark.nw.r.appspot.com/users/my-beers/add",
-            "http://localhost:5000/users/my-beers/add",
+            "https://beer-bookmark.nw.r.appspot.com/users/my-beers/add",
+            //"http://localhost:5000/users/my-beers/add",
             postData
         )
         .then((res) => {

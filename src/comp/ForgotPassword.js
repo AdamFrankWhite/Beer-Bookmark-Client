@@ -38,7 +38,7 @@ function ForgotPassword(props) {
             >
                 {errorMessage}
             </p>
-            <Link to="/login">Back to login</Link>
+            <Link to="login">Back to login</Link>
         </div>
     );
 }

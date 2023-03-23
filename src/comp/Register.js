@@ -42,7 +42,7 @@ function Register(props) {
     return (
         <form className="registration" onSubmit={handleSubmit} noValidate>
             <div className="login-head">
-                <img src="/register.png" alt="login" />
+                <img src="images/register.png" alt="login" />
                 <h2>Register</h2>
             </div>
             {/* Username field */}
@@ -122,10 +122,10 @@ function Register(props) {
             <br />
             <input className="button" type="submit" value="Register" />{" "}
             {props.user.loggedIn && props.user.beers.length > 0 && (
-                <Redirect to="/my-beers" />
+                <Redirect to="my-beers" />
             )}
             {props.user.loggedIn && props.user.beers.length == 0 && (
-                <Redirect to="/search" />
+                <Redirect to="search" />
             )}
         </form>
     );

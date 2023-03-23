@@ -12,16 +12,16 @@ export default function Sidebar() {
                 <h2>Dashboard</h2>
             </div>
             <nav>
-                <Link to="/account/theme">
+                <Link to="account/theme">
                     <FontAwesomeIcon icon={faPalette} />
                     Theme
                 </Link>
 
-                <Link to="/account/profile">
+                <Link to="account/profile">
                     <FontAwesomeIcon icon={faUserCircle} />
                     Profile
                 </Link>
-                <Link to="/account/settings">
+                <Link to="account/settings">
                     <FontAwesomeIcon icon={faCog} />
                     Privacy
                 </Link>
