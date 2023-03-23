@@ -21,7 +21,7 @@ const NewPassword = ({ match, location }) => {
                 onClick={() => {
                     axios
                         .put(
-                            "http://beerappapi-env.eba-2sbxm4bu.eu-west-2.elasticbeanstalk.com/users/reset",
+                            "https://beer-bookmark.nw.r.appspot.com/users/reset",
                             {
                                 id: requestId,
                                 newPassword,

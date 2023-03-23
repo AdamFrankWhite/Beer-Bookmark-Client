@@ -1,6 +1,6 @@
 {
   "name": "beer-app",
-  "homepage": "https://beerbookmark.herokuapp.com",
+  "homepage": "https://adamwhite.tech/beer-bookmark",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,7 +36,7 @@
   "scripts": {
     "client": "npm start",
     "start": "react-scripts start",
-    "build": "react-scripts build && react-snapshot",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
